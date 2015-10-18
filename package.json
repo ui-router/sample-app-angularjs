@@ -1,0 +1,38 @@
+{
+  "name": "ui-router-architecture",
+  "description": "Architecture overview demo for Angular UI-Router",
+  "version": "1.0.0",
+  "contributors": [
+    {
+      "name": "Nate Abele",
+      "email": "nate@radify.io",
+      "web": "https://radify.io"
+    },
+    {
+      "name": "Chris Thielen",
+      "web": "https://github.com/christopherthielen"
+    }
+  ],
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "https://github.com/angular-ui/ui-router/blob/master/LICENSE"
+    }
+  ],
+  "dependencies": {
+    "angular": "^1.4.7",
+    "jspm": "^0.16.12",
+    "ui-router-extras": "^0.1.0"
+  },
+  "jspm": {
+    "dependencies": {
+      "angular": "github:angular/bower-angular@^1.4.7",
+      "angular-ui-router": "github:angular-ui/ui-router@^0.2.15",
+      "d3": "github:mbostock/d3@^3.5.6",
+      "ui-router-extras": "npm:ui-router-extras@^0.1.0"
+    },
+    "devDependencies": {
+      "typescript": "npm:typescript@^1.6.2"
+    }
+  }
+}
