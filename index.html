@@ -5,29 +5,10 @@
     <script>
         System.import('app/main')
     </script>
-    <style>
-        .statevis circle {
-            fill: #fff;
-            stroke: steelblue;
-            stroke-width: 3px;
-        }
-
-        .statevis text { font: 12px sans-serif; }
-
-        .statevis .link {
-            fill: none;
-            stroke: #ccc;
-            stroke-width: 2px;
-        }
-    </style>
+    <link rel="stylesheet" href="app/vis/vis.css">
 
 </head>
 <body ng-app="demo">
-    {{ $rootScope | json }}
-
-    <!--<state-vis>-->
-    <!--</state-vis>-->
-
     <uir-state-vis class="statevis"></uir-state-vis>
 </body>
 </html>

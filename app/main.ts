@@ -12,7 +12,9 @@ let imports = [ d3, vis, extrasCore, extrasSticky, extrasStatevis ];
 
 let app = angular.module("demo", [uiRouter, vis, 'ct.ui.router.extras.statevis']);
 
+let $sp;
 app.config($stateProvider => {
+  $sp = $stateProvider;
   $stateProvider.state({
     name: 'app',
     url: '/app',
@@ -42,4 +44,19 @@ app.config($stateProvider => {
     url: '/:contactId',
     template: '<h3>contact</h3> <div ui-view/>'
   });
+});
+
+app.run(($interval, $state) => {
+  $interval(function() {
+    let states = $state.get();
+    let rnd = (max) => Math.floor(Math.random() * max);
+    let idx = rnd(states.length);
+    let parent = states[idx];
+    let newInt = rnd(999);
+    $sp.state({
+      name: parent.name ? parent.name + ".S" + newInt : "S" + newInt,
+      url: "/" + newInt,
+      template: "<h3>" + newInt + "</h3>"
+    });
+  }, 5000)
 });
