@@ -8,6 +8,11 @@
     stroke-width: 3px;
 }
 
+.statevis circle.active {
+    fill: steelblue;
+    stroke-width: 5px;
+}
+
 .statevis text {
     font: 12px sans-serif;
 }

@@ -3,9 +3,11 @@
 
 import d3 from "d3";
 import angular from "angular";
+import d3ng from "./d3ng";
+import easing from "./easing";
 
 export default "ui.router.demo";
-let app = angular.module("ui.router.demo", ['ui.router']);
+let app = angular.module("ui.router.demo", ['ui.router', d3ng, easing]);
 
 app.directive('uirStateVis', () => {
   return {
@@ -40,7 +42,7 @@ app.directive('uirStateVis', () => {
       this.scaleY = this.scaleY || (this.height - this.offsetY * 2);
 
       const pollStates = () => {
-        let all = (<any[]> $state.get()).map(s => s.$$state());
+        let all = (<any[]> $state.get()).map((s: any) => s.$$state());
         let known = this.nodes.map(Object.getPrototypeOf);
         let toAdd = all.filter(s => known.indexOf(s) === -1);
         let toDel = known.filter(s => all.indexOf(s) === -1);
@@ -82,7 +84,7 @@ app.directive('uirStateVis', () => {
 });
 
 
-app.directive('uirStateNode', () => {
+app.directive('uirStateNode', (d3ng) => {
   return {
     restrict: "A",
     scope: {
@@ -92,20 +94,42 @@ app.directive('uirStateNode', () => {
     require: "^uirStateVis",
     link: function (scope, elem, attr, uirStateVis) {
       scope.radius = uirStateVis.radius;
-      scope.x = (n) => n.x * uirStateVis.scaleX + uirStateVis.offsetX;
-      scope.y = (n) => n.y * uirStateVis.scaleY + uirStateVis.offsetY;
+
+      const x = (xval) => xval * uirStateVis.scaleX + uirStateVis.offsetX;
+      const y = (yval) => yval * uirStateVis.scaleY + uirStateVis.offsetY;
+
+
+      let getLinkPath = (state, parent) => {
+        let [s, p] = [state, parent];
+        let halfy = (s._y + p._y) / 2;
+        return `M ${s._x} ${s._y} C ${s._x} ${halfy}, ${p._x} ${halfy}, ${p._x} ${p._y}`;
+      };
+
+      scope.$watchGroup(["state.x", "state.y", "parent.x", "parent.y"], (newVals) => {
+        let {state, parent} = scope;
+
+        let currentCoords = [state._x || uirStateVis.width / 2, state._y || uirStateVis.height / 2];
+        let targetCoords = [x(newVals[0]), y(newVals[1])];
+
+        d3ng.animatePath(targetCoords, currentCoords,500, (interpolated) => {
+          let [stateX, stateY] = interpolated;
+          state._x = stateX;
+          state._y = stateY;
+          if (parent)
+            state._linkPath = getLinkPath(state, parent);
+        });
+      });
     },
 
     template: `
-      <line ng-if="parent" ng-attr-x1="{{x(state)}}" ng-attr-y1="{{y(state)}}"
-          ng-attr-x2="{{x(parent)}}" ng-attr-y2="{{y(parent)}}" class="link"/>
+      <path ng-if="parent" ng-attr-d='{{state._linkPath}}' class="link"/>
 
-      <circle r="10" ng-attr-cx="{{x(state)}}" ng-attr-cy="{{y(state)}}"></circle>
+      <circle r="10" ng-attr-cx="{{state._x}}" ng-attr-cy="{{state._y}}"></circle>
 
-      <text class="label"
-          ng-attr-transform="rotate(-8 {{x(state)}} {{y(state)}})"
-          ng-attr-x="{{x(state) - radius}}"
-          ng-attr-y="{{y(state) - (radius / 1.5)}}">{{state.name}}</text>
+      <text class="label"  text-anchor="middle"
+          ng-attr-transform="rotate(-12 {{state._x}} {{state._y}})"
+          ng-attr-x="{{state._x}}"
+          ng-attr-y="{{state._y - radius}}">{{state.name}}</text>
     `
   }
 });
