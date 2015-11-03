@@ -3,14 +3,12 @@ import uiRouter from "angular-ui-router";
 
 import d3 from "d3";
 import * as extrasCore from "../lib/ct-ui-router-extras.core.js";
-import * as extrasSticky from "../lib/ct-ui-router-extras.sticky.js";
-import * as extrasStatevis from "../lib/ct-ui-router-extras.statevis.js";
+import stateSel from "./vis/stateSelector";
 
 import vis from "./vis/vis";
 
-let imports = [ d3, vis, extrasCore, extrasSticky, extrasStatevis ];
-
-let app = angular.module("demo", [uiRouter, vis, 'ct.ui.router.extras.statevis']);
+let imports = [ d3, vis, extrasCore];
+let app = angular.module("demo", [uiRouter, vis, stateSel, 'ct.ui.router.extras.core']);
 
 let $sp;
 app.config($stateProvider => {
@@ -30,6 +28,7 @@ app.config($stateProvider => {
   $stateProvider.state({
     name: 'app.msgs.folder',
     url: '/:folderId',
+    params: { folderId: "123" },
     template: '<h3>folder</h3> <div ui-view/>'
   });
 
@@ -42,6 +41,7 @@ app.config($stateProvider => {
   $stateProvider.state({
     name: 'app.contacts.contact',
     url: '/:contactId',
+    params: { contactId: "123" },
     template: '<h3>contact</h3> <div ui-view/>'
   });
 });
@@ -56,7 +56,7 @@ app.run(($interval, $state) => {
     $sp.state({
       name: parent.name ? parent.name + ".S" + newInt : "S" + newInt,
       url: "/" + newInt,
-      template: "<h3>" + newInt + "</h3>"
+      template: "<h3>" + newInt + "</h3> <div ui-view></div>"
     });
   }, 5000)
 });
