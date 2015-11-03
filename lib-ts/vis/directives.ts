@@ -5,46 +5,11 @@ import d3 from "d3";
 import angular from "angular";
 import d3ng from "./d3ng";
 import easing from "./easing";
+import visSvc from "./service"
 
 let moduleName = "ui.router.demo";
 export default moduleName;
-let app = angular.module(moduleName, ['ui.router', d3ng, easing]);
-
-app.service("uirStateVisService", ($state, $interval) => {
-  let nodes = [];
-
-  const nodeForState = (state) => nodes.filter(node => node.name === state.name)[0];
-
-  const pollStates = () => {
-    let all = (<any[]> $state.get()).map((s: any) => s.$$state());
-    let known = nodes.map(Object.getPrototypeOf);
-    let toAdd = all.filter(s => known.indexOf(s) === -1);
-    let toDel = known.filter(s => all.indexOf(s) === -1);
-
-    if (toAdd.length || toDel.length) {
-      toAdd.map(s => Object.create(s)).forEach(n => nodes.push(n));
-      // todo: del.forEach(blah)
-
-      // Rebuild each node's children array
-      nodes.forEach((n: any) => n.children = []);
-      nodes.forEach((n: any) => {
-        if (!n || !n.parent) return;
-        let parentNode = nodeForState(n.parent);
-        if (!parentNode) return;
-        parentNode.children.push(n);
-        n._parent = parentNode;
-      });
-    }
-  };
-
-  pollStates();
-  let cancel = $interval(pollStates, 50);
-
-  return {
-    nodes: nodes,
-    cancel: cancel
-  };
-});
+let app = angular.module(moduleName, ['ui.router', visSvc, d3ng, easing]);
 
 app.directive('uirStateVis', (uirStateVisService) => {
   return {
@@ -65,19 +30,18 @@ app.directive('uirStateVis', (uirStateVisService) => {
       this.nodes = uirStateVisService.nodes;
 
       this.radius = this.radius || 20;
-
       this.offsetX = this.offsetX || 0;
       this.offsetY = this.offsetY || this.radius * 2;
-
       this.height = this.height || 500;
       this.width = this.width || 500;
-
       this.scaleX = this.scaleX || (this.width - this.offsetX * 2);
       this.scaleY = this.scaleY || (this.height - this.offsetY * 2);
 
+      let tree = d3.layout.tree();
+
       const doLayout = () => {
         let root = this.nodes.filter(state => state.name === "")[0];
-        d3.layout.tree()(root);
+        tree(root);
       };
 
       $scope.$watchCollection(() => this.nodes, doLayout);
@@ -102,30 +66,34 @@ app.directive('uirStateNode', (d3ng) => {
     link: function (scope, elem, attr, uirStateVis) {
       scope.radius = uirStateVis.radius;
 
-      const x = (xval) => xval * uirStateVis.scaleX + uirStateVis.offsetX;
-      const y = (yval) => yval * uirStateVis.scaleY + uirStateVis.offsetY;
-
-
-      let makeLinkPath = (state, parent) => {
+      const makeLinkPath = (state, parent) => {
         let [s, p] = [state, parent];
         let yAvg = (s._y + p._y) / 2;
         return `M ${s._x} ${s._y} C ${s._x} ${yAvg}, ${p._x} ${yAvg}, ${p._x} ${p._y}`;
       };
 
-      scope.$watchGroup(["state.x", "state.y", "parent.x", "parent.y"], (newVals) => {
+      let cancelCurrentAnimation = angular.noop;
+
+      function xyValsUpdated(newXyVals) {
+        cancelCurrentAnimation();
+
+        const transformX = (xval) => xval * uirStateVis.scaleX + uirStateVis.offsetX;
+        const transformY = (yval) => yval * uirStateVis.scaleY + uirStateVis.offsetY;
+
         let {state, parent} = scope;
-
         let currentCoords = [state._x || uirStateVis.width / 2, state._y || uirStateVis.height / 2];
-        let targetCoords = [x(newVals[0]), y(newVals[1])];
+        let targetCoords = [transformX(newXyVals[0]), transformY(newXyVals[1])];
 
-        d3ng.animatePath(targetCoords, currentCoords, 800, (interpolated) => {
-          let [stateX, stateY] = interpolated;
-          state._x = stateX;
-          state._y = stateY;
-          if (angular.isDefined(parent) && angular.isDefined(parent._x))
+        function animationFrame(xyValArray) {
+          let [x, y] = xyValArray;
+          state._x = x;
+          state._y = y;
+          if (parent && angular.isDefined(parent._x))
             state._linkPath = makeLinkPath(state, parent);
-        });
-      });
+        }
+        cancelCurrentAnimation = d3ng.animatePath(targetCoords, currentCoords, 800, animationFrame);
+      }
+      scope.$watchGroup(["state.x", "state.y", "parent.x", "parent.y"], xyValsUpdated);
     },
 
     template: `

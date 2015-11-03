@@ -3,9 +3,9 @@ import uiRouter from "angular-ui-router";
 
 import d3 from "d3";
 import * as extrasCore from "../lib/ct-ui-router-extras.core.js";
-import stateSel from "./vis/stateSelector";
+import stateSel from "../lib-ts/stateSelector";
 
-import vis from "./vis/vis";
+import vis from "../lib-ts/vis/directives";
 
 let imports = [ d3, vis, extrasCore];
 let app = angular.module("demo", [uiRouter, vis, stateSel, 'ct.ui.router.extras.core']);
@@ -46,8 +46,11 @@ app.config($stateProvider => {
   });
 });
 
-app.run(($interval, $state) => {
-  $interval(function() {
+app.run(($rootScope, $interval, $state) => {
+
+  $rootScope.newState = newState;
+
+  function newState() {
     let states = $state.get();
     let rnd = (max) => Math.floor(Math.random() * max);
     let idx = rnd(states.length);
@@ -58,5 +61,6 @@ app.run(($interval, $state) => {
       url: "/" + newInt,
       template: "<h3>" + newInt + "</h3> <div ui-view></div>"
     });
-  }, 5000)
+  }
+
 });

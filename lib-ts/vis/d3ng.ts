@@ -6,23 +6,24 @@ export default moduleName;
 angular.module(moduleName, []).service("d3ng", function(easing, $rootScope) {
   return {
     animatePath: function(newValue, oldValue, duration, updateFrame) {
-      let interpolate, start = null, step;
-      interpolate = d3.interpolateArray(oldValue, newValue);
+      let start = null, interpolate = d3.interpolateArray(oldValue, newValue);
 
-      step = function(now) {
+      let step = function(now) {
+        if (duration === -1) return;
         if (start == null) start = now;
-        var progress = now - start;
-
+        let progress = now - start, percent = 1;
         if (progress < duration) {
           requestAnimationFrame(step);
-          let eased = easing.easeOutElastic(progress, 0, 1, duration);
-          $rootScope.$apply(() => updateFrame(interpolate(eased)));
-        } else {
-          $rootScope.$apply(() => updateFrame(interpolate(1)));
+          percent = easing.easeOutElastic(progress, 0, 1, duration);
         }
+        $rootScope.$apply(() => updateFrame(interpolate(percent)));
       };
 
-      return requestAnimationFrame(step);
+      requestAnimationFrame(step);
+
+      return function cancel() {
+        duration = -1;
+      }
     }
   }
 });

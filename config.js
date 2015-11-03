@@ -10,6 +10,9 @@ System.config({
   packages: {
     "app": {
       "defaultExtension": "ts"
+    },
+    "lib-ts": {
+      "defaultExtension": "ts"
     }
   },
 
