@@ -7,10 +7,14 @@ let moduleName = "ui.router.demo.vissvc";
 export default moduleName;
 let app = angular.module(moduleName, ['ui.router']);
 
+/**
+ * This service watches for state lifecycle (added/removed).  It maintains an array of states (wrapped as nodes).
+ * When transitions occur, it applies transition metadata to the nodes.
+ */
 app.service("uirStateVisService", ($state, $interval) => {
   let nodes = [];
 
-  const nodeForState = (state) => nodes.filter(node => node.name === state.name)[0];
+  const nodeForState: (any) => INode = (state) => nodes.filter(node => node.name === state.name)[0];
 
   const pollStates = () => {
     let all = (<any[]> $state.get()).map((s: any) => s.$$state());
@@ -38,7 +42,77 @@ app.service("uirStateVisService", ($state, $interval) => {
   let cancel = $interval(pollStates, 50);
 
   return {
+    nodeForState: nodeForState,
     nodes: nodes,
     cancel: cancel
   };
+});
+
+
+export interface INode {
+  label:      string;
+  highlight:     boolean;
+  active:     boolean;
+  retained:   boolean;
+  exited:     boolean;
+  entered:    boolean;
+  inactive:   boolean;
+}
+
+app.run(($rootScope, $injector, uirStateVisService) => {
+  let nodes: INode[] = uirStateVisService.nodes;
+  let nodeForState = uirStateVisService.nodeForState;
+
+  let $trans = $injector.get("$transitions");
+
+  let resetMetadata = {
+    label: '',
+    highlight: false,
+    active: false,
+    retained: false,
+    entered: false,
+    exited: false,
+    inactive: true
+  };
+
+  let applyClasses = (node) => {
+    let classes = ["entered", "retained", "exited", "active", "inactive", "highlight"];
+    node._classes = classes.reduce((str, clazz) => (str + (node[clazz] ? ` ${clazz} ` : '')), '');
+  };
+
+  if ($trans) {
+
+    $trans.onStart({}, ($transition$) => {
+      let tc = $transition$.treeChanges();
+      const getNode = node => nodeForState(node.state);
+      nodes.forEach(n => angular.extend(n, resetMetadata));
+      tc.retained.concat(tc.entering).map(getNode).forEach((n: INode) => n.entered = true);
+      tc.retained.map(getNode).forEach((n: INode) => n.retained = true);
+      tc.exiting.map(getNode).forEach((n: INode)=> n.exited = true);
+      tc.to.slice(-1).map(getNode).forEach((n: INode)=>n.active = true);
+      nodes.forEach(applyClasses)
+    });
+
+    $trans.onEnter({}, ($state$, $transition$) => {
+      nodes.forEach(n => angular.extend(n, {highlight: false, entering: false }));
+      angular.extend(nodeForState($state$), {highlight: false, entering: false, label: 'entering' });
+    });
+
+    $trans.onSuccess({}, ($transition$) => {
+      let tc = $transition$.treeChanges();
+      console.log(tc)
+      const getNode = node => nodeForState(node.state);
+      nodes.forEach(n => angular.extend(n, resetMetadata));
+      tc.retained.concat(tc.entering).map(getNode).forEach((n: INode) => n.entered = true);
+      tc.retained.map(getNode).forEach((n: INode) => n.retained = true);
+      tc.exiting.map(getNode).forEach((n: INode)=> n.exited = true);
+      tc.to.slice(-1).map(getNode).forEach((n: INode)=> { n.active = true; n.label = "active"})
+    });
+
+  } else {
+    $rootScope.$on("$stateChangeSuccess", (evt, toState, toParams) => {
+      nodes.forEach(n => angular.extend(n, resetMetadata));
+      nodeForState(toState).active = true;
+    })
+  }
 });

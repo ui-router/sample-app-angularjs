@@ -1,5 +1,5 @@
 System.config({
-  baseURL: "/",
+  baseURL: "/new-state-vis",
   defaultJSExtensions: true,
   transpiler: "typescript",
   paths: {
@@ -20,6 +20,7 @@ System.config({
     "angular": "github:angular/bower-angular@1.4.7",
     "angular-ui-router": "lib/angular-ui-router.js",
     "d3": "github:mbostock/d3@3.5.6",
+    "lorenzofox3/Smart-Table": "github:lorenzofox3/Smart-Table@2.1.4",
     "typescript": "npm:typescript@1.6.2",
     "ui-router-extras": "npm:ui-router-extras@0.1.0",
     "github:jspm/nodelibs-assert@0.1.0": {

@@ -1,53 +1,36 @@
-import angular from "angular";
-import uiRouter from "angular-ui-router";
+import {app} from './module'
+import {services, states} from './messages/moduleMessages';
 
-import d3 from "d3";
-import * as extrasCore from "../lib/ct-ui-router-extras.core.js";
-import stateSel from "../lib-ts/stateSelector";
-
-import vis from "../lib-ts/vis/directives";
-
-let imports = [ d3, vis, extrasCore];
-let app = angular.module("demo", [uiRouter, vis, stateSel, 'ct.ui.router.extras.core']);
+services.forEach(app.service.bind(app));
 
 let $sp;
-app.config($stateProvider => {
+app.config(($stateProvider, $urlRouterProvider) => {
+  $urlRouterProvider.otherwise("/app");
   $sp = $stateProvider;
   $stateProvider.state({
     name: 'app',
     url: '/app',
-    template: '<h3>app</h3> <div ui-view/>'
+    template: '<span>welcome to the app</span> <span ui-view/>'
   });
 
-  $stateProvider.state({
-    name: 'app.msgs',
-    url: '/msgs',
-    template: '<h3>msgs</h3> <div ui-view/>'
-  });
-
-  $stateProvider.state({
-    name: 'app.msgs.folder',
-    url: '/:folderId',
-    params: { folderId: "123" },
-    template: '<h3>folder</h3> <div ui-view/>'
-  });
+  states.forEach($sp.state.bind($sp));
 
   $stateProvider.state({
     name: 'app.contacts',
     url: '/contacts',
-    template: '<h3>contacts</h3> <div ui-view/>'
+    template: '<span>contacts</span> <span ui-view/>'
   });
 
   $stateProvider.state({
     name: 'app.contacts.contact',
     url: '/:contactId',
     params: { contactId: "123" },
-    template: '<h3>contact</h3> <div ui-view/>'
+    template: '<span>contact</span> <span ui-view/>'
   });
 });
 
-app.run(($rootScope, $interval, $state) => {
-
+app.run(($rootScope, $interval, $state, $trace) => {
+  $trace.enable(1, 2);
   $rootScope.newState = newState;
 
   function newState() {
@@ -59,7 +42,7 @@ app.run(($rootScope, $interval, $state) => {
     $sp.state({
       name: parent.name ? parent.name + ".S" + newInt : "S" + newInt,
       url: "/" + newInt,
-      template: "<h3>" + newInt + "</h3> <div ui-view></div>"
+      template: "<span>" + newInt + "</span> <span ui-view></span>"
     });
   }
 

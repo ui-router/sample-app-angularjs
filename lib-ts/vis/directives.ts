@@ -11,6 +11,8 @@ let moduleName = "ui.router.demo";
 export default moduleName;
 let app = angular.module(moduleName, ['ui.router', visSvc, d3ng, easing]);
 
+app.filter("lastDottedSegment", () => (word) => word.split(".").slice(-1)[0]);
+
 app.directive('uirStateVis', (uirStateVisService) => {
   return {
     restrict: "E",
@@ -29,7 +31,7 @@ app.directive('uirStateVis', (uirStateVisService) => {
     controller: function($state, $interval, $scope) {
       this.nodes = uirStateVisService.nodes;
 
-      this.radius = this.radius || 20;
+      this.radius = this.radius || 15;
       this.offsetX = this.offsetX || 0;
       this.offsetY = this.offsetY || this.radius * 2;
       this.height = this.height || 500;
@@ -59,15 +61,15 @@ app.directive('uirStateNode', (d3ng) => {
   return {
     restrict: "A",
     scope: {
-      state: "=",
+      node: "=state",
       parent: "="
     },
     require: "^uirStateVis",
     link: function (scope, elem, attr, uirStateVis) {
       scope.radius = uirStateVis.radius;
 
-      const makeLinkPath = (state, parent) => {
-        let [s, p] = [state, parent];
+      const makeLinkPath = (node, parent) => {
+        let [s, p] = [node, parent];
         let yAvg = (s._y + p._y) / 2;
         return `M ${s._x} ${s._y} C ${s._x} ${yAvg}, ${p._x} ${yAvg}, ${p._x} ${p._y}`;
       };
@@ -80,31 +82,37 @@ app.directive('uirStateNode', (d3ng) => {
         const transformX = (xval) => xval * uirStateVis.scaleX + uirStateVis.offsetX;
         const transformY = (yval) => yval * uirStateVis.scaleY + uirStateVis.offsetY;
 
-        let {state, parent} = scope;
-        let currentCoords = [state._x || uirStateVis.width / 2, state._y || uirStateVis.height / 2];
+        let {node, parent} = scope;
+        let currentCoords = [node._x || uirStateVis.width / 2, node._y || uirStateVis.height / 2];
         let targetCoords = [transformX(newXyVals[0]), transformY(newXyVals[1])];
 
         function animationFrame(xyValArray) {
           let [x, y] = xyValArray;
-          state._x = x;
-          state._y = y;
+          node._x = x;
+          node._y = y;
           if (parent && angular.isDefined(parent._x))
-            state._linkPath = makeLinkPath(state, parent);
+            node._linkPath = makeLinkPath(node, parent);
         }
         cancelCurrentAnimation = d3ng.animatePath(targetCoords, currentCoords, 800, animationFrame);
       }
-      scope.$watchGroup(["state.x", "state.y", "parent.x", "parent.y"], xyValsUpdated);
+      scope.$watchGroup(["node.x", "node.y", "parent.x", "parent.y"], xyValsUpdated);
     },
 
     template: `
-      <path ng-if="state._linkPath" ng-attr-d='{{state._linkPath}}' class="link"/>
+      <path ng-if="node._linkPath" ng-attr-d='{{node._linkPath}}' class="link"/>
 
-      <circle r="10" ng-attr-cx="{{state._x}}" ng-attr-cy="{{state._y}}"></circle>
+      <circle class="{{node._classes}}" r="10" ng-attr-cx="{{node._x}}" ng-attr-cy="{{node._y}}"></circle>
+      <path class="{{node._classes}}" r="10" ng-attr-cx="{{node._x}}" ng-attr-cy="{{node._y}}"></path>
 
-      <text class="label"  text-anchor="middle"
-          ng-attr-transform="rotate(-12 {{state._x}} {{state._y}})"
-          ng-attr-x="{{state._x}}"
-          ng-attr-y="{{state._y - radius}}">{{state.name}}</text>
+      <text class="name" text-anchor="middle"
+          ng-attr-transform="rotate(-12 {{node._x}} {{node._y}})"
+          ng-attr-x="{{node._x}}" ng-attr-y="{{node._y - radius}}">
+          {{node.name | lastDottedSegment}}
+      </text>
+
+      <text class="label" text-anchor="middle" ng-attr-x="{{node._x}}" ng-attr-y="{{node._y + radius + 10}}">
+          {{node.label}}
+      </text>
     `
   }
 });

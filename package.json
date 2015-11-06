@@ -29,6 +29,7 @@
       "angular": "github:angular/bower-angular@^1.4.7",
       "angular-ui-router": "github:angular-ui/ui-router@^0.2.15",
       "d3": "github:mbostock/d3@^3.5.6",
+      "lorenzofox3/Smart-Table": "github:lorenzofox3/Smart-Table@^2.1.4",
       "ui-router-extras": "npm:ui-router-extras@^0.1.0"
     },
     "devDependencies": {

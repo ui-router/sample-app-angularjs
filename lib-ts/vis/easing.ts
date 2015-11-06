@@ -1,6 +1,7 @@
 let moduleName = "ui.router.demo.easing";
 export default moduleName;
 
+/** This is a collection of easing functions taken from jquery easing */
 angular.module(moduleName, []).service("easing", () => {
   /* ============================================================
    * jQuery Easing v1.3 - http://gsgd.co.uk/sandbox/jquery/easing/

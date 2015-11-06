@@ -3,14 +3,32 @@
 }
 
 .statevis circle {
+    r: 10;
     fill: #fff;
-    stroke: steelblue;
+    stroke: grey;
     stroke-width: 3px;
+
+    transition-property: r, fill, stroke, stroke-width;
+    transition-duration: 350ms;
+    transition-timing-function: ease-in-out;
+}
+
+.statevis circle.entered {
+    r: 10;
+    stroke: black;
+    stroke-width: 3px;
+    fill: lightgreen;
+}
+
+.statevis circle.entered:after {
+    content: "<text>Entered</text>"
 }
 
 .statevis circle.active {
-    fill: steelblue;
-    stroke-width: 5px;
+    r: 15;
+    fill: green;
+    stroke: black;
+    stroke-width: 3px;
 }
 
 .statevis text {
@@ -21,4 +39,9 @@
     fill: none;
     stroke: #ccc;
     stroke-width: 2px;
+}
+
+.statevis text.label {
+    fill: grey;
+    font-size: 0.7em;
 }
