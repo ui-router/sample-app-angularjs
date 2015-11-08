@@ -2,7 +2,7 @@ import {app} from './app_module';
 
 import "./datasource/contacts"
 import "./datasource/messages"
-import "./messages/messages_module"
+import "./mymessages/mymessages"
 
 let $sp;
 app.config(($stateProvider, $urlRouterProvider) => {
@@ -11,7 +11,8 @@ app.config(($stateProvider, $urlRouterProvider) => {
   $stateProvider.state({
     name: 'app',
     url: '',
-    template: '<div class="container-fluid" ui-view/>'
+    redirectTo: 'mymessages',
+    template: '<div class="container-fluidx" ui-view/>'
   });
 
   $stateProvider.state({

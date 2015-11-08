@@ -11,23 +11,12 @@ import directives from "../lib-ts/vis/directives";
 
 let app = angular.module("demo", ['ct.ui.router.extras.core', directives, stateSel, smartTable]);
 
-app.run(($rootScope, $interval, $state, $trace) => {
+app.run(($rootScope, $interval, $state, $trace, $transitions) => {
   $trace.enable(1);
-  $rootScope.newState = newState;
 
-  function newState() {
-    let states = $state.get();
-    let rnd = (max) => Math.floor(Math.random() * max);
-    let idx = rnd(states.length);
-    let parent = states[idx];
-    let newInt = rnd(999);
-    $sp.state({
-      name: parent.name ? parent.name + ".S" + newInt : "S" + newInt,
-      url: "/" + newInt,
-      template: "<span>" + newInt + "</span> <span ui-view></span>"
-    });
-  }
-
+  let matchCriteria = { to: (state) => !!state.redirectTo };
+  let redirectFn = ($transition$) => $transition$.redirect($state.targetState($transition$.to().redirectTo));
+  $transitions.onBefore(matchCriteria, redirectFn);
 });
 
 export {app};

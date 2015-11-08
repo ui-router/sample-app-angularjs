@@ -5,11 +5,31 @@
     content: "\f114";
 }
 
+.ellipsis {
+    text-overflow: ellipsis;
+}
+
+.my-messages {
+    display: flex;
+    flex-direction: row;
+    align-items: stretch;
+    align-content: flex-start;
+}
+
+.my-messages .folderlist {
+    flex: 1 0 auto;
+    padding: 2em;
+    background-color: #DDD;
+}
+
 .messages td {
     white-space: nowrap;
+    font-size: smaller;
 }
 
 .messagelist {
-    max-height: 50%;
+    max-height: 35%;
     overflow: scroll;
+    flex: 1 0 auto;
 }
+

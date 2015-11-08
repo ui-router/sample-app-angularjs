@@ -9,7 +9,7 @@ function MessageController(message) {
 }
 
 let messageState = {
-  name: 'messages.folder.message',
+  name: 'mymessages.folder.message',
   url: '/:messageId',
   resolve: {
     message: (Messages, $stateParams) => Messages.byId($stateParams.messageId)
