@@ -1,0 +1,15 @@
+.folder.selected i.fa:before {
+    content: "\f115";
+}
+.folder:not(.selected) i.fa:before {
+    content: "\f114";
+}
+
+.messages td {
+    white-space: nowrap;
+}
+
+.messagelist {
+    max-height: 50%;
+    overflow: scroll;
+}

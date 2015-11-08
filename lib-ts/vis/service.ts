@@ -63,7 +63,7 @@ app.run(($rootScope, $injector, uirStateVisService) => {
   let nodes: INode[] = uirStateVisService.nodes;
   let nodeForState = uirStateVisService.nodeForState;
 
-  let $trans = $injector.get("$transitions");
+  let $transitions = $injector.get("$transitions");
 
   let resetMetadata = {
     label: '',
@@ -80,33 +80,18 @@ app.run(($rootScope, $injector, uirStateVisService) => {
     node._classes = classes.reduce((str, clazz) => (str + (node[clazz] ? ` ${clazz} ` : '')), '');
   };
 
-  if ($trans) {
-
-    $trans.onStart({}, ($transition$) => {
+  if ($transitions) {
+    $transitions.onSuccess({}, ($transition$) => {
       let tc = $transition$.treeChanges();
       const getNode = node => nodeForState(node.state);
       nodes.forEach(n => angular.extend(n, resetMetadata));
+
       tc.retained.concat(tc.entering).map(getNode).forEach((n: INode) => n.entered = true);
       tc.retained.map(getNode).forEach((n: INode) => n.retained = true);
       tc.exiting.map(getNode).forEach((n: INode)=> n.exited = true);
-      tc.to.slice(-1).map(getNode).forEach((n: INode)=>n.active = true);
+      tc.to.slice(-1).map(getNode).forEach((n: INode)=> { n.active = true; n.label = "active"});
+
       nodes.forEach(applyClasses)
-    });
-
-    $trans.onEnter({}, ($state$, $transition$) => {
-      nodes.forEach(n => angular.extend(n, {highlight: false, entering: false }));
-      angular.extend(nodeForState($state$), {highlight: false, entering: false, label: 'entering' });
-    });
-
-    $trans.onSuccess({}, ($transition$) => {
-      let tc = $transition$.treeChanges();
-      console.log(tc)
-      const getNode = node => nodeForState(node.state);
-      nodes.forEach(n => angular.extend(n, resetMetadata));
-      tc.retained.concat(tc.entering).map(getNode).forEach((n: INode) => n.entered = true);
-      tc.retained.map(getNode).forEach((n: INode) => n.retained = true);
-      tc.exiting.map(getNode).forEach((n: INode)=> n.exited = true);
-      tc.to.slice(-1).map(getNode).forEach((n: INode)=> { n.active = true; n.label = "active"})
     });
 
   } else {

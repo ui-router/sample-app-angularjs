@@ -9,7 +9,7 @@ System.config({
 
   packages: {
     "app": {
-      "defaultExtension": "ts"
+      "defaultExtension": "js"
     },
     "lib-ts": {
       "defaultExtension": "ts"
@@ -19,7 +19,10 @@ System.config({
   map: {
     "angular": "github:angular/bower-angular@1.4.7",
     "angular-ui-router": "lib/angular-ui-router.js",
+    "bootstrap": "github:twbs/bootstrap@3.3.5",
+    "css": "github:systemjs/plugin-css@0.1.19",
     "d3": "github:mbostock/d3@3.5.6",
+    "font-awesome": "npm:font-awesome@4.4.0",
     "lorenzofox3/Smart-Table": "github:lorenzofox3/Smart-Table@2.1.4",
     "typescript": "npm:typescript@1.6.2",
     "ui-router-extras": "npm:ui-router-extras@0.1.0",
@@ -32,8 +35,14 @@ System.config({
     "github:jspm/nodelibs-util@0.1.0": {
       "util": "npm:util@0.10.3"
     },
+    "github:twbs/bootstrap@3.3.5": {
+      "jquery": "github:components/jquery@2.1.4"
+    },
     "npm:assert@1.3.0": {
       "util": "npm:util@0.10.3"
+    },
+    "npm:font-awesome@4.4.0": {
+      "css": "github:systemjs/plugin-css@0.1.19"
     },
     "npm:inherits@2.0.1": {
       "util": "github:jspm/nodelibs-util@0.1.0"
