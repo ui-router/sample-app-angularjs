@@ -19,4 +19,6 @@ app.run(($rootScope, $interval, $state, $trace, $transitions) => {
   $transitions.onBefore(matchCriteria, redirectFn);
 });
 
+app.filter("messageBody", ($sce) => (msgText) => $sce.trustAsHtml(msgText.split(/\n/).map(p => `<p>${p}</p>`).join('\n')));
+
 export {app};

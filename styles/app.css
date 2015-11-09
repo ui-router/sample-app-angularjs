@@ -1,7 +1,19 @@
+/* folder list */
+.folder {
+    padding: 0 1.5em;
+}
+.folder.selected {
+    background-color: cornflowerblue;
+}
+.folder.selected a {
+    color: white;
+}
 .folder.selected i.fa:before {
+    padding-right: 0.25em;
     content: "\f115";
 }
 .folder:not(.selected) i.fa:before {
+    padding-right: 0.25em;
     content: "\f114";
 }
 
@@ -9,7 +21,12 @@
     text-overflow: ellipsis;
 }
 
+
+
+/* my messages folder list/message list */
+
 .my-messages {
+    width: 100%;
     display: flex;
     flex-direction: row;
     align-items: stretch;
@@ -17,19 +34,83 @@
 }
 
 .my-messages .folderlist {
-    flex: 1 0 auto;
-    padding: 2em;
+    flex: 0 0 auto;
     background-color: #DDD;
 }
 
-.messages td {
-    white-space: nowrap;
-    font-size: smaller;
-}
+
+
+
+/* message list */
 
 .messagelist {
     max-height: 35%;
+    padding: 0.5em;
     overflow: scroll;
-    flex: 1 0 auto;
+    flex: 1 0 12em;
+}
+
+.messagelist table {
+    table-layout: fixed;
+    display: block;
+    max-height:300px;
+    width:100%;
+}
+
+.messagelist thead td {
+    font-weight: bold;
+}
+
+.messagelist thead td.st-sort-ascent:after {
+    content: " \f0de";
+    font-family: "FontAwesome";
+}
+
+.messagelist thead td.st-sort-descent:after {
+    content: " \f0dd";
+    font-family: "FontAwesome";
+}
+
+.messagelist table td {
+    padding: 0.25em 0.75em;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-size: small;
+}
+
+.messagelist table tr.active {
+    background-color: cornflowerblue;
+    color: white;
+}
+
+.messagelist table td:nth-child(1){ width: 1.75em; }
+.messagelist table td:nth-child(2){ width: 25%; }
+.messagelist table td:nth-child(3){ width: 55%; }
+.messagelist table td:nth-child(4){ width: 15%; }
+
+.messagelist thead tr:first-child {
+    /*position:absolute;*/
+}
+
+.messagelist tbody tr:first-child td{
+    /*padding-top:28px;*/
+}
+
+
+
+
+/* message content */
+
+.message .header,.body {
+    padding: 1em 2em;
+}
+
+.message .header {
+    background-color: darkgray;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-between;
+    align-items: baseline;
 }
 

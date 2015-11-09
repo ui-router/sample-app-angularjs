@@ -1,6 +1,17 @@
 let messageTemplate = `
 <div class="message">
-  <pre>{{message.message | json }}</pre>
+
+  <div class="header">
+    <div>
+      <h4>{{message.message.subject}}</h4>
+      <h5>{{message.message.senderEmail}}</h5>
+    </div>
+    <div>
+      <span>{{message.message.date | date: 'longDate'}} {{message.message.date | date: 'mediumTime'}}</span>
+    </div>
+  </div>
+
+  <div class="body" ng-bind-html="::message.message.message | messageBody"></div>
 </div>
 `;
 
