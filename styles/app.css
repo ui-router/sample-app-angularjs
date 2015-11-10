@@ -1,3 +1,12 @@
+.flex-h {
+    display: flex;
+    flex-flow: row wrap;
+}
+
+.flex-h * {
+    flex: 1 1;
+}
+
 /* folder list */
 .folder {
     padding: 0 1.5em;
@@ -114,3 +123,30 @@
     align-items: baseline;
 }
 
+
+.message .header .line2 {
+    display: flex;
+    flex-flow: column;
+    justify-content: space-between;
+}
+
+
+.compose .header label {
+    padding: 0 1em;
+    flex: 0 0 6em;
+}
+
+.compose .body {
+    background-color: lightgray;
+    height: 100%;
+}
+.compose .body textarea {
+    width: 100%;
+    border: 0;
+    outline: 0;
+}
+
+.compose .body .buttons {
+    padding: 1em 0;
+    float: right;
+}

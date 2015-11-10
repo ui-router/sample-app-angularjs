@@ -15,6 +15,7 @@ var myMessagesTemplate = `
 </div>
 
 <div ui-view="messagecontent"></div>
+<div ui-view="compose"></div>
 `;
 
 function FoldersController(folders) {
