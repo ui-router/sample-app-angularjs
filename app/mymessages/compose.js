@@ -4,7 +4,6 @@ let composeTemplate = `
     <div class="flex-h"> <label>Recipient</label><input type="text" id="to" name="to" ng-model="vm.message.to"> </div>
     <div class="flex-h"> <label>Subject</label><input type="text" id="subject" name="subject" ng-model="vm.message.subject"> </div>
   </div>
-  <hr>
 
   <div class="body">
     <textarea name="body" id="body" ng-model="vm.message.body" cols="30" rows="20"></textarea>
