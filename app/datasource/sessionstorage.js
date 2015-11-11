@@ -28,7 +28,7 @@ class SessionStorage {
 
   _commit = (data) => this.$q.when(sessionStorage.setItem(sessionStorageKey, JSON.stringify(data)));
 
-  _all = (thenFn) => $timeout(() => this._data, 200).then(thenFn);   // TODO: use DemoPrefs.delay
+  _all = (thenFn) => $timeout(() => this._data).then(thenFn);   // TODO: use DemoPrefs.delay
 
   _search(exampleItem) {
     let contains = (search, inString) => ("" + inString).indexOf("" + search) !== -1;
