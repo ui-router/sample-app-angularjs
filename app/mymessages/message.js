@@ -1,3 +1,5 @@
+import {angular} from "angular";
+
 let messageTemplate = `
 <div class="message">
 
@@ -6,11 +8,13 @@ let messageTemplate = `
       <h4>{{vm.message.subject}}</h4>
       <h5>{{vm.message.senderEmail}}</h5>
     </div>
+
     <div class="line2">
       <div>{{vm.message.date | date: 'longDate'}} {{vm.message.date | date: 'mediumTime'}}</div>
       <div>
-        <button ui-sref="mymessages.compose({ to: vm.message.senderEmail, subject: vm.prefixSubject('Re: ', vm.message), body: vm.quoteMessage(vm.message) })"><i class="fa fa-reply"></i></button>
-        <button ui-sref="mymessages.compose({ subject: vm.prefixSubject('Fwd: ', vm.message), body: vm.quoteMessage(vm.message) })"><i class="fa fa-forward" ></i></button>
+        <button ng-click="vm.reply(vm.message)"><i class="fa fa-reply"></i> Reply</button>
+        <button ng-click="vm.forward(vm.message)"><i class="fa fa-forward" ></i> Forward</button>
+        <button ng-click="vm.delete(vm.message)"><i class="fa fa-close"></i> Delete</button>
       </div>
     </div>
   </div>
@@ -19,10 +23,8 @@ let messageTemplate = `
 </div>
 `;
 
-function MessageController(message) {
-  this.message = message;
-  this.prefixSubject = (prefix, message) => prefix + message.subject;
-  this.quoteMessage = (message) => `
+const prefixSubject = (prefix, message) => prefix + message.subject;
+const quoteMessage = (message) => `
 
 
 
@@ -33,13 +35,38 @@ Date: ${message.date}
 Subject: ${message.subject}
 
 ${message.body}`;
+
+
+function MessageController($state, Messages, message) {
+  this.message = message;
+
+  this.reply = function(message) {
+    let stateParams = {
+      to: message.senderEmail,
+      subject: prefixSubject('Re: ', message),
+      body: quoteMessage(message)
+    };
+    $state.go('mymessages.compose', stateParams);
+  };
+
+  this.forward = function(message) {
+    let stateParams = {
+      subject: prefixSubject('Fwd: ', message),
+      body: quoteMessage(message)
+    };
+    $state.go('mymessages.compose', stateParams);
+  };
+
+  this.delete = function(message) {
+    Messages._delete(message).then(() => $state.go('mymessages.folder', undefined, { reload: 'mymessages.folder' }));
+  };
 }
 
 let messageState = {
   name: 'mymessages.folder.message',
   url: '/:messageId',
   resolve: {
-    message: (Messages, $stateParams) => Messages.byId($stateParams.messageId)
+    message: (Messages, $stateParams) => Messages._get($stateParams.messageId)
   },
   views: {
     "^.^.messagecontent": {
