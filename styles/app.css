@@ -56,7 +56,10 @@
     max-height: 35%;
     overflow: scroll;
     flex: 1 0 12em;
-}
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none; }
 
 .messagelist table {
     table-layout: fixed;
@@ -85,6 +88,7 @@
     overflow: hidden;
     text-overflow: ellipsis;
     font-size: small;
+    cursor: default;
 }
 
 .messagelist table tr.active {
@@ -93,9 +97,10 @@
 }
 
 .messagelist table td:nth-child(1){ width: 1.75em; }
-.messagelist table td:nth-child(2){ width: 25%; }
-.messagelist table td:nth-child(3){ width: 55%; }
-.messagelist table td:nth-child(4){ width: 15%; }
+.messagelist table td:nth-child(2){ width: 12%; }
+.messagelist table td:nth-child(3){ width: 17%; }
+.messagelist table td:nth-child(4){ width: 52%; }
+.messagelist table td:nth-child(5){ width: 15%; }
 
 .messagelist thead tr:first-child {
     /*position:absolute;*/

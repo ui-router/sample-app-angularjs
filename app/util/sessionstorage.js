@@ -1,4 +1,4 @@
-import {pushToArr, guid} from "../util/util";
+import {pushToArr, guid} from "./util";
 
 /**
  * This class simulates a RESTful resource using Session Storage

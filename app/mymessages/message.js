@@ -37,8 +37,10 @@ Subject: ${message.subject}
 ${message.body}`;
 
 
-function MessageController($state, Messages, message) {
+function MessageController($state, Messages, MessageListUi, message) {
   this.message = message;
+  message.read = true;
+  Messages._put(message);
 
   this.reply = function(message) {
     let stateParams = {
@@ -58,7 +60,10 @@ function MessageController($state, Messages, message) {
   };
 
   this.delete = function(message) {
-    Messages._delete(message).then(() => $state.go('mymessages.folder', undefined, { reload: 'mymessages.folder' }));
+    let nextMessageId = MessageListUi.proximalMessageId(message._id);
+    let nextState = nextMessageId ? 'mymessages.folder.message' : 'mymessages.folder';
+    let params = { messageId: nextMessageId };
+    Messages._delete(message).then(() => $state.go(nextState, params, { reload: 'mymessages.folder' }));
   };
 }
 

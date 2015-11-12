@@ -1,5 +1,5 @@
 import {angular} from "angular"
-import {SessionStorage} from "./sessionstorage"
+import {SessionStorage} from "../util/sessionstorage"
 import {uniqReduce} from "../util/util";
 import {app} from "../app_module"
 
