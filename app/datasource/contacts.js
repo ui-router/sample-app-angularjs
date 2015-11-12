@@ -10,7 +10,8 @@ class Contact {
 
 class ContactsService extends SessionStorage {
   constructor($http, $timeout, $q) {
-    super($http, $timeout, $q, "contacts", "http://beta.json-generator.com/api/json/get/V1g6UwwGx");
+    // http://beta.json-generator.com/api/json/get/V1g6UwwGx
+    super($http, $timeout, $q, "contacts", "data/contacts.json");
   }
 }
 

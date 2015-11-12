@@ -4,7 +4,8 @@ import {app} from "../app_module"
 
 class MessagesService extends SessionStorage {
   constructor($http, $timeout, $q) {
-    super($http, $timeout, $q, 'messages', 'http://beta.json-generator.com/api/json/get/VJl5GbIze');
+    // http://beta.json-generator.com/api/json/get/VJl5GbIze
+    super($http, $timeout, $q, 'messages', 'data/messages.json');
   }
 
   byFolder = (folder) => this._search({ tag: folder });
