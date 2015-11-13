@@ -1,12 +1,5 @@
-import {angular} from "angular"
 import {SessionStorage} from "../util/sessionstorage"
-import {uniqReduce} from "../util/util";
 import {app} from "../app_module"
-
-class Contact {
-  constructor(raw) { angular.extend(this, raw); }
-  toString = () => `${this.name.last}, ${this.name.first} <${this.email}>`
-}
 
 class ContactsService extends SessionStorage {
   constructor($http, $timeout, $q) {

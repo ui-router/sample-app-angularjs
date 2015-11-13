@@ -7,8 +7,27 @@
     flex: 1 1;
 }
 
+
+
+/* my messages */
+
+.my-messages {
+    width: 100%;
+    display: flex;
+}
+
+.my-messages .folderlist {
+    flex: 0 0 auto;
+    background-color: #DDD;
+    padding: 1em 0;
+}
+
+
+
+
 /* folder list */
-.folder {
+.folder a {
+    display: block;
     padding: 0 1.5em;
 }
 .folder.selected {
@@ -17,12 +36,13 @@
 .folder.selected a {
     color: white;
 }
+.folder i.fa {
+    width: 1.35em;
+}
 .folder.selected i.fa:before {
-    padding-right: 0.25em;
     content: "\f115";
 }
 .folder:not(.selected) i.fa:before {
-    padding-right: 0.25em;
     content: "\f114";
 }
 
@@ -32,38 +52,21 @@
 
 
 
-/* my messages folder list/message list */
-
-.my-messages {
-    width: 100%;
-    display: flex;
-    flex-direction: row;
-    align-items: stretch;
-    align-content: flex-start;
-}
-
-.my-messages .folderlist {
-    flex: 0 0 auto;
-    background-color: #DDD;
-}
-
-
-
 
 /* message list */
 
 .messagelist {
-    max-height: 35%;
-    overflow: scroll;
     flex: 1 0 12em;
+    max-height: 200px;
+    overflow-y: scroll;
     -webkit-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
-    user-select: none; }
+    user-select: none;
+}
 
 .messagelist table {
     table-layout: fixed;
-    display: block;
     max-height:300px;
     width:100%;
 }
