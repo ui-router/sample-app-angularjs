@@ -5,13 +5,15 @@ import {pushToArr, guid} from "./util";
  */
 class SessionStorage {
   _data; // promise for all data
-  _id = "_id";
-  _eqFn = (l, r) => l[this._id] === r[this._id];
+  _idProp = "_id";
   $q;
+  $timeout;
+  _eqFn = (l, r) => l[this._idProp] === r[this._idProp];
 
   constructor($http, $timeout, $q, sessionStorageKey, sourceUrl) {
     let data, fromSession = sessionStorage.getItem(sessionStorageKey);
     this.$q = $q;
+    this.$timeout = $timeout;
 
     if (fromSession) {
       try {
@@ -26,37 +28,50 @@ class SessionStorage {
     this._data = initial.then(() => JSON.parse(sessionStorage.getItem(sessionStorageKey)));
   }
 
-  _commit = (data) => this.$q.when(sessionStorage.setItem(sessionStorageKey, JSON.stringify(data)));
+  _commit = (data) =>
+      this.$q.when(sessionStorage.setItem(sessionStorageKey, JSON.stringify(data)));
 
-  _all = (thenFn) => $timeout(() => this._data).then(thenFn);   // TODO: use DemoPrefs.delay
+  all(thenFn) {
+      return this.$timeout(() => this._data).then(thenFn);   // TODO: use DemoPrefs.delay
+  }
 
-  _search(exampleItem) {
+  search(exampleItem) {
     let contains = (search, inString) => ("" + inString).indexOf("" + search) !== -1;
     let matchesExample = (example, item) =>
         Object.keys(example).reduce((memo, key) => memo && contains(example[key], item[key]), true);
-    return this._all(items => items.filter(matchesExample.bind(null, exampleItem)));
+    return this.all(items => items.filter(matchesExample.bind(null, exampleItem)));
   }
 
-  _get = (id) => this._all(items => items.find(item => item[this._id] === id));
-
-  _post(item) {
-    item[this._id] = guid();
-    return this._all(items => pushToArr(items, item)).then(this._commit);
+  get(id) {
+    return this.all(items => items.find(item => item[this._idProp] === id));
   }
 
-  _put = (item, eqFn = this._eqFn) => this._all(items => {
-    let idx = items.findIndex(eqFn.bind(null, item));
-    if (idx === -1) throw Error(`${item} not found in ${this}`);
-    items[idx] = item;
-    return this._commit(items);
-  });
+  save(item) {
+    return item[this._idProp] ? this.put(item) : this.post(item);
+  }
 
-  _delete = (item, eqFn = this._eqFn) => this._all(items => {
-    let idx = items.findIndex(eqFn.bind(null, item));
-    if (idx === -1) throw Error(`${item} not found in ${this}`);
-    items.splice(idx, 1);
-    return this._commit(items);
-  });
+  post(item) {
+    item[this._idProp] = guid();
+    return this.all(items => pushToArr(items, item)).then(this._commit);
+  }
+
+  put(item, eqFn = this._eqFn) {
+    return this.all(items => {
+      let idx = items.findIndex(eqFn.bind(null, item));
+      if (idx === -1) throw Error(`${item} not found in ${this}`);
+      items[idx] = item;
+      return this._commit(items);
+    });
+  }
+
+  remove(item, eqFn = this._eqFn) {
+    return this.all(items => {
+      let idx = items.findIndex(eqFn.bind(null, item));
+      if (idx === -1) throw Error(`${item} not found in ${this}`);
+      items.splice(idx, 1);
+      return this._commit(items);
+    });
+  }
 }
 
 export {SessionStorage}

@@ -1,8 +1,8 @@
-let composeTemplate = `
+let template = `
 <div class="compose">
   <div class="header">
-    <div class="flex-h"> <label>Recipient</label><input type="text" id="to" name="to" ng-model="vm.message.to"> </div>
-    <div class="flex-h"> <label>Subject</label><input type="text" id="subject" name="subject" ng-model="vm.message.subject"> </div>
+    <div class="flex-h"> <label>Recipient</label> <input type="text" id="to" name="to" ng-model="vm.message.recipientEmail"> </div>
+    <div class="flex-h"> <label>Subject</label> <input type="text" id="subject" name="subject" ng-model="vm.message.subject"> </div>
   </div>
 
   <div class="body">
@@ -17,39 +17,32 @@ let composeTemplate = `
 `;
 
 function ComposeController(AppConfig, $stateParams, $state, $transition$, Messages) {
-  let hasPrevious = !!$transition$.from().name;
-
   this.goPrevious = function() {
-    let state = hasPrevious ? $transition$.from() : "mymessages";
+    let hasPrevious = !!$transition$.from().name;
+    let state = hasPrevious ? $transition$.from() : "mymessages.folder";
     let params = hasPrevious ? $transition$.params("from") : {};
     $state.go(state, params, {reload: true});
   };
 
-  this.message = {
-    to: $stateParams.to,
-    senderEmail: AppConfig.emailAddress,
-    subject: $stateParams.subject,
-    body: $stateParams.body
-  };
+  this.message = angular.extend({ senderEmail: AppConfig.emailAddress }, $stateParams.message);
+  this.message.senderEmail = AppConfig.emailAddress;
 
-  this.send = (message) => Messages._post(angular.extend(message, { tag: 'sent' })).then(this.goPrevious);
-  this.save = (message) => Messages._post(angular.extend(message, { tag: 'drafts' })).then(this.goPrevious);
+  this.send = (message) => Messages.save(angular.extend(message, { folder: 'sent' })).then(this.goPrevious);
+  this.save = (message) => Messages.save(angular.extend(message, { folder: 'drafts' })).then(this.goPrevious);
 }
 
 let composeState = {
   name: 'mymessages.compose',
   url: '/compose',
   params: {
-    to: "",
-    subject: "",
-    body: ""
+    message: {}
   },
   onEnter: ($transition$) => ({$transition$: () => $transition$ }),
   controller: ComposeController,
   controllerAs: 'vm',
   views: {
     "!$default": {
-      template: composeTemplate
+      template: template
     }
   }
 };

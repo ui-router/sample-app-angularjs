@@ -1,0 +1,37 @@
+[
+  {
+    "_id": "inbox",
+    "columns": [ "read", "from", "subject", "date" ],
+    "actions": [ "reply", "forward", "delete" ]
+  },
+  {
+    "_id": "finance",
+    "columns": [ "read", "from", "subject", "date" ],
+    "actions": [ "reply", "forward", "delete" ]
+  },
+  {
+    "_id": "travel",
+    "columns": [ "read", "from", "subject", "date" ],
+    "actions": [ "reply", "forward", "delete" ]
+  },
+  {
+    "_id": "personal",
+    "columns": [ "read", "from", "subject", "date" ],
+    "actions": [ "reply", "forward", "delete" ]
+  },
+  {
+    "_id": "spam",
+    "columns": [ "read", "from", "subject", "date" ],
+    "actions": [ "reply", "forward", "delete" ]
+  },
+  {
+    "_id": "drafts",
+    "columns": [ "read", "to", "subject", "date" ],
+    "actions": [ "edit", "delete" ]
+  },
+  {
+    "_id": "sent",
+    "columns": [ "read", "to", "subject", "date" ],
+    "actions": [ "forward", "delete" ]
+  }
+]

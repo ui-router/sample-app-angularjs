@@ -1,20 +1,22 @@
 import {angular} from "angular";
+import {setProp} from "../util/util";
 
-let messageTemplate = `
+let template = `
 <div class="message">
 
   <div class="header">
     <div>
       <h4>{{vm.message.subject}}</h4>
-      <h5>{{vm.message.senderEmail}}</h5>
+      <h5>{{vm.message.senderEmail}} <i class="fa fa-long-arrow-right"></i> {{vm.message.recipientEmail}}</h5>
     </div>
 
     <div class="line2">
       <div>{{vm.message.date | date: 'longDate'}} {{vm.message.date | date: 'mediumTime'}}</div>
       <div>
-        <button ng-click="vm.reply(vm.message)"><i class="fa fa-reply"></i> Reply</button>
-        <button ng-click="vm.forward(vm.message)"><i class="fa fa-forward" ></i> Forward</button>
-        <button ng-click="vm.delete(vm.message)"><i class="fa fa-close"></i> Delete</button>
+        <button ng-show="vm.actions.edit" ng-click="vm.editDraft(vm.message)"><i class="fa fa-pencil"></i> Edit Draft</button>
+        <button ng-show="vm.actions.reply" ng-click="vm.reply(vm.message)"><i class="fa fa-reply"></i> Reply</button>
+        <button ng-show="vm.actions.forward" ng-click="vm.forward(vm.message)"><i class="fa fa-forward" ></i> Forward</button>
+        <button ng-show="vm.actions.delete" ng-click="vm.remove(vm.message)"><i class="fa fa-close"></i> Delete</button>
       </div>
     </div>
   </div>
@@ -37,33 +39,40 @@ Subject: ${message.subject}
 ${message.body}`;
 
 
-function MessageController($state, Messages, MessageListUi, message) {
+function MessageController($state, Messages, MessageListUi, folder, message) {
   this.message = message;
   message.read = true;
-  Messages._put(message);
+  Messages.put(message);
+
+  this.actions = folder.actions.reduce((obj, action) => setProp(obj, action, true), {});
+
+  let makeResponseMsg = (subjectPrefix, origMsg) => ({
+    senderEmail: origMsg.recipientEmail,
+    recipientEmail: origMsg.senderEmail,
+    subject: prefixSubject(subjectPrefix, origMsg),
+    body: quoteMessage(origMsg)
+  });
 
   this.reply = function(message) {
-    let stateParams = {
-      to: message.senderEmail,
-      subject: prefixSubject('Re: ', message),
-      body: quoteMessage(message)
-    };
-    $state.go('mymessages.compose', stateParams);
+    let replyMsg = makeResponseMsg("Re: ", message);
+    $state.go('mymessages.compose', { message: replyMsg });
   };
 
   this.forward = function(message) {
-    let stateParams = {
-      subject: prefixSubject('Fwd: ', message),
-      body: quoteMessage(message)
-    };
-    $state.go('mymessages.compose', stateParams);
+    let fwdMsg = makeResponseMsg("Fwd: ", message);
+    delete fwdMsg.recipientEmail;
+    $state.go('mymessages.compose', { message: fwdMsg });
   };
 
-  this.delete = function(message) {
+  this.editDraft = function(message) {
+    $state.go('mymessages.compose', { message: message });
+  };
+
+  this.remove = function(message) {
     let nextMessageId = MessageListUi.proximalMessageId(message._id);
     let nextState = nextMessageId ? 'mymessages.folder.message' : 'mymessages.folder';
     let params = { messageId: nextMessageId };
-    Messages._delete(message).then(() => $state.go(nextState, params, { reload: 'mymessages.folder' }));
+    Messages.remove(message).then(() => $state.go(nextState, params, { reload: 'mymessages.folder' }));
   };
 }
 
@@ -71,11 +80,11 @@ let messageState = {
   name: 'mymessages.folder.message',
   url: '/:messageId',
   resolve: {
-    message: (Messages, $stateParams) => Messages._get($stateParams.messageId)
+    message: (Messages, $stateParams) => Messages.get($stateParams.messageId)
   },
   views: {
     "^.^.messagecontent": {
-      template: messageTemplate,
+      template: template,
       controller: MessageController,
       controllerAs: 'vm'
     }

@@ -1,8 +1,7 @@
-import {app} from './app_module';
+import "./datasources"
+import "./mymessages/mymessages_module"
 
-import "./datasource/contacts"
-import "./datasource/messages"
-import "./mymessages/mymessages"
+import {app} from './app_module';
 
 let $sp;
 app.config(($stateProvider, $urlRouterProvider) => {

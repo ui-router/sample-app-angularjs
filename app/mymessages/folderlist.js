@@ -1,10 +1,10 @@
-var myMessagesTemplate = `
+var template = `
 <div class="my-messages">
 
   <div class="folderlist">
     <ul class="list-unstyled">
       <li class="folder" ui-sref-active="selected active" ng-repeat="folder in vm.folders" >
-        <a ui-sref=".folder({folderId: folder})"><i class="fa"></i>{{folder}}</a>
+        <a ui-sref=".folder({folderId: folder._id})"><i class="fa"></i>{{folder._id}}</a>
       </li>
     </ul>
   </div>
@@ -27,9 +27,9 @@ let messagesState = {
   url: "/mymessages",
   redirectTo: 'mymessages.folder',
   resolve: {
-    folders: (Messages) => Messages.folders()
+    folders: (Folders) => Folders.all()
   },
-  template: myMessagesTemplate,
+  template: template,
   controller: FoldersController,
   controllerAs: "vm"
 };

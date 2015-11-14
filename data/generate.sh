@@ -12,3 +12,4 @@ echo "exports.Markov = Markov;" >> markov.js
 node generate
 
 rm markov.js probabilityset.js
+rm corpora/*.txt
