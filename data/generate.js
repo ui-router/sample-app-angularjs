@@ -10,7 +10,7 @@ var markovs = {};
 var messages = JSON.parse(fs.readFileSync('messages.txt'));
 messages.forEach(function(message) {
   currentMarkov = getMarkov(message.corpus);
-  message.subject = sen2gibberish(message.subject);
+  message.subject = sen2gibberish(1, message.subject);
   var pars = message.body.split("\n");
   var sig = pars.slice(-2);
   message.body = msg2gibberish(message.body) + '\n' + sig.join("\n");
@@ -18,12 +18,12 @@ messages.forEach(function(message) {
 fs.writeFile('messages.json', JSON.stringify(messages), 'utf-8');
 
 
-function sen2gibberish(sentence) {
-  var words = sentence.split(/\s+/).length;
+function sen2gibberish(mult, sentence) {
+  var words = sentence.split(/\s+/).length * mult;
   var start = currentMarkov.randomStart();
   var gibberish = currentMarkov.generate(start, words);
   gibberish = gibberish.replace(/\w.+/, function(txt){
-    return txt.charAt(0).toUpperCase() + txt.substr(1);
+    return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
   });
   console.log("sentence: " + gibberish);
   return gibberish + ".";
@@ -31,7 +31,7 @@ function sen2gibberish(sentence) {
 
 function par2gibberish(paragraph) {
   return paragraph.split(/\./)
-	.map(sen2gibberish)
+	.map(sen2gibberish.bind(null, 2))
 	.join("   ");
 }
 

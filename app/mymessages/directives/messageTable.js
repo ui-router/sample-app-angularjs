@@ -22,8 +22,9 @@ let makeColumn = (id, title, template, search = true, sort = id) =>
 
 let allColumns = [
   makeColumn('read',    '',          '<i class="fa fa-circle" ng-show="!message.read"></i>', false, false),
-  makeColumn('from',    'Sender',    '{{ message.senderEmail }}'),
-  makeColumn('to',      'Recipient', '{{ message.recipientEmail }}'),
+  makeColumn('corpus',  'Style',     '{{ message.corpus }}'),
+  makeColumn('from',    'Sender',    '{{ message.from }}'),
+  makeColumn('to',      'Recipient', '{{ message.to }}'),
   makeColumn('subject', 'Subject',   '{{ message.subject }}'),
   makeColumn('date',    'Date',      '{{ message.date | date: "yyyy-MM-dd" }}')
 ];

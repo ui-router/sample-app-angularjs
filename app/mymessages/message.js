@@ -7,7 +7,7 @@ let template = `
   <div class="header">
     <div>
       <h4>{{vm.message.subject}}</h4>
-      <h5>{{vm.message.senderEmail}} <i class="fa fa-long-arrow-right"></i> {{vm.message.recipientEmail}}</h5>
+      <h5>{{vm.message.from}} <i class="fa fa-long-arrow-right"></i> {{vm.message.to}}</h5>
     </div>
 
     <div class="line2">
@@ -32,7 +32,7 @@ const quoteMessage = (message) => `
 
 ---------------------------------------
 Original message:
-From: ${message.senderEmail}
+From: ${message.from}
 Date: ${message.date}
 Subject: ${message.subject}
 
@@ -47,8 +47,8 @@ function MessageController($state, Messages, MessageListUi, folder, message) {
   this.actions = folder.actions.reduce((obj, action) => setProp(obj, action, true), {});
 
   let makeResponseMsg = (subjectPrefix, origMsg) => ({
-    senderEmail: origMsg.recipientEmail,
-    recipientEmail: origMsg.senderEmail,
+    from: origMsg.to,
+    to: origMsg.from,
     subject: prefixSubject(subjectPrefix, origMsg),
     body: quoteMessage(origMsg)
   });
@@ -60,7 +60,7 @@ function MessageController($state, Messages, MessageListUi, folder, message) {
 
   this.forward = function(message) {
     let fwdMsg = makeResponseMsg("Fwd: ", message);
-    delete fwdMsg.recipientEmail;
+    delete fwdMsg.to;
     $state.go('mymessages.compose', { message: fwdMsg });
   };
 

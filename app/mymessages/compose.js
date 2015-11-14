@@ -1,7 +1,7 @@
 let template = `
 <div class="compose">
   <div class="header">
-    <div class="flex-h"> <label>Recipient</label> <input type="text" id="to" name="to" ng-model="vm.message.recipientEmail"> </div>
+    <div class="flex-h"> <label>Recipient</label> <input type="text" id="to" name="to" ng-model="vm.message.to"> </div>
     <div class="flex-h"> <label>Subject</label> <input type="text" id="subject" name="subject" ng-model="vm.message.subject"> </div>
   </div>
 
@@ -24,11 +24,11 @@ function ComposeController(AppConfig, $stateParams, $state, $transition$, Messag
     $state.go(state, params, {reload: true});
   };
 
-  this.message = angular.extend({ senderEmail: AppConfig.emailAddress }, $stateParams.message);
-  this.message.senderEmail = AppConfig.emailAddress;
+  this.message = angular.extend({ from: AppConfig.emailAddress }, $stateParams.message);
+  this.message.from = AppConfig.emailAddress;
 
-  this.send = (message) => Messages.save(angular.extend(message, { folder: 'sent' })).then(this.goPrevious);
-  this.save = (message) => Messages.save(angular.extend(message, { folder: 'drafts' })).then(this.goPrevious);
+  this.send = (message) => Messages.save(angular.extend(message, { read: true, folder: 'sent' })).then(this.goPrevious);
+  this.save = (message) => Messages.save(angular.extend(message, { read: true, folder: 'drafts' })).then(this.goPrevious);
 }
 
 let composeState = {
