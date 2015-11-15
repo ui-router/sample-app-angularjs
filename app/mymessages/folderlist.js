@@ -25,7 +25,6 @@ let messagesState = {
   parent: "app",
   name: "mymessages",
   url: "/mymessages",
-  redirectTo: 'mymessages.folder',
   resolve: {
     folders: (Folders) => Folders.all()
   },

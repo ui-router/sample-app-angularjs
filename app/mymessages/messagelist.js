@@ -1,5 +1,4 @@
 let template = `
-
 <div class="messages">
   <message-table columns="vm.folder.columns" messages="vm.messages"></message-table>
 </div>

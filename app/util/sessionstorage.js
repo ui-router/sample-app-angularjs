@@ -36,14 +36,17 @@ class SessionStorage {
   }
 
   search(exampleItem) {
-    let contains = (search, inString) => ("" + inString).indexOf("" + search) !== -1;
+    let contains = (search, inString) =>
+        ("" + inString).indexOf("" + search) !== -1;
     let matchesExample = (example, item) =>
         Object.keys(example).reduce((memo, key) => memo && contains(example[key], item[key]), true);
-    return this.all(items => items.filter(matchesExample.bind(null, exampleItem)));
+    return this.all(items =>
+        items.filter(matchesExample.bind(null, exampleItem)));
   }
 
   get(id) {
-    return this.all(items => items.find(item => item[this._idProp] === id));
+    return this.all(items =>
+        items.find(item => item[this._idProp] === id));
   }
 
   save(item) {

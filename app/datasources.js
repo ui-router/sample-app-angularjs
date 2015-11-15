@@ -16,12 +16,18 @@ class FoldersService extends SessionStorage {
 }
 
 class MessagesService extends SessionStorage {
-  constructor($http, $timeout, $q) {
+  constructor($http, $timeout, $q, AppConfig) {
     // http://beta.json-generator.com/api/json/get/VJl5GbIze
     super($http, $timeout, $q, 'messages', 'data/messages.json');
+    this.AppConfig = AppConfig;
   }
 
-  byFolder = (folder) => this.search({ folder: folder });
+  byFolder(folder) {
+    let searchObject = { folder: folder };
+    let toFromAttr = ["drafts", "sent"].indexOf(folder) !== -1 ? "from" : "to";
+    searchObject[toFromAttr] = this.AppConfig.emailAddress;
+    return this.search(searchObject);
+  }
 }
 
 

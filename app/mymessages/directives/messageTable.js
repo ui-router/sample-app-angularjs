@@ -4,30 +4,26 @@ let tableTemplate =
 `  <table>
     <thead>
       <tr>
-        <td sort-messages="col.sort" ng-repeat="col in ::vm.visibleClumns">{{col.title}}</td>
+        <td ng-if="::vm.colVisible('read')"></td>
+        <td ng-if="::vm.colVisible('from')"     sort-messages="from">Sender</td>
+        <td ng-if="::vm.colVisible('to')"       sort-messages="from">Recipient</td>
+        <td ng-if="::vm.colVisible('subject')"  sort-messages="from">Subject</td>
+        <td ng-if="::vm.colVisible('date')"     sort-messages="from">Date</td>
       </tr>
     </thead>
 
     <tbody>
       <tr ng-repeat="message in vm.messages | orderBy: vm.AppConfig.sort track by message._id"
           ui-sref=".message({messageId: message._id})" ui-sref-active="active">
-        <td ng-repeat="col in vm.visibleClumns" cell-template="col.template"></td>
+        <td ng-if="::vm.colVisible('read')"><i class="fa fa-circle" style="font-size: 50%" ng-show="!message.read"></td>
+        <td ng-if="::vm.colVisible('from')">{{ message.from }}</td>
+        <td ng-if="::vm.colVisible('to')">{{ message.to }}</td>
+        <td ng-if="::vm.colVisible('subject')">{{ message.subject }}</td>
+        <td ng-if="::vm.colVisible('date')">{{ message.date | date: "yyyy-MM-dd" }}</td>
       </tr>
     </tbody>
 
   </table>`;
-
-let makeColumn = (id, title, template, search = true, sort = id) =>
-    ({ id, title, search, sort, template });
-
-let allColumns = [
-  makeColumn('read',    '',          '<i class="fa fa-circle" ng-show="!message.read"></i>', false, false),
-  makeColumn('corpus',  'Style',     '{{ message.corpus }}'),
-  makeColumn('from',    'Sender',    '{{ message.from }}'),
-  makeColumn('to',      'Recipient', '{{ message.to }}'),
-  makeColumn('subject', 'Subject',   '{{ message.subject }}'),
-  makeColumn('date',    'Date',      '{{ message.date | date: "yyyy-MM-dd" }}')
-];
 
 app.directive("messageTable", (AppConfig) => ({
   bindToController: {
@@ -37,9 +33,8 @@ app.directive("messageTable", (AppConfig) => ({
   template: tableTemplate,
   scope: {},
   controllerAs: 'vm',
-  controller: function($interpolate, $sce) {
+  controller: function() {
     this.AppConfig = AppConfig;
-    this.visibleClumns = allColumns.filter(c => this.columns.indexOf(c.id) !== -1);
-    this.renderTemplate = (template, data) => $sce.trustAsHtml($interpolate(template)(data));
+    this.colVisible = (name) => this.columns.indexOf(name) !== -1;
   }
 }));

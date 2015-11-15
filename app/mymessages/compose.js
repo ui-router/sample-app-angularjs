@@ -21,14 +21,16 @@ function ComposeController(AppConfig, $stateParams, $state, $transition$, Messag
     let hasPrevious = !!$transition$.from().name;
     let state = hasPrevious ? $transition$.from() : "mymessages.folder";
     let params = hasPrevious ? $transition$.params("from") : {};
-    $state.go(state, params, {reload: true});
+    $state.go(state, params);
   };
 
   this.message = angular.extend({ from: AppConfig.emailAddress }, $stateParams.message);
   this.message.from = AppConfig.emailAddress;
 
-  this.send = (message) => Messages.save(angular.extend(message, { read: true, folder: 'sent' })).then(this.goPrevious);
-  this.save = (message) => Messages.save(angular.extend(message, { read: true, folder: 'drafts' })).then(this.goPrevious);
+  this.send = (message) =>
+      Messages.save(angular.extend(message, { date: new Date(), read: true, folder: 'sent' })).then(this.goPrevious);
+  this.save = (message) =>
+      Messages.save(angular.extend(message, { date: new Date(), read: true, folder: 'drafts' })).then(this.goPrevious);
 }
 
 let composeState = {
