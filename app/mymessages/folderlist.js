@@ -2,7 +2,7 @@ var template = `
 <div class="my-messages">
 
   <div class="folderlist">
-    <ul class="list-unstyled">
+    <ul class="selectlist list-unstyled">
       <li class="folder" ui-sref-active="selected active" ng-repeat="folder in vm.folders" >
         <a ui-sref=".folder({folderId: folder._id})"><i class="fa"></i>{{folder._id}}</a>
       </li>

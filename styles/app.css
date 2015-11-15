@@ -3,8 +3,16 @@
     flex-flow: row wrap;
 }
 
-.flex-h * {
+.flex-h > * {
     flex: 1 1;
+}
+
+.flex.grow {
+    flex: 1 0 auto;
+}
+
+.flex.nogrow {
+    flex: 0 1 auto;
 }
 
 
@@ -18,33 +26,41 @@
 
 .my-messages .folderlist {
     flex: 0 0 auto;
-    background-color: #DDD;
-    padding: 1em 0;
 }
 
+
+
+
+/* selection lists */
+.selectlist {
+    padding: 1.5em 0;
+    background-color: #DDD;
+}
+.selectlist a {
+    display: block;
+    padding: 0 1.5em;
+}
+.selectlist .selected {
+    background-color: cornflowerblue;
+}
+.selectlist .selected a {
+    color: white;
+}
+.selectlist i.fa {
+    width: 1.35em;
+}
 
 
 
 /* folder list */
-.folder a {
-    display: block;
-    padding: 0 1.5em;
-}
-.folder.selected {
-    background-color: cornflowerblue;
-}
-.folder.selected a {
-    color: white;
-}
-.folder i.fa {
-    width: 1.35em;
-}
-.folder.selected i.fa:before {
+.selectlist .folder.selected i.fa:before {
     content: "\f115";
 }
-.folder:not(.selected) i.fa:before {
+.selectlist .folder:not(.selected) i.fa:before {
     content: "\f114";
 }
+
+
 
 .ellipsis {
     text-overflow: ellipsis;
@@ -160,4 +176,23 @@
 .compose .body .buttons {
     padding: 1em 0;
     float: right;
+}
+
+
+
+
+
+.contact {
+    padding: 2em;
+    border: 2px solid lightgray;
+}
+
+.contact .details > div {
+    display: flex;
+    flex-flow: row wrap;
+}
+
+.contact .details label {
+    width: 8em;
+    flex: 0 1 auto;
 }
