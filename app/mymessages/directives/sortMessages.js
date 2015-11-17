@@ -1,4 +1,4 @@
-import {app} from "../../index";
+import {app} from "../../app.module";
 app.directive("sortMessages", (AppConfig, $parse) => {
   return {
     restrict: 'A',

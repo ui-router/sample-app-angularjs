@@ -1,5 +1,5 @@
 import angular from "angular";
-import {app} from "../index";
+import {app} from "../app.module";
 
 let dialogTpl = `
   <div class="backdrop"></div>

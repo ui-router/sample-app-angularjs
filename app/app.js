@@ -1,12 +1,12 @@
-import {app} from './index';
+import {app} from './app.module';
 
 import {flattenReduce} from './util/util';
 
 import "./dataSources"
 
-import './mymessages/index';
-import './contacts/index';
-import './prefs/index';
+import './mymessages/mymessages.module';
+import './contacts/contacts.module';
+import './prefs/prefs.module';
 
 app.config(($stateProvider, $urlRouterProvider) => {
   $urlRouterProvider.otherwise("");
