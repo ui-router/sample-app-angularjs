@@ -3,7 +3,7 @@
 curl -O https://raw.githubusercontent.com/banksean/jsmarkov/master/markov.js
 curl -O https://raw.githubusercontent.com/banksean/jsmarkov/master/probabilityset.js
 
-gunzip -k corpora/*.gz
+gunzip -f -k corpora/*.gz
 
 cat probabilityset.js  >> markov.js
 echo >> markov.js

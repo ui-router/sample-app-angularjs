@@ -16,10 +16,10 @@ let template = `
       </div>
     </div>
   </div>
+
   <div class="flex nogrow">
     <img ng-src="{{vm.contact.picture}}"/>
   </div>
-
 </div>
 `;
 

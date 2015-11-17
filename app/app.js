@@ -1,5 +1,5 @@
-import "./datasources"
-import {app} from './app_module';
+import "./dataSources"
+import {app} from './_app';
 import {flattenReduce} from './util/util';
 
 import { mymessagesStates } from './mymessages/_mymessages';

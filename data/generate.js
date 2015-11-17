@@ -22,11 +22,28 @@ function sen2gibberish(mult, sentence) {
   var words = sentence.split(/\s+/).length * mult;
   var start = currentMarkov.randomStart();
   var gibberish = currentMarkov.generate(start, words);
-  gibberish = gibberish.replace(/\w.+/, function(txt){
-    return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
+
+  var sentence = gibberish;
+
+  while (sentence.match(/^ *[,.?!]/)) {
+    var words = sentence.split(/\s/);
+    var newWord = currentMarkov.generate(words.slice(-2), 1);
+    sentence = words.slice(1).join(" ") + newWord;
+  }
+
+  sentence = sentence.replace(/ ([^\w])/g, "$1");
+
+  sentence = sentence.replace(/[!?.] [a-z]/g, function (txt) {
+    var len = txt.length;
+    return txt.substr(0, len-1) + txt.charAt(len - 1).toUpperCase();
   });
-  console.log("sentence: " + gibberish);
-  return gibberish + ".";
+
+  sentence = sentence.trim().replace(/\w.+/, function(txt){
+    return txt.charAt(0).toUpperCase() + txt.substr(1);
+  });
+
+  console.log("sentence: " + sentence);
+  return sentence + ".";
 }
 
 function par2gibberish(paragraph) {
@@ -48,8 +65,9 @@ function getMarkov(corpus) {
   if (!markovs[corpus]) {
     markovs[corpus] = new Markov();
     var inputFile = path.join(__dirname, '/corpora/', corpus + '.txt');
-    var text = fs.readFileSync(inputFile, 'utf8')
-    text = text.replace(/[^\s\w.,]/g, "");
+    var text = fs.readFileSync(inputFile, 'utf8');
+    text = text.replace(/([^\s\w.,?!])/g, "");
+    text = text.replace(/([.,?!])/g, " $1 ");
     console.log("*** Training markov corpus with " + corpus);
     markovs[corpus].train(text);
   }
