@@ -17,10 +17,11 @@ let template = `
     <div><label>Image</label><input type="text" ng-model="vm.contact.picture"></div>
   </div>
 
+<hr>
   <div>
-    <button ui-sref="^"><i class="fa fa-close"></i> Cancel</button>
-    <button ng-click="vm.save(vm.contact)"><i class="fa fa-save"></i> Save</button>
-    <button ng-click="vm.remove(vm.contact)"><i class="fa fa-close"></i> Delete</button>
+    <button class="btn btn-primary" ui-sref="^"><i class="fa fa-close"></i> Cancel</button>
+    <button class="btn btn-primary" ng-click="vm.save(vm.contact)"><i class="fa fa-save"></i> Save</button>
+    <button class="btn btn-primary" ng-click="vm.remove(vm.contact)"><i class="fa fa-close"></i> Delete</button>
   </div>
 </div>
 

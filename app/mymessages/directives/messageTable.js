@@ -1,4 +1,4 @@
-import {app} from "../../_app";
+import {app} from "../../index";
 
 let tableTemplate =
 `  <table>

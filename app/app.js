@@ -1,15 +1,16 @@
-import "./dataSources"
-import {app} from './_app';
+import {app} from './index';
+
 import {flattenReduce} from './util/util';
 
-import { mymessagesStates } from './mymessages/_mymessages';
-import { contactsStates } from './contacts/_contacts';
-import { prefsStates } from './prefs/_prefs';
+import "./dataSources"
 
-let $sp;
+import './mymessages/index';
+import './contacts/index';
+import './prefs/index';
+
 app.config(($stateProvider, $urlRouterProvider) => {
   $urlRouterProvider.otherwise("");
-  $sp = $stateProvider;
+
   $stateProvider.state({
     name: 'app',
     url: '',
@@ -18,8 +19,18 @@ app.config(($stateProvider, $urlRouterProvider) => {
   });
 });
 
-app.config(function ($stateProvider) {
-  let states = [prefsStates, contactsStates, mymessagesStates].reduce(flattenReduce, []);
-  states.forEach(state => $stateProvider.state(state));
+app.run(($state, $trace, $transitions) => {
+  $trace.enable(1); // transitions; alternative to $trace.enable("TRANSITION")
+
+  let matchCriteria = { to: (state) => !!state.redirectTo };
+  let redirectFn = ($transition$) => $transition$.redirect($state.targetState($transition$.to().redirectTo));
+  $transitions.onBefore(matchCriteria, redirectFn);
+});
+
+app.filter('messageBody', ($sce) => (msgText) => $sce.trustAsHtml(msgText.split(/\n/).map(p => `<p>${p}</p>`).join('\n')));
+
+app.value('AppConfig', {
+  sort: '+date',
+  emailAddress: 'myself@angular.dev'
 });
 

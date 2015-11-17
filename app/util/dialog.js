@@ -1,5 +1,5 @@
 import angular from "angular";
-import {app} from "../_app";
+import {app} from "../index";
 
 let dialogTpl = `
   <div class="backdrop"></div>
@@ -9,8 +9,8 @@ let dialogTpl = `
       <div ng-show="details">{{details}}</div>
 
       <div style="padding-top: 1em;">
-        <button ng-click="yes()">Yes</button>
-        <button ng-click="no()">No</button>
+        <button class="btn btn-primary" ng-click="yes()">Yes</button>
+        <button class="btn btn-primary" ng-click="no()">No</button>
       </div>
     </div>
   </div>

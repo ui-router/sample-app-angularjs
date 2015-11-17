@@ -1,6 +1,6 @@
 import {uniqReduce} from "./util/util";
 import {SessionStorage} from "./util/sessionStorage"
-import {app} from "./_app"
+import {app} from "./index"
 
 class ContactsService extends SessionStorage {
   constructor($http, $timeout, $q) {

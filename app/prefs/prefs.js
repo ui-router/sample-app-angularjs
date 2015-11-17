@@ -1,14 +1,14 @@
 let template = `
 <div>
-  <button ui-sref="^">Back</button>
-  <button ng-click="vm.reset()">Reset Data</button>
+  <button class="btn btn-primary" ui-sref="^">Back</button>
+  <button class="btn btn-primary" ng-click="vm.reset()">Reset Data</button>
 </div>
 `;
 
-function PrefsController($state) {
+function PrefsController($document) {
   this.reset = () => {
     sessionStorage.clear();
-    $state.reload();
+    document.location.reload(true);
   }
 }
 

@@ -26,14 +26,16 @@ class SessionStorage {
     let stripHashKey = (obj) =>
         setProp(obj, '$$hashKey', undefined);
 
-    let initial = data ? $q.when(data) : $http.get(sourceUrl).then(resp => resp.data);
-    initial = initial.then(this._commit);
-    this._data = initial.then(() => JSON.parse(sessionStorage.getItem(sessionStorageKey)))
+    this._data = (data ? $q.resolve(data) : $http.get(sourceUrl).then(resp => resp.data))
+        .then(this._commit)
+        .then(() => JSON.parse(sessionStorage.getItem(sessionStorageKey)))
         .then(array => array.map(stripHashKey));
   }
 
-  _commit = (data) =>
-      this.$q.when(sessionStorage.setItem(sessionStorageKey, JSON.stringify(data)));
+  _commit = (data) => {
+    sessionStorage.setItem(sessionStorageKey, JSON.stringify(data));
+    return $q.resolve(data);
+  };
 
   all(thenFn) {
     return this.$timeout(() => this._data).then(thenFn);   // TODO: use DemoPrefs.delay

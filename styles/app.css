@@ -1,3 +1,7 @@
+button.btn i {
+    margin-right: 0.75em;
+}
+
 .flex-h {
     display: flex;
     flex-flow: row wrap;
@@ -22,10 +26,13 @@
 .my-messages {
     width: 100%;
     display: flex;
+    max-height: 200px;
 }
 
 .my-messages .folderlist {
+    background-color: #DDD;
     flex: 0 0 auto;
+    overflow-y: scroll;
 }
 
 
@@ -33,12 +40,15 @@
 
 /* selection lists */
 .selectlist {
+    margin: 0;
     padding: 1.5em 0;
-    background-color: #DDD;
 }
 .selectlist a {
     display: block;
-    padding: 0 1.5em;
+    color: black;
+    padding: 0.15em 1.5em;
+    text-decoration: none;
+    font-size: small;
 }
 .selectlist .selected {
     background-color: cornflowerblue;
@@ -73,7 +83,6 @@
 
 .messagelist {
     flex: 1 0 12em;
-    max-height: 200px;
     overflow-y: scroll;
     -webkit-user-select: none;
     -moz-user-select: none;
@@ -83,7 +92,6 @@
 
 .messagelist table {
     table-layout: fixed;
-    max-height:300px;
     width:100%;
 }
 
@@ -121,9 +129,9 @@
 }
 
 .messagelist table td:nth-child(1){ width: 1.75em; }
-.messagelist table td:nth-child(2){ width: 12%; }
+.messagelist table td:nth-child(2){ width: 21%; }
 .messagelist table td:nth-child(3){ width: 62%; }
-.messagelist table td:nth-child(4){ width: 17%; }
+.messagelist table td:nth-child(4){ width: 15%; }
 
 .messagelist thead tr:first-child {
     /*position:absolute;*/
@@ -197,6 +205,10 @@
     flex: 0 1 auto;
 }
 
+.contact .details input {
+    flex: 1 1 auto;
+}
+
 
 
 
@@ -234,7 +246,7 @@
 }
 
 .dialog .content {
-    transition: top 0.5s ease;
+    transition: top 0.25s ease;
     flex: 1 1 auto;
     background: white;
     padding: 2em;
