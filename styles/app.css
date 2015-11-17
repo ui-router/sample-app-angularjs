@@ -33,6 +33,7 @@ button.btn i {
     background-color: #DDD;
     flex: 0 0 auto;
     overflow-y: scroll;
+    max-height: 200px;
 }
 
 
@@ -84,6 +85,7 @@ button.btn i {
 .messagelist {
     flex: 1 0 12em;
     overflow-y: scroll;
+    max-height: 200px;
     -webkit-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;

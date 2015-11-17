@@ -9,7 +9,9 @@
 </head>
 <body ng-app="demo">
     <state-selector></state-selector>
-    <!--<uir-state-vis class="statevis" width="150" height="250"></uir-state-vis>-->
+    <div style="position: fixed; right: 0; bottom: 0; cursor: move" draggable>
+        <uir-state-vis class="statevis" width="250" height="250"></uir-state-vis>
+    </div>
     <!-- app goes here -->
     <div ui-view></div>
 

@@ -6,6 +6,6 @@ import "font-awesome/css/font-awesome.css!"
 import "bootstrap/css/bootstrap.css!"
 
 import stateSel from "../lib-ts/stateSelector";
-import directives from "../lib-ts/vis/directives";
+import stateVis from "../lib-ts/vis/statevis";
 
-export let app = angular.module("demo", ['ct.ui.router.extras.core', directives, stateSel]);
+export let app = angular.module("demo", ['ct.ui.router.extras.core', stateSel, stateVis]);
