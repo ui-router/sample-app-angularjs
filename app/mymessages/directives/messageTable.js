@@ -6,9 +6,9 @@ let tableTemplate =
       <tr>
         <td ng-if="::vm.colVisible('read')"></td>
         <td ng-if="::vm.colVisible('from')"     sort-messages="from">Sender</td>
-        <td ng-if="::vm.colVisible('to')"       sort-messages="from">Recipient</td>
-        <td ng-if="::vm.colVisible('subject')"  sort-messages="from">Subject</td>
-        <td ng-if="::vm.colVisible('date')"     sort-messages="from">Date</td>
+        <td ng-if="::vm.colVisible('to')"       sort-messages="to">Recipient</td>
+        <td ng-if="::vm.colVisible('subject')"  sort-messages="subject">Subject</td>
+        <td ng-if="::vm.colVisible('date')"     sort-messages="date">Date</td>
       </tr>
     </thead>
 

@@ -5,8 +5,6 @@ app.directive("sortMessages", (AppConfig, $parse) => {
     link: function(scope, elem, attrs) {
       let col = attrs.sortMessages;
       if (!col) return;
-      col = $parse(col)(scope);
-
       let chevron = angular.element("<i style='padding-left: 0.25em' class='fa'></i>");
       elem.append(chevron);
 
