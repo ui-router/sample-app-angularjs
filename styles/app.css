@@ -196,3 +196,52 @@
     width: 8em;
     flex: 0 1 auto;
 }
+
+
+
+
+
+.dialog {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 1040;
+}
+
+.dialog .backdrop {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    transition: opacity 0.25s ease;
+    background: #000;
+    opacity: 0;
+}
+
+.dialog.active .backdrop {
+    opacity: 0.5;
+}
+
+.dialog .wrapper {
+    z-index: 1041;
+    opacity: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.dialog .content {
+    transition: top 0.5s ease;
+    flex: 1 1 auto;
+    background: white;
+    padding: 2em;
+    position: relative;
+    top: -200px;
+}
+
+.dialog.active .content {
+    top: 4em;
+}

@@ -1,7 +1,8 @@
 import {angular} from "angular";
 
 let template = `
-<div class="contact flex-h">
+<div class="contact">
+<div class="flex-h">
   <div class="details">
     <div><label>First</label><div>{{vm.contact.name.first}}</div></div>
     <div><label>Last</label><div>{{vm.contact.name.last}}</div></div>
@@ -21,17 +22,12 @@ let template = `
     <img ng-src="{{vm.contact.picture}}"/>
   </div>
 </div>
+  <button ui-sref=".edit"><i class="fa fa-pencil"></i> Edit</button>
+</div>
 `;
 
 function ContactController(contact) {
   this.contact = contact;
-  this.remove = function (contact) {
-    //let nextContactId = MessageListUi.proximalMessageId(message._id);
-    //let nextState = nextContactId ? 'mymessages.folder.message' : 'mymessages.folder';
-    //let params = {messageId: nextContactId};
-    //Messages.remove(message).then(() => $state.go(nextState, params, {reload: 'mymessages.folder'}));
-    Contacts.remove(contact).then(() => $state.go("^"));
-  };
 }
 
 let viewContactState = {

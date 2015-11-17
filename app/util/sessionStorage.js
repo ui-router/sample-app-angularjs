@@ -1,4 +1,4 @@
-import {pushToArr, guid} from "./util";
+import {pushToArr, guid, setProp} from "./util";
 
 /**
  * This class simulates a RESTful resource using Session Storage
@@ -23,16 +23,20 @@ class SessionStorage {
       }
     }
 
+    let stripHashKey = (obj) =>
+        setProp(obj, '$$hashKey', undefined);
+
     let initial = data ? $q.when(data) : $http.get(sourceUrl).then(resp => resp.data);
     initial = initial.then(this._commit);
-    this._data = initial.then(() => JSON.parse(sessionStorage.getItem(sessionStorageKey)));
+    this._data = initial.then(() => JSON.parse(sessionStorage.getItem(sessionStorageKey)))
+        .then(array => array.map(stripHashKey));
   }
 
   _commit = (data) =>
       this.$q.when(sessionStorage.setItem(sessionStorageKey, JSON.stringify(data)));
 
   all(thenFn) {
-      return this.$timeout(() => this._data).then(thenFn);   // TODO: use DemoPrefs.delay
+    return this.$timeout(() => this._data).then(thenFn);   // TODO: use DemoPrefs.delay
   }
 
   search(exampleItem) {
