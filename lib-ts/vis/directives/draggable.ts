@@ -4,6 +4,7 @@ import {app} from "../statevis.module.ts";
 app.directive('draggable', ($document) => ({
   restrict: "A",
   link: function (scope, elem) {
+    elem.addClass("draggable");
     let isDragging = false;
     let mx = 0, my = 0;
     let x = 0, y = 0;
@@ -18,7 +19,8 @@ app.directive('draggable', ($document) => ({
 
     elem.on("mousemove", (e) => {
       if (!isDragging) return;
-
+      e.preventDefault();
+      elem[0].style.right = elem[0].style.bottom = null;
       elem[0].style.left = (x + (e.pageX - mx)) + 'px';
       elem[0].style.top = (y + (e.pageY - my)) + 'px';
     });

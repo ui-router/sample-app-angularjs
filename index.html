@@ -6,15 +6,16 @@
 
     <link rel="stylesheet" href="styles/app.css">
     <link rel="stylesheet" href="lib-ts/vis/vis.css">
+    <link rel="stylesheet" href="lib-ts/vis/stateographer.css">
 </head>
 <body ng-app="demo">
     <state-selector></state-selector>
-    <div style="position: fixed; right: 0; bottom: 0; cursor: move" draggable>
-        <!--<uir-transition-view></uir-transition-view>-->
-        <uir-state-vis class="statevis" width="250" height="250"></uir-state-vis>
+    <div style="z-index: 2; position: fixed; right: 0; bottom: 0; display: flex; flex-direction: row; background-color: rgba(255,255,255,0.8)" draggable>
+        <uir-state-vis style="flex: 1 0 auto" class="statevis" width="250" height="250"></uir-state-vis>
     </div>
     <!-- app goes here -->
     <div ui-view></div>
 
+    <uir-transitions-view></uir-transitions-view>
 </body>
 </html>

@@ -45,3 +45,12 @@
     fill: grey;
     font-size: 0.7em;
 }
+
+
+.draggable {
+    cursor: move;
+}
+
+.draggable:hover {
+    outline: 3px solid rgba(0,0,0,0.15)
+}

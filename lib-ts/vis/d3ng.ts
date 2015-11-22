@@ -7,7 +7,7 @@ let moduleName = "ui.router.demo.d3ng";
 export default moduleName;
 angular.module(moduleName, []).service("d3ng", function(easing, $rootScope) {
   return {
-    animatePath: function(newValue, oldValue, duration, updateFrame) {
+    animatePath: function(newValue, oldValue, duration, updateFrame, easeFn = easing.easeOutElastic) {
       let start = null, interpolate = d3.interpolateArray(oldValue, newValue);
 
       let step = function(now) {
@@ -16,7 +16,7 @@ angular.module(moduleName, []).service("d3ng", function(easing, $rootScope) {
         let progress = now - start, percent = 1;
         if (progress < duration) {
           requestAnimationFrame(step);
-          percent = easing.easeOutElastic(progress, 0, 1, duration);
+          percent = easeFn(progress, 0, 1, duration);
         }
         $rootScope.$apply(() => updateFrame(interpolate(percent)));
       };
