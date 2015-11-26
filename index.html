@@ -6,16 +6,20 @@
 
     <link rel="stylesheet" href="styles/app.css">
     <link rel="stylesheet" href="lib-ts/vis/vis.css">
-    <link rel="stylesheet" href="lib-ts/vis/stateographer.css">
+    <link rel="stylesheet" href="lib-ts/vis/transitionHistory.css">
 </head>
 <body ng-app="demo">
     <state-selector></state-selector>
-    <div style="z-index: 2; position: fixed; right: 0; bottom: 0; display: flex; flex-direction: row; background-color: rgba(255,255,255,0.8)" draggable>
+    <div style="z-index: 2; position: fixed; right: 0; bottom: 50px; display: flex; flex-direction: row; background-color: rgba(255,255,255,0.8)" draggable>
         <uir-state-vis style="flex: 1 0 auto" class="statevis" width="250" height="250"></uir-state-vis>
     </div>
     <!-- app goes here -->
     <div ui-view></div>
 
     <uir-transitions-view></uir-transitions-view>
+
+    <script type='text/javascript' id="__bs_script__">//<![CDATA[
+    document.write("<script async src='http://HOST:3000/browser-sync/browser-sync-client.2.10.0.js'><\/script>".replace("HOST", location.hostname));
+    //]]></script>
 </body>
 </html>

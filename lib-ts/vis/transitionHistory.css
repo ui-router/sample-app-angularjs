@@ -6,16 +6,17 @@
     right: 0;
     padding: 0 1em;
     overflow-x: scroll;
+    z-index: 2;
 }
 
 .transitionHistory .historyEntry {
     position: relative;
+    flex: 0 0 auto;
     text-align: center;
     padding: 12px 30px;
     margin-bottom: 6px;
     margin-right: 6px;
     color: #000;
-    float: left;
 }
 
 .transitionHistory .historyEntry:before,.historyEntry:after {
@@ -24,19 +25,17 @@
     left: 0;
     height: 50%;
     width: 100%;
-    background: #ccc;
+    background: cornflowerblue;
+    border: 1px solid black;
     z-index: -1;
 }
-
-.transitionHistory:hover::before, .transitionHistory:hover::after  {
-     background: #efefef;
- }
 
 .transitionHistory .historyEntry:before {
     top: 0;
     -webkit-transform: skew(40deg, 0deg);
     -ms-transform: skew(40deg, 0deg);
     transform: skew(40deg, 0deg);
+    border-bottom: 0;
 }
 
 .transitionHistory .historyEntry:after {
@@ -44,11 +43,40 @@
     -webkit-transform: skew(-40deg, 0deg);
     -ms-transform: skew(-40deg, 0deg);
     transform: skew(-40deg, 0deg);
+    border-top: 0;
+}
+
+.transitionDetail {
+    position: fixed;
+    bottom: 45px;
+    background: white;
+    border: 1px solid lightgrey;
+    padding: 1em 1em 0 1em;
+}
+
+
+.transitionDetail table {
+    font-size: smaller;
+}
+
+.historyEntry:hover:before, .historyEntry:hover:after  {
+    background: #2855ED;
 }
 
 
 
-
 .historyEntry .summary {
+    color: white;
     white-space: nowrap;
+    font-size: small;
+}
+
+.historyEntry .summary .transid {
+    position: absolute;
+    top: 0.15em;
+    left: 0.85em;
+    font-size: smaller;
+}
+.historyEntry .summary .transname {
+    font-weight: bold;
 }
