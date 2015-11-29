@@ -21,7 +21,7 @@ app.directive('uirTransitionsView', ($transitions, $timeout, d3ng, easing) => {
         $transition$.onSuccess({}, later(() => null, 300));
       });
 
-      let cancelPrevious, duration = 300, el = $element.children()[0].children[1];
+      let cancelPrevious, duration = 150, el = $element.children()[0].children[1];
       let scrollToRight = () => {
         let targetScrollX = el.scrollWidth - el.clientWidth;
         cancelPrevious && cancelPrevious();
@@ -43,7 +43,7 @@ app.directive('uirTransitionsView', ($transitions, $timeout, d3ng, easing) => {
       <div>
         <uir-transition-detail transition="detail"><h1>asdfASDJFAS JDfkla sjdlfkja sdlkj</h1></uir-transition-detail>
         <div class="transitionHistory">
-          <uir-transition-view class="historyEntry" transition="transition" ng-repeat="transition in transitions"></uir-transition-view>
+          <uir-transition-view transition="transition" ng-repeat="transition in transitions"></uir-transition-view>
         </div>
       </div>
     `
@@ -59,8 +59,16 @@ app.directive('uirTransitionView', ($transitions) => {
       trans: '=transition'
     },
     controller: function ($scope) {
-      $scope.trans.onStart({}, () => console.log("onstart"));
-      $scope.trans.onSuccess({}, () => console.log("onsuccess"));
+      let iconClasses = {
+        running: 'fa fa-spin fa-spinner',
+        success: 'fa fa-check',
+        error: 'fa fa-close'
+      };
+      $scope.iconClass = () => iconClasses[$scope.status];
+
+      $scope.status = "running";
+      $scope.trans.promise.then(() => $scope.status = "success", () => $scope.status = "error");
+
       $scope.tc = $scope.trans.treeChanges();
 
       let views = ['summary', 'detail', 'tree'];
@@ -76,11 +84,14 @@ app.directive('uirTransitionView', ($transitions) => {
     },
 
     template: `
-        <div ng-click="cycleView()" style="cursor: pointer">
+        <div class="historyEntry" ng-class="status" ng-click="cycleView()" style="cursor: pointer">
 
           <div class="summary">
               <div class="transid">{{trans.$id}}</div>
-              <div class="transname">{{trans.to().name}}</div>
+              <div class="transname">
+                <i ng-class="iconClass()"></i>
+                {{trans.to().name}}
+                </div>
           </div>
 
           <div ng-show="currentview == 'tree'" class="tree">
@@ -108,13 +119,11 @@ app.directive('uirTransitionDetail', () => ({
   template: `
   <div ng-show="!!vm.transition" class="transitionDetail">
     <table class="table table-condensed table-striped">
-
       <thead>
         <tr><th>Param</th><th>Value</th></tr>
       </thead>
 
       <tr ng-repeat="(key, val) in vm.params()"><td>{{ key }}</td><td>{{ val }}</td></tr>
-
     </table>
   </div>
   `,

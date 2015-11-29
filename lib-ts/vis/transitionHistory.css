@@ -20,30 +20,53 @@
 }
 
 .transitionHistory .historyEntry:before,.historyEntry:after {
+    background: #737373;
+}
+.transitionHistory .historyEntry:hover:before,.historyEntry:hover:after {
+    background: #a6a6a6;
+}
+
+.transitionHistory .historyEntry.success:before,.historyEntry.success:after {
+    background: #45803b;
+}
+.transitionHistory .historyEntry.success:hover:before,.historyEntry.success:hover:after {
+    background: #19a600;
+}
+
+
+.transitionHistory .historyEntry.error:before,.historyEntry.error:after {
+    background: #bf1f1d;
+}
+.transitionHistory .historyEntry.error:hover:before,.historyEntry.error:hover:after {
+    background: #e62622;
+}
+
+
+.transitionHistory .historyEntry:before,.historyEntry:after {
     content: '';
     position: absolute;
+    background: darkgrey;
     left: 0;
     height: 50%;
     width: 100%;
-    background: cornflowerblue;
     border: 1px solid black;
     z-index: -1;
 }
 
 .transitionHistory .historyEntry:before {
     top: 0;
+    border-bottom: 0;
     -webkit-transform: skew(40deg, 0deg);
     -ms-transform: skew(40deg, 0deg);
     transform: skew(40deg, 0deg);
-    border-bottom: 0;
 }
 
 .transitionHistory .historyEntry:after {
     bottom: 0;
+    border-top: 0;
     -webkit-transform: skew(-40deg, 0deg);
     -ms-transform: skew(-40deg, 0deg);
     transform: skew(-40deg, 0deg);
-    border-top: 0;
 }
 
 .transitionDetail {
@@ -52,15 +75,11 @@
     background: white;
     border: 1px solid lightgrey;
     padding: 1em 1em 0 1em;
+    font-size: small;
 }
-
 
 .transitionDetail table {
-    font-size: smaller;
-}
-
-.historyEntry:hover:before, .historyEntry:hover:after  {
-    background: #2855ED;
+    font-size: small;
 }
 
 

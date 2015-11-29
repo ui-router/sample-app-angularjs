@@ -4,16 +4,14 @@ import {pushToArr, guid, setProp} from "./util";
  * This class simulates a RESTful resource using Session Storage
  */
 class SessionStorage {
-  _data; // promise for all data
-  _idProp = "_id";
-  $q;
-  $timeout;
-  _eqFn = (l, r) => l[this._idProp] === r[this._idProp];
-
-  constructor($http, $timeout, $q, sessionStorageKey, sourceUrl) {
+  constructor($http, $timeout, $q, sessionStorageKey, sourceUrl, AppConfig) {
     let data, fromSession = sessionStorage.getItem(sessionStorageKey);
+    this._data = undefined; // promise for all data
+    this._idProp = "_id";
+    this._eqFn = (l, r) => l[this._idProp] === r[this._idProp];
     this.$q = $q;
     this.$timeout = $timeout;
+    this.AppConfig = AppConfig;
 
     if (fromSession) {
       try {
@@ -38,7 +36,7 @@ class SessionStorage {
   };
 
   all(thenFn) {
-    return this.$timeout(() => this._data).then(thenFn);   // TODO: use DemoPrefs.delay
+    return this.$timeout(() => this._data, this.AppConfig.restDelay).then(thenFn);   // TODO: use DemoPrefs.delay
   }
 
   search(exampleItem) {

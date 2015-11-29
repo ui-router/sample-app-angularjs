@@ -3,23 +3,22 @@ import {SessionStorage} from "./util/sessionStorage"
 import {app} from "./app.module"
 
 class ContactsService extends SessionStorage {
-  constructor($http, $timeout, $q) {
+  constructor($http, $timeout, $q, AppConfig) {
     // http://beta.json-generator.com/api/json/get/V1g6UwwGx
-    super($http, $timeout, $q, "contacts", "data/contacts.json");
+    super($http, $timeout, $q, "contacts", "data/contacts.json", AppConfig);
   }
 }
 
 class FoldersService extends SessionStorage {
-  constructor($http, $timeout, $q) {
-    super($http, $timeout, $q, 'folders', 'data/folders.json');
+  constructor($http, $timeout, $q, AppConfig) {
+    super($http, $timeout, $q, 'folders', 'data/folders.json', AppConfig);
   }
 }
 
 class MessagesService extends SessionStorage {
   constructor($http, $timeout, $q, AppConfig) {
     // http://beta.json-generator.com/api/json/get/VJl5GbIze
-    super($http, $timeout, $q, 'messages', 'data/messages.json');
-    this.AppConfig = AppConfig;
+    super($http, $timeout, $q, 'messages', 'data/messages.json', AppConfig);
   }
 
   byFolder(folder) {
