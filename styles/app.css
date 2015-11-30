@@ -19,7 +19,23 @@ button.btn i {
     flex: 0 1 auto;
 }
 
+.header {
+    margin: 0.3em 0.3em 0 0.3em;
+}
 
+.header .nav-tabs li.active a:focus {
+    background-color: #f7f7f7;
+}
+
+.header .nav-tabs li.active a {
+    border-color: lightgray lightgray rgba(0,0,0,0) lightgray ;
+    background-color: #f7f7f7;
+}
+
+.header .nav-tabs li a {
+    border-width: 1px;
+    border-radius: 10px 10px 0 0;
+}
 
 /* my messages */
 

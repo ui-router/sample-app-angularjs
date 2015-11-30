@@ -9,7 +9,24 @@
     <link rel="stylesheet" href="lib-ts/vis/transitionHistory.css">
 </head>
 <body ng-app="demo">
-    <state-selector></state-selector>
+    <div class="header">
+        <ul class="nav nav-tabs">
+            <li ui-sref-active="active">
+                <a ui-sref="mymessages" role="button"> Messages </a>
+            </li>
+            <li ui-sref-active="active">
+                <a ui-sref="contacts" role="button"> Contacts </a>
+            </li>
+            <li ui-sref-active="active">
+                <a ui-sref="prefs" role="button"> Preferences </a>
+            </li>
+
+            <li class="navbar-text navbar-right" style="margin: 0.5em 1.5em;">
+                Current State: <state-selector></state-selector>
+            </li>
+        </ul>
+    </div>
+
     <div style="z-index: 2; position: fixed; right: 0; bottom: 50px; display: flex; flex-direction: row; background-color: rgba(255,255,255,0.8)" draggable>
         <uir-state-vis style="flex: 1 0 auto" class="statevis" width="250" height="250"></uir-state-vis>
     </div>
