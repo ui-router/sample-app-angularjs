@@ -8,6 +8,10 @@ import './mymessages/mymessages.module';
 import './contacts/contacts.module';
 import './prefs/prefs.module';
 
+import './login';
+import './util/appConfig';
+import './util/auth';
+
 
 app.config(($stateProvider, $urlRouterProvider) => {
   $urlRouterProvider.otherwise("");
@@ -15,7 +19,7 @@ app.config(($stateProvider, $urlRouterProvider) => {
   $stateProvider.state({
     name: 'app',
     url: '',
-    redirectTo: 'mymessages',
+    data: { requiresAuth: true},
     template: '<div ui-view/>'
   });
 });
@@ -24,34 +28,14 @@ app.config(($stateProvider, $urlRouterProvider) => {
 app.run(($state, $trace, $transitions) => {
   $trace.enable(1); // transitions; alternative to $trace.enable("TRANSITION")
 
-  let matchCriteria = { to: (state) => !!state.redirectTo };
+  // Matches if the destination state has a 'redirectTo' property
+  let matchCriteria = { to: (state) => state.redirectTo != null };
+  // Function that returns a redirect for a transition, with a TargetState created using the desitionat state's 'redirectTo' property
   let redirectFn = ($transition$) => $transition$.redirect($state.targetState($transition$.to().redirectTo));
+  // Register the redirectTo hook
   $transitions.onBefore(matchCriteria, redirectFn);
 });
 
 
 app.filter('messageBody', ($sce) => (msgText) => $sce.trustAsHtml(msgText.split(/\n/).map(p => `<p>${p}</p>`).join('\n')));
-
-
-class AppConfig {
-  constructor() {
-    this.sort = '+date';
-    this.emailAddress = 'myself@angular.dev';
-    this.restDelay = 100;
-  }
-
-  load() {
-    try {
-      return angular.extend(this, angular.fromJson(sessionStorage.getItem("appConfig")))
-    } catch (Error) { }
-
-    return this;
-  }
-
-  save() {
-    sessionStorage.setItem("appConfig", angular.toJson(angular.extend({}, this)));
-  }
-}
-
-app.value('AppConfig', new AppConfig().load());
 

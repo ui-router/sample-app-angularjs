@@ -275,3 +275,13 @@ button.btn i {
 .dialog.active .content {
     top: 4em;
 }
+
+
+.bounce-horizontal {
+    animation: bounce-horizontal 0.5s alternate infinite;
+}
+
+@keyframes bounce-horizontal {
+    0% { left: 1.5em; }
+    100% { left: 0.5em; }
+}

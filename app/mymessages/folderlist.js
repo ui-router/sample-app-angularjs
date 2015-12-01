@@ -3,7 +3,7 @@ var template = `
 
   <div class="folderlist">
     <ul class="selectlist list-unstyled">
-      <li class="folder" ui-sref-active="selected active" ng-repeat="folder in vm.folders" >
+      <li class="folder" ui-sref-active="selected" ng-repeat="folder in vm.folders" >
         <a ui-sref=".folder({folderId: folder._id})"><i class="fa"></i>{{folder._id}}</a>
       </li>
     </ul>

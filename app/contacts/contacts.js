@@ -1,7 +1,7 @@
 var template = `
 <div class="my-contacts flex-h">
   <ul class="selectlist list-unstyled flex nogrow">
-    <li ui-sref-active="selected active" ng-repeat="contact in vm.contacts" >
+    <li ui-sref-active="selected" ng-repeat="contact in vm.contacts" >
       <a ui-sref=".contact({contactId: contact._id})">
         {{contact.name.first}} {{contact.name.last}}
       </a>

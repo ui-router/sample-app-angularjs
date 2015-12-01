@@ -6,19 +6,15 @@ app.directive('uirTransitionsView', ($transitions, $timeout, d3ng, easing) => {
     restrict: "E",
 
     controller: function ($scope, $element) {
-      $scope.transitions = {};
-      $scope.tc = {};
-
-      const later = (fn, delay) => () => $timeout(fn, delay);
+      $scope.transitions = [];
 
       $transitions.onBefore({}, ($transition$) => {
-        $scope.transitions[$transition$.$id] = $transition$;
-        $scope.tc[$transition$.$id] = $transition$.treeChanges();
-        $transition$.onStart({}, later(() => null, 300));  // all these are not working, why?
-        $transition$.onEnter({}, later(() => null, 300));
-        $transition$.onRetain({}, later(() => null, 300));
-        $transition$.onExit({}, later(() => null, 300));
-        $transition$.onSuccess({}, later(() => null, 300));
+        $scope.transitions.push($transition$);
+        //$transition$.onStart({}, later(() => null, 300));  // all these are not working, why?
+        //$transition$.onEnter({}, later(() => null, 300));
+        //$transition$.onRetain({}, later(() => null, 300));
+        //$transition$.onExit({}, later(() => null, 300));
+        //$transition$.onSuccess({}, later(() => null, 300));
       });
 
       let cancelPrevious, duration = 150, el = $element.children()[0].children[1];
@@ -30,8 +26,8 @@ app.directive('uirTransitionsView', ($transitions, $timeout, d3ng, easing) => {
         cancelPrevious = d3ng.animatePath(newVal, oldVal, duration, callback, easing.easeInOutCubic);
       };
 
+      const later = (fn, delay) => () => $timeout(fn, delay);
       $scope.$watchCollection("transitions", later(scrollToRight, 0));
-
 
       let uirTransitionDetail = undefined;
       this.register = (controller) => { uirTransitionDetail = controller; };
@@ -50,7 +46,7 @@ app.directive('uirTransitionsView', ($transitions, $timeout, d3ng, easing) => {
   }
 });
 
-app.directive('uirTransitionView', ($transitions) => {
+app.directive('uirTransitionView', () => {
   return {
     restrict: "E",
     require: '^uirTransitionsView',

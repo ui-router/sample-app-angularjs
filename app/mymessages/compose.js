@@ -39,7 +39,6 @@ let composeState = {
   params: {
     message: {}
   },
-  onEnter: ($transition$) => ({$transition$: () => $transition$ }),
   controller: ComposeController,
   controllerAs: 'vm',
   views: {
