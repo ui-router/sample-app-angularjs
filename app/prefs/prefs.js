@@ -1,12 +1,10 @@
 let template = `
 <div>
-  <button class="btn btn-primary" ui-sref="^"><i class="fa fa-arrow-left"></i> Back</button>
+  <button class="btn btn-primary" ng-click="vm.reset()"><i class="fa fa-recycle"></i> Reset All Data</button>
 </div>
+
 <div>
-  <button class="btn btn-primary" ng-click="vm.reset()"><i class="fa fa-recycle"></i> Reset Data</button>
-</div>
-<div>
-<label for="restDelay">Simulated REST API delay (ms)</label>
+  <label for="restDelay">Simulated REST API delay (ms)</label>
   <input type="text" name="restDelay" ng-model="vm.prefs.restDelay">
   <button class="btn btn-primary" ng-click="vm.savePrefs()">Save</button>
 </div>
@@ -27,7 +25,7 @@ function PrefsController($document, AppConfig) {
 }
 
 export let prefsState = {
-  parent: 'app',
+  parent: 'authedStates',
   name: 'prefs',
   template: template,
   url: '/prefs',

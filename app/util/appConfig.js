@@ -3,7 +3,7 @@ import {app} from "../app.module"
 class AppConfig {
   constructor() {
     this.sort = '+date';
-    this.emailAddress = 'myself@angular.dev';
+    this.emailAddress = undefined;
     this.restDelay = 100;
   }
 

@@ -39,7 +39,7 @@ app.directive('uirTransitionsView', ($transitions, $timeout, d3ng, easing) => {
       <div>
         <uir-transition-detail transition="detail"><h1>asdfASDJFAS JDfkla sjdlfkja sdlkj</h1></uir-transition-detail>
         <div class="transitionHistory">
-          <uir-transition-view transition="transition" ng-repeat="transition in transitions"></uir-transition-view>
+          <uir-transition-view transition="transition" ng-repeat="transition in transitions track by transition.$id"></uir-transition-view>
         </div>
       </div>
     `

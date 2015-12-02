@@ -42,7 +42,7 @@ let composeState = {
   controller: ComposeController,
   controllerAs: 'vm',
   views: {
-    "!$default": {
+    "!$default.$default": {
       template: template
     }
   }

@@ -1,5 +1,10 @@
 import {app} from "./app.module";
 
+// This is the login screen
+// It shows a fake login dialog and prompts the user to authenticate.
+// Once the user authenticates, it then re-attempts to activate the state
+// that they originally came from
+
 class LoginController {
   constructor(AppConfig, AuthService, $state, returnTo) {
     this.usernames = AuthService.usernames;
@@ -27,13 +32,15 @@ let loginTemplate = `
     <div class="container">
       <div class="col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
         <h3>Log In</h3>
-        <p>(This login screen is for demonstration only... just enter 'password' and click <b>"Log in"</b>)</p>
+        <p>(This login screen is for demonstration only... just pick a username, enter 'password' and click <b>"Log in"</b>)</p>
         <hr>
 
         <div>
           <label for="username">Username:</label>
           <select class="form-control" name="username" id="username"
             ng-model="vm.credentials.username" ng-options="username for username in vm.usernames"></select>
+          <i style="position: relative; bottom: 1.8em; margin-left: 10em; height: 0"
+              ng-hide="vm.credentials.username" class="fa fa-arrow-left bounce-horizontal"> Choose </i>
         </div>
         <br>
 
@@ -41,7 +48,7 @@ let loginTemplate = `
           <label for="password">Password:</label>
           <input class="form-control" type="password" name="password" ng-model="vm.credentials.password">
           <i style="position: relative; bottom: 1.8em; margin-left: 5em; height: 0"
-              ng-hide="vm.credentials.password == 'password'" class="fa fa-arrow-left bounce-horizontal">
+              ng-hide="!vm.credentials.username || vm.credentials.password == 'password'" class="fa fa-arrow-left bounce-horizontal">
             Enter '<b>password</b>' here
           </i>
         </div>
@@ -54,7 +61,7 @@ let loginTemplate = `
               ng-disabled="vm.authenticating" ng-click="vm.login(vm.credentials)">
             <i class="fa fa-spin fa-spinner" ng-show="vm.authenticating"></i> Log in
           </button>
-          <i ng-show="vm.credentials.password == 'password'" style="position: relative;" class="fa fa-arrow-left bounce-horizontal"> Click Me!</i>
+          <i ng-show="vm.credentials.username && vm.credentials.password == 'password'" style="position: relative;" class="fa fa-arrow-left bounce-horizontal"> Click Me!</i>
       </div>
     </div>
     `;
@@ -77,7 +84,7 @@ const returnTo = ($state, $transition$) => {
     params: redirectedFrom.params('from')
   };
 
-  return returnTo.state.name ? returnTo : { state: 'app', params: {} };
+  return returnTo.state.name ? returnTo : { state: 'home' };
 };
 
 

@@ -7,6 +7,11 @@ button.btn i {
     flex-flow: row wrap;
 }
 
+.flex-v {
+    display: flex;
+    flex-flow: column wrap;
+}
+
 .flex-h > * {
     flex: 1 1;
 }
@@ -19,22 +24,56 @@ button.btn i {
     flex: 0 1 auto;
 }
 
-.header {
+
+.home.buttons {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-around;
+    align-items: center;
+    height: 45%;
+}
+
+.home.buttons button {
+    padding: 2em;
+    margin: 0;
+    border: 3px solid black;
+    border-radius: 1em;
+    text-shadow: 0.1em 0.1em 0.1em black;
+}
+
+.home.buttons button i {
+    padding: 0;
+    margin: 0;
+    text-shadow: 0.1em 0.1em 0.1em black;
+}
+
+.navheader {
     margin: 0.3em 0.3em 0 0.3em;
 }
 
-.header .nav-tabs li.active a:focus {
+.navheader .nav-tabs li.active a:focus {
     background-color: #f7f7f7;
 }
 
-.header .nav-tabs li.active a {
+.navheader .nav-tabs li.active a {
     border-color: lightgray lightgray rgba(0,0,0,0) lightgray ;
     background-color: #f7f7f7;
 }
 
-.header .nav-tabs li a {
+.navheader .nav-tabs li a {
     border-width: 1px;
     border-radius: 10px 10px 0 0;
+}
+
+.navheader .logged-in-user div.hoverdrop {
+    display: none;
+    position: absolute;
+    width: 100%;
+}
+
+.navheader .logged-in-user:hover div.hoverdrop {
+    display: flex;
+    flex-direction:row-reverse;
 }
 
 /* my messages */

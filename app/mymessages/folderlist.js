@@ -22,7 +22,7 @@ function FoldersController(folders) {
 }
 
 let messagesState = {
-  parent: "app",
+  parent: 'authedStates',
   name: "mymessages",
   url: "/mymessages",
   resolve: {

@@ -41,8 +41,15 @@ class FakeAuthService {
     });
 
     return $timeout(checkCredentials, 800)
-        .then((authenticatedUser) =>
-        AppConfig.emailAddress = authenticatedUser);
+        .then((authenticatedUser) => {
+          AppConfig.emailAddress = authenticatedUser;
+          AppConfig.save()
+        });
+  }
+
+  logout() {
+    this.AppConfig.emailAddress = undefined;
+    this.AppConfig.save();
   }
 }
 
