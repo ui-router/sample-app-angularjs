@@ -1,151 +1,126 @@
 import angular from "angular";
 import {app} from "../statevis.module.ts";
 
+
+///////////////////////////////////////////////////////////
+// These two directives make up the Transition Visualizer
+///////////////////////////////////////////////////////////
+
+
+/**
+ * This outer directive manages the list of all transitions (history), and provides a fixed, scrolling viewport.
+ * It attaches hooks for lifecycle events and decorates the transition with a descriptive message.
+ */
 app.directive('uirTransitionsView', ($transitions, $timeout, d3ng, easing) => {
   return {
     restrict: "E",
 
     controller: function ($scope, $element) {
+      const later = (fn, delay) => () => $timeout(fn, delay);
+      function setMessage($transition$, message) {
+        $transition$._message = message;
+      }
+
       $scope.transitions = [];
+      $scope.toggles = { showDetail: false };
 
       $transitions.onBefore({}, ($transition$) => {
         $scope.transitions.push($transition$);
-        //$transition$.onStart({}, later(() => null, 300));  // all these are not working, why?
-        //$transition$.onEnter({}, later(() => null, 300));
-        //$transition$.onRetain({}, later(() => null, 300));
-        //$transition$.onExit({}, later(() => null, 300));
-        //$transition$.onSuccess({}, later(() => null, 300));
+        const statename = (state) => state.name || "(root)";
+        $transition$.onStart({}, () => setMessage($transition$, "Starting..."), { priority: -1 });
+        $transition$.onExit({}, ($state$) => setMessage($transition$, `Exiting ${statename($state$)}`), { priority: -1 });
+        $transition$.onRetain({}, ($state$) => setMessage($transition$, `Retained ${statename($state$)}`), { priority: -1 });
+        $transition$.onEnter({}, ($state$) => setMessage($transition$, `Entering ${statename($state$)}`), { priority: -1 });
+        $transition$.onFinish({}, () => setMessage($transition$, `Finishing...`));
+        $transition$.promise.then(() => delete $transition$._message);
       });
 
-      let cancelPrevious, duration = 150, el = $element.children()[0].children[1];
+      let cancelPreviousAnim, duration = 150, el = $element[0].children[0].children[0];
       let scrollToRight = () => {
         let targetScrollX = el.scrollWidth - el.clientWidth;
-        cancelPrevious && cancelPrevious();
+        cancelPreviousAnim && cancelPreviousAnim();
         let newVal = [targetScrollX], oldVal = [el.scrollLeft];
         let callback = (vals) => el.scrollLeft = vals[0];
-        cancelPrevious = d3ng.animatePath(newVal, oldVal, duration, callback, easing.easeInOutCubic);
+        cancelPreviousAnim = d3ng.animatePath(newVal, oldVal, duration, callback, easing.easeInOutCubic);
       };
 
-      const later = (fn, delay) => () => $timeout(fn, delay);
       $scope.$watchCollection("transitions", later(scrollToRight, 0));
-
-      let uirTransitionDetail = undefined;
-      this.register = (controller) => { uirTransitionDetail = controller; };
-      this.showDetails = (transition, element) => { uirTransitionDetail.show(transition, element); };
-      this.hideDetails = () => { uirTransitionDetail.hide(); };
     },
 
     template: `
-      <div>
-        <uir-transition-detail transition="detail"><h1>asdfASDJFAS JDfkla sjdlfkja sdlkj</h1></uir-transition-detail>
-        <div class="transitionHistory">
-          <uir-transition-view transition="transition" ng-repeat="transition in transitions track by transition.$id"></uir-transition-view>
+      <div >
+        <div class="transitionHistory" ng-mouseover="toggles.showDetail = true" ng-mouseout="toggles.showDetail = false">
+          <uir-transition-view transition="transition" toggles="toggles" ng-repeat="transition in transitions track by transition.$id"></uir-transition-view>
         </div>
       </div>
     `
   }
 });
 
+/** This directive visualizes a single transition object. It changes visualization as the transition runs. */
 app.directive('uirTransitionView', () => {
   return {
     restrict: "E",
-    require: '^uirTransitionsView',
+    require: ['^uirTransitionsView', 'uirTransitionDetail'],
 
     scope: {
-      trans: '=transition'
+      trans: '=transition',
+      toggles: '='
     },
+
+    bindToController: true,
+    controllerAs: "vm",
     controller: function ($scope) {
       let iconClasses = {
         running: 'fa fa-spin fa-spinner',
         success: 'fa fa-check',
+        redirected: 'fa fa-share',
+        ignored: 'fa fa-circle-o',
         error: 'fa fa-close'
       };
-      $scope.iconClass = () => iconClasses[$scope.status];
 
-      $scope.status = "running";
-      $scope.trans.promise.then(() => $scope.status = "success", () => $scope.status = "error");
+      this.iconClass = () => iconClasses[this.status];
 
-      $scope.tc = $scope.trans.treeChanges();
+      this.status = "running";
+      this.tc = this.trans.treeChanges();
 
-      let views = ['summary', 'detail', 'tree'];
-      $scope.currentview = 'summary';
-      $scope.cycleView = () => $scope.currentview = views[(views.indexOf($scope.currentview) + 1) % views.length];
+      const paramsForNode = node => Object.keys(node.values).map(key => [node.state.name, key, node.values[key]]);
+      this.params = this.trans.treeChanges().to
+          .map(paramsForNode)
+          .reduce((memo, array) => memo.concat(array), [])
+          .filter(tuple => tuple[1] !== '#' || tuple[2] != null);
 
-      $scope.paramCount = (params) => Object.keys(params || {}).length;
-    },
+      const success = () => this.status = "success";
+      const reject = (rejection) => {
+        if (rejection.type == 2) this.status = "redirected";
+        if (rejection.type == 5) this.status = "ignored";
+        this.rejection = rejection;
+      };
 
-    link: (scope, elem, attrs, uirTransitionsView) => {
-      elem.on("mouseover", (evt) => uirTransitionsView.showDetails(scope.trans, elem));
-      elem.on("mouseout", (evt) => uirTransitionsView.hideDetails());
+      this.trans.promise.then(success, reject);
     },
 
     template: `
-        <div class="historyEntry" ng-class="status" ng-click="cycleView()" style="cursor: pointer">
-
-          <div class="summary">
-              <div class="transid">{{trans.$id}}</div>
-              <div class="transname">
-                <i ng-class="iconClass()"></i>
-                {{trans.to().name}}
-                </div>
-          </div>
-
-          <div ng-show="currentview == 'tree'" class="tree">
-            <h1>asdf</h1>
-            <div class="node retained" ng-repeat="node in ctrl.tc.retained">ret: {{node.state.name}}</div>
-
-            <div style="display: flex; flex-flow: ">
-              <div>
-                <uir-node-view class="node entering" ng-repeat="node in ctrl.tc.entering">ent: {{node.state.name}}</uir-node-view>
-              </div>
-
-              <div>
-                <uir-node-view class="node exiting" ng-repeat="node in ctrl.tc.exiting">ext: {{node.state.name}}</uir-node-view>
-              </div>
+        <div ng-show="vm.toggles.showDetail" class="transitionDetail">
+          <h5>Param Values</h5>
+          <div ng-repeat="param in vm.params">
+            <div class="header">
+              <strong>{{param[1]}}</strong> <div class="stateName">({{param[0]}})</div>
             </div>
+            {{param[2]}}
+          </div>
+        </div>
+
+        <div class="historyEntry" ng-class="vm.status" style="cursor: pointer">
+          <div class="summary">
+            <div class="transid">{{vm.trans.$id}}</div>
+            <div class="status">{{vm.status}}<span ng-show="vm.trans._message">: {{vm.trans._message}}</span> </div>
+            <div class="transname">
+              <i ng-class="vm.iconClass()"></i>
+              {{vm.trans.to().name}}
+              </div>
           </div>
         </div>
     `
   }
 });
-
-
-app.directive('uirTransitionDetail', () => ({
-  require: ['^uirTransitionsView', 'uirTransitionDetail'],
-  template: `
-  <div ng-show="!!vm.transition" class="transitionDetail">
-    <table class="table table-condensed table-striped">
-      <thead>
-        <tr><th>Param</th><th>Value</th></tr>
-      </thead>
-
-      <tr ng-repeat="(key, val) in vm.params()"><td>{{ key }}</td><td>{{ val }}</td></tr>
-    </table>
-  </div>
-  `,
-  link: (scope, elem, attrs, [uirTransitionsView, uirTransitionDetail]) => {
-    uirTransitionsView.register(uirTransitionDetail);
-  },
-  controllerAs: "vm",
-  bindToController: "true",
-  controller: function($element, $timeout) {
-    let detailEl = angular.element($element[0].children[0]);
-
-    this.params = () => {
-      let keyvals = angular.extend({}, this.transition && this.transition.params('to'));
-      if (keyvals['#'] === null) delete keyvals['#'];
-      return keyvals;
-    };
-
-    this.show = (transition, element) => {
-      let rect = element[0].getBoundingClientRect();
-      this.transition = transition;
-      detailEl.css('left', rect.left);
-    };
-
-    this.hide = () => {
-      this.transition = undefined;
-    };
-
-  }
-}));

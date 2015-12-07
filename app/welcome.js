@@ -23,11 +23,12 @@ let welcomeTemplate = `
       </div>
     </p>
 
-    <h4>Patterns</h4>
+    <h4>Patterns and Recipes</h4>
     <ul>
-      <li>pattern 1</li>
-      <li>pattern 2</li>
-      <li>pattern 3</li>
+      <li>Require Authentication</li>
+      <li>Previous State</li>
+      <li>Redirect Hook</li>
+      <li>Default Param Values</li>
     </ul>
   </div>
 `;

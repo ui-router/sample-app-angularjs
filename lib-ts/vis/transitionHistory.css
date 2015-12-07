@@ -1,5 +1,6 @@
 .transitionHistory {
     display: flex;
+    align-items: flex-end;
     position: fixed;
     left: 0;
     bottom: 0;
@@ -42,6 +43,21 @@
 }
 
 
+.transitionHistory .historyEntry.ignored:before,.historyEntry.ignored:after {
+    background: #e68b05;
+}
+.transitionHistory .historyEntry.ignored:hover:before,.historyEntry.ignored:hover:after {
+    background: #ff9808;
+}
+
+.transitionHistory .historyEntry.redirected:before,.historyEntry.redirected:after {
+    background: #e68b05;
+}
+.transitionHistory .historyEntry.redirected:hover:before,.historyEntry.redirected:hover:after {
+    background: #ff9808;
+}
+
+
 .transitionHistory .historyEntry:before,.historyEntry:after {
     content: '';
     position: absolute;
@@ -70,18 +86,25 @@
 }
 
 .transitionDetail {
-    position: fixed;
-    bottom: 45px;
     background: white;
     border: 1px solid lightgrey;
     padding: 1em 1em 0 1em;
     font-size: small;
+    min-height: 10em;
 }
 
-.transitionDetail table {
-    font-size: small;
+.transitionDetail .header {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+    align-items: baseline;
 }
 
+
+.transitionDetail .header .stateName {
+    color: lightgrey;
+    font-size: x-small;
+}
 
 
 .historyEntry .summary {
@@ -92,7 +115,14 @@
 
 .historyEntry .summary .transid {
     position: absolute;
-    top: 0.15em;
+    top: 0.1em;
+    left: 0.85em;
+    font-size: smaller;
+}
+
+.historyEntry .summary .status {
+    position: absolute;
+    bottom: 0.1em;
     left: 0.85em;
     font-size: smaller;
 }
