@@ -84,11 +84,11 @@ app.directive('uirTransitionView', () => {
       this.status = "running";
       this.tc = this.trans.treeChanges();
 
-      const paramsForNode = node => Object.keys(node.values).map(key => [node.state.name, key, node.values[key]]);
+      const paramsForNode = node => Object.keys(node.values).map(key => ({state: node.state.name, key: key, value: node.values[key]}));
       this.params = this.trans.treeChanges().to
           .map(paramsForNode)
           .reduce((memo, array) => memo.concat(array), [])
-          .filter(tuple => tuple[1] !== '#' || tuple[2] != null);
+          .filter(param => param.key !== '#' || !!param.value);
 
       const success = () => this.status = "success";
       const reject = (rejection) => {
@@ -102,12 +102,20 @@ app.directive('uirTransitionView', () => {
 
     template: `
         <div ng-show="vm.toggles.showDetail" class="transitionDetail">
-          <h5>Param Values</h5>
-          <div ng-repeat="param in vm.params">
-            <div class="header">
-              <strong>{{param[1]}}</strong> <div class="stateName">({{param[0]}})</div>
+          <!--<div class="panel-default">-->
+            <!--<div class="panel-heading">States</div>-->
+            <!--<div class="header"> <strong>From:</strong> <div>{{vm.trans.from().name || '(root)'}}</div> </div>-->
+            <!--<div class="header"> <strong>To:</strong> <div>{{vm.trans.to().name}}</div> </div>-->
+          <!--</div>-->
+
+          <div class="panel-default">
+            <div class="panel-heading">Param Values</div>
+            <div ng-repeat="param in vm.params">
+              <div class="header">
+                <strong>{{param.key}}</strong> <div class="stateName">({{param.state}})</div>
+              </div>
+              {{param.value}}
             </div>
-            {{param[2]}}
           </div>
         </div>
 
