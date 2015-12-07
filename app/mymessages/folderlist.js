@@ -28,6 +28,7 @@ let messagesState = {
   resolve: {
     folders: (Folders) => Folders.all()
   },
+  redirectTo: 'mymessages.folder',
   template: template,
   controller: FoldersController,
   controllerAs: "vm"

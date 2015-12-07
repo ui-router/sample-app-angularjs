@@ -8,7 +8,7 @@ import './mymessages/mymessages.module';
 import './contacts/contacts.module';
 import './prefs/prefs.module';
 
-import './guest';
+import './welcome';
 import './home';
 import './login';
 import './authenticatedNav';
