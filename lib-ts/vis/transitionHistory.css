@@ -86,26 +86,113 @@
 }
 
 .transitionDetail {
-    background: white;
     border: 1px solid lightgrey;
-    padding: 1em 1em 0 1em;
     font-size: small;
-    min-height: 10em;
+}
+
+.transitionDetail .panel-heading {
+    text-align: center;
+}
+
+.transitionDetail table {
+    border-collapse: collapse;
+}
+
+.transitionDetail th {
+    text-align: center;
+    font-size: small;
 }
 
 .transitionDetail .header {
     display: flex;
-    flex-flow: row nowrap;
+    flex-flow: row-reverse nowrap;
     justify-content: space-between;
     align-items: baseline;
 }
 
 
-.transitionDetail .header .stateName {
+.transitionDetail table.paths td {
+    color: white;
+    padding: 0.1em 0.5em !important;
+    border: 0;
+    font-size: small;
+    min-width: 10em;
+}
+
+.transitionDetail.expand table.paths td {
+    border: 5px solid white;
+}
+
+.transitionDetail table.summary td {
+    font-size: small;
+    vertical-align: top;
+}
+
+.transitionDetail table.summary td:nth-child(1) {
+    white-space: nowrap;
+}
+
+.transitionDetail table.summary td:nth-child(2) {
+    font-weight: bold;
+    padding-left: 1em;
+}
+
+
+.transitionDetail td.retain {
+    background-color: #737273;
+}
+
+.transitionDetail td.exit {
+    background-color: #590e0e;
+}
+
+.transitionDetail td.enter {
+    background-color: #31592a;
+}
+
+.transitionDetail .deemphasize {
     color: lightgrey;
     font-size: x-small;
 }
 
+.transitionDetail .params {
+    background-color: rgba(255,255,255,0.2);
+    margin-left: -0.5em;
+    margin-right: -0.5em;
+    padding: 0;
+    overflow: hidden;
+    transition: max-height, opacity 0.75s ease;
+    max-height: 0;
+    margin-top: 0.25em;
+}
+
+.transitionDetail.expand .params {
+    padding: 0.5em;
+    max-height: 300px;
+}
+
+.transitionDetail .paramslabel {
+    float: right;
+    margin-top: -0.5em;
+}
+
+.transitionDetail .statename {
+    font-weight: bolder;
+    margin-right: 1em;
+}
+
+.transitionDetail .nowrap {
+    white-space: nowrap;
+}
+
+.transitionDetail .paramid {
+    font-weight: bolder;
+    color: white;
+}
+
+.transitionDetail .paramvalue {
+    color: #e6e6e6;
+}
 
 .historyEntry .summary {
     color: white;
@@ -128,4 +215,10 @@
 }
 .historyEntry .summary .transname {
     font-weight: bold;
+}
+
+
+span.link {
+    cursor: pointer;
+    text-decoration: underline;
 }
