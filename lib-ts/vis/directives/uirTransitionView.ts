@@ -36,6 +36,10 @@ app.directive('uirTransitionsView', ($transitions, $timeout, d3ng, easing) => {
         $transition$.promise.then(() => delete $transition$._message);
       });
 
+      this.fullScreen = function(toggle) {
+        $element.toggleClass("fullscreen", toggle);
+      };
+
       let cancelPreviousAnim, duration = 150, el = $element[0].children[0].children[0];
       let scrollToRight = () => {
         let targetScrollX = el.scrollWidth - el.clientWidth;
@@ -49,7 +53,7 @@ app.directive('uirTransitionsView', ($transitions, $timeout, d3ng, easing) => {
     },
 
     template: `
-      <div >
+      <div>
         <div class="transitionHistory">
           <uir-transition-view transition="transition" toggles="toggles[$index]" ng-repeat="transition in transitions track by transition.$id"></uir-transition-view>
           <div style="min-width: 18em; border: 1px solid transparent;"></div>
@@ -153,6 +157,7 @@ app.directive('uirTransitionView', () => {
 
             </table>
           </div>
+          <div class="downArrow"></div>
         </div>
 
         <div class="historyEntry" ng-class="vm.status" style="cursor: pointer" ng-click="vm.toggles.expand = !vm.toggles.expand">
@@ -165,6 +170,7 @@ app.directive('uirTransitionView', () => {
               </div>
           </div>
         </div>
+
       </div>
     `
   }
@@ -227,10 +233,9 @@ app.directive('uirTransitionNodeDetail', () => ({
               <h3>{{ resolve.key }}</h3>
             </div>
             <div class="modal-body" style="max-height: 80%;">
-              <pre>{{ resolve.value.data | json }}</pre>
+              <pre style="max-height: 50%">{{ resolve.value.data | json }}</pre>
             </div>
             <div class="modal-footer"><button class="btn btn-primary" ng-click="vm.showresolve = null">Close</button></div>
-
           </simple-modal>
 
           <span class="paramid">
@@ -249,15 +254,20 @@ app.directive("simpleModal", function ($timeout) {
   return {
     restrict: 'AE',
     transclude: true,
+    require: "^?uirTransitionsView",
     scope: {
       size: '@',
       asModal: '='
     },
-    link: function (scope, elem) { $timeout(() => elem.children().addClass("in"), 10) },
+    link: function (scope, elem, attrs, uirTransitionsView) {
+      $timeout(() => elem.children().addClass("in"), 10);
+      uirTransitionsView.fullScreen(true);
+      scope.$on("$destroy", () => uirTransitionsView.fullScreen(false))
+    },
     template: `
-        <div ng-class="{'modal-backdrop Xfade': asModal}" style="z-index: 1040;"> </div>
+        <div ng-class="{'modal-backdrop fade': asModal}" style="z-index: 1040;"> </div>
 
-        <div tabindex="-1" ng-class="{'modal Xfade': asModal}" style="z-index: 1050; display: block;">
+        <div tabindex="-1" ng-class="{'modal fade': asModal}" style="z-index: 1050; display: block;">
           <div ng-class="{'modal-dialog': asModal}" ng-class="{ 'modal-sm': size == 'sm', 'modal-lg': size == 'lg' }">
             <div ng-class="{'modal-content': asModal}" ng-transclude></div>
           </div>

@@ -1,3 +1,9 @@
+/*
+    .transitionHistory is the breadcrumbs and transition details block.
+    It fills the footer of the screen, and scrolls horizontally.
+    Mouse clicks should pass through to the elements underneath.
+*/
+
 .transitionHistory {
     display: flex;
     align-items: flex-end;
@@ -8,8 +14,22 @@
     padding: 0 1em;
     overflow-x: scroll;
     z-index: 2;
+    /* disable mouse clicks, hover, etc, for the overall div */
+    pointer-events: none;
 }
 
+.transitionHistory * {
+    /* Enable mouse for any sub-elements (the breadcrumb elemetns and detail elements) */
+    pointer-events: all;
+}
+
+/*  workaround for modal screen, and chrome and safari not allowing it to be
+    visible outside the .transitionHistory overflow while the .transitionHistory div is scrolled */
+.fullScreen .transitionHistory {
+    top: 0;
+}
+
+/* A single history entry (breadcrumb) arrow looking thing */
 .transitionHistory .historyEntry {
     position: relative;
     flex: 0 0 auto;
@@ -20,6 +40,60 @@
     color: #000;
 }
 
+
+/* History entry arrow CSS */
+.transitionHistory .historyEntry:before,.historyEntry:after {
+    content: '';
+    position: absolute;
+    background: darkgrey;
+    left: 0;
+    height: 50%;
+    width: 100%;
+    border: 1px solid black;
+    z-index: -1;
+}
+
+.transitionHistory .historyEntry:before {
+    top: 0;
+    border-bottom: 0;
+    -webkit-transform: skew(40deg, 0deg);
+    -ms-transform: skew(40deg, 0deg);
+    transform: skew(40deg, 0deg);
+}
+
+.transitionHistory .historyEntry:after {
+    bottom: 0;
+    border-top: 0;
+    -webkit-transform: skew(-40deg, 0deg);
+    -ms-transform: skew(-40deg, 0deg);
+    transform: skew(-40deg, 0deg);
+}
+
+/* Styling for breadcrumb contents */
+.historyEntry .summary {
+    color: white;
+    white-space: nowrap;
+    font-size: small;
+}
+
+.historyEntry .summary .transid {
+    position: absolute;
+    top: 0.1em;
+    left: 0.85em;
+    font-size: smaller;
+}
+
+.historyEntry .summary .status {
+    position: absolute;
+    bottom: 0.1em;
+    left: 0.85em;
+    font-size: smaller;
+}
+.historyEntry .summary .transname {
+    font-weight: bold;
+}
+
+/* breadcrumb/history entry color coding */
 .transitionHistory .historyEntry:before,.historyEntry:after {
     background: #737373;
 }
@@ -58,38 +132,47 @@
 }
 
 
-.transitionHistory .historyEntry:before,.historyEntry:after {
-    content: '';
-    position: absolute;
-    background: darkgrey;
-    left: 0;
-    height: 50%;
-    width: 100%;
-    border: 1px solid black;
-    z-index: -1;
-}
 
-.transitionHistory .historyEntry:before {
-    top: 0;
-    border-bottom: 0;
-    -webkit-transform: skew(40deg, 0deg);
-    -ms-transform: skew(40deg, 0deg);
-    transform: skew(40deg, 0deg);
-}
 
-.transitionHistory .historyEntry:after {
-    bottom: 0;
-    border-top: 0;
-    -webkit-transform: skew(-40deg, 0deg);
-    -ms-transform: skew(-40deg, 0deg);
-    transform: skew(-40deg, 0deg);
-}
 
+
+/* The transition detail popover (when hovering over a breadcrumb) */
 .transitionDetail {
     border: 1px solid lightgrey;
     font-size: small;
+    transition: box-shadow 0.5s ease,  border 1.0s ease
 }
 
+/* Pointer element points from the transitionDetail to the breadcrumb */
+.transitionDetail .downArrow {
+    position: relative;
+    width: 100%;
+    bottom: -10px;
+    margin-bottom: 10px;
+}
+
+.transitionDetail .downArrow:before, .transitionDetail .downArrow:after {
+    content: "";
+    position: absolute;
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    top: 100%;
+    left: 50%;
+    margin-left: -10px;
+}
+
+.transitionDetail .downArrow:before {
+    border-top: 10px solid lightgray;
+}
+
+.transitionDetail .downArrow:after{
+    border-top: 10px solid white;
+    margin-top: -1px;
+    z-index: 1;
+}
+
+
+/* The layout and styling of the transition detail popover */
 .transitionDetail .panel-heading {
     text-align: center;
 }
@@ -110,17 +193,12 @@
     align-items: baseline;
 }
 
-
 .transitionDetail table.paths td {
     color: white;
     padding: 0.1em 0.5em !important;
     border: 0;
     font-size: small;
     min-width: 10em;
-}
-
-.transitionDetail.expand table.paths td {
-    border: 5px solid white;
 }
 
 .transitionDetail table.summary td {
@@ -137,7 +215,7 @@
     padding-left: 1em;
 }
 
-
+/* color code path elements by retained/exited/entered */
 .transitionDetail td.retain {
     background-color: #737273;
 }
@@ -155,21 +233,41 @@
     font-size: x-small;
 }
 
+/* Styling for parameter values and resolve values */
 .transitionDetail .params {
     background-color: rgba(255,255,255,0.2);
     margin-left: -0.5em;
     margin-right: -0.5em;
     padding: 0;
+    opacity: 0;
     overflow: hidden;
-    transition: max-height, opacity 0.75s ease;
+    transition: padding 0.25s ease, max-height 0.25s ease, opacity 1s ease;
     max-height: 0;
-    margin-top: 0.25em;
+    margin-top: 0.5em;
+}
+
+
+.transitionDetail.expand {
+    box-shadow: 4px 4px 12px rgba(0,0,0,0.3);
+    border: 1px solid black;
+}
+
+.transitionDetail.expand .downArrow:before {
+    border-top-color: black;
 }
 
 .transitionDetail.expand .params {
     padding: 0.5em;
-    max-height: 300px;
+    max-height: 40px;
+    opacity: 1;
 }
+
+/* When showing expanded details, put space between path elements */
+.transitionDetail.expand table.paths td {
+    border: 5px solid white;
+    max-height: 100px;
+}
+
 
 .transitionDetail .paramslabel {
     float: right;
@@ -194,28 +292,6 @@
     color: #e6e6e6;
 }
 
-.historyEntry .summary {
-    color: white;
-    white-space: nowrap;
-    font-size: small;
-}
-
-.historyEntry .summary .transid {
-    position: absolute;
-    top: 0.1em;
-    left: 0.85em;
-    font-size: smaller;
-}
-
-.historyEntry .summary .status {
-    position: absolute;
-    bottom: 0.1em;
-    left: 0.85em;
-    font-size: smaller;
-}
-.historyEntry .summary .transname {
-    font-weight: bold;
-}
 
 
 span.link {
