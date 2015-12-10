@@ -17,9 +17,9 @@ let welcomeTemplate = `
       one of the three submodules: Messages, Contacts, or Preferences. If you are not already logged in,
       you will be taken to an authentication screen (the authentication is fake; the password is "password")
       <div>
-        <button class="btn btn-primary" ui-sref="mymessages"><i class="fa fa-envelope"></i> Messages</button>
-        <button class="btn btn-primary" ui-sref="contacts"><i class="fa fa-users"></i> Contacts</button>
-        <button class="btn btn-primary" ui-sref="prefs"><i class="fa fa-cogs"></i> Preferences</button>
+        <button class="btn btn-primary" ui-sref="mymessages"><i class="fa fa-envelope"></i><span>Messages</span></button>
+        <button class="btn btn-primary" ui-sref="contacts"><i class="fa fa-users"></i><span>Contacts</span></button>
+        <button class="btn btn-primary" ui-sref="prefs"><i class="fa fa-cogs"></i><span>Preferences</span></button>
       </div>
     </p>
 

@@ -13,10 +13,10 @@ let template = `
     <div class="line2">
       <div>{{vm.message.date | date: 'longDate'}} {{vm.message.date | date: 'mediumTime'}}</div>
       <div>
-        <button class="btn btn-primary" ng-show="vm.actions.edit" ng-click="vm.editDraft(vm.message)"><i class="fa fa-pencil"></i> Edit Draft</button>
-        <button class="btn btn-primary" ng-show="vm.actions.reply" ng-click="vm.reply(vm.message)"><i class="fa fa-reply"></i> Reply</button>
-        <button class="btn btn-primary" ng-show="vm.actions.forward" ng-click="vm.forward(vm.message)"><i class="fa fa-forward" ></i> Forward</button>
-        <button class="btn btn-primary" ng-show="vm.actions.delete" ng-click="vm.remove(vm.message)"><i class="fa fa-close"></i> Delete</button>
+        <button class="btn btn-primary" ng-show="vm.actions.edit" ng-click="vm.editDraft(vm.message)"><i class="fa fa-pencil"></i> <span>Edit Draft</span></button>
+        <button class="btn btn-primary" ng-show="vm.actions.reply" ng-click="vm.reply(vm.message)"><i class="fa fa-reply"></i> <span>Reply</span></button>
+        <button class="btn btn-primary" ng-show="vm.actions.forward" ng-click="vm.forward(vm.message)"><i class="fa fa-forward" ></i> <span>Forward</span></button>
+        <button class="btn btn-primary" ng-show="vm.actions.delete" ng-click="vm.remove(vm.message)"><i class="fa fa-close"></i> <span>Delete</span></button>
       </div>
     </div>
   </div>

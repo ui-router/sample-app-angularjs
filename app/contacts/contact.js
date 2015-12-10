@@ -22,7 +22,7 @@ let template = `
     <img ng-src="{{vm.contact.picture}}"/>
   </div>
 </div>
-  <button class="btn btn-primary" ui-sref=".edit"><i class="fa fa-pencil"></i> Edit</button>
+  <button class="btn btn-primary" ui-sref=".edit"><i class="fa fa-pencil"></i><span>Edit</span></button>
 </div>
 `;
 

@@ -20,9 +20,9 @@ let template = `
   <hr>
 
   <div>
-    <button class="btn btn-primary" ui-sref="^"><i class="fa fa-close"></i> Cancel</button>
-    <button class="btn btn-primary" ng-click="vm.save(vm.contact)"><i class="fa fa-save"></i> Save</button>
-    <button class="btn btn-primary" ng-click="vm.remove(vm.contact)"><i class="fa fa-close"></i> Delete</button>
+    <button class="btn btn-primary" ui-sref="^"><i class="fa fa-close"></i><span>Cancel</span></button>
+    <button class="btn btn-primary" ng-click="vm.save(vm.contact)"><i class="fa fa-save"></i><span>Save</span></button>
+    <button class="btn btn-primary" ng-click="vm.remove(vm.contact)"><i class="fa fa-close"></i><span>Delete</span></button>
   </div>
 </div>
 

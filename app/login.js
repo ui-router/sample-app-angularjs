@@ -59,7 +59,7 @@ let loginTemplate = `
         <div>
           <button class="btn btn-primary" type="button"
               ng-disabled="vm.authenticating" ng-click="vm.login(vm.credentials)">
-            <i class="fa fa-spin fa-spinner" ng-show="vm.authenticating"></i> Log in
+            <i class="fa fa-spin fa-spinner" ng-show="vm.authenticating"></i> <span>Log in</span>
           </button>
           <i ng-show="vm.credentials.username && vm.credentials.password == 'password'" style="position: relative;" class="fa fa-arrow-left bounce-horizontal"> Click Me!</i>
       </div>

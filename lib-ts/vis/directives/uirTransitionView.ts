@@ -129,7 +129,9 @@ app.directive('uirTransitionView', () => {
       <div ng-mouseover="vm.toggles.showDetail = true" ng-mouseout="vm.toggles.showDetail = false">
         <div ng-show="vm.toggles.showDetail || vm.toggles.expand" ng-class="{ expand: vm.toggles.expand }" class="transitionDetail panel panel-default">
           <div class="panel-heading">
-            <button class="pull-right" ng-click="vm.toggles.expand = false" ng-show="vm.toggles.expand"><i class="fa fa-thumb-tack"> </i></button>
+            <button class="btn btn-default btn-xs pull-right pinButton" ng-click="vm.toggles.expand = !vm.toggles.expand">
+              <i class="fa fa-thumb-tack" ng-class="{ 'fa-rotate-45 text-muted': !vm.toggles.expand }"></i>
+            </button>
             <h3 class="panel-title">Transition #{{vm.trans.$id}}</h3>
           </div>
           <div class="panel-body">

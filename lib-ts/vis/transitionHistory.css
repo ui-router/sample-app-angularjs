@@ -298,3 +298,18 @@ span.link {
     cursor: pointer;
     text-decoration: underline;
 }
+
+.pinButton i {
+    transition: transform 1s ease;
+}
+.pinButton:hover i {
+    color: darkgrey;
+}
+
+.fa-thumb-tack.fa-rotate-45 {
+    color: lightgray;
+    filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=1);
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
+}

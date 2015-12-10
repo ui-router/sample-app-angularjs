@@ -8,9 +8,9 @@ let template = `
   <div class="body">
     <textarea name="body" id="body" ng-model="vm.message.body" cols="30" rows="20"></textarea>
     <div class="buttons">
-      <button class="btn btn-primary" ng-click="vm.goPrevious()"><i class="fa fa-times-circle-o"></i>Cancel</button>
-      <button class="btn btn-primary" ng-click="vm.save(vm.message)"><i class="fa fa-save"></i>Save as Draft</button>
-      <button class="btn btn-primary" ng-click="vm.send(vm.message)"><i class="fa fa-paper-plane-o"></i>Send</button>
+      <button class="btn btn-primary" ng-click="vm.goPrevious()"><i class="fa fa-times-circle-o"></i><span>Cancel</span></button>
+      <button class="btn btn-primary" ng-click="vm.save(vm.message)"><i class="fa fa-save"></i><span>Save as Draft</span></button>
+      <button class="btn btn-primary" ng-click="vm.send(vm.message)"><i class="fa fa-paper-plane-o"></i><span>Send</span></button>
     </div>
   </div>
 </div>

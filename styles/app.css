@@ -1,5 +1,5 @@
-button.btn i {
-    margin-right: 0.75em;
+button.btn i + span {
+    margin-left: 0.75em;
 }
 
 .flex-h {

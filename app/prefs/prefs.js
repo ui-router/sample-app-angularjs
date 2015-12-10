@@ -1,6 +1,6 @@
 let template = `
 <div>
-  <button class="btn btn-primary" ng-click="vm.reset()"><i class="fa fa-recycle"></i> Reset All Data</button>
+  <button class="btn btn-primary" ng-click="vm.reset()"><i class="fa fa-recycle"></i> <span>Reset All Data</span></button>
 </div>
 
 <div>
