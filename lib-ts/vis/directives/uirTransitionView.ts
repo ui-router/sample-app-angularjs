@@ -86,6 +86,7 @@ app.directive('uirTransitionView', () => {
       };
 
       this.iconClass = () => iconClasses[this.status];
+      this.fullScreen = toggle => this.toggles.fullscreen = toggle;
 
       this.status = "running";
       let tc = this.tc = this.trans.treeChanges();
@@ -127,13 +128,20 @@ app.directive('uirTransitionView', () => {
 
     template: `
       <div ng-mouseover="vm.toggles.showDetail = true" ng-mouseout="vm.toggles.showDetail = false">
-        <div ng-show="vm.toggles.showDetail || vm.toggles.expand" ng-class="{ expand: vm.toggles.expand }" class="transitionDetail panel panel-default">
-          <div class="panel-heading">
-            <button class="btn btn-default btn-xs pull-right pinButton" ng-click="vm.toggles.expand = !vm.toggles.expand">
-              <i class="fa fa-thumb-tack" ng-class="{ 'fa-rotate-45 text-muted': !vm.toggles.expand }"></i>
+        <div ng-show="vm.toggles.showDetail || vm.toggles.pin || vm.toggles.fullscreen" ng-class="vm.toggles" class="transitionDetail panel panel-default">
+
+          <div class="panel-heading header">
+            <button class="btn btn-default btn-xs pinButton" ng-click="vm.toggles.pin = !vm.toggles.pin">
+              <i class="fa fa-thumb-tack" ng-class="{ 'fa-rotate-45 text-muted': !vm.toggles.pin }"></i>
             </button>
+
             <h3 class="panel-title">Transition #{{vm.trans.$id}}</h3>
+
+            <div style="cursor: pointer;" ng-click="vm.toggles.expand = !vm.toggles.expand">
+              <i class="tooltip-right fa" title="Show Details" ng-class="{ 'fa-toggle-off': !vm.toggles.expand, 'fa-toggle-on': vm.toggles.expand }"></i>
+            </div>
           </div>
+
           <div class="panel-body">
             <table class="summary">
               <tr><td>From State:</td><td>{{vm.trans.from().name || '(root)'}}</td></tr>
@@ -159,7 +167,9 @@ app.directive('uirTransitionView', () => {
 
             </table>
           </div>
+
           <div class="downArrow"></div>
+
         </div>
 
         <div class="historyEntry" ng-class="vm.status" style="cursor: pointer" ng-click="vm.toggles.expand = !vm.toggles.expand">
@@ -230,13 +240,15 @@ app.directive('uirTransitionNodeDetail', () => ({
         <div ng-repeat="resolve in vm.resolves">
 
           <simple-modal size="lg" as-modal="true" ng-if="vm.showresolve == resolve.key">
-            <div class="modal-header" style="background-color: cornflowerblue">
-              <button class="btn btn-primary pull-right" ng-click="vm.showresolve = null">Close</button>
-              <h3>{{ resolve.key }}</h3>
+            <div class="modal-header" style="display: flex; flex-flow: row nowrap; justify-content: space-between; background-color: cornflowerblue">
+              <div style="font-size: 1.5em;">Resolve data: {{ resolve.key }}</div>
+              <button class="btn btn-primary" ng-click="vm.showresolve = null"><i class="fa fa-close"></i></button>
             </div>
+
             <div class="modal-body" style="max-height: 80%;">
               <pre style="max-height: 50%">{{ resolve.value.data | json }}</pre>
             </div>
+
             <div class="modal-footer"><button class="btn btn-primary" ng-click="vm.showresolve = null">Close</button></div>
           </simple-modal>
 
@@ -256,15 +268,16 @@ app.directive("simpleModal", function ($timeout) {
   return {
     restrict: 'AE',
     transclude: true,
-    require: "^?uirTransitionsView",
+    require: [ "^?uirTransitionsView", "^?uirTransitionView" ],
     scope: {
       size: '@',
       asModal: '='
     },
-    link: function (scope, elem, attrs, uirTransitionsView) {
+    link: function (scope, elem, attrs, controllers) {
       $timeout(() => elem.children().addClass("in"), 10);
-      uirTransitionsView.fullScreen(true);
-      scope.$on("$destroy", () => uirTransitionsView.fullScreen(false))
+      controllers = controllers.filter(x => !!x);
+      controllers.forEach(ctrl => ctrl.fullScreen(true));
+      scope.$on("$destroy", () => controllers.forEach(ctrl => ctrl.fullScreen(false)))
     },
     template: `
         <div ng-class="{'modal-backdrop fade': asModal}" style="z-index: 1040;"> </div>

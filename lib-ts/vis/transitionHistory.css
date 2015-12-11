@@ -193,6 +193,23 @@
     align-items: baseline;
 }
 
+.transitionDetail .panel-heading.header > button {
+    flex: 0 1 auto;
+    transition: transform 0.5s ease;
+}
+.transitionDetail .panel-heading.header > button:hover i {
+    flex: 0 1 auto;
+    transition: all 0.5s ease;
+}
+
+.fa-thumb-tack.fa-rotate-45 {
+    color: lightgray;
+    filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=1);
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
+}
+
 .transitionDetail table.paths td {
     color: white;
     padding: 0.1em 0.5em !important;
@@ -247,12 +264,12 @@
 }
 
 
-.transitionDetail.expand {
+.transitionDetail.pin {
     box-shadow: 4px 4px 12px rgba(0,0,0,0.3);
     border: 1px solid black;
 }
 
-.transitionDetail.expand .downArrow:before {
+.transitionDetail.pin .downArrow:before {
     border-top-color: black;
 }
 
@@ -299,17 +316,29 @@ span.link {
     text-decoration: underline;
 }
 
-.pinButton i {
-    transition: transform 1s ease;
-}
-.pinButton:hover i {
-    color: darkgrey;
+
+.tooltip-right {
+    display: inline;
+    position: relative;
+    transition: all 1.5s ease;
 }
 
-.fa-thumb-tack.fa-rotate-45 {
-    color: lightgray;
-    filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=1);
-    -webkit-transform: rotate(45deg);
-    -ms-transform: rotate(45deg);
-    transform: rotate(45deg);
+.tooltip-right:after {
+    color: rgba(0,0,0,0);
+    text-decoration: none;
+    transition: all 1.5s ease;
+}
+
+.tooltip-right:hover:after {
+    bottom: 0;
+    color: rgba(0,0,0,0.5);
+    content: attr(title);
+    display: block;
+    position: absolute;
+    white-space: nowrap;
+    font-size: smaller;
+}
+
+.fa.tooltip-right:after {
+    left: 1.5em;
 }
