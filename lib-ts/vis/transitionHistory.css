@@ -21,6 +21,7 @@
 .transitionHistory * {
     /* Enable mouse for any sub-elements (the breadcrumb elemetns and detail elements) */
     pointer-events: all;
+    flex: 0 0 auto;
 }
 
 /*  workaround for modal screen, and chrome and safari not allowing it to be
@@ -32,7 +33,6 @@
 /* A single history entry (breadcrumb) arrow looking thing */
 .transitionHistory .historyEntry {
     position: relative;
-    flex: 0 0 auto;
     text-align: center;
     padding: 12px 30px;
     margin-bottom: 6px;
