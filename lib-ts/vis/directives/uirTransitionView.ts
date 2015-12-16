@@ -7,11 +7,13 @@ import {app} from "../statevis.module.ts";
 ///////////////////////////////////////////////////////////
 
 
+app.value("uirTransitionsViewConfig", { MAX_TRANSITIONS: 15});
+
 /**
  * This outer directive manages the list of all transitions (history), and provides a fixed, scrolling viewport.
  * It attaches hooks for lifecycle events and decorates the transition with a descriptive message.
  */
-app.directive('uirTransitionsView', ($transitions, $timeout, d3ng, easing) => {
+app.directive('uirTransitionsView', ($transitions, $timeout, d3ng, easing, uirTransitionsViewConfig) => {
   return {
     restrict: "E",
 
@@ -40,13 +42,14 @@ app.directive('uirTransitionsView', ($transitions, $timeout, d3ng, easing) => {
         $element.toggleClass("fullscreen", toggle);
       };
 
-      let cancelPreviousAnim, duration = 150, el = $element[0].children[0].children[0];
+      let cancelPreviousAnim, duration = 750, el = $element[0].children[0].children[0];
       let scrollToRight = () => {
         let targetScrollX = el.scrollWidth - el.clientWidth;
         cancelPreviousAnim && cancelPreviousAnim();
         let newVal = [targetScrollX], oldVal = [el.scrollLeft];
+        let enforceMax = () => [$scope.transitions, $scope.toggles].forEach(arr => { while (arr.length > uirTransitionsViewConfig.MAX_TRANSITIONS) arr.shift(); });
         let callback = (vals) => el.scrollLeft = vals[0];
-        cancelPreviousAnim = d3ng.animatePath(newVal, oldVal, duration, callback, easing.easeInOutCubic);
+        cancelPreviousAnim = d3ng.animatePath(newVal, oldVal, duration, callback, enforceMax, easing.easeInOutCubic);
       };
 
       $scope.$watchCollection("transitions", later(scrollToRight, 0));
@@ -135,7 +138,7 @@ app.directive('uirTransitionView', () => {
               <i class="fa fa-thumb-tack" ng-class="{ 'fa-rotate-45 text-muted': !vm.toggles.pin }"></i>
             </button>
 
-            <h3 class="panel-title">Transition #{{vm.trans.$id}}</h3>
+            <h3 class="panel-title">Transition #{{::vm.trans.$id}}</h3>
 
             <div style="cursor: pointer;" ng-click="vm.toggles.expand = !vm.toggles.expand">
               <i class="tooltip-right fa" title="Show Details" ng-class="{ 'fa-toggle-off': !vm.toggles.expand, 'fa-toggle-on': vm.toggles.expand }"></i>
@@ -144,9 +147,9 @@ app.directive('uirTransitionView', () => {
 
           <div class="panel-body">
             <table class="summary">
-              <tr><td>From State:</td><td>{{vm.trans.from().name || '(root)'}}</td></tr>
-              <tr><td>To State:</td><td>{{vm.trans.to().name || '(root)'}}</td></tr>
-              <tr><td>Outcome:</td><td>{{vm.status}}<span ng-show="vm.rejection">: {{vm.rejection}}</span></td></tr>
+              <tr><td>From State:</td><td>{{::vm.trans.from().name || '(root)'}}</td></tr>
+              <tr><td>To State:</td><td>{{::vm.trans.to().name || '(root)'}}</td></tr>
+              <tr><td>Outcome:</td><td>{{::vm.status}}<span ng-show="vm.rejection">: {{vm.rejection}}</span></td></tr>
             </table>
 
             <hr/>
@@ -158,10 +161,10 @@ app.directive('uirTransitionView', () => {
               </thead>
 
               <tbody>
-                <tr ng-repeat="elem in vm.paths">
+                <tr ng-repeat="elem in ::vm.paths">
                   <!--<td ng-show="elem.fromType == 'retain'" colspan="2" ng-class="elem.fromType" uir-transition-node-detail node="elem.from" type="elem.fromType"></td>-->
-                  <td ng-class="elem.fromType" uir-transition-node-detail node="elem.from" type="elem.fromType"></td>
-                  <td ng-class="elem.toType" uir-transition-node-detail node="elem.to" type="elem.toType"></td>
+                  <td ng-class="::elem.fromType" uir-transition-node-detail node="::elem.from" type="::elem.fromType"></td>
+                  <td ng-class="::elem.toType" uir-transition-node-detail node="::elem.to" type="::elem.toType"></td>
                 </tr>
               </tbody>
 
@@ -174,11 +177,11 @@ app.directive('uirTransitionView', () => {
 
         <div class="historyEntry" ng-class="vm.status" style="cursor: pointer" ng-click="vm.toggles.expand = !vm.toggles.expand">
           <div class="summary">
-            <div class="transid">{{vm.trans.$id}}</div>
+            <div class="transid">{{::vm.trans.$id}}</div>
             <div class="status">{{vm.status}}<span ng-show="vm.trans._message">: {{vm.trans._message}}</span> </div>
             <div class="transname">
               <i ng-class="vm.iconClass()"></i>
-              {{vm.trans.to().name}}
+              {{::vm.trans.to().name}}
               </div>
           </div>
         </div>
@@ -221,27 +224,27 @@ app.directive('uirTransitionNodeDetail', () => ({
 
   },
   template: `
-    <div ng-if="vm.type">
+    <div ng-if="::vm.type">
       <div class="header">
-        <div class="nowrap deemphasize">[{{vm.type}} state]</div>
-        <div class="statename">{{vm.stateName(vm.node)}}</div>
+        <div class="nowrap deemphasize">[{{::vm.type}} state]</div>
+        <div class="statename">{{::vm.stateName(vm.node)}}</div>
       </div>
 
       <div class="params" ng-show="vm.node.schema.length">
         <div class="paramslabel deemphasize">Param values</div>
         <div ng-repeat="param in vm.node.schema">
-          <div class="paramid">{{param.id}}:</div>
-          <div class="paramvalue">{{vm.paramValue(vm.node.values[param.id])}}</div>
+          <div class="paramid">{{::param.id}}:</div>
+          <div class="paramvalue">{{::vm.paramValue(vm.node.values[param.id])}}</div>
         </div>
       </div>
 
-      <div class="params" ng-show="vm.resolves.length">
+      <div class="params" ng-show="::vm.resolves.length">
         <div class="paramslabel deemphasize">Resolved data</div>
         <div ng-repeat="resolve in vm.resolves">
 
           <simple-modal size="lg" as-modal="true" ng-if="vm.showresolve == resolve.key">
             <div class="modal-header" style="display: flex; flex-flow: row nowrap; justify-content: space-between; background-color: cornflowerblue">
-              <div style="font-size: 1.5em;">Resolve data: {{ resolve.key }}</div>
+              <div style="font-size: 1.5em;">Resolve data: {{ ::resolve.key }}</div>
               <button class="btn btn-primary" ng-click="vm.showresolve = null"><i class="fa fa-close"></i></button>
             </div>
 
@@ -253,7 +256,7 @@ app.directive('uirTransitionNodeDetail', () => ({
           </simple-modal>
 
           <span class="paramid">
-            <span class="link" ng-click="vm.showresolve = resolve.key">{{resolve.key}}</span>
+            <span class="link" ng-click="vm.showresolve = resolve.key">{{::resolve.key}}</span>
             <i ng-show="resolve.value.data" class="fa fa-check"></i>
           </span>
         </div>
