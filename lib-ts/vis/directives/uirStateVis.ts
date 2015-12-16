@@ -3,8 +3,53 @@ import d3 from "d3";
 
 app.filter("lastDottedSegment", () => (word) => word.split(".").slice(-1)[0]);
 
-app.directive('uirStateVis', (uirStateVisService) => {
-  return {
+app.directive('uirStateVisContainer', uirStateVisService => ({
+  restrict: 'E',
+  controllerAs: 'vm',
+  controller: function($element) {
+    //$element = $element.children();
+    let el = $element[0].children[0];
+
+    this.minimize = (evt) => {
+      console.log(evt);
+      evt && evt.preventDefault();
+      evt && evt.stopPropagation();
+
+      let bounds = el.getBoundingClientRect();
+      el.style.top = el.style.left = "auto";
+      el.style.right = this.right = (window.innerWidth - bounds.right);
+      el.style.bottom = this.bottom = (window.innerHeight- bounds.bottom);
+
+      let unminimize = () => {
+        el.style.top = el.style.left = "auto";
+        el.style.right = this.right;
+        el.style.bottom = this.bottom;
+        $element.children().toggleClass("minimized", false);
+        $element.off("click", unminimize);
+        this.minimized = false;
+      };
+
+      $element.children().toggleClass("minimized", true);
+      $element.on("click", unminimize);
+      setTimeout(() => el.style.right = el.style.bottom = "0");
+
+      this.minimized = true;
+    };
+
+    //this.minimize(null);
+  },
+  template: `
+    <div class="uirStateVisContainer" draggable="!vm.minimized">
+      <div style="width: 100%; display: flex; flex-flow: row nowrap; justify-content: space-between">
+        <div> Current State: <state-selector></state-selector></div>
+        <button ng-click="vm.minimize($event)"><i class="fa fa-chevron-down" style="cursor: pointer"></i></button>
+      </div>
+      <uir-state-vis style="flex: 1 0 auto" class="statevis" width="350" height="250"></uir-state-vis>
+    </div>
+`
+}));
+
+app.directive('uirStateVis', uirStateVisService => ({
     restrict: "E",
     scope: true,
     controllerAs: 'vis',
@@ -43,5 +88,4 @@ app.directive('uirStateVis', (uirStateVisService) => {
         <g uir-state-node ng-repeat="node in vis.nodes | orderBy: '-y' track by node.name " state="node" parent="node._parent"></g>
       </svg>
     `
-  }
-});
+}));

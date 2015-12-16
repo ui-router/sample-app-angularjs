@@ -30,12 +30,12 @@ app.directive('uirTransitionsView', ($transitions, $timeout, d3ng, easing, uirTr
         $scope.transitions.push($transition$);
         $scope.toggles.push({ expand: false, showDetail: false });
         const statename = (state) => state.name || "(root)";
-        $transition$.onStart({}, () => setMessage($transition$, "Starting..."), { priority: -1 });
-        $transition$.onExit({}, ($state$) => setMessage($transition$, `Exiting ${statename($state$)}`), { priority: -1 });
-        $transition$.onRetain({}, ($state$) => setMessage($transition$, `Retained ${statename($state$)}`), { priority: -1 });
-        $transition$.onEnter({}, ($state$) => setMessage($transition$, `Entering ${statename($state$)}`), { priority: -1 });
+        $transition$.onStart({}, () => setMessage($transition$, "Starting..."), { priority: 10000 });
+        $transition$.onExit({}, ($state$) => setMessage($transition$, `Exiting ${statename($state$)}`), { priority: 10000 });
+        $transition$.onRetain({}, ($state$) => setMessage($transition$, `Retained ${statename($state$)}`), { priority: 10000 });
+        $transition$.onEnter({}, ($state$) => setMessage($transition$, `Entering ${statename($state$)}`), { priority: 10000 });
         $transition$.onFinish({}, () => setMessage($transition$, `Finishing...`));
-        $transition$.promise.then(() => delete $transition$._message);
+        $transition$.promise.finally(() => delete $transition$._message);
       });
 
       this.fullScreen = function(toggle) {

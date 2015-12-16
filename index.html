@@ -14,10 +14,7 @@
 
     <uir-transitions-view></uir-transitions-view>
 
-    <div style="z-index: 2; position: fixed; right: 0; bottom: 4em; display: flex; flex-direction: column; align-items: center; background-color: rgba(255,255,255,0.8)" draggable>
-        <div>Current State: <state-selector></state-selector></div>
-        <uir-state-vis style="flex: 1 0 auto" class="statevis" width="350" height="250"></uir-state-vis>
-    </div>
+    <uir-state-vis-container></uir-state-vis-container>
 
     <script type='text/javascript' id="__bs_script__">//<![CDATA[
     document.write("<script async src='http://HOST:3000/browser-sync/browser-sync-client.2.10.0.js'><\/script>".replace("HOST", location.hostname));
