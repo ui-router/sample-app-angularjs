@@ -29,6 +29,7 @@ app.config(($stateProvider) => {
             </li>
 
             <li class="navbar-right">
+              <button class="btn btn-primary fa fa-home" ui-sref="home"></button>
               <button style="margin-right: 15px;" class="btn btn-primary" ui-sref="mymessages.compose"><i class="fa fa-envelope"></i> New Message</button>
             </li>
 
