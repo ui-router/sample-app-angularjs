@@ -17,7 +17,7 @@ function ContactsController(contacts) {
 }
 
 let contactsState = {
-  parent: 'authedStates',
+  parent: 'authRequired',
   name: "contacts",
   url: "/contacts",
   resolve: {

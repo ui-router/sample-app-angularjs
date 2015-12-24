@@ -263,7 +263,7 @@
 }
 
 .transitionDetail td.exit {
-    background-color: #590e0e;
+    background-color: #7c1010;
 }
 
 .transitionDetail td.enter {
@@ -271,23 +271,32 @@
 }
 
 .transitionDetail .deemphasize {
-    color: lightgrey;
+    color: #eaeaea;
     font-size: x-small;
 }
 
 /* Styling for parameter values and resolve values */
 .transitionDetail .params {
-    background-color: rgba(255,255,255,0.2);
-    margin-left: -0.5em;
-    margin-right: -0.5em;
+    background-color: rgba(255,255,255,0.15);
     padding: 0;
     opacity: 0;
     overflow: hidden;
-    transition: padding 0.25s ease, max-height 0.25s ease, opacity 1s ease;
+    transition: padding 0.25s ease, max-height 0.25s ease,max-width 0.25s ease, opacity 1s ease;
     max-height: 0;
-    margin-top: 0.5em;
+    max-width: 150px;
 }
 
+.transitionDetail.expand .params {
+    display: block;
+    border-radius: 4px;
+    box-shadow: 1px 1px 2px black;
+    padding: 0.5em;
+    max-height: 250px;
+    max-width: 300px;
+    overflow-y: auto;
+    opacity: 1;
+    margin: 0.5em 0;
+}
 
 .transitionDetail.pin {
     box-shadow: 4px 4px 12px rgba(0,0,0,0.3);
@@ -298,12 +307,6 @@
     border-top-color: black;
 }
 
-.transitionDetail.expand .params {
-    padding: 0.5em;
-    max-height: 250px;
-    overflow-y: auto;
-    opacity: 1;
-}
 
 /* When showing expanded details, put space between path elements */
 .transitionDetail.expand table.paths td {
@@ -325,13 +328,22 @@
 
 .transitionHistory .paramid {
     font-weight: bolder;
-    color: white;
+    color: #eaeaea;
     margin-right: 0.5em;
 }
 
 .transitionHistory .paramslabel {
-    /*float: right;*/
+    color: white;
     margin-top: -0.5em;
+    text-align: center;
+    font-weight: bold;
+}
+
+.transitionHistory .resolvelabel {
+    color: white;
+    margin-top: -0.5em;
+    text-align: center;
+    font-weight: bold;
 }
 
 .transitionHistory .paramvalue {

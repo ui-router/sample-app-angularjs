@@ -267,17 +267,17 @@ app.directive('uirTransitionNodeDetail', () => ({
   template: `
     <div ng-if="::vm.type">
       <div class="header">
-        <div class="nowrap deemphasize">[{{::vm.type}} state]</div>
+        <div class="nowrap deemphasize">({{::vm.type}} state)</div>
         <div class="statename">{{::vm.stateName(vm.node)}}</div>
       </div>
 
       <div keys-and-values="vm.params"
-          classes="{ outerdiv: 'params' }"
+          classes="{ outerdiv: 'params', section: 'paramslabel deemphasize' }"
           labels="{ section: 'Parameter values', modalTitle: 'Parameter value: ' }">
       </div>
 
       <div keys-and-values="vm.resolves" getvalue="vm.unwrapResolve(value)"
-          classes="{ outerdiv: 'params' }"
+          classes="{ outerdiv: 'params resolve', section: 'resolvelabel deemphasize' }"
           labels="{ section: 'Resolved data', modalTitle: 'Resolved value: ' }">
       </div>
     </div>

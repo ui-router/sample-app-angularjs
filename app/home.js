@@ -24,7 +24,7 @@ let homeTemplate = `
 
 app.config(($stateProvider) => {
   $stateProvider.state({
-    parent: 'authedStates',
+    parent: 'authRequired',
     name: 'home',
     url: '/home',
     template: homeTemplate

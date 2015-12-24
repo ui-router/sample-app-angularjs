@@ -47,7 +47,7 @@ app.config(($stateProvider) => {
   `;
 
   $stateProvider.state({
-    name: 'authedStates',
+    name: 'authRequired',
     redirectTo: 'home',
     template: authedTemplate,
     controller: AuthedController,
