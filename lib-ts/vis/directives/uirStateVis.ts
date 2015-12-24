@@ -10,15 +10,14 @@ app.directive('uirStateVisContainer', uirStateVisService => ({
     //$element = $element.children();
     let el = $element[0].children[0];
 
-    this.minimize = (evt) => {
-      console.log(evt);
+    this.minimize = (evt?) => {
       evt && evt.preventDefault();
       evt && evt.stopPropagation();
 
       let bounds = el.getBoundingClientRect();
       el.style.top = el.style.left = "auto";
       el.style.right = this.right = (window.innerWidth - bounds.right);
-      el.style.bottom = this.bottom = (window.innerHeight- bounds.bottom);
+      el.style.bottom = this.bottom = (window.innerHeight - bounds.bottom);
 
       let unminimize = () => {
         el.style.top = el.style.left = "auto";
@@ -31,12 +30,13 @@ app.directive('uirStateVisContainer', uirStateVisService => ({
 
       $element.children().toggleClass("minimized", true);
       $element.on("click", unminimize);
-      setTimeout(() => el.style.right = el.style.bottom = "0");
+      // wait 50ms to avoid coordinates jumping directly to 0/0 and avoid animation
+      setTimeout(() => el.style.right = el.style.bottom = "0", 50);
 
       this.minimized = true;
     };
 
-    //this.minimize(null);
+    setTimeout(() => this.minimize(), 1000)
   },
   template: `
     <div class="uirStateVisContainer" draggable="!vm.minimized">
@@ -63,7 +63,7 @@ app.directive('uirStateVis', uirStateVisService => ({
       height: "@"
     },
 
-    controller: function($state, $interval, $scope) {
+    controller: function($state, $scope) {
       this.nodes = uirStateVisService.nodes;
 
       this.radius = this.radius || 15;

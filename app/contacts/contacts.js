@@ -8,7 +8,7 @@ var template = `
     </li>
   </ul>
 
-  <div ui-view></div>
+  <div ui-view><h4 style="margin: 1em 2em;">Select a contact</h4></div>
 </div>
 `;
 

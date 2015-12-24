@@ -68,6 +68,15 @@ app.directive('uirTransitionsView', ($transitions, $timeout, d3ng, easing, uirTr
 
 /** This directive visualizes a single transition object. It changes visualization as the transition runs. */
 app.directive('uirTransitionView', () => {
+  // Icons in the breadcrumb/arrow based on the transition status
+  let iconClasses = {
+    running: 'fa fa-spin fa-spinner',
+    success: 'fa fa-check',
+    redirected: 'fa fa-share',
+    ignored: 'fa fa-circle-o',
+    error: 'fa fa-close'
+  };
+
   return {
     restrict: "E",
     require: ['^uirTransitionsView', 'uirTransitionDetail'],
@@ -79,51 +88,65 @@ app.directive('uirTransitionView', () => {
 
     bindToController: true,
     controllerAs: "vm",
-    controller: function ($scope) {
-      let iconClasses = {
-        running: 'fa fa-spin fa-spinner',
-        success: 'fa fa-check',
-        redirected: 'fa fa-share',
-        ignored: 'fa fa-circle-o',
-        error: 'fa fa-close'
-      };
-
-      this.iconClass = () => iconClasses[this.status];
-      this.fullScreen = toggle => this.toggles.fullscreen = toggle;
-
+    controller: function () {
       this.status = "running";
-      let tc = this.tc = this.trans.treeChanges();
 
-      this.paths = tc.retained
-          .filter(node => node.state.name)
+      // Makes the widget take up the entire screen, via position: fixed
+      this.fullScreen = toggle => this.toggles.fullscreen = toggle;
+      // Provides the icon class to the view
+      this.iconClass = () => iconClasses[this.status];
+
+      this.tc = this.trans.treeChanges();
+      let paths = angular.extend({}, this.tc);
+      // Ignore the root state when drawing paths.
+      ["entering", "exiting", "retained"].forEach(key => paths[key] = paths[key].filter(node => node.state.name));
+      paths.exiting.reverse();
+
+      this.paths = paths.retained
           .map(node => ({to: node, toType: 'retain', from: node, fromType: 'retain'}));
-      let count = Math.max(tc.exiting.length, tc.entering.length);
+
+      let count = Math.max(paths.exiting.length, paths.entering.length);
       for (let i = 0; i < count; i++) {
-        this.paths.push({to: tc.entering[i], toType: tc.entering[i] && 'enter', from: tc.exiting[i], fromType: tc.exiting[i] && 'exit'});
+        this.paths.push({
+          to: paths.entering[i],
+          toType: paths.entering[i] && 'enter',
+          from: paths.exiting[i],
+          fromType: paths.exiting[i] && 'exit'
+        });
       }
 
-      const paramsForNode = node => Object.keys(node.values).map(key => ({state: node.state.name, key: key, value: node.values[key]}));
+      const paramsForNode = node =>
+          Object.keys(node.values).map(key => ({state: node.state.name, key: key, value: node.values[key]}));
+
       this.params = this.trans.treeChanges().to
           .map(paramsForNode)
           .reduce((memo, array) => memo.concat(array), [])
           .filter(param => param.key !== '#' || !!param.value);
+      this.paramsMap = this.params.reduce(((obj, param) => { obj[param.key] = param.value; return obj; }), {});
 
       const success = () => this.status = "success";
+
       const reject = (rejection) => {
         this.status = "error";
-        this.rejection = rejection && rejection.message;
-        if (rejection.type == 2) {
-          this.status = "redirected";
-          //this.rejection = rejection.detail;
-          let toState = rejection.detail.to().name;
-          let toParams = JSON.stringify(rejection.detail.params("to"));
-          this.rejection = truncateTo(100, `${toState}(${toParams}`) + ")";
+        if (rejection) {
+          this.rejection = rejection && rejection.message;
+
+          let type = rejection && rejection.type;
+          if (type == 2) {
+            this.status = "redirected";
+            //this.rejection = rejection.detail;
+            let toState = rejection.detail.to().name;
+            let toParams = JSON.stringify(rejection.detail.params("to"));
+            this.rejection = truncateTo(100, `${toState}(${toParams}`) + ")";
+          }
+
+          if (type == 5) {
+            this.status = "ignored";
+            this.rejection = "All states and parameters in the To and From paths are identical."
+          }
+
+          console.log(rejection);
         }
-        if (rejection.type == 5) {
-          this.status = "ignored";
-          this.rejection = "The To and From paths are identical."
-        }
-        console.log(rejection);
       };
 
       this.trans.promise.then(success, reject);
@@ -149,7 +172,17 @@ app.directive('uirTransitionView', () => {
             <table class="summary">
               <tr><td>From State:</td><td>{{::vm.trans.from().name || '(root)'}}</td></tr>
               <tr><td>To State:</td><td>{{::vm.trans.to().name || '(root)'}}</td></tr>
-              <tr><td>Outcome:</td><td>{{::vm.status}}<span ng-show="vm.rejection">: {{vm.rejection}}</span></td></tr>
+              <tr>
+                <td colspan="1">Parameters:</td>
+                <td colspan="1">
+                  <div keys-and-values="::vm.paramsMap"
+                      labels="{ section: '', modalTitle: 'Parameter value: ' }"
+                      classes="{ outerdiv: '', keyvaldiv: 'keyvalue', section: '', key: '', value: '' }">
+                  </div>
+                </td>
+              </tr>
+
+              <tr><td>Outcome:</td><td>{{vm.status}}<span ng-show="vm.rejection">: {{vm.rejection}}</span></td></tr>
             </table>
 
             <hr/>
@@ -207,19 +240,27 @@ app.directive('uirTransitionNodeDetail', () => ({
       return name && name.split(".").reverse()[0];
     };
 
-    this.paramValue = (value) => {
-      if (value === undefined) return "undefined";
-      if (value === null) return "undefined";
-      if (!angular.isObject(value)) return value.toString();
-      return "[object " + truncateTo(99, JSON.stringify(value)) + "]";
+    $scope.$watch(() => this.node, (node, oldval) => {
+      if (!node) return;
+      this.params = node.schema.reduce((params, param) => {
+        params[param.id] = node.values[param.id];
+        return params;
+      }, {});
+    });
+
+    let getResolveKeys = memoDebounce(500, () =>
+        Object.keys(this.node && this.node.resolves || {}).filter(key => key !== '$stateParams' && key !== '$transition$'));
+
+    this.unwrapResolve = (resolve) => {
+      return resolve.data;
     };
 
-    let resolveKeys = memoDebounce(500, () =>
-        Object.keys(this.node && this.node.resolves || {})
-            .filter(key => key !== '$stateParams' && key !== '$transition$'));
 
-    $scope.$watchCollection(resolveKeys, (newval, oldval) => {
-      this.resolves = (newval || []).map(key => ({ key: key, value: this.node.resolves[key]}))
+    $scope.$watchCollection(getResolveKeys, (keys, oldval) => {
+      this.resolves = (keys || []).reduce(((resolves, key) => {
+        resolves[key] = this.node.resolves[key];
+        return resolves;
+      }), {});
     });
 
   },
@@ -230,40 +271,97 @@ app.directive('uirTransitionNodeDetail', () => ({
         <div class="statename">{{::vm.stateName(vm.node)}}</div>
       </div>
 
-      <div class="params" ng-show="vm.node.schema.length">
-        <div class="paramslabel deemphasize">Param values</div>
-        <div ng-repeat="param in vm.node.schema">
-          <div class="paramid">{{::param.id}}:</div>
-          <div class="paramvalue">{{::vm.paramValue(vm.node.values[param.id])}}</div>
-        </div>
+      <div keys-and-values="vm.params"
+          classes="{ outerdiv: 'params' }"
+          labels="{ section: 'Parameter values', modalTitle: 'Parameter value: ' }">
       </div>
 
-      <div class="params" ng-show="::vm.resolves.length">
-        <div class="paramslabel deemphasize">Resolved data</div>
-        <div ng-repeat="resolve in vm.resolves">
-
-          <simple-modal size="lg" as-modal="true" ng-if="vm.showresolve == resolve.key">
-            <div class="modal-header" style="display: flex; flex-flow: row nowrap; justify-content: space-between; background-color: cornflowerblue">
-              <div style="font-size: 1.5em;">Resolve data: {{ ::resolve.key }}</div>
-              <button class="btn btn-primary" ng-click="vm.showresolve = null"><i class="fa fa-close"></i></button>
-            </div>
-
-            <div class="modal-body" style="max-height: 80%;">
-              <pre style="max-height: 50%">{{ resolve.value.data | json }}</pre>
-            </div>
-
-            <div class="modal-footer"><button class="btn btn-primary" ng-click="vm.showresolve = null">Close</button></div>
-          </simple-modal>
-
-          <span class="paramid">
-            <span class="link" ng-click="vm.showresolve = resolve.key">{{::resolve.key}}</span>
-            <i ng-show="resolve.value.data" class="fa fa-check"></i>
-          </span>
-        </div>
+      <div keys-and-values="vm.resolves" getvalue="vm.unwrapResolve(value)"
+          classes="{ outerdiv: 'params' }"
+          labels="{ section: 'Resolved data', modalTitle: 'Resolved value: ' }">
       </div>
     </div>
   `
 }));
+
+
+app.directive("keysAndValues", function () {
+  return {
+    restrict: 'AE',
+
+    scope: {
+      keysAndValues: '=', // map of keys/values to display
+      getvalue: '&?', // [Optional] a function which unwraps each value
+      classes: '=', // Apply classes to specific elements
+      labels: '=' // Apply labels to specific elements, e.g., { section: 'Param values', modalTitle: 'Parameter value: ' }
+    },
+
+    controller($scope) {
+      // Default CSS class values
+      let _classes = { outerdiv: 'param', keyvaldiv: 'keyvalue', section: 'paramslabel deemphasize', key: 'paramid', value: 'paramvalue' };
+      $scope._classes = angular.extend(_classes, $scope.classes);
+      $scope.toggles = {
+        modal: null // Toggle display of a modal for a particular value
+      };
+
+      // Unwraps the value using the bound unwrapValue function
+      $scope.unwrap = (value) => $scope.getvalue ? $scope.getvalue({ value: value }) : value;
+
+      $scope.empty = () => Object.keys($scope.keysAndValues || {}).length == 0;
+
+      $scope.isObject = (object) => // If it's not a string, not a number, not a boolean, is it an object?
+        object && !angular.isString(object) && !angular.isNumber(object) && object !== true && object !== false;
+
+      // Render various types of objects differently
+      $scope.displayValue = function (object) {
+        if (object === undefined) return "undefined";
+        if (object === null) return "null";
+        if (angular.isString(object)) return '"' + truncateTo(100, object) + '"';
+        if ($scope.isObject(object)) return "[Object]";
+        if (typeof object.toString === 'function') return truncateTo(100, object.toString());
+        return object;
+      };
+    },
+
+    template: `
+      <div ng-class="::_classes.outerdiv" ng-if="!empty()">
+        <div ng-class="::_classes.section">{{::labels.section}}</div>
+
+        <div ng-repeat="(key, value) in keysAndValues" ng-class="::_classes.keyvaldiv">
+
+          <div ng-class="::_classes.key">{{::key}}: </div>
+
+          <div ng-if="!isObject(unwrap(value))" ng-class="::_classes.value">
+            <!-- The value  is a simple string, int, boolean -->
+            {{ displayValue(unwrap(value)) }}
+          </div>
+
+          <div ng-if="isObject(unwrap(value))" ng-class="::_classes.value">
+            <!-- The value is an Object. Allow user to click a link titled [Object] to show a modal containing the object as JSON -->
+
+            <simple-modal size="lg" as-modal="true" ng-if="toggles.modal == key">
+              <div class="modal-header" style="display: flex; flex-flow: row nowrap; justify-content: space-between; background-color: cornflowerblue">
+                <div style="font-size: 1.5em;">{{::labels.modalTitle}}: {{ ::key }}</div>
+                <button class="btn btn-primary" ng-click="toggles.modal = null"><i class="fa fa-close"></i></button>
+              </div>
+
+              <div class="modal-body" style="max-height: 80%;">
+                <pre style="max-height: 50%">{{ ::unwrap(value) | json }}</pre>
+              </div>
+
+              <div class="modal-footer"><button class="btn btn-primary" ng-click="toggles.modal = null">Close</button></div>
+            </simple-modal>
+
+            <span>
+              <span class="link" ng-click="toggles.modal = key">[Object]</span>
+            </span>
+
+          </div>
+        </div>
+      </div>
+      `
+  };
+});
 
 
 

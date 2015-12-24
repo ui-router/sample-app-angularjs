@@ -39,7 +39,7 @@ app.service("uirStateVisService", ($state, $interval) => {
   };
 
   pollStates();
-  let cancel = $interval(pollStates, 50);
+  let cancel = $interval(pollStates, 1000);
 
   return {
     nodeForState: nodeForState,

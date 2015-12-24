@@ -85,7 +85,6 @@ button.btn i + span {
 }
 
 .my-messages .folderlist {
-    background-color: #DDD;
     flex: 0 0 auto;
     overflow-y: scroll;
     max-height: 200px;
@@ -98,6 +97,7 @@ button.btn i + span {
 .selectlist {
     margin: 0;
     padding: 1.5em 0;
+    background-color: #DDD;
 }
 .selectlist a {
     display: block;
@@ -248,13 +248,16 @@ button.btn i + span {
 
 
 .contact {
-    padding: 2em;
-    border: 2px solid lightgray;
+    padding: 1em 3em;
 }
 
 .contact .details > div {
     display: flex;
     flex-flow: row wrap;
+}
+
+.contact .details h3 {
+    margin-top: 0;
 }
 
 .contact .details label {

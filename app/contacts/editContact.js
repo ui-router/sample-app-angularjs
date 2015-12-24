@@ -28,18 +28,23 @@ let template = `
 
 `;
 
-function EditContactController(Contacts, $state, contact, statusApi) {
+function EditContactController($state, dialogService, Contacts, contact, statusApi) {
   statusApi.isDirty = () => !angular.equals(this.contact, contact);
-  let clearDirty = () => statusApi.isDirty = () => false;
+  let resetPristine = () => contact = this.contact;
 
   this.contact = angular.copy(contact);
 
   this.remove = function (contact) {
-    Contacts.remove(contact).then(clearDirty).then(() => $state.go("^.^"));
+    dialogService.confirm(`Delete contact: ${contact.name.first} ${contact.name.last}`)
+        .then(() => Contacts.remove(contact))
+        .then(resetPristine)
+        .then(() => $state.go("^.^"));
   };
 
   this.save = function (contact) {
-    Contacts.save(contact).then(clearDirty).then(() => $state.go("^", null, { reload: true }));
+    Contacts.save(contact)
+        .then(resetPristine)
+        .then(() => $state.go("^", null, { reload: true }));
   };
 }
 
@@ -53,7 +58,7 @@ let editContactState = {
   },
   onExit: (dialogService, statusApi) => {
     if (statusApi.isDirty())
-      return dialogService.confirm('You have unsaved changes', 'Are you sure?');
+      return dialogService.confirm('You have unsaved changes to this contact.', 'Navigate away and lose changes?', "Yes", "No");
   },
   views: {
     '^.^.$default': {

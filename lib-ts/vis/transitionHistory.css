@@ -69,6 +69,8 @@
     transform: skew(-40deg, 0deg);
 }
 
+/*.historyEntry::before height: 51% (|| ::after) */
+
 /* Styling for breadcrumb contents */
 .historyEntry .summary {
     color: white;
@@ -130,6 +132,13 @@
 .transitionHistory .historyEntry.redirected:hover:before,.historyEntry.redirected:hover:after {
     background: #ff9808;
 }
+
+.transitionHistory .keyvalue {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+}
+
 
 
 
@@ -218,6 +227,22 @@
     min-width: 10em;
 }
 
+
+.transitionDetail .summary .keyvalue {
+    justify-content: flex-start !important;
+    align-items: baseline;
+}
+
+.transitionDetail .summary .keyvalue > div:nth-child(2){
+    padding-left: 0.5em;
+    font-weight: normal;
+}
+
+
+.transitionDetail table.summary {
+    max-width: 400px;
+}
+
 .transitionDetail table.summary td {
     font-size: small;
     vertical-align: top;
@@ -275,7 +300,8 @@
 
 .transitionDetail.expand .params {
     padding: 0.5em;
-    max-height: 40px;
+    max-height: 250px;
+    overflow-y: auto;
     opacity: 1;
 }
 
@@ -283,13 +309,10 @@
 .transitionDetail.expand table.paths td {
     border: 5px solid white;
     max-height: 100px;
+    vertical-align: top;
 }
 
 
-.transitionDetail .paramslabel {
-    float: right;
-    margin-top: -0.5em;
-}
 
 .transitionDetail .statename {
     font-weight: bolder;
@@ -300,12 +323,18 @@
     white-space: nowrap;
 }
 
-.transitionDetail .paramid {
+.transitionHistory .paramid {
     font-weight: bolder;
     color: white;
+    margin-right: 0.5em;
 }
 
-.transitionDetail .paramvalue {
+.transitionHistory .paramslabel {
+    /*float: right;*/
+    margin-top: -0.5em;
+}
+
+.transitionHistory .paramvalue {
     color: #e6e6e6;
 }
 

@@ -39,7 +39,7 @@ Subject: ${message.subject}
 ${message.body}`;
 
 
-function MessageController($state, Messages, MessageListUi, folder, message) {
+function MessageController($state, dialogService, Messages, MessageListUi, folder, message) {
   this.message = message;
   message.read = true;
   Messages.put(message);
@@ -72,7 +72,10 @@ function MessageController($state, Messages, MessageListUi, folder, message) {
     let nextMessageId = MessageListUi.proximalMessageId(message._id);
     let nextState = nextMessageId ? 'mymessages.folder.message' : 'mymessages.folder';
     let params = { messageId: nextMessageId };
-    Messages.remove(message).then(() => $state.go(nextState, params, { reload: 'mymessages.folder' }));
+
+    dialogService.confirm("Delete?", undefined)
+        .then(() => Messages.remove(message))
+        .then(() => $state.go(nextState, params, { reload: 'mymessages.folder' }));
   };
 }
 

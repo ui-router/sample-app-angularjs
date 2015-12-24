@@ -16,7 +16,7 @@ let template = `
 </div>
 `;
 
-function ComposeController(AppConfig, $stateParams, $state, $transition$, Messages) {
+function ComposeController(AppConfig, $stateParams, $state, $transition$, statusApi, Messages) {
   this.goPrevious = function() {
     let hasPrevious = !!$transition$.from().name;
     let state = hasPrevious ? $transition$.from() : "mymessages.folder";
@@ -25,12 +25,14 @@ function ComposeController(AppConfig, $stateParams, $state, $transition$, Messag
   };
 
   this.message = angular.extend({ from: AppConfig.emailAddress }, $stateParams.message);
-  this.message.from = AppConfig.emailAddress;
+  this.pristine = angular.copy(this.message);
+  statusApi.isDirty = () => !angular.equals(this.pristine, this.message);
+  resetPristine = () => this.pristine = this.message;
 
   this.send = (message) =>
-      Messages.save(angular.extend(message, { date: new Date(), read: true, folder: 'sent' })).then(this.goPrevious);
+      Messages.save(angular.extend(message, { date: new Date(), read: true, folder: 'sent' })).then(resetPristine).then(this.goPrevious);
   this.save = (message) =>
-      Messages.save(angular.extend(message, { date: new Date(), read: true, folder: 'drafts' })).then(this.goPrevious);
+      Messages.save(angular.extend(message, { date: new Date(), read: true, folder: 'drafts' })).then(resetPristine).then(this.goPrevious);
 }
 
 let composeState = {
@@ -38,6 +40,15 @@ let composeState = {
   url: '/compose',
   params: {
     message: {}
+  },
+  resolve: {
+    statusApi: () => ({
+      isDirty: () => false
+    })
+  },
+  onExit: (dialogService, statusApi) => {
+    if (statusApi.isDirty())
+      return dialogService.confirm('You have not saved this message.', 'Navigate away and lose changes?', "Yes", "No");
   },
   controller: ComposeController,
   controllerAs: 'vm',

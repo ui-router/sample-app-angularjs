@@ -28,6 +28,10 @@ app.config(($stateProvider) => {
                 <a ui-sref="prefs" role="button"> Preferences </a>
             </li>
 
+            <li class="navbar-right">
+              <button style="margin-right: 15px;" class="btn btn-primary" ui-sref="mymessages.compose"><i class="fa fa-envelope"></i> New Message</button>
+            </li>
+
             <li class="navbar-text navbar-right logged-in-user" style="margin: 0.5em 1.5em;">
               <div>
                 {{vm.AppConfig.emailAddress}} <i class="fa fa-chevron-down"></i>
