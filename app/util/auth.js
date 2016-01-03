@@ -11,7 +11,7 @@ app.run(($state, $transitions, AuthService) => {
   };
 
   // Function that returns a redirect for the current transition to the login state
-  let redirectToLogin = ($transition$) => $transition$.redirect($state.targetState('login'));
+  let redirectToLogin = ($transition$) => $state.target('login');
 
   // Register the "requires auth" hook
   $transitions.onBefore(requiresAuthCriteria, redirectToLogin, {priority: 10});

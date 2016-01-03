@@ -135,8 +135,8 @@ app.directive('uirTransitionView', () => {
           if (type == 2) {
             this.status = "redirected";
             //this.rejection = rejection.detail;
-            let toState = rejection.detail.to().name;
-            let toParams = JSON.stringify(rejection.detail.params("to"));
+            let toState = rejection.detail.name();
+            let toParams = JSON.stringify(rejection.detail.params());
             this.rejection = truncateTo(100, `${toState}(${toParams}`) + ")";
           }
 
