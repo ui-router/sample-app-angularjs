@@ -1,27 +1,59 @@
-import {app} from './app.module';
+/**
+ * This is the parent state for the entire application.
+ *
+ * This state's primary purposes are:
+ * 1) Shows the outermost chrome (including the navigation and logout for authenticated users)
+ * 2) Provide a viewport (ui-view) for a substate to plug into
+ */
+class AuthedController {
+  constructor(AppConfig, AuthService, $state) {
+    this.AuthService = AuthService;
+    this.$state = $state;
 
-import {flattenReduce} from './util/util';
+    this.emailAddress = AppConfig.emailAddress;
+    this.isAuthenticated = AuthService.isAuthenticated();
+  }
 
-import "./dataSources"
+  logout() {
+    let {AuthService, $state} = this;
+    AuthService.logout();
+    // Reload states after authentication change
+    return $state.go('welcome', {}, { reload: true });
+  }
+}
 
-import './mymessages/mymessages.module';
-import './contacts/contacts.module';
-import './prefs/prefs.module';
+let authedTemplate = `
+<div class="navheader">
+  <ul ng-if="::vm.isAuthenticated" class="nav nav-tabs">
 
-import './welcome';
-import './home';
-import './login';
-import './authenticatedNav';
-import './util/appConfig';
-import './util/auth';
-import './routerhooks/redirectTo';
-import './util/messageBodyFilter';
+    <li ui-sref-active="active"> <a ui-sref="mymessages" role="button"> Messages </a> </li>
+    <li ui-sref-active="active"> <a ui-sref="contacts" role="button"> Contacts </a> </li>
+    <li ui-sref-active="active"> <a ui-sref="prefs" role="button"> Preferences </a> </li>
 
-app.config(($stateProvider, $urlRouterProvider) => {
-  $urlRouterProvider.otherwise("/welcome");
-});
+    <li class="navbar-right">
+      <button class="btn btn-primary fa fa-home" ui-sref="home"></button>
+      <button style="margin-right: 15px;" class="btn btn-primary" ui-sref="mymessages.compose"><i class="fa fa-envelope"></i> New Message</button>
+    </li>
 
-app.run(($trace) => {
-  // trace transitions; alternative to $trace.enable("TRANSITION")
-  $trace.enable(1);
-});
+    <li class="navbar-text navbar-right logged-in-user" style="margin: 0.5em 1.5em;">
+      <div>
+        {{::vm.emailAddress}} <i class="fa fa-chevron-down"></i>
+        <div class="hoverdrop">
+          <button class="btn btn-primary" ng-click="vm.logout()">Log Out</button>
+        </div>
+      </div>
+    </li>
+
+  </ul>
+</div>
+
+<div ui-view/>
+`;
+
+export let appState = {
+  name: 'app',
+  redirectTo: 'welcome',
+  template: authedTemplate,
+  controller: AuthedController,
+  controllerAs: 'vm'
+};

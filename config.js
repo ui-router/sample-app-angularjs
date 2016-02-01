@@ -18,7 +18,7 @@ System.config({
 
   map: {
     "angular": "github:angular/bower-angular@1.4.7",
-    "angular-ui-router": "lib/angular-ui-router.min.js",
+    "angular-ui-router": "lib/angular-ui-router.js",
     "bootstrap": "github:twbs/bootstrap@3.3.5",
     "css": "github:systemjs/plugin-css@0.1.19",
     "d3": "github:mbostock/d3@3.5.6",

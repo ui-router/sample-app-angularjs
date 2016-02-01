@@ -17,7 +17,7 @@ function ContactsController(contacts) {
 }
 
 let contactsState = {
-  parent: 'authRequired',
+  parent: 'app',
   name: "contacts",
   url: "/contacts",
   resolve: {
@@ -25,7 +25,8 @@ let contactsState = {
   },
   template: template,
   controller: ContactsController,
-  controllerAs: "vm"
+  controllerAs: "vm",
+  data: { requiresAuth: true }
 };
 
 export {contactsState}

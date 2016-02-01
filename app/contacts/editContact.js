@@ -1,5 +1,5 @@
 import angular from "angular";
-import "../util/dialog"
+import "../services/dialog";
 
 let template = `
 <div class="contact">

@@ -1,4 +1,7 @@
-var template = `
+/**
+ *
+ */
+let template = `
 <div class="my-messages">
 
   <div class="folderlist">
@@ -21,8 +24,8 @@ function FoldersController(folders) {
   this.folders = folders;
 }
 
-let messagesState = {
-  parent: 'authRequired',
+let mymessagesState = {
+  parent: 'app',
   name: "mymessages",
   url: "/mymessages",
   resolve: {
@@ -31,7 +34,8 @@ let messagesState = {
   redirectTo: 'mymessages.folder',
   template: template,
   controller: FoldersController,
-  controllerAs: "vm"
+  controllerAs: "vm",
+  data: { requiresAuth: true }
 };
 
-export {messagesState}
+export {mymessagesState}

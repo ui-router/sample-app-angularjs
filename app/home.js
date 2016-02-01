@@ -1,5 +1,3 @@
-import {app} from "./app.module";
-
 // This is a home screen for authenticated users.
 // It shows giant buttons which activate their respective submodules: Messages, Contacts, Preferences
 
@@ -22,11 +20,9 @@ let homeTemplate = `
     </div>
 `;
 
-app.config(($stateProvider) => {
-  $stateProvider.state({
-    parent: 'authRequired',
-    name: 'home',
-    url: '/home',
-    template: homeTemplate
-  });
-});
+export let homeState = {
+  parent: 'app',
+  name: 'home',
+  url: '/home',
+  template: homeTemplate
+};

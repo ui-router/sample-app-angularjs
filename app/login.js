@@ -1,9 +1,12 @@
 import {app} from "./app.module";
 
-// This is the login screen
-// It shows a fake login dialog and prompts the user to authenticate.
-// Once the user authenticates, it then re-attempts to activate the state
-// that they originally came from
+/**
+ * This is the login state.  It is activated when the user navigates to /login, or if a unauthenticated
+ * user attempts to access a protected state (or substate) which requires authentication. (see routerhooks/requiresAuth.js)
+ *
+ * It shows a fake login dialog and prompts the user to authenticate.  Once the user authenticates, it then
+ * reactivates the state that the user originally came from.
+ */
 
 class LoginController {
   constructor(AppConfig, AuthService, $state, returnTo) {
@@ -87,14 +90,11 @@ const returnTo = ($state, $transition$) => {
   return returnTo.state.name ? returnTo : { state: 'home' };
 };
 
-
-app.config(($stateProvider) => {
-  $stateProvider.state({
-    name: 'login',
-    url: '/login',
-    controller: LoginController,
-    controllerAs: 'vm',
-    template: loginTemplate,
-    resolve: { returnTo: returnTo }
-  });
-});
+export let loginState = {
+  name: 'login',
+  url: '/login',
+  controller: LoginController,
+  controllerAs: 'vm',
+  template: loginTemplate,
+  resolve: { returnTo: returnTo }
+};

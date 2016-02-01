@@ -25,10 +25,11 @@ function PrefsController($document, AppConfig) {
 }
 
 export let prefsState = {
-  parent: 'authRequired',
+  parent: 'app',
   name: 'prefs',
   template: template,
   url: '/prefs',
   controller: PrefsController,
-  controllerAs: 'vm'
+  controllerAs: 'vm',
+  data: { requiresAuth: true }
 };

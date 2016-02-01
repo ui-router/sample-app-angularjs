@@ -1,4 +1,7 @@
-import {app} from "./app.module";
+/**
+ * This is the 'welcome' state.  It is the default state (as defined by app.js) if no other state
+ * can be matched to the URL.
+ */
 
 let welcomeTemplate = `
   <div class="container-fluid">
@@ -33,10 +36,8 @@ let welcomeTemplate = `
   </div>
 `;
 
-app.config(($stateProvider) => {
-  $stateProvider.state({
-    name: 'welcome',
-    url: '/welcome',
-    template: welcomeTemplate
-  });
-});
+export let welcomeState = {
+  name: 'welcome',
+  url: '/welcome',
+  template: welcomeTemplate
+};
