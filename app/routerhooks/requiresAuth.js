@@ -18,7 +18,7 @@ ngmodule.run(($state, $transitions, AuthService) => {
   // if the user is not currently authenticated (according to the AuthService)
   let redirectToLogin = [ 'AuthService', '$transition$', (AuthService) => {
     if (!AuthService.isAuthenticated()) {
-      return $state.target('login');
+      return $state.target('login', undefined, { location: false });
     }
   }];
 
