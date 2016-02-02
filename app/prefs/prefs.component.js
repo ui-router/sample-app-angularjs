@@ -1,7 +1,4 @@
-/**
- * This state allows the user to set their application preferences
- */
-let template = `
+export let template = `
 <div>
   <button class="btn btn-primary" ng-click="vm.reset()"><i class="fa fa-recycle"></i> <span>Reset All Data</span></button>
 </div>
@@ -13,7 +10,7 @@ let template = `
 </div>
 `;
 
-function PrefsController(AppConfig) {
+export let controller = function PrefsController(AppConfig) {
   this.prefs = {
     restDelay: AppConfig.restDelay
   };
@@ -27,15 +24,4 @@ function PrefsController(AppConfig) {
     angular.extend(AppConfig, { restDelay: this.prefs.restDelay }).save();
     document.location.reload(true);
   }
-}
-
-export let prefsState = {
-  parent: 'app',
-  name: 'prefs',
-  template: template,
-  url: '/prefs',
-  controller: PrefsController,
-  controllerAs: 'vm',
-  // Mark this state as requiring authentication.  See ../routerhooks/requiresAuth.js.
-  data: { requiresAuth: true }
 };

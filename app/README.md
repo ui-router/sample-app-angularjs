@@ -7,7 +7,7 @@
 - app.module.js 
 
 ### Top-level states
-- app.js
-- home.js
-- login.js
-- welcome.js
+- app.state.js
+- home.state.js
+- login.state.js
+- welcome.state.js

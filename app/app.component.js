@@ -1,28 +1,4 @@
-/**
- * This is the parent state for the entire application.
- *
- * This state's primary purposes are:
- * 1) Shows the outermost chrome (including the navigation and logout for authenticated users)
- * 2) Provide a viewport (ui-view) for a substate to plug into
- */
-class AuthedController {
-  constructor(AppConfig, AuthService, $state) {
-    this.AuthService = AuthService;
-    this.$state = $state;
-
-    this.emailAddress = AppConfig.emailAddress;
-    this.isAuthenticated = AuthService.isAuthenticated();
-  }
-
-  logout() {
-    let {AuthService, $state} = this;
-    AuthService.logout();
-    // Reload states after authentication change
-    return $state.go('welcome', {}, { reload: true });
-  }
-}
-
-let authedTemplate = `
+export let template = `
 <div class="navheader">
   <ul ng-if="::vm.isAuthenticated" class="nav nav-tabs">
 
@@ -50,10 +26,20 @@ let authedTemplate = `
 <div ui-view/>
 `;
 
-export let appState = {
-  name: 'app',
-  redirectTo: 'welcome',
-  template: authedTemplate,
-  controller: AuthedController,
-  controllerAs: 'vm'
+
+export let controller = class AuthedController {
+  constructor(AppConfig, AuthService, $state) {
+    this.AuthService = AuthService;
+    this.$state = $state;
+
+    this.emailAddress = AppConfig.emailAddress;
+    this.isAuthenticated = AuthService.isAuthenticated();
+  }
+
+  logout() {
+    let {AuthService, $state} = this;
+    AuthService.logout();
+    // Reload states after authentication change
+    return $state.go('welcome', {}, { reload: true });
+  }
 };

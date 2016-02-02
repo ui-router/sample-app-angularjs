@@ -1,9 +1,5 @@
-import {angular} from "angular";
-/**
- * This state displays a single contact.
- * The contact to display is fetched using a resolve, based on the `contactId` parameter.
- */
-let template = `
+
+export let template = `
 <div class="contact">
   <div class="flex-h">
     <div class="details">
@@ -38,21 +34,6 @@ let template = `
 </div>
 `;
 
-function ContactController(contact) {
+export let controller = function ContactController(contact) {
   this.contact = contact;
-}
-
-let viewContactState = {
-  name: 'contacts.contact',
-  url: '/:contactId',
-  resolve: {
-    // Resolve the contact, based on the contactId parameter value.
-    // The resolved contact is then injected into the controller.
-    contact: (Contacts, $stateParams) => Contacts.get($stateParams.contactId)
-  },
-  template: template,
-  controller: ContactController,
-  controllerAs: 'vm'
 };
-
-export {viewContactState};

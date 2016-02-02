@@ -1,23 +1,9 @@
+import {template, controller} from "./folder.component";
 /**
  * This state shows the contents (a message list) of a single folder
  */
 
-// Import the directives used
-import "./directives/sortMessages";
-
-let template = `
-<div class="messages">
-  <message-table columns="vm.folder.columns" messages="vm.messages"></message-table>
-</div>
-`;
-
-function FolderController(AppConfig, folder, messages) {
-  this.folder = folder;
-  this.messages = messages;
-  this.AppConfig = AppConfig;
-}
-
-let folderState = {
+export let folderState = {
   name: 'mymessages.folder',
   url: '/:folderId',
   // The folderId parameter is part of the URL.  This params block sets 'inbox' as the default value.
@@ -35,10 +21,8 @@ let folderState = {
     // This targets the "messagelist" named ui-view added to the DOM in the parent state 'mymessages'
     "messagelist": {
       template: template,
-      controller: FolderController,
+      controller: controller,
       controllerAs: 'vm'
     }
   }
 };
-
-export {folderState};

@@ -1,10 +1,17 @@
 ## Contents
 
 ### The MyMessages submodule states
-- mymessages.js: The main 'mymessages' parent state; Shows the list of folders
-- folder.js: The 'mymessages.folder' child state; Shows the list of messages in a folder.
-- message.js: The 'mymessages.folder.message' child state; Shows the contents of a message.
-- compose.js: The 'mymessages.compose' child state; Allows a new message to be sent.
+- mymessages.state.js: The main 'mymessages' parent state.
+- myessages.component.js: A template/controller to display a list of folders.
+
+- folder.state.js: The 'mymessages.folder' child state for a folder of messages.
+- folder.component.js: A template/controller to show the list of messages in a folder.
+
+- message.state.js: The 'mymessages.folder.message' child state for a single message.
+- message.component.js: A template/controller to show the contents of a message.
+
+- compose.state.js: The 'mymessages.compose' child state for composing a message.
+- compose.component.js: A template/controller allowing a new message to be composed.
 
 ### The MyMessages submodule bootstrap
 - mymessages.module.js

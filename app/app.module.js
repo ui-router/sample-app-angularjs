@@ -1,10 +1,10 @@
 import {ngmodule} from "./ngmodule";
 
 // Import the top-level state definitions for app, welcome, home, and login
-import {appState} from "./app";
-import {welcomeState} from './welcome';
-import {homeState} from './home';
-import {loginState} from './login';
+import {appState} from "./app.state";
+import {welcomeState} from './welcome.state';
+import {homeState} from './home.state';
+import {loginState} from './login.state';
 
 // and register each one with the StateProvider
 ngmodule.config(['$stateProvider', $stateProvider => {
