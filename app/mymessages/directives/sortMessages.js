@@ -1,5 +1,5 @@
-import {app} from "../../app.module";
-app.directive("sortMessages", (AppConfig, $parse) => {
+import {ngmodule} from "../../ngmodule";
+ngmodule.directive("sortMessages", (AppConfig, $parse) => {
   return {
     restrict: 'A',
     link: function(scope, elem, attrs) {

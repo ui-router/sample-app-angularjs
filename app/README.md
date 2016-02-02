@@ -1,4 +1,4 @@
-This directory contains:
+## Contents
  
 ### The application entrypoint
 - entrypoint.js

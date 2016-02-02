@@ -1,4 +1,4 @@
-This directory contains:
+## Contents
 
 ### Global services
 - appConfig.js: Stores and retrieves the user's application preferences

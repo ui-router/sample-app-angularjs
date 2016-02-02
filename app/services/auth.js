@@ -1,5 +1,8 @@
-import {app} from "../app.module"
+import {ngmodule} from "../ngmodule"
 
+/**
+ * This service emulates an Authentication Service.
+ */
 class FakeAuthService {
   constructor(AppConfig, $q, $timeout) {
     this.AppConfig = AppConfig;
@@ -8,9 +11,19 @@ class FakeAuthService {
     this.usernames = ['myself@angular.dev', 'devgal@angular.dev', 'devguy@angular.dev'];
   }
 
+  /**
+   * Returns true if the user is currently authenticated, else false
+   */
   isAuthenticated = () => !!this.AppConfig.emailAddress;
 
-  // Fake authentication function that returns a promise.
+  /**
+   * Fake authentication function that returns a promise that is either resolved or rejected.
+   *
+   * Given a username and password, checks that the username matches one of the known
+   * usernames (this.usernames), and that the password matches 'password'.
+   *
+   * Delays 800ms to simulate an async REST API delay.
+   */
   authenticate(username, password) {
     let { $timeout, $q, AppConfig } = this;
 
@@ -29,10 +42,11 @@ class FakeAuthService {
         });
   }
 
+  /** Logs the current user out */
   logout() {
     this.AppConfig.emailAddress = undefined;
     this.AppConfig.save();
   }
 }
 
-app.service("AuthService", FakeAuthService);
+ngmodule.service("AuthService", FakeAuthService);

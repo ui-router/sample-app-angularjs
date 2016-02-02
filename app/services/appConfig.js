@@ -1,5 +1,7 @@
-import {app} from "../app.module"
-
+import {ngmodule} from "../ngmodule"
+/**
+ * This service stores and retrieves user preferences in session storage
+ */
 class AppConfig {
   constructor() {
     this.sort = '+date';
@@ -20,5 +22,5 @@ class AppConfig {
   }
 }
 
-app.value('AppConfig', new AppConfig().load());
+ngmodule.value('AppConfig', new AppConfig().load());
 

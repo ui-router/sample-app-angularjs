@@ -1,4 +1,4 @@
-This directory contains:
+## Contents
 
 ### Utility Code
 - sessionStorage.js: Provides an API that emulates a RESTful client API

@@ -1,25 +1,31 @@
 /**
  * This file is the main entry point for the entire app.
  *
+ * If the application is being bundled, this is where the bundling process
+ * starts.  If the application is being loaded by an es6 module loader, this
+ * is the entry point.
+ *
  * Point Webpack or SystemJS to this file.
  *
- * It imports all the different parts of the application:
+ * This module imports all the different parts of the application:
+ * - 3rd party Libraries and angular1 module
  * - Services
  * - Components
  * - Submodules
+ * - Top-level states
+ * - UI-Router Transition Hooks
  */
 
+// Import the angular1 module
+import "./ngmodule";
 
-// This file starts by importing the angular module "demo" from app.module.js
-import {app} from './app.module';
+// Import CSS (SystemJS will inject it into the document)
+import "font-awesome/css/font-awesome.css!"
+import "bootstrap/css/bootstrap.css!"
 
 // Import the service that manages the user's application preferences, and the Authentication service
 import './services/appConfig';
 import './services/auth';
-
-// Import any global transition hooks
-import './routerhooks/redirectTo';
-import './routerhooks/requiresAuth';
 
 // Import the fake REST APIs (for Contacts, Folders, Messages)
 // These register themselves as angular services
@@ -27,31 +33,12 @@ import "./services/dataSources"
 
 // Import the submodules that make up the main subsections of the application
 // Each submodule registers its own states/services/components
+import './app.module';
 import './mymessages/mymessages.module';
 import './contacts/contacts.module';
 import './prefs/prefs.module';
 
-
-
-// Import the top-level state definitions for app, welcome, home, and login
-import {appState} from "./app";
-import {welcomeState} from './welcome';
-import {homeState} from './home';
-import {loginState} from './login';
-// and register each one with the StateProvider
-app.config(['$stateProvider', $stateProvider => {
-  [appState, homeState, welcomeState, loginState].forEach(state => $stateProvider.state(state));
-}]);
-
-
-
-// Apply some global configuration...
-
-// If the user enters a URL that doesn't match any known URL (state), send them to `/welcome`
-app.config(['$urlRouterProvider', $urlRouterProvider => { $urlRouterProvider.otherwise("/welcome"); }]);
-
-// Trace each TRANSITION... see the javascript console.
-// This syntax `$trace.enable(1)` is an alternative to `$trace.enable("TRANSITION")`.
-app.run(['$trace', $trace => { $trace.enable(1); }]);
-// Besides "TRANSITION", you can also enable tracing for : "RESOLVE", "HOOK", "INVOKE", "UIVIEW", "VIEWCONFIG"
+// Import any global transition hooks
+import './routerhooks/redirectTo';
+import './routerhooks/requiresAuth';
 

@@ -37,6 +37,7 @@ let welcomeTemplate = `
 `;
 
 export let welcomeState = {
+  parent: 'app',
   name: 'welcome',
   url: '/welcome',
   template: welcomeTemplate

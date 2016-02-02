@@ -1,5 +1,8 @@
 import {angular} from "angular";
-
+/**
+ * This state displays a single contact.
+ * The contact to display is fetched using a resolve, based on the `contactId` parameter.
+ */
 let template = `
 <div class="contact">
   <div class="flex-h">
@@ -21,8 +24,17 @@ let template = `
       <img ng-src="{{vm.contact.picture}}"/>
     </div>
   </div>
-  <button class="btn btn-primary" ui-sref="mymessages.compose({ message: { to: vm.contact.email } })"><i class="fa fa-envelope"></i><span>Message</span></button>
-  <button class="btn btn-primary" ui-sref=".edit"><i class="fa fa-pencil"></i><span>Edit Contact</span></button>
+
+  <!-- This button has an ui-sref to the mymessages.compose state. The ui-sref provides the mymessages.compose
+       state with an non-url parameter, which is used as the initial message model -->
+  <button class="btn btn-primary" ui-sref="mymessages.compose({ message: { to: vm.contact.email } })">
+    <i class="fa fa-envelope"></i><span>Message</span>
+  </button>
+
+  <!-- This button has a relative ui-sref to the contacts.contact.edit state. -->
+  <button class="btn btn-primary" ui-sref=".edit">
+    <i class="fa fa-pencil"></i><span>Edit Contact</span>
+  </button>
 </div>
 `;
 
@@ -34,6 +46,8 @@ let viewContactState = {
   name: 'contacts.contact',
   url: '/:contactId',
   resolve: {
+    // Resolve the contact, based on the contactId parameter value.
+    // The resolved contact is then injected into the controller.
     contact: (Contacts, $stateParams) => Contacts.get($stateParams.contactId)
   },
   template: template,

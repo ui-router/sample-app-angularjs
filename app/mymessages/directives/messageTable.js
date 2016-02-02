@@ -1,4 +1,5 @@
-import {app} from "../../app.module";
+import {ngmodule} from "../../ngmodule";
+import "./sortMessages";
 
 let tableTemplate =
 `  <table>
@@ -25,7 +26,7 @@ let tableTemplate =
 
   </table>`;
 
-app.directive("messageTable", (AppConfig) => ({
+ngmodule.directive("messageTable", (AppConfig) => ({
   bindToController: {
     columns: '=',
     messages: '='

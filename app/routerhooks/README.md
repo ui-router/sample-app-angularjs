@@ -1,4 +1,4 @@
-This directory contains:
+## Contents
 
 ### Global router hooks
 - redirectTo.js: Allows a state to declare a state to redirect the transition to

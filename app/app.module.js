@@ -1,26 +1,24 @@
-/**
- * This file imports the application's dependencies.
- */
+import {ngmodule} from "./ngmodule";
 
-// External dependencies
-import angular from "angular";
-import "angular-ui-router";
-import "d3";
+// Import the top-level state definitions for app, welcome, home, and login
+import {appState} from "./app";
+import {welcomeState} from './welcome';
+import {homeState} from './home';
+import {loginState} from './login';
 
-// Internal dependencies; If this app were bundled, these files would be bundled as well
-import "../lib/ct-ui-router-extras.core.js";
-import stateSel from "../lib-ts/stateSelector";
-import stateVis from "../lib-ts/vis/statevis";
+// and register each one with the StateProvider
+ngmodule.config(['$stateProvider', $stateProvider => {
+  [appState, homeState, welcomeState, loginState].forEach(state => $stateProvider.state(state));
+}]);
 
-// Import CSS (SystemJS will inject it into the document for us)
-import "font-awesome/css/font-awesome.css!"
-import "bootstrap/css/bootstrap.css!"
 
-// Create the angular module "demo".  It's empty now, but other parts of the app will register things on it.
-// Since it is exported, other parts of the application (in other files) can then import it and register things.
-// For example, in mymessages.module.js:
-//
-// import {app} from "../app.module";
-// app.config(($stateProvider) => { /* ... register states with $stateProvider */ }
-export let app = angular.module("demo", ['ui.router', 'ct.ui.router.extras.core', stateSel, stateVis]);
+// Apply some global configuration...
 
+// If the user enters a URL that doesn't match any known URL (state), send them to `/welcome`
+ngmodule.config(['$urlRouterProvider', $urlRouterProvider => { $urlRouterProvider.otherwise("/welcome"); }]);
+
+// Enable tracing of each TRANSITION... (check the javascript console)
+
+// This syntax `$trace.enable(1)` is an alternative to `$trace.enable("TRANSITION")`.
+// Besides "TRANSITION", you can also enable tracing for : "RESOLVE", "HOOK", "INVOKE", "UIVIEW", "VIEWCONFIG"
+ngmodule.run(['$trace', $trace => { $trace.enable(1); }]);

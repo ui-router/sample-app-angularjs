@@ -1,15 +1,12 @@
-import {app} from "../app.module";
+import {ngmodule} from "../ngmodule";
 
-import './filters/messageBodyFilter';
-import "./directives/sortMessages";
-import "./directives/messageTable";
-
+// Import all the state definitions for this submodule...
 import {mymessagesState} from "./mymessages";
 import {folderState} from "./folder";
 import {messageState} from "./message";
 import {composeState} from "./compose";
-
-app.config(($stateProvider) => {
+// ...and register them with the $stateProvider
+ngmodule.config(($stateProvider) => {
   let mymessagesStates = [ folderState, mymessagesState, messageState, composeState ];
   mymessagesStates.forEach(state => $stateProvider.state(state));
 });

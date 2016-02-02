@@ -1,12 +1,12 @@
-import {app} from "../app.module.js";
+import {ngmodule} from "../ngmodule";
 /**
- * Adds a global "redirectTo" transition hook.
+ * Adds a custom global "redirectTo" transition hook.
  *
  * This hook will be triggered if the destination state has a 'redirectTo' property.
  * The hook will return a new TargetState based on the value of the original destination state's 'redirectTo' property.
  * The Transition will then be redirected to the new TargetState.
  */
-app.run(($state, $transitions) => {
+ngmodule.run(($state, $transitions) => {
   // Matches if the destination state has a 'redirectTo' property
   let matchCriteria = { to: (state) => state.redirectTo != null };
 

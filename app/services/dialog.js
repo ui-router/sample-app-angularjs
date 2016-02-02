@@ -1,5 +1,5 @@
 import angular from "angular";
-import {app} from "../app.module";
+import {ngmodule} from "../ngmodule";
 
 let dialogTpl = `
   <div class="backdrop"></div>
@@ -39,5 +39,5 @@ function DialogService($document, $compile, $rootScope) {
   }
 }
 
-app.directive("dialog", DialogDirective);
-app.service("dialogService", DialogService);
+ngmodule.directive("dialog", DialogDirective);
+ngmodule.service("dialogService", DialogService);

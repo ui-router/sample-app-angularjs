@@ -1,6 +1,11 @@
 import {angular} from "angular";
 import {setProp} from "../util/util";
+import './filters/messageBodyFilter';
 
+/**
+ * This state shows the contents of a single message.
+ * It also has UI to reply, forward, delete, or edit an existing draft.
+ */
 let template = `
 <div class="message">
 
@@ -21,11 +26,14 @@ let template = `
     </div>
   </div>
 
+  // Pass the raw (plain text) message body through the messageBody filter to format slightly nicer.
   <div class="body" ng-bind-html="::vm.message.body | messageBody"></div>
 </div>
 `;
 
+/** Helper function to prefix a message with "fwd: " or "re: " */
 const prefixSubject = (prefix, message) => prefix + message.subject;
+/** Helper function which quotes an email message */
 const quoteMessage = (message) => `
 
 
@@ -83,9 +91,22 @@ let messageState = {
   name: 'mymessages.folder.message',
   url: '/:messageId',
   resolve: {
-    message: (Messages, $stateParams) => Messages.get($stateParams.messageId)
+    // Fetch the message from the Messages service using the messageId parameter
+    message: (Messages, $stateParams) => Messages.get($stateParams.messageId),
+    MessageListUi: ($filter, AppConfig, messages) => ({
+      // This is a UI helper which finds the nearest messageId in the messages list to the messageId parameter
+      proximalMessageId: (messageId) => {
+        let sorted = $filter("orderBy")(messages, AppConfig.sort);
+        let idx = sorted.findIndex(msg => msg._id === messageId);
+        var proximalIdx = sorted.length > idx + 1 ? idx + 1 : idx - 1;
+        return proximalIdx >= 0 ? sorted[proximalIdx]._id : undefined;
+      }
+    })
   },
   views: {
+    // Relatively target the parent-state's parent-state's 'messagecontent' ui-view
+    // This could also have been written using ui-view@state addressing: 'messagecontent@mymessages'
+    // Or, this could also have been written using absolute ui-view addressing: '!$default.$default.messagecontent'
     "^.^.messagecontent": {
       template: template,
       controller: MessageController,

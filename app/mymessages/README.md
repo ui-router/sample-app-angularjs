@@ -1,4 +1,4 @@
-This directory contains:
+## Contents
 
 ### The MyMessages submodule states
 - mymessages.js: The main 'mymessages' parent state; Shows the list of folders

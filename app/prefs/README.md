@@ -1,4 +1,4 @@
-This directory contains:
+## Contents
 
 ### The Preferences submodule states
 - prefs.js: The 'prefs' state; Shows and/or updates user preferences

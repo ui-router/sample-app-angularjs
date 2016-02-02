@@ -1,5 +1,3 @@
-import {app} from "./app.module";
-
 /**
  * This is the login state.  It is activated when the user navigates to /login, or if a unauthenticated
  * user attempts to access a protected state (or substate) which requires authentication. (see routerhooks/requiresAuth.js)
@@ -20,7 +18,7 @@ class LoginController {
     this.login = (credentials) => {
       this.authenticating = true;
 
-      const returnToOriginalState = () => $state.go(returnTo.state, returnTo.params);
+      const returnToOriginalState = () => $state.go(returnTo.state, returnTo.params, { reload: true });
       const showError = (errorMessage) => this.errorMessage = errorMessage;
 
       AuthService.authenticate(credentials.username, credentials.password)
@@ -91,6 +89,7 @@ const returnTo = ($state, $transition$) => {
 };
 
 export let loginState = {
+  parent: 'app',
   name: 'login',
   url: '/login',
   controller: LoginController,

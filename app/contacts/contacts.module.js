@@ -1,10 +1,12 @@
-import {app} from "../app.module";
+import {ngmodule} from "../ngmodule";
 
+// Import all the state definitions for this submodule...
 import { contactsState } from "./contacts";
 import { editContactState } from "./editContact";
 import { viewContactState } from "./contact";
 
-app.config(($stateProvider) => {
+// ...and register them with the $stateProvider
+ngmodule.config(($stateProvider) => {
   let contactsStates = [contactsState, viewContactState, editContactState];
   contactsStates.forEach(state => $stateProvider.state(state));
 });

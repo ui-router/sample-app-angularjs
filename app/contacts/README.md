@@ -1,4 +1,4 @@
-This directory contains:
+## Contents
 
 ### The Contacts submodule states
 - contacts.js: The main 'contacts' state
