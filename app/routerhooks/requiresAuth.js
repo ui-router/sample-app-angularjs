@@ -1,4 +1,4 @@
-import {ngmodule} from "../ngmodule"
+import {ngmodule} from "../bootstrap/ngmodule"
 
 /**
  * This file registers an hook with the TransitionsService which protects a

@@ -1,5 +1,5 @@
 import angular from "angular";
-import {ngmodule} from "../ngmodule";
+import {ngmodule} from "../bootstrap/ngmodule";
 
 let dialogTpl = `
   <div class="backdrop"></div>

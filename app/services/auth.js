@@ -1,4 +1,4 @@
-import {ngmodule} from "../ngmodule"
+import {ngmodule} from "../bootstrap/ngmodule"
 
 /**
  * This service emulates an Authentication Service.

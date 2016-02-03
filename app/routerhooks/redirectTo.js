@@ -1,4 +1,4 @@
-import {ngmodule} from "../ngmodule";
+import {ngmodule} from "../bootstrap/ngmodule";
 /**
  * Adds a custom global "redirectTo" transition hook.
  *

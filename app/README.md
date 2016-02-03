@@ -21,3 +21,12 @@
 
 - *welcome.state*.js: The welcome state
 - *welcome.component*.js: A template/controller which displays a welcome screen for guest users
+
+### Directories
+- *bootstrap*: This code assembles the different ES6 modules and starts it running.
+- *contacts*: The Contacts submodule
+- *mymessages*: The My Messages submodule
+- *prefs*: The Preferences submodule
+- *routerhooks*: Global ui-router hooks
+- *services*: Global services
+- *util*: : Utility functions

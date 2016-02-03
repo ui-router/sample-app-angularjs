@@ -1,4 +1,4 @@
-import {ngmodule} from "../../ngmodule";
+import {ngmodule} from "../../bootstrap/ngmodule";
 ngmodule.directive("sortMessages", (AppConfig, $parse) => {
   return {
     restrict: 'A',

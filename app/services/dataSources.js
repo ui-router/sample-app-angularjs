@@ -1,6 +1,6 @@
 import {uniqReduce} from "../util/util";
 import {SessionStorage} from "../util/sessionStorage"
-import {ngmodule} from "../ngmodule"
+import {ngmodule} from "../bootstrap/ngmodule"
 
 /**
  * Fake REST Services (Contacts, Folders, Messages) used in the mymessages submodule.

@@ -1,4 +1,4 @@
-import {ngmodule} from "./ngmodule";
+import {ngmodule} from "./bootstrap/ngmodule";
 
 // Import the top-level state definitions for app, welcome, home, and login
 import {appState} from "./app.state";

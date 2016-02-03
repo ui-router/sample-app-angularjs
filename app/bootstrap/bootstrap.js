@@ -24,21 +24,21 @@ import "font-awesome/css/font-awesome.css!"
 import "bootstrap/css/bootstrap.css!"
 
 // Import the service that manages the user's application preferences, and the Authentication service
-import './services/appConfig';
-import './services/auth';
+import '../services/appConfig';
+import '../services/auth';
 
 // Import the fake REST APIs (for Contacts, Folders, Messages)
 // These register themselves as angular services
-import "./services/dataSources"
+import "../services/dataSources"
 
 // Import the submodules that make up the main subsections of the application
 // Each submodule registers its own states/services/components
-import './app.module';
-import './mymessages/mymessages.module';
-import './contacts/contacts.module';
-import './prefs/prefs.module';
+import '../app.module';
+import '../mymessages/mymessages.module';
+import '../contacts/contacts.module';
+import '../prefs/prefs.module';
 
 // Import any global transition hooks
-import './routerhooks/redirectTo';
-import './routerhooks/requiresAuth';
+import '../routerhooks/redirectTo';
+import '../routerhooks/requiresAuth';
 

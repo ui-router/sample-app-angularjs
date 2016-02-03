@@ -1,4 +1,4 @@
-import {ngmodule} from "../ngmodule"
+import {ngmodule} from "../bootstrap/ngmodule"
 /**
  * This service stores and retrieves user preferences in session storage
  */

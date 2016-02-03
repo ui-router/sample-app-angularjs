@@ -1,4 +1,4 @@
-import {ngmodule} from "../ngmodule";
+import {ngmodule} from "../bootstrap/ngmodule";
 
 // Import the prefs state definition...
 import { prefsState } from "./prefs.state";
