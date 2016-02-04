@@ -18,10 +18,7 @@ ngmodule.config($transitionsProvider => {
         .filter(x => x != null && x !== '^')
         .join('');
 
-    let vpv = (path) => {
-      console.log(path);
-      ga('send', 'pageview', path);
-    };
+    let vpv = (path) => ga('send', 'pageview', path);
 
     let success = () => { vpv(path); };
     let error = (err) => {
