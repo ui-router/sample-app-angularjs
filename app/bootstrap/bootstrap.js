@@ -42,3 +42,4 @@ import '../prefs/prefs.module';
 import '../routerhooks/redirectTo';
 import '../routerhooks/requiresAuth';
 
+import '../util/ga';
