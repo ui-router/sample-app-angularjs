@@ -18,22 +18,33 @@ export let loginState = {
 
 /**
  * A resolve function which figures out what state we should return to after a successful login.
- * If the user was redirected to this state (due to the requiresAuth redirect), then return the state/params
- * they were redirected from.  Otherwise, if they transitioned directly, return the from state.  Otherwise
+ *
+ * If the user was redirected to this state (due to the requiresAuth redirect), then return the toState/params
+ * they were redirected from.  Otherwise, if they transitioned directly, return the fromState/params.  Otherwise
  * return the main "app" state.
  */
 function returnTo ($transition$) {
-  let redirectedFrom = $transition$;
-  // Follow the current transition's redirect chain all the way backwards
-  while (redirectedFrom.previous()) {
-    redirectedFrom = redirectedFrom.previous();
+  let redirectedFrom = $transition$.previous();
+  // The user was redirected to the login state (via the requiresAuth hook)
+  if (redirectedFrom != null) {
+    // Follow the current transition's redirect chain all the way back to the original attempted transition
+    while (redirectedFrom.previous()) {
+      redirectedFrom = redirectedFrom.previous();
+    }
+    // return to the original attempted "to state"
+
+    return { state: redirectedFrom.to(), params: redirectedFrom.params("to") };
   }
 
-  // Get the "from" state & params, so we can return to there after successful authentication.
-  let returnTo = {
-    state: redirectedFrom.from(),
-    params: redirectedFrom.params('from')
-  };
+  // The user was not redirected to the login state; they directly activated the login state somehow.
+  // Return them to the state they came from.
+  let fromState = $transition$.from();
+  let fromParams = $transition$.params("from");
 
-  return returnTo.state.name ? returnTo : { state: 'home' };
+  if (fromState.name !== '') {
+    return {state: fromState, params: fromParams};
+  }
+
+  // If the fromState's name is empty, then this was the initial transition. Just return them to the home state
+  return { state: 'home' };
 }
