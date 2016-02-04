@@ -1,5 +1,5 @@
 System.config({
-  baseURL: "/new-state-vis",
+  baseURL: "/sample-app",
   defaultJSExtensions: true,
   transpiler: "typescript",
   paths: {
