@@ -1,4 +1,3 @@
-import angular from "angular";
 import "../services/dialog";
 import {template, controller} from "./editContact.component";
 
