@@ -26,6 +26,7 @@ System.config({
     "lorenzofox3/Smart-Table": "github:lorenzofox3/Smart-Table@2.1.4",
     "typescript": "npm:typescript@1.6.2",
     "ui-router-extras": "npm:ui-router-extras@0.1.0",
+    "ui-router-visualizer": "npm:ui-router-visualizer@1.0.0",
     "github:jspm/nodelibs-assert@0.1.0": {
       "assert": "npm:assert@1.3.0"
     },
@@ -37,6 +38,9 @@ System.config({
     },
     "github:twbs/bootstrap@3.3.5": {
       "jquery": "github:components/jquery@2.1.4"
+    },
+    "npm:angular@1.4.9": {
+      "process": "github:jspm/nodelibs-process@0.1.2"
     },
     "npm:assert@1.3.0": {
       "util": "npm:util@0.10.3"
@@ -52,6 +56,9 @@ System.config({
     },
     "npm:ui-router-extras@0.1.0": {
       "process": "github:jspm/nodelibs-process@0.1.2"
+    },
+    "npm:ui-router-visualizer@1.0.0": {
+      "angular": "npm:angular@1.4.9"
     },
     "npm:util@0.10.3": {
       "inherits": "npm:inherits@2.0.1",
