@@ -1,11 +1,5 @@
 ## Contents
  
-### The application entrypoint
-- *entrypoint*.js: This is where a bundler (such as webpack) would start
-
-### Dependencies
-- *ngmodule*.js: Imports all third party dependencies and creates the angular "demo" module
-
 ### The main app module bootstrap
 - *app.module*.js: Loads the top-level states, and does some configuration
 
