@@ -1,5 +1,6 @@
 import "../services/dialog";
-import {template, controller} from "./editContact.component";
+import {template, EditContactController} from "./editContact.component";
+import {RevertableModel} from "../util/revertableModel";
 
 /**
  * This state allows a user to edit a contact
@@ -13,12 +14,12 @@ export let editContactState = {
   name: 'contacts.contact.edit',
   url: '/edit',
   resolve: {
-    statusApi: () => ({
-      isDirty: () => false
-    })
+    // Override parent "contact" resolve with a RevertableModel wrapper
+    // This provides a fresh copy to edit, and modification detection
+    contact: (contact) => new RevertableModel(contact)
   },
-  onExit: (dialogService, statusApi) => {
-    if (statusApi.isDirty())
+  onExit: (dialogService, contact) => {
+    if (contact.isDirty())
       return dialogService.confirm('You have unsaved changes to this contact.', 'Navigate away and lose changes?', "Yes", "No");
   },
   views: {
@@ -27,7 +28,7 @@ export let editContactState = {
     // Or, this could also have been written using absolute ui-view addressing: !$default.$default.$default
     '^.^.$default': {
       template: template,
-      controller: controller,
+      controller: EditContactController,
       controllerAs: 'vm'
     }
   }

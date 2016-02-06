@@ -26,25 +26,30 @@ export let template = `
 
 `;
 
-// contact is injected from the parent state's pre-resolved data.
-export let controller = function EditContactController($state, dialogService, Contacts, contact, statusApi) {
-  statusApi.isDirty = () => !angular.equals(this.contact, contact);
-  let resetPristine = () => contact = this.contact;
+// contact is a RevertableModel object injected from the state's resolve data.
+export class EditContactController {
+  constructor($state, dialogService, Contacts, contact) {
+    this.$state = $state;
+    this.dialogService = dialogService;
+    this.Contacts = Contacts;
 
-  this.contact = angular.copy(contact);
+    // Take the editable part of the RevertableModel and put it on the controller for the view to use
+    this.contact = contact.editableModel;
+    this.clearDirty = () => contact.clearDirty();
+  }
 
   /** Ask for confirmation, then delete the contact, then go to the grandparent state ('contacts') */
-  this.remove = function (contact) {
-    dialogService.confirm(`Delete contact: ${contact.name.first} ${contact.name.last}`)
-        .then(() => Contacts.remove(contact))
-        .then(resetPristine)
-        .then(() => $state.go("^.^"));
-  };
+  remove(contact) {
+    this.dialogService.confirm(`Delete contact: ${contact.name.first} ${contact.name.last}`)
+        .then(() => this.Contacts.remove(contact))
+        .then(this.clearDirty)
+        .then(() => this.$state.go("^.^"));
+  }
 
   /** Save the contact, then go to the grandparent state ('contacts') */
-  this.save = function (contact) {
-    Contacts.save(contact)
-        .then(resetPristine)
-        .then(() => $state.go("^", null, { reload: true }));
-  };
-};
+  save(contact) {
+    this.Contacts.save(contact)
+        .then(this.clearDirty)
+        .then(() => this.$state.go("^", null, { reload: true }));
+  }
+}

@@ -10,5 +10,7 @@
 - *editContact.state*.js: The 'contacts.contact.edit' substate for editing a single contact.
 - *editContact.component*.js: A template/controller for editing a contact.
 
+- *newContact.state*.js: The 'contacts.new' substate for creating a new contact (shares the editContact component)
+
 ### The Contacts submodule bootstrap
 - *contacts.module*.js
