@@ -7,10 +7,7 @@
 import * as angular from "angular";
 import uiRouter from "angular-ui-router";
 import "d3";
-
-// Internal dependencies; If this app were bundled, these files would be bundled with it
-import "../../lib/ct-ui-router-extras.core.js";
-
+import "ui-router-extras-core";
 import stateVis from "ui-router-visualizer";
 
 // Create the angular module "demo".  It's empty now, but other parts of the app will register things on it.

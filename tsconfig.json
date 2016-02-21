@@ -7,7 +7,7 @@
     "experimentalDecorators": true,
     "module": "commonjs",
     "target": "es5",
-    "outDir": "transpiled",
+    "outDir": "transpiled/app",
     "declaration": false,
     "sourceMap": true
   }
