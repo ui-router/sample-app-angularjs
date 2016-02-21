@@ -29,4 +29,4 @@ export let template = `
   </ul>
 </div>`;
 
-export controller = function() {};
+export let controller = function() {};

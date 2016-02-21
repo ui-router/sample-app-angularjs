@@ -38,19 +38,19 @@ export let controller = function ComposeController(AppConfig, $stateParams, $sta
   // Dirty checking code; checks if the message is still pristine, or has changed
   this.pristine = angular.copy(this.message);
   statusApi.isDirty = () => !angular.equals(this.pristine, this.message);
-  resetPristine = () => this.pristine = this.message;
+  this.resetPristine = () => this.pristine = this.message;
 
   /** "Send" the message (save to the 'sent' folder), and then go to the previous state */
   this.send = function (message) {
     Messages.save(angular.extend(message, {date: new Date(), read: true, folder: 'sent'}))
-        .then(resetPristine)
+        .then(this.resetPristine)
         .then(this.gotoPreviousState);
   };
 
   /** Save the message to the 'drafts' folder, and then go to the previous state */
   this.save = function(message) {
     Messages.save(angular.extend(message, { date: new Date(), read: true, folder: 'drafts' }))
-        .then(resetPristine)
+        .then(this.resetPristine)
         .then(this.gotoPreviousState);
   };
 };

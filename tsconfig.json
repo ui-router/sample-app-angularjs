@@ -1,0 +1,14 @@
+{
+  "moduleResolution": "node",
+  "files": [ "app/bootstrap/bootstrap.js" ],
+  "compilerOptions": {
+    "allowJs": true,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "module": "commonjs",
+    "target": "es5",
+    "outDir": "transpiled",
+    "declaration": false,
+    "sourceMap": true
+  }
+}

@@ -14,7 +14,9 @@ class FakeAuthService {
   /**
    * Returns true if the user is currently authenticated, else false
    */
-  isAuthenticated = () => !!this.AppConfig.emailAddress;
+  isAuthenticated() {
+    return !!this.AppConfig.emailAddress;
+  }
 
   /**
    * Fake authentication function that returns a promise that is either resolved or rejected.

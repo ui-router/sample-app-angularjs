@@ -37,6 +37,7 @@ class SessionStorage {
     // Services required to implement the fake REST API
     this.$q = $q;
     this.$timeout = $timeout;
+    this.sessionStorageKey = sessionStorageKey;
     this.AppConfig = AppConfig; // Used to get the REST latency simulator,
 
     if (fromSession) {
@@ -53,16 +54,17 @@ class SessionStorage {
 
     // Create a promise for the data; Either the existing data from session storage, or the initial data via $http request
     this._data = (data ? $q.resolve(data) : $http.get(sourceUrl).then(resp => resp.data))
-        .then(this._commit)
+        .then(this._commit.bind(this))
         .then(() => JSON.parse(sessionStorage.getItem(sessionStorageKey)))
         .then(array => array.map(stripHashKey));
+
   }
 
   /** Saves all the data back to the session storage */
-  _commit = (data) => {
-    sessionStorage.setItem(sessionStorageKey, JSON.stringify(data));
-    return $q.resolve(data);
-  };
+  _commit(data) {
+    sessionStorage.setItem(this.sessionStorageKey, JSON.stringify(data));
+    return this.$q.resolve(data);
+  }
 
   /** Helper which simulates a delay, then provides the `thenFn` with the data */
   all(thenFn) {
@@ -93,7 +95,7 @@ class SessionStorage {
   /** Returns a promise to save (POST) a new item.   The item's identifier is auto-assigned. */
   post(item) {
     item[this._idProp] = guid();
-    return this.all(items => pushToArr(items, item)).then(this._commit);
+    return this.all(items => pushToArr(items, item)).then(this._commit.bind(this));
   }
 
   /** Returns a promise to save (PUT) an existing item. */
@@ -102,7 +104,7 @@ class SessionStorage {
       let idx = items.findIndex(eqFn.bind(null, item));
       if (idx === -1) throw Error(`${item} not found in ${this}`);
       items[idx] = item;
-      return this._commit(items);
+      return this._commit(items).then(() => item);
     });
   }
 
@@ -112,7 +114,7 @@ class SessionStorage {
       let idx = items.findIndex(eqFn.bind(null, item));
       if (idx === -1) throw Error(`${item} not found in ${this}`);
       items.splice(idx, 1);
-      return this._commit(items);
+      return this._commit(items).then(() => item);
     });
   }
 }
