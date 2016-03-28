@@ -11,7 +11,8 @@ ngmodule.run(($state, $transitions) => {
   let matchCriteria = { to: (state) => state.redirectTo != null };
 
   // Function that returns a redirect for a transition, with a TargetState created using the destination state's 'redirectTo' property
-  let redirectFn = ($transition$) => $state.target($transition$.to().redirectTo);
+  let redirectFn = ($transition$) =>
+      $state.target($transition$.to().redirectTo, $transition$.params(), $transition$.options());
 
   // Register the global 'redirectTo' hook
   $transitions.onBefore(matchCriteria, redirectFn);
