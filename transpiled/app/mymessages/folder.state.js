@@ -19,8 +19,8 @@ exports.folderState = {
     views: {
         // This targets the "messagelist" named ui-view added to the DOM in the parent state 'mymessages'
         "messagelist": {
-            template: folder_component_1.template,
-            controller: folder_component_1.controller,
+            template: folder_component_1.folderTemplate,
+            controller: folder_component_1.folderController,
             controllerAs: 'vm'
         }
     }

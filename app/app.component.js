@@ -1,4 +1,4 @@
-export let template = `
+export let appTemplate = `
 <div class="navheader">
   <ul ng-if="::vm.isAuthenticated" class="nav nav-tabs">
 
@@ -27,7 +27,7 @@ export let template = `
 `;
 
 
-export let controller = class AuthedController {
+export let appController = class AuthedController {
   constructor(AppConfig, AuthService, $state) {
     this.AuthService = AuthService;
     this.$state = $state;

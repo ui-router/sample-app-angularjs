@@ -1,4 +1,4 @@
-export let template = `
+export let mymessagesTemplate = `
 <div class="my-messages">
 
   <!-- Renders a list of folders -->
@@ -25,7 +25,7 @@ export let template = `
 <div ui-view="messagecontent"></div>
 `;
 
-export let controller = function FoldersController(folders) {
+export let mymessagesController = function FoldersController(folders) {
   this.folders = folders;
 };
 

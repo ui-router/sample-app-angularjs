@@ -1,4 +1,4 @@
-export let template = `
+export let welcomeTemplate = `
 <div class="container-fluid">
 
   <h3>UI-Router Sample App</h3>
@@ -29,4 +29,4 @@ export let template = `
   </ul>
 </div>`;
 
-export let controller = function() {};
+export let welcomeController = function() {};

@@ -14,8 +14,8 @@ var contactsState = {
         // Resolve all the contacts.  The resolved contacts are injected into the controller.
         contacts: function (Contacts) { return Contacts.all(); }
     },
-    template: contacts_component_1.template,
-    controller: contacts_component_1.controller,
+    template: contacts_component_1.contactsTemplate,
+    controller: contacts_component_1.contactsController,
     controllerAs: "vm",
     data: { requiresAuth: true }
 };

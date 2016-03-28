@@ -7,8 +7,8 @@ exports.prefsState = {
     parent: 'app',
     name: 'prefs',
     url: '/prefs',
-    template: prefs_component_1.template,
-    controller: prefs_component_1.controller,
+    template: prefs_component_1.prefsTemplate,
+    controller: prefs_component_1.prefsController,
     controllerAs: 'vm',
     // Mark this state as requiring authentication.  See ../routerhooks/requiresAuth.js.
     data: { requiresAuth: true }

@@ -1,5 +1,5 @@
 import "../services/dialog";
-import {template, EditContactController} from "./editContact.component";
+import {editContactTemplate, EditContactController} from "./editContact.component";
 import {RevertableModel} from "../util/revertableModel";
 
 /**
@@ -18,7 +18,7 @@ export let newContactState = {
     if (contact.isDirty())
       return dialogService.confirm('You have unsaved changes to this contact.', 'Navigate away and lose changes?', "Yes", "No");
   },
-  template: template,
+  template: editContactTemplate,
   controller: EditContactController,
   controllerAs: 'vm'
 };

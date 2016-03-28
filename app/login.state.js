@@ -1,4 +1,4 @@
-import {template, controller} from "./login.component";
+import {loginTemplate, loginController} from "./login.component";
 /**
  * This is the login state.  It is activated when the user navigates to /login, or if a unauthenticated
  * user attempts to access a protected state (or substate) which requires authentication. (see routerhooks/requiresAuth.js)
@@ -10,8 +10,8 @@ export let loginState = {
   parent: 'app',
   name: 'login',
   url: '/login',
-  template: template,
-  controller: controller,
+  template: loginTemplate,
+  controller: loginController,
   controllerAs: 'vm',
   resolve: { returnTo: returnTo }
 };

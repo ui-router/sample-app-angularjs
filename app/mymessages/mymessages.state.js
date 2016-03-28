@@ -1,4 +1,4 @@
-import {template, controller} from "./mymessages.component";
+import {mymessagesTemplate, mymessagesController} from "./mymessages.component";
 /**
  * The mymessages state. This is the main state for the mymessages submodule.
  *
@@ -16,8 +16,8 @@ export let mymessagesState = {
   },
   // If mymessages state is directly activated, redirect the transition to the child state 'mymessages.folder'
   redirectTo: 'mymessages.folder',
-  template: template,
-  controller: controller,
+  template: mymessagesTemplate,
+  controller: mymessagesController,
   controllerAs: "vm",
   // Mark this state as requiring authentication.  See ../routerhooks/requiresAuth.js.
   data: { requiresAuth: true }

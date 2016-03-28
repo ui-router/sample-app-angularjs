@@ -8,7 +8,7 @@ exports.welcomeState = {
     parent: 'app',
     name: 'welcome',
     url: '/welcome',
-    template: welcome_component_1.template,
-    controller: welcome_component_1.controller
+    template: welcome_component_1.welcomeTemplate,
+    controller: welcome_component_1.welcomeController
 };
 //# sourceMappingURL=welcome.state.js.map

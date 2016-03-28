@@ -28,8 +28,8 @@ exports.composeState = {
     views: {
         // Absolutely targets the $default (unnamed) ui-view, two nesting levels down.
         "!$default.$default": {
-            template: compose_component_1.template,
-            controller: compose_component_1.controller,
+            template: compose_component_1.composeTemplate,
+            controller: compose_component_1.composeController,
             controllerAs: 'vm'
         }
     }

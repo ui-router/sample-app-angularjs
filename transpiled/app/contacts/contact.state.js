@@ -12,8 +12,8 @@ exports.viewContactState = {
         // The resolved contact is then injected into the controller.
         contact: function (Contacts, $stateParams) { return Contacts.get($stateParams.contactId); }
     },
-    template: contact_component_1.template,
-    controller: contact_component_1.controller,
+    template: contact_component_1.contactTemplate,
+    controller: contact_component_1.contactController,
     controllerAs: 'vm'
 };
 //# sourceMappingURL=contact.state.js.map

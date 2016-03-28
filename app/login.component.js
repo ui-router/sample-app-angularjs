@@ -1,4 +1,4 @@
-export let template = `
+export let loginTemplate = `
 <div class="container">
   <div class="col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
     <h3>Log In</h3>
@@ -36,7 +36,7 @@ export let template = `
 </div>
 `;
 
-export let controller = class LoginController {
+export let loginController = class LoginController {
   constructor(AppConfig, AuthService, $state, returnTo) {
     this.usernames = AuthService.usernames;
 

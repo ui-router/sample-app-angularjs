@@ -1,7 +1,7 @@
 import {setProp} from "../util/util";
 import './filters/messageBodyFilter';
 
-export let template = `
+export let messageTemplate = `
 <div class="message">
 
   <div class="header">
@@ -42,7 +42,7 @@ Subject: ${message.subject}
 ${message.body}`;
 
 
-export let controller = function MessageController($state, dialogService, Messages, MessageListUi, folder, message) {
+export let messageController = function MessageController($state, dialogService, Messages, MessageListUi, folder, message) {
   this.message = message;
   message.read = true;
   Messages.put(message);

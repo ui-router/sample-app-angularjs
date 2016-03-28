@@ -1,4 +1,4 @@
-export let template = `
+export let prefsTemplate = `
 <div>
   <button class="btn btn-primary" ng-click="vm.reset()"><i class="fa fa-recycle"></i> <span>Reset All Data</span></button>
 </div>
@@ -10,7 +10,7 @@ export let template = `
 </div>
 `;
 
-export let controller = function PrefsController(AppConfig) {
+export let prefsController = function PrefsController(AppConfig) {
   this.prefs = {
     restDelay: AppConfig.restDelay
   };

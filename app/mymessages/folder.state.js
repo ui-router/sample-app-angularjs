@@ -1,4 +1,4 @@
-import {template, controller} from "./folder.component";
+import {folderTemplate, folderController} from "./folder.component";
 /**
  * This state shows the contents (a message list) of a single folder
  */
@@ -20,8 +20,8 @@ export let folderState = {
   views: {
     // This targets the "messagelist" named ui-view added to the DOM in the parent state 'mymessages'
     "messagelist": {
-      template: template,
-      controller: controller,
+      template: folderTemplate,
+      controller: folderController,
       controllerAs: 'vm'
     }
   }

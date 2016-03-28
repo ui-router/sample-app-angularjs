@@ -1,4 +1,4 @@
-import {template, controller} from "./compose.component";
+import {composeTemplate, composeController} from "./compose.component";
 /**
  * This state allows the user to compose a new message, edit a drafted message, send a message,
  * or save an unsent message as a draft.
@@ -27,8 +27,8 @@ export let composeState = {
   views: {
     // Absolutely targets the $default (unnamed) ui-view, two nesting levels down.
     "!$default.$default": {
-      template: template,
-      controller: controller,
+      template: composeTemplate,
+      controller: composeController,
       controllerAs: 'vm'
     }
   }

@@ -1,4 +1,4 @@
-import {template} from "./home.component";
+import {homeTemplate} from "./home.component";
 /**
  * This is a home screen for authenticated users.
  *
@@ -8,5 +8,5 @@ export let homeState = {
   parent: 'app',
   name: 'home',
   url: '/home',
-  template: template
+  template: homeTemplate
 };

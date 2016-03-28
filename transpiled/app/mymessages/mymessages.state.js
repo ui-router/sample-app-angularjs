@@ -17,8 +17,8 @@ exports.mymessagesState = {
     },
     // If mymessages state is directly activated, redirect the transition to the child state 'mymessages.folder'
     redirectTo: 'mymessages.folder',
-    template: mymessages_component_1.template,
-    controller: mymessages_component_1.controller,
+    template: mymessages_component_1.mymessagesTemplate,
+    controller: mymessages_component_1.mymessagesController,
     controllerAs: "vm",
     // Mark this state as requiring authentication.  See ../routerhooks/requiresAuth.js.
     data: { requiresAuth: true }

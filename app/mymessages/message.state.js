@@ -1,4 +1,4 @@
-import {template, controller} from "./message.component";
+import {messageTemplate, messageController} from "./message.component";
 /**
  * This state shows the contents of a single message.
  * It also has UI to reply, forward, delete, or edit an existing draft.
@@ -24,8 +24,8 @@ export let messageState = {
     // This could also have been written using ui-view@state addressing: 'messagecontent@mymessages'
     // Or, this could also have been written using absolute ui-view addressing: '!$default.$default.messagecontent'
     "^.^.messagecontent": {
-      template: template,
-      controller: controller,
+      template: messageTemplate,
+      controller: messageController,
       controllerAs: 'vm'
     }
   }

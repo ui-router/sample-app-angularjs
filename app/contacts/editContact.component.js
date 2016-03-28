@@ -1,4 +1,4 @@
-export let template = `
+export let editContactTemplate = `
 <div class="contact">
   <div class="details">
     <div><label>First</label><input type="text" ng-model="vm.contact.name.first"></div>

@@ -9,6 +9,6 @@ exports.homeState = {
     parent: 'app',
     name: 'home',
     url: '/home',
-    template: home_component_1.template
+    template: home_component_1.homeTemplate
 };
 //# sourceMappingURL=home.state.js.map

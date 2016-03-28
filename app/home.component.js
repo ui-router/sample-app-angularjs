@@ -1,7 +1,7 @@
 // This is a home screen for authenticated users.
 // It shows giant buttons which activate their respective submodules: Messages, Contacts, Preferences
 
-export let template = `
+export let homeTemplate = `
     <div class="home buttons">
       <button ui-sref="mymessages" class="btn btn-primary">
         <h1><i class="fa fa-envelope"></i></h1>

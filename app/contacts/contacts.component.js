@@ -1,4 +1,4 @@
-export var template = `
+export var contactsTemplate = `
 <div class="my-contacts flex-h">
   <ul class="selectlist list-unstyled flex nogrow">
     <li>
@@ -29,7 +29,7 @@ export var template = `
 </div>
 `;
 
-export let controller = function ContactsController(contacts) {
+export let contactsController = function ContactsController(contacts) {
   this.contacts = contacts;
 };
 

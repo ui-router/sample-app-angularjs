@@ -10,8 +10,8 @@ var app_component_1 = require("./app.component");
 exports.appState = {
     name: 'app',
     redirectTo: 'welcome',
-    template: app_component_1.template,
-    controller: app_component_1.controller,
+    template: app_component_1.appTemplate,
+    controller: app_component_1.appController,
     controllerAs: 'vm'
 };
 //# sourceMappingURL=app.state.js.map

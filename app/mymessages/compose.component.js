@@ -1,4 +1,4 @@
-export let template = `
+export let composeTemplate = `
 <div class="compose">
   <div class="header">
     <div class="flex-h"> <label>Recipient</label> <input type="text" id="to" name="to" ng-model="vm.message.to"> </div>
@@ -17,7 +17,7 @@ export let template = `
 </div>
 `;
 
-export let controller = function ComposeController(AppConfig, $stateParams, $state, $transition$, statusApi, Messages) {
+export let composeController = function ComposeController(AppConfig, $stateParams, $state, $transition$, statusApi, Messages) {
   /**
    * Navigates back to the previous state.
    *

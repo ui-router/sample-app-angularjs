@@ -1,5 +1,5 @@
 import "../services/dialog";
-import {template, EditContactController} from "./editContact.component";
+import {editContactTemplate, EditContactController} from "./editContact.component";
 import {RevertableModel} from "../util/revertableModel";
 
 /**
@@ -27,7 +27,7 @@ export let editContactState = {
     // This could also have been written using ui-view@state addressing: $default@contacts
     // Or, this could also have been written using absolute ui-view addressing: !$default.$default.$default
     '^.^.$default': {
-      template: template,
+      template: editContactTemplate,
       controller: EditContactController,
       controllerAs: 'vm'
     }

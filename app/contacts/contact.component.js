@@ -1,5 +1,5 @@
 
-export let template = `
+export let contactTemplate = `
 <div class="contact">
   <div class="flex-h">
     <div class="details">
@@ -34,6 +34,6 @@ export let template = `
 </div>
 `;
 
-export let controller = function ContactController(contact) {
+export let contactController = function ContactController(contact) {
   this.contact = contact;
 };

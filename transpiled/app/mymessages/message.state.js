@@ -25,8 +25,8 @@ exports.messageState = {
         // This could also have been written using ui-view@state addressing: 'messagecontent@mymessages'
         // Or, this could also have been written using absolute ui-view addressing: '!$default.$default.messagecontent'
         "^.^.messagecontent": {
-            template: message_component_1.template,
-            controller: message_component_1.controller,
+            template: message_component_1.messageTemplate,
+            controller: message_component_1.messageController,
             controllerAs: 'vm'
         }
     }

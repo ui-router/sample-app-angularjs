@@ -1,4 +1,4 @@
-import {template, controller} from "./app.component";
+import {appTemplate, appController} from "./app.component";
 /**
  * This is the parent state for the entire application.
  *
@@ -9,7 +9,7 @@ import {template, controller} from "./app.component";
 export let appState = {
   name: 'app',
   redirectTo: 'welcome',
-  template: template,
-  controller: controller,
+  template: appTemplate,
+  controller: appController,
   controllerAs: 'vm'
 };

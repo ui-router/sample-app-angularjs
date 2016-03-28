@@ -11,8 +11,8 @@ exports.loginState = {
     parent: 'app',
     name: 'login',
     url: '/login',
-    template: login_component_1.template,
-    controller: login_component_1.controller,
+    template: login_component_1.loginTemplate,
+    controller: login_component_1.loginController,
     controllerAs: 'vm',
     resolve: { returnTo: returnTo }
 };

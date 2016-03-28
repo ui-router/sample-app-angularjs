@@ -1,4 +1,4 @@
-import {template, controller} from "./contact.component";
+import {contactTemplate, contactController} from "./contact.component";
 /**
  * This state displays a single contact.
  * The contact to display is fetched using a resolve, based on the `contactId` parameter.
@@ -11,7 +11,7 @@ export let viewContactState = {
     // The resolved contact is then injected into the controller.
     contact: (Contacts, $stateParams) => Contacts.get($stateParams.contactId)
   },
-  template: template,
-  controller: controller,
+  template: contactTemplate,
+  controller: contactController,
   controllerAs: 'vm'
 };

@@ -1,4 +1,4 @@
-import {template, controller} from "./contacts.component";
+import {contactsTemplate, contactsController} from "./contacts.component";
 /**
  * This state displays the contact list.
  * It also provides a nested ui-view (viewport) for child states to fill in.
@@ -13,8 +13,8 @@ let contactsState = {
     // Resolve all the contacts.  The resolved contacts are injected into the controller.
     contacts: (Contacts) => Contacts.all()
   },
-  template: template,
-  controller: controller,
+  template: contactsTemplate,
+  controller: contactsController,
   controllerAs: "vm",
   data: { requiresAuth: true }
 };
