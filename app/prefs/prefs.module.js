@@ -1,7 +1,20 @@
 import {ngmodule} from "../bootstrap/ngmodule";
+import {prefsTemplate, prefsController} from "./prefs.component";
 
-// Import the prefs state definition...
-import { prefsState } from "./prefs.state";
+/**
+ * This state allows the user to set their application preferences
+ */
+let prefsState = {
+  parent: 'app',
+  name: 'prefs',
+  url: '/prefs',
+  template: prefsTemplate,
+  controller: prefsController,
+  controllerAs: 'vm',
+  // Mark this state as requiring authentication.  See ../routerhooks/requiresAuth.js.
+  data: { requiresAuth: true }
+};
+
 // ... and register with the $stateProvider
 ngmodule.config(($stateProvider) => {
   let prefsStates = [prefsState];
