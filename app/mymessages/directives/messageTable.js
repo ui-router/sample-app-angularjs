@@ -26,16 +26,11 @@ let tableTemplate =
 
   </table>`;
 
-ngmodule.directive("messageTable", (AppConfig) => ({
-  bindToController: {
-    columns: '=',
-    messages: '='
-  },
+ngmodule.component("messageTable", {
+  bindings: { columns: '<', messages: '<' },
   template: tableTemplate,
-  scope: {},
-  controllerAs: '$ctrl',
-  controller: function() {
+  controller: function(AppConfig) {
     this.AppConfig = AppConfig;
     this.colVisible = (name) => this.columns.indexOf(name) !== -1;
   }
-}));
+});
