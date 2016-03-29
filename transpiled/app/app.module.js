@@ -16,7 +16,7 @@ var appState = {
     redirectTo: 'welcome',
     template: app_component_1.appTemplate,
     controller: app_component_1.appController,
-    controllerAs: 'vm'
+    controllerAs: '$ctrl'
 };
 /**
  * This is the 'welcome' state.  It is the default state (as defined by app.js) if no other state
@@ -53,7 +53,7 @@ var loginState = {
     url: '/login',
     template: login_component_1.loginTemplate,
     controller: login_component_1.loginController,
-    controllerAs: 'vm',
+    controllerAs: '$ctrl',
     resolve: { returnTo: returnTo }
 };
 /**

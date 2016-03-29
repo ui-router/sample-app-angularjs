@@ -22,7 +22,7 @@ let contactsState = {
   },
   template: contactsTemplate,
   controller: contactsController,
-  controllerAs: "vm",
+  controllerAs: "$ctrl",
   data: { requiresAuth: true }
 };
 
@@ -40,7 +40,7 @@ let viewContactState = {
   },
   template: contactTemplate,
   controller: contactController,
-  controllerAs: 'vm'
+  controllerAs: '$ctrl'
 };
 
 
@@ -71,7 +71,7 @@ let editContactState = {
     '^.^.$default': {
       template: editContactTemplate,
       controller: EditContactController,
-      controllerAs: 'vm'
+      controllerAs: '$ctrl'
     }
   }
 };
@@ -94,7 +94,7 @@ let newContactState = {
   },
   template: editContactTemplate,
   controller: EditContactController,
-  controllerAs: 'vm'
+  controllerAs: '$ctrl'
 };
 
 // ...and register them with the $stateProvider

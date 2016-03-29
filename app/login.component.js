@@ -8,30 +8,30 @@ export let loginTemplate = `
     <div>
       <label for="username">Username:</label>
       <select class="form-control" name="username" id="username"
-        ng-model="vm.credentials.username" ng-options="username for username in vm.usernames"></select>
+        ng-model="$ctrl.credentials.username" ng-options="username for username in $ctrl.usernames"></select>
       <i style="position: relative; bottom: 1.8em; margin-left: 10em; height: 0"
-          ng-hide="vm.credentials.username" class="fa fa-arrow-left bounce-horizontal"> Choose </i>
+          ng-hide="$ctrl.credentials.username" class="fa fa-arrow-left bounce-horizontal"> Choose </i>
     </div>
     <br>
 
     <div>
       <label for="password">Password:</label>
-      <input class="form-control" type="password" name="password" ng-model="vm.credentials.password">
+      <input class="form-control" type="password" name="password" ng-model="$ctrl.credentials.password">
       <i style="position: relative; bottom: 1.8em; margin-left: 5em; height: 0"
-          ng-hide="!vm.credentials.username || vm.credentials.password == 'password'" class="fa fa-arrow-left bounce-horizontal">
+          ng-hide="!$ctrl.credentials.username || $ctrl.credentials.password == 'password'" class="fa fa-arrow-left bounce-horizontal">
         Enter '<b>password</b>' here
       </i>
     </div>
 
-    <div ng-show="vm.errorMessage" class="well error">{{ vm.errorMessage }}</div>
+    <div ng-show="$ctrl.errorMessage" class="well error">{{ $ctrl.errorMessage }}</div>
 
     <hr>
     <div>
       <button class="btn btn-primary" type="button"
-          ng-disabled="vm.authenticating" ng-click="vm.login(vm.credentials)">
-        <i class="fa fa-spin fa-spinner" ng-show="vm.authenticating"></i> <span>Log in</span>
+          ng-disabled="$ctrl.authenticating" ng-click="$ctrl.login($ctrl.credentials)">
+        <i class="fa fa-spin fa-spinner" ng-show="$ctrl.authenticating"></i> <span>Log in</span>
       </button>
-      <i ng-show="vm.credentials.username && vm.credentials.password == 'password'" style="position: relative;" class="fa fa-arrow-left bounce-horizontal"> Click Me!</i>
+      <i ng-show="$ctrl.credentials.username && $ctrl.credentials.password == 'password'" style="position: relative;" class="fa fa-arrow-left bounce-horizontal"> Click Me!</i>
   </div>
 </div>
 `;

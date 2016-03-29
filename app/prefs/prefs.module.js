@@ -10,7 +10,7 @@ let prefsState = {
   url: '/prefs',
   template: prefsTemplate,
   controller: prefsController,
-  controllerAs: 'vm',
+  controllerAs: '$ctrl',
   // Mark this state as requiring authentication.  See ../routerhooks/requiresAuth.js.
   data: { requiresAuth: true }
 };

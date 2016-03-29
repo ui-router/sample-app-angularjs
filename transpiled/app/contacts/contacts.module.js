@@ -21,7 +21,7 @@ var contactsState = {
     },
     template: contacts_component_1.contactsTemplate,
     controller: contacts_component_1.contactsController,
-    controllerAs: "vm",
+    controllerAs: "$ctrl",
     data: { requiresAuth: true }
 };
 /**
@@ -38,7 +38,7 @@ var viewContactState = {
     },
     template: contact_component_1.contactTemplate,
     controller: contact_component_1.contactController,
-    controllerAs: 'vm'
+    controllerAs: '$ctrl'
 };
 /**
  * This state allows a user to edit a contact
@@ -67,7 +67,7 @@ var editContactState = {
         '^.^.$default': {
             template: editContact_component_1.editContactTemplate,
             controller: editContact_component_1.EditContactController,
-            controllerAs: 'vm'
+            controllerAs: '$ctrl'
         }
     }
 };
@@ -89,7 +89,7 @@ var newContactState = {
     },
     template: editContact_component_1.editContactTemplate,
     controller: editContact_component_1.EditContactController,
-    controllerAs: 'vm'
+    controllerAs: '$ctrl'
 };
 // ...and register them with the $stateProvider
 ngmodule_1.ngmodule.config(function ($stateProvider) {

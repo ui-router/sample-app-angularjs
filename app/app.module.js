@@ -16,7 +16,7 @@ let appState = {
   redirectTo: 'welcome',
   template: appTemplate,
   controller: appController,
-  controllerAs: 'vm'
+  controllerAs: '$ctrl'
 };
 
 
@@ -60,7 +60,7 @@ let loginState = {
   url: '/login',
   template: loginTemplate,
   controller: loginController,
-  controllerAs: 'vm',
+  controllerAs: '$ctrl',
   resolve: { returnTo: returnTo }
 };
 

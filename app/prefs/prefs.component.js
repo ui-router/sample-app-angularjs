@@ -1,12 +1,12 @@
 export let prefsTemplate = `
 <div>
-  <button class="btn btn-primary" ng-click="vm.reset()"><i class="fa fa-recycle"></i> <span>Reset All Data</span></button>
+  <button class="btn btn-primary" ng-click="$ctrl.reset()"><i class="fa fa-recycle"></i> <span>Reset All Data</span></button>
 </div>
 
 <div>
   <label for="restDelay">Simulated REST API delay (ms)</label>
-  <input type="text" name="restDelay" ng-model="vm.prefs.restDelay">
-  <button class="btn btn-primary" ng-click="vm.savePrefs()">Save</button>
+  <input type="text" name="restDelay" ng-model="$ctrl.prefs.restDelay">
+  <button class="btn btn-primary" ng-click="$ctrl.savePrefs()">Save</button>
 </div>
 `;
 

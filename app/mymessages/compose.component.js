@@ -1,17 +1,17 @@
 export let composeTemplate = `
 <div class="compose">
   <div class="header">
-    <div class="flex-h"> <label>Recipient</label> <input type="text" id="to" name="to" ng-model="vm.message.to"> </div>
-    <div class="flex-h"> <label>Subject</label> <input type="text" id="subject" name="subject" ng-model="vm.message.subject"> </div>
+    <div class="flex-h"> <label>Recipient</label> <input type="text" id="to" name="to" ng-model="$ctrl.message.to"> </div>
+    <div class="flex-h"> <label>Subject</label> <input type="text" id="subject" name="subject" ng-model="$ctrl.message.subject"> </div>
   </div>
 
   <div class="body">
-    <textarea name="body" id="body" ng-model="vm.message.body" cols="30" rows="20"></textarea>
+    <textarea name="body" id="body" ng-model="$ctrl.message.body" cols="30" rows="20"></textarea>
     <div class="buttons">
       <!-- Clicking this button brings the user back to the state they came from (previous state) -->
-      <button class="btn btn-primary" ng-click="vm.gotoPreviousState()"><i class="fa fa-times-circle-o"></i><span>Cancel</span></button>
-      <button class="btn btn-primary" ng-click="vm.save(vm.message)"><i class="fa fa-save"></i><span>Save as Draft</span></button>
-      <button class="btn btn-primary" ng-click="vm.send(vm.message)"><i class="fa fa-paper-plane-o"></i><span>Send</span></button>
+      <button class="btn btn-primary" ng-click="$ctrl.gotoPreviousState()"><i class="fa fa-times-circle-o"></i><span>Cancel</span></button>
+      <button class="btn btn-primary" ng-click="$ctrl.save($ctrl.message)"><i class="fa fa-save"></i><span>Save as Draft</span></button>
+      <button class="btn btn-primary" ng-click="$ctrl.send($ctrl.message)"><i class="fa fa-paper-plane-o"></i><span>Send</span></button>
     </div>
   </div>
 </div>

@@ -8,7 +8,7 @@ export let mymessagesTemplate = `
       <!-- Highlight the selected folder:
           When the current state matches the ui-sref's state (and its parameters)
           ui-sref-active applies the 'selected' class to the li element -->
-      <li class="folder" ui-sref-active="selected" ng-repeat="folder in vm.folders" >
+      <li class="folder" ui-sref-active="selected" ng-repeat="folder in $ctrl.folders" >
         <!-- This ui-sref is a relative link to the 'mymessages.folder' substate. It provides the
             'folderId' parameter value from the current folder's .id property -->
         <a ui-sref=".folder({folderId: folder._id})"><i class="fa"></i>{{folder._id}}</a>

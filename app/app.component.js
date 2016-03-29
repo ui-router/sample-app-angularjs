@@ -1,6 +1,6 @@
 export let appTemplate = `
 <div class="navheader">
-  <ul ng-if="::vm.isAuthenticated" class="nav nav-tabs">
+  <ul ng-if="::$ctrl.isAuthenticated" class="nav nav-tabs">
 
     <li ui-sref-active="active"> <a ui-sref="mymessages" role="button"> Messages </a> </li>
     <li ui-sref-active="active"> <a ui-sref="contacts" role="button"> Contacts </a> </li>
@@ -13,9 +13,9 @@ export let appTemplate = `
 
     <li class="navbar-text navbar-right logged-in-user" style="margin: 0.5em 1.5em;">
       <div>
-        {{::vm.emailAddress}} <i class="fa fa-chevron-down"></i>
+        {{::$ctrl.emailAddress}} <i class="fa fa-chevron-down"></i>
         <div class="hoverdrop">
-          <button class="btn btn-primary" ng-click="vm.logout()">Log Out</button>
+          <button class="btn btn-primary" ng-click="$ctrl.logout()">Log Out</button>
         </div>
       </div>
     </li>

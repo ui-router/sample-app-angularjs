@@ -2,7 +2,7 @@ import "./directives/messageTable";
 
 export let folderTemplate = `
 <div class="messages">
-  <message-table columns="vm.folder.columns" messages="vm.messages"></message-table>
+  <message-table columns="$ctrl.folder.columns" messages="$ctrl.messages"></message-table>
 </div>
 `;
 

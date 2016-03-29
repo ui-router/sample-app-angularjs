@@ -1,5 +1,5 @@
 "use strict";
-exports.prefsTemplate = "\n<div>\n  <button class=\"btn btn-primary\" ng-click=\"vm.reset()\"><i class=\"fa fa-recycle\"></i> <span>Reset All Data</span></button>\n</div>\n\n<div>\n  <label for=\"restDelay\">Simulated REST API delay (ms)</label>\n  <input type=\"text\" name=\"restDelay\" ng-model=\"vm.prefs.restDelay\">\n  <button class=\"btn btn-primary\" ng-click=\"vm.savePrefs()\">Save</button>\n</div>\n";
+exports.prefsTemplate = "\n<div>\n  <button class=\"btn btn-primary\" ng-click=\"$ctrl.reset()\"><i class=\"fa fa-recycle\"></i> <span>Reset All Data</span></button>\n</div>\n\n<div>\n  <label for=\"restDelay\">Simulated REST API delay (ms)</label>\n  <input type=\"text\" name=\"restDelay\" ng-model=\"$ctrl.prefs.restDelay\">\n  <button class=\"btn btn-primary\" ng-click=\"$ctrl.savePrefs()\">Save</button>\n</div>\n";
 exports.prefsController = function PrefsController(AppConfig) {
     var _this = this;
     this.prefs = {

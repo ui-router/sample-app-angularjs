@@ -6,23 +6,23 @@ export let messageTemplate = `
 
   <div class="header">
     <div>
-      <h4>{{vm.message.subject}}</h4>
-      <h5>{{vm.message.from}} <i class="fa fa-long-arrow-right"></i> {{vm.message.to}}</h5>
+      <h4>{{$ctrl.message.subject}}</h4>
+      <h5>{{$ctrl.message.from}} <i class="fa fa-long-arrow-right"></i> {{$ctrl.message.to}}</h5>
     </div>
 
     <div class="line2">
-      <div>{{vm.message.date | date: 'longDate'}} {{vm.message.date | date: 'mediumTime'}}</div>
+      <div>{{$ctrl.message.date | date: 'longDate'}} {{$ctrl.message.date | date: 'mediumTime'}}</div>
       <div>
-        <button class="btn btn-primary" ng-show="vm.actions.edit" ng-click="vm.editDraft(vm.message)"><i class="fa fa-pencil"></i> <span>Edit Draft</span></button>
-        <button class="btn btn-primary" ng-show="vm.actions.reply" ng-click="vm.reply(vm.message)"><i class="fa fa-reply"></i> <span>Reply</span></button>
-        <button class="btn btn-primary" ng-show="vm.actions.forward" ng-click="vm.forward(vm.message)"><i class="fa fa-forward" ></i> <span>Forward</span></button>
-        <button class="btn btn-primary" ng-show="vm.actions.delete" ng-click="vm.remove(vm.message)"><i class="fa fa-close"></i> <span>Delete</span></button>
+        <button class="btn btn-primary" ng-show="$ctrl.actions.edit" ng-click="$ctrl.editDraft($ctrl.message)"><i class="fa fa-pencil"></i> <span>Edit Draft</span></button>
+        <button class="btn btn-primary" ng-show="$ctrl.actions.reply" ng-click="$ctrl.reply($ctrl.message)"><i class="fa fa-reply"></i> <span>Reply</span></button>
+        <button class="btn btn-primary" ng-show="$ctrl.actions.forward" ng-click="$ctrl.forward($ctrl.message)"><i class="fa fa-forward" ></i> <span>Forward</span></button>
+        <button class="btn btn-primary" ng-show="$ctrl.actions.delete" ng-click="$ctrl.remove($ctrl.message)"><i class="fa fa-close"></i> <span>Delete</span></button>
       </div>
     </div>
   </div>
 
   <!-- Pass the raw (plain text) message body through the messageBody filter to format slightly nicer. -->
-  <div class="body" ng-bind-html="::vm.message.body | messageBody"></div>
+  <div class="body" ng-bind-html="::$ctrl.message.body | messageBody"></div>
 </div>
 `;
 

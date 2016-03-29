@@ -34,7 +34,7 @@ let composeState = {
     "!$default.$default": {
       template: composeTemplate,
       controller: composeController,
-      controllerAs: 'vm'
+      controllerAs: '$ctrl'
     }
   }
 };
@@ -58,7 +58,7 @@ let mymessagesState = {
   redirectTo: 'mymessages.folder',
   template: mymessagesTemplate,
   controller: mymessagesController,
-  controllerAs: "vm",
+  controllerAs: "$ctrl",
   // Mark this state as requiring authentication.  See ../routerhooks/requiresAuth.js.
   data: { requiresAuth: true }
 };
@@ -91,7 +91,7 @@ let messageState = {
     "^.^.messagecontent": {
       template: messageTemplate,
       controller: messageController,
-      controllerAs: 'vm'
+      controllerAs: '$ctrl'
     }
   }
 };
@@ -119,7 +119,7 @@ let folderState = {
     "messagelist": {
       template: folderTemplate,
       controller: folderController,
-      controllerAs: 'vm'
+      controllerAs: '$ctrl'
     }
   }
 };
