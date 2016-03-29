@@ -7,7 +7,6 @@
 import * as angular from "angular";
 import uiRouter from "angular-ui-router";
 import "d3";
-import "ui-router-extras-core";
 import stateVis from "ui-router-visualizer";
 
 // Create the angular module "demo".  It's empty now, but other parts of the app will register things on it.
@@ -16,4 +15,4 @@ import stateVis from "ui-router-visualizer";
 //
 // import {ngmodule} from "../bootstrap/ngmodule";
 // ngmodule.config(($stateProvider) => { /* ... register states with $stateProvider */ }
-export let ngmodule = angular.module("demo", [uiRouter, 'ct.ui.router.extras.core', stateVis]);
+export let ngmodule = angular.module("demo", [uiRouter, stateVis]);

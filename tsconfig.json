@@ -1,12 +1,13 @@
 {
   "moduleResolution": "node",
-  "files": [ "app/bootstrap/bootstrap.js" ],
+  "files": [ "app/bootstrap/bootstrap.js", "typings/es6-shim/es6-shim.d.ts" ],
   "compilerOptions": {
     "allowJs": true,
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "module": "commonjs",
     "target": "es5",
+    "rootDir": "app",
     "outDir": "transpiled/app",
     "declaration": false,
     "sourceMap": true
