@@ -1,4 +1,8 @@
-export var contactsTemplate = `
+import {ngmodule} from "../bootstrap/ngmodule";
+
+export const contactsComponent = "contacts";
+
+const contactsTemplate = `
 <div class="my-contacts flex-h">
   <ul class="selectlist list-unstyled flex nogrow">
     <li>
@@ -26,10 +30,10 @@ export var contactsTemplate = `
     <!-- This default content is displayed when the ui-view is not filled in by a child state -->
     <h4 style="margin: 1em 2em;">Select a contact</h4>
   </div>
-</div>
-`;
+</div>`;
 
-export let contactsController = function ContactsController(contacts) {
-  this.contacts = contacts;
-};
 
+ngmodule.component(contactsComponent, {
+  bindings: { contacts: '<' },
+  template: contactsTemplate
+});

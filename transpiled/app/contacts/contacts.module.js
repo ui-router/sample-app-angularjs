@@ -19,10 +19,8 @@ var contactsState = {
         // Resolve all the contacts.  The resolved contacts are injected into the controller.
         contacts: function (Contacts) { return Contacts.all(); }
     },
-    template: contacts_component_1.contactsTemplate,
-    controller: contacts_component_1.contactsController,
-    controllerAs: "$ctrl",
-    data: { requiresAuth: true }
+    data: { requiresAuth: true },
+    component: contacts_component_1.contactsComponent
 };
 /**
  * This state displays a single contact.
@@ -33,12 +31,10 @@ var viewContactState = {
     url: '/:contactId',
     resolve: {
         // Resolve the contact, based on the contactId parameter value.
-        // The resolved contact is then injected into the controller.
+        // The resolved contact is provided to the contactComponent's contact binding
         contact: function (Contacts, $stateParams) { return Contacts.get($stateParams.contactId); }
     },
-    template: contact_component_1.contactTemplate,
-    controller: contact_component_1.contactController,
-    controllerAs: '$ctrl'
+    component: contact_component_1.contactComponent
 };
 /**
  * This state allows a user to edit a contact

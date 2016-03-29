@@ -1,4 +1,8 @@
-export let editContactTemplate = `
+import {ngmodule} from "../bootstrap/ngmodule";
+
+export const editContactComponent = 'editContact';
+
+const editContactTemplate = `
 <div class="contact">
   <div class="details">
     <div><label>First</label><input type="text" ng-model="$ctrl.contact.name.first"></div>
@@ -22,34 +26,51 @@ export let editContactTemplate = `
     <button class="btn btn-primary" ng-click="$ctrl.save($ctrl.contact)"><i class="fa fa-save"></i><span>Save</span></button>
     <button class="btn btn-primary" ng-click="$ctrl.remove($ctrl.contact)"><i class="fa fa-close"></i><span>Delete</span></button>
   </div>
-</div>
+</div>`;
 
-`;
 
-// contact is a RevertableModel object injected from the state's resolve data.
-export class EditContactController {
-  constructor($state, dialogService, Contacts, contact) {
+class EditContactController {
+  constructor($state, dialogService, Contacts) {
     this.$state = $state;
     this.dialogService = dialogService;
     this.Contacts = Contacts;
+  }
 
-    // Take the editable part of the RevertableModel and put it on the controller for the view to use
-    this.contact = contact.editableModel;
-    this.clearDirty = () => contact.clearDirty();
+  $onInit() {
+    // Make an editable copy of the pristineContact
+    this.contact = angular.copy(this.pristineContact);
+  }
+
+  uiCanExit($transition$) {
+    if (this.canExit || angular.equals(this.contact, this.pristineContact)) {
+      return true;
+    }
+
+    let message = 'You have unsaved changes to this contact.';
+    let question = 'Navigate away and lose changes?';
+    return this.dialogService.confirm(message, question);
   }
 
   /** Ask for confirmation, then delete the contact, then go to the grandparent state ('contacts') */
   remove(contact) {
     this.dialogService.confirm(`Delete contact: ${contact.name.first} ${contact.name.last}`)
         .then(() => this.Contacts.remove(contact))
-        .then(this.clearDirty)
+        .then(() => this.canExit = true)
         .then(() => this.$state.go("^.^"));
   }
 
   /** Save the contact, then go to the grandparent state ('contacts') */
   save(contact) {
     this.Contacts.save(contact)
-        .then(this.clearDirty)
+        .then(() => this.canExit = true)
         .then(() => this.$state.go("^", null, { reload: true }));
   }
 }
+
+EditContactController.prototype.uiCanExit.$inject = ['$transition$'];
+
+ngmodule.component(editContactComponent, {
+  bindings: { pristineContact: '<' },
+  controller: EditContactController,
+  template: editContactTemplate
+});

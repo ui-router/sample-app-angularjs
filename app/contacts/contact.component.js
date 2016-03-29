@@ -1,5 +1,8 @@
+import {ngmodule} from "../bootstrap/ngmodule";
 
-export let contactTemplate = `
+export const contactComponent = "contact";
+
+const contactTemplate = `
 <div class="contact">
   <div class="flex-h">
     <div class="details">
@@ -31,9 +34,11 @@ export let contactTemplate = `
   <button class="btn btn-primary" ui-sref=".edit">
     <i class="fa fa-pencil"></i><span>Edit Contact</span>
   </button>
-</div>
-`;
+</div>`;
 
-export let contactController = function ContactController(contact) {
-  this.contact = contact;
-};
+
+ngmodule.component(contactComponent, {
+  bindings: { contact: '<' },
+  template: contactTemplate
+});
+

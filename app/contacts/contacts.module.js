@@ -1,9 +1,9 @@
 import {ngmodule} from "../bootstrap/ngmodule";
 import "../services/dialog";
 
-import {contactTemplate, contactController} from "./contact.component";
-import {contactsTemplate, contactsController} from "./contacts.component";
-import {editContactTemplate, EditContactController} from "./editContact.component";
+import {contactComponent} from "./contact.component";
+import {contactsComponent} from "./contacts.component";
+import {editContactComponent} from "./editContact.component";
 import {RevertableModel} from "../util/revertableModel";
 
 /**
@@ -20,10 +20,8 @@ let contactsState = {
     // Resolve all the contacts.  The resolved contacts are injected into the controller.
     contacts: (Contacts) => Contacts.all()
   },
-  template: contactsTemplate,
-  controller: contactsController,
-  controllerAs: "$ctrl",
-  data: { requiresAuth: true }
+  data: { requiresAuth: true },
+  component: contactsComponent
 };
 
 /**
@@ -35,12 +33,10 @@ let viewContactState = {
   url: '/:contactId',
   resolve: {
     // Resolve the contact, based on the contactId parameter value.
-    // The resolved contact is then injected into the controller.
+    // The resolved contact is provided to the contactComponent's contact binding
     contact: (Contacts, $stateParams) => Contacts.get($stateParams.contactId)
   },
-  template: contactTemplate,
-  controller: contactController,
-  controllerAs: '$ctrl'
+  component: contactComponent
 };
 
 
@@ -55,23 +51,13 @@ let viewContactState = {
 let editContactState = {
   name: 'contacts.contact.edit',
   url: '/edit',
-  resolve: {
-    // Override parent "contact" resolve with a RevertableModel wrapper
-    // This provides a fresh copy to edit, and modification detection
-    contact: (contact) => new RevertableModel(contact)
-  },
-  onExit: (dialogService, contact) => {
-    if (contact.isDirty())
-      return dialogService.confirm('You have unsaved changes to this contact.', 'Navigate away and lose changes?', "Yes", "No");
-  },
   views: {
-    // Relatively target the parent-state's parent-state's $default (unnamed) ui-view
+    // Relatively target the grand-parent-state's $default (unnamed) ui-view
     // This could also have been written using ui-view@state addressing: $default@contacts
     // Or, this could also have been written using absolute ui-view addressing: !$default.$default.$default
     '^.^.$default': {
-      template: editContactTemplate,
-      controller: EditContactController,
-      controllerAs: '$ctrl'
+      bindings: { pristineContact: "contact" },
+      component: editContactComponent
     }
   }
 };
@@ -79,22 +65,12 @@ let editContactState = {
 /**
  * This state allows a user to create a new contact
  *
- * The contact data to edit is injected from the parent state's resolve.
+ * The contact data to edit is injected into the component from the parent state's resolve.
  */
 let newContactState = {
   name: 'contacts.new',
   url: '/new',
-  resolve: {
-    // provide the view with a RevertableModel wrapped around a blank contact object
-    contact: () => new RevertableModel({})
-  },
-  onExit: (dialogService, contact) => {
-    if (contact.isDirty())
-      return dialogService.confirm('You have unsaved changes to this contact.', 'Navigate away and lose changes?', "Yes", "No");
-  },
-  template: editContactTemplate,
-  controller: EditContactController,
-  controllerAs: '$ctrl'
+  component: editContactComponent
 };
 
 // ...and register them with the $stateProvider
