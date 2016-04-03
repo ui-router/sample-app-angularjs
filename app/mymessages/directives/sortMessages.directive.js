@@ -1,5 +1,5 @@
 import {ngmodule} from "../../bootstrap/ngmodule";
-ngmodule.directive("sortMessages", (AppConfig, $parse) => {
+ngmodule.directive("sortMessages", (AppConfig) => {
   return {
     restrict: 'A',
     link: function(scope, elem, attrs) {

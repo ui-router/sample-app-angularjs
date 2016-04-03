@@ -1,5 +1,5 @@
 import {ngmodule} from "../../bootstrap/ngmodule";
-import "./sortMessages";
+import "./sortMessages.directive";
 
 let tableTemplate =
 `  <table>
