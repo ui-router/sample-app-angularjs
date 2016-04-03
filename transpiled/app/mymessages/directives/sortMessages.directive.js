@@ -1,6 +1,6 @@
 "use strict";
 var ngmodule_1 = require("../../bootstrap/ngmodule");
-ngmodule_1.ngmodule.directive("sortMessages", function (AppConfig, $parse) {
+ngmodule_1.ngmodule.directive("sortMessages", function (AppConfig) {
     return {
         restrict: 'A',
         link: function (scope, elem, attrs) {

@@ -1,0 +1,1 @@
+{"version":3,"file":"messageList.component.js","sourceRoot":"","sources":["../../../app/mymessages/messageList.component.js"],"names":[],"mappings":";AAAA,yBAAuB,uBAAuB,CAAC,CAAA;AAC/C,QAAO,qCAAqC,CAAC,CAAA;AAEhC,4BAAoB,GAAG,aAAa,CAAC;AAElD,mBAAQ,CAAC,SAAS,CAAC,4BAAoB,EAAE;IACvC,QAAQ,EAAE,EAAE,MAAM,EAAE,GAAG,EAAE,QAAQ,EAAE,GAAG,EAAE;IACxC,QAAQ,EAAE,sIAIX,EAAC,CAAC,CAAC"}

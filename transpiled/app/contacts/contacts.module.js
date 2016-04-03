@@ -4,7 +4,6 @@ require("../services/dialog");
 var contact_component_1 = require("./contact.component");
 var contacts_component_1 = require("./contacts.component");
 var editContact_component_1 = require("./editContact.component");
-var revertableModel_1 = require("../util/revertableModel");
 /**
  * This state displays the contact list.
  * It also provides a nested ui-view (viewport) for child states to fill in.
@@ -47,45 +46,25 @@ var viewContactState = {
 var editContactState = {
     name: 'contacts.contact.edit',
     url: '/edit',
-    resolve: {
-        // Override parent "contact" resolve with a RevertableModel wrapper
-        // This provides a fresh copy to edit, and modification detection
-        contact: function (contact) { return new revertableModel_1.RevertableModel(contact); }
-    },
-    onExit: function (dialogService, contact) {
-        if (contact.isDirty())
-            return dialogService.confirm('You have unsaved changes to this contact.', 'Navigate away and lose changes?', "Yes", "No");
-    },
     views: {
-        // Relatively target the parent-state's parent-state's $default (unnamed) ui-view
+        // Relatively target the grand-parent-state's $default (unnamed) ui-view
         // This could also have been written using ui-view@state addressing: $default@contacts
         // Or, this could also have been written using absolute ui-view addressing: !$default.$default.$default
         '^.^.$default': {
-            template: editContact_component_1.editContactTemplate,
-            controller: editContact_component_1.EditContactController,
-            controllerAs: '$ctrl'
+            bindings: { pristineContact: "contact" },
+            component: editContact_component_1.editContactComponent
         }
     }
 };
 /**
  * This state allows a user to create a new contact
  *
- * The contact data to edit is injected from the parent state's resolve.
+ * The contact data to edit is injected into the component from the parent state's resolve.
  */
 var newContactState = {
     name: 'contacts.new',
     url: '/new',
-    resolve: {
-        // provide the view with a RevertableModel wrapped around a blank contact object
-        contact: function () { return new revertableModel_1.RevertableModel({}); }
-    },
-    onExit: function (dialogService, contact) {
-        if (contact.isDirty())
-            return dialogService.confirm('You have unsaved changes to this contact.', 'Navigate away and lose changes?', "Yes", "No");
-    },
-    template: editContact_component_1.editContactTemplate,
-    controller: editContact_component_1.EditContactController,
-    controllerAs: '$ctrl'
+    component: editContact_component_1.editContactComponent
 };
 // ...and register them with the $stateProvider
 ngmodule_1.ngmodule.config(function ($stateProvider) {

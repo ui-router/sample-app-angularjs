@@ -8,9 +8,7 @@ var prefsState = {
     parent: 'app',
     name: 'prefs',
     url: '/prefs',
-    template: prefs_component_1.prefsTemplate,
-    controller: prefs_component_1.prefsController,
-    controllerAs: '$ctrl',
+    component: prefs_component_1.prefsComponent,
     // Mark this state as requiring authentication.  See ../routerhooks/requiresAuth.js.
     data: { requiresAuth: true }
 };
