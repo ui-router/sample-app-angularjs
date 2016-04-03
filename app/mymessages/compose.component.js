@@ -1,4 +1,8 @@
-export let composeTemplate = `
+import {ngmodule} from "../bootstrap/ngmodule";
+
+export const composeComponent = "compose";
+
+const composeTemplate = `
 <div class="compose">
   <div class="header">
     <div class="flex-h"> <label>Recipient</label> <input type="text" id="to" name="to" ng-model="$ctrl.message.to"> </div>
@@ -17,40 +21,62 @@ export let composeTemplate = `
 </div>
 `;
 
-export let composeController = function ComposeController(AppConfig, $stateParams, $state, $transition$, statusApi, Messages) {
+class ComposeController {
+  constructor($state, dialogService, AppConfig, Messages) {
+    this.$state = $state;
+    this.dialogService = dialogService;
+    this.AppConfig = AppConfig;
+    this.Messages = Messages;
+  }
+  
+  $onInit() {
+    // Create our message's model using the current user's email address as 'message.from'
+    // Then extend it with all the properties from non-url state parameter 'message'.
+    this.pristineMessage = angular.extend({from: this.AppConfig.emailAddress}, this.$stateParams.message);
+    this.message = angular.copy(this.pristineMessage);
+  }
+
+  uiCanExit() {
+    if (this.canExit || angular.equals(this.pristineMessage, this.message)) {
+        return true;
+    }
+
+    var message = 'You have not saved this message.';
+    var question = 'Navigate away and lose changes?';
+    return this.dialogService.confirm(message, question, "Yes", "No");
+  }
+
   /**
    * Navigates back to the previous state.
    *
    * - Checks the $transition$ which activated this controller for a 'from state' that isn't the implicit root state.
-   * - If there is no previous state (because the user deep-linked in, etc), then go to 'mymessages.folder'
+   * - If there is no previous state (because the user deep-linked in, etc), then go to 'mymessages.messagelist'
    */
-  this.gotoPreviousState = function() {
+  gotoPreviousState() {
+    let $transition$ = this.$transition$;
     let hasPrevious = !!$transition$.from().name;
-    let state = hasPrevious ? $transition$.from() : "mymessages.folder";
+    let state = hasPrevious ? $transition$.from() : "mymessages.messagelist";
     let params = hasPrevious ? $transition$.params("from") : {};
-    $state.go(state, params);
+    this.$state.go(state, params);
   };
 
-  // Create our message's model using the current user's email address as 'message.from'
-  // Then extend it with all the properties from non-url state parameter 'message'.
-  this.message = angular.extend({ from: AppConfig.emailAddress }, $stateParams.message);
-
-  // Dirty checking code; checks if the message is still pristine, or has changed
-  this.pristine = angular.copy(this.message);
-  statusApi.isDirty = () => !angular.equals(this.pristine, this.message);
-  this.resetPristine = () => this.pristine = this.message;
-
   /** "Send" the message (save to the 'sent' folder), and then go to the previous state */
-  this.send = function (message) {
-    Messages.save(angular.extend(message, {date: new Date(), read: true, folder: 'sent'}))
-        .then(this.resetPristine)
-        .then(this.gotoPreviousState);
+  send(message) {
+    this.Messages.save(angular.extend(message, {date: new Date(), read: true, folder: 'sent'}))
+        .then(() => this.canExit = true)
+        .then(() => this.gotoPreviousState());
   };
 
   /** Save the message to the 'drafts' folder, and then go to the previous state */
-  this.save = function(message) {
-    Messages.save(angular.extend(message, { date: new Date(), read: true, folder: 'drafts' }))
-        .then(this.resetPristine)
-        .then(this.gotoPreviousState);
-  };
-};
+  save(message) {
+    this.Messages.save(angular.extend(message, {date: new Date(), read: true, folder: 'drafts'}))
+        .then(() => this.canExit = true)
+        .then(() => this.gotoPreviousState());
+  }
+}
+
+ngmodule.component(composeComponent, {
+  bindings: { $stateParams: '<', $transition$: '<' },
+  controller: ComposeController,
+  template: composeTemplate
+});

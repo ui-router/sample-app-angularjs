@@ -1,7 +1,10 @@
+import {ngmodule} from "../bootstrap/ngmodule"
 import {setProp} from "../util/util";
-import './filters/messageBodyFilter';
+import './filters/messageBody.filter';
 
-export let messageTemplate = `
+export const messageComponent = "message";
+
+const messageTemplate = `
 <div class="message">
 
   <div class="header">
@@ -41,43 +44,57 @@ Subject: ${message.subject}
 
 ${message.body}`;
 
+/** Helper function to make a response message object */
+const makeResponseMsg = (subjectPrefix, origMsg) => ({
+  from: origMsg.to,
+  to: origMsg.from,
+  subject: prefixSubject(subjectPrefix, origMsg),
+  body: quoteMessage(origMsg)
+});
 
-export let messageController = function MessageController($state, dialogService, Messages, MessageListUi, folder, message) {
-  this.message = message;
-  message.read = true;
-  Messages.put(message);
 
-  this.actions = folder.actions.reduce((obj, action) => setProp(obj, action, true), {});
+class MessageController {
+  constructor($state, dialogService, Messages) {
+    this.$state = $state;
+    this.dialogService = dialogService;
+    this.Messages = Messages;
+  }
 
-  let makeResponseMsg = (subjectPrefix, origMsg) => ({
-    from: origMsg.to,
-    to: origMsg.from,
-    subject: prefixSubject(subjectPrefix, origMsg),
-    body: quoteMessage(origMsg)
-  });
+  $onInit() {
+    this.message.read = true;
+    this.Messages.put(this.message);
 
-  this.reply = function(message) {
+    this.actions = this.folder.actions.reduce((obj, action) => setProp(obj, action, true), {});
+  }
+
+  reply(message) {
     let replyMsg = makeResponseMsg("Re: ", message);
-    $state.go('mymessages.compose', { message: replyMsg });
+    this.$state.go('mymessages.compose', { message: replyMsg });
   };
 
-  this.forward = function(message) {
+  forward(message) {
     let fwdMsg = makeResponseMsg("Fwd: ", message);
     delete fwdMsg.to;
-    $state.go('mymessages.compose', { message: fwdMsg });
+    this.$state.go('mymessages.compose', { message: fwdMsg });
   };
 
-  this.editDraft = function(message) {
-    $state.go('mymessages.compose', { message: message });
+  editDraft(message) {
+    this.$state.go('mymessages.compose', { message: message });
   };
 
-  this.remove = function(message) {
-    let nextMessageId = MessageListUi.proximalMessageId(message._id);
-    let nextState = nextMessageId ? 'mymessages.folder.message' : 'mymessages.folder';
+  remove(message) {
+    let nextMessageId = this.nextMessageGetter(message._id);
+    let nextState = nextMessageId ? 'mymessages.messagelist.message' : 'mymessages.messagelist';
     let params = { messageId: nextMessageId };
 
-    dialogService.confirm("Delete?", undefined)
-        .then(() => Messages.remove(message))
-        .then(() => $state.go(nextState, params, { reload: 'mymessages.folder' }));
+    this.dialogService.confirm("Delete?", undefined)
+        .then(() => this.Messages.remove(message))
+        .then(() => this.$state.go(nextState, params, { reload: 'mymessages.messagelist' }));
   };
 }
+
+ngmodule.component(messageComponent, {
+  bindings: { folder: '<', message: '<', nextMessageGetter: '<' },
+  controller: MessageController,
+  template: messageTemplate
+});
