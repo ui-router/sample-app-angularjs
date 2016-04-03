@@ -1,6 +1,6 @@
 {
   "moduleResolution": "node",
-  "files": [ "app/bootstrap/bootstrap.js", "typings/es6-shim/es6-shim.d.ts" ],
+  "files": [ "app/bootstrap/bootstrap.ts", "typings/es6-shim/es6-shim.d.ts" ],
   "compilerOptions": {
     "allowJs": true,
     "emitDecoratorMetadata": true,
