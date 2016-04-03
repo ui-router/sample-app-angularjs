@@ -15,6 +15,7 @@ System.config({
   map: {
     "angular": "npm:angular/angular.min",
     "angular-ui-router": "npm:angular-ui-router/release/angular-ui-router",
+    "ui-router-ng2": "npm:ui-router-ng2/ng2",
     "bootstrap": "npm:bootstrap/dist",
     "css": "npm:systemjs-plugin-css/css",
     "d3": "npm:d3/d3.min",
