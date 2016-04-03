@@ -1,5 +1,5 @@
 import {ngmodule} from "../bootstrap/ngmodule";
-import {prefsTemplate, prefsController} from "./prefs.component";
+import {prefsComponent} from "./prefs.component";
 
 /**
  * This state allows the user to set their application preferences
@@ -8,9 +8,7 @@ let prefsState = {
   parent: 'app',
   name: 'prefs',
   url: '/prefs',
-  template: prefsTemplate,
-  controller: prefsController,
-  controllerAs: '$ctrl',
+  component: prefsComponent,
   // Mark this state as requiring authentication.  See ../routerhooks/requiresAuth.js.
   data: { requiresAuth: true }
 };
