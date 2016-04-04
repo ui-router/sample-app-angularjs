@@ -30,6 +30,14 @@ const editContactTemplate = `
 
 
 class EditContactController {
+  $state;
+  dialogService;
+  Contacts;
+
+  pristineContact;
+  contact;
+  canExit: boolean;
+
   constructor($state, dialogService, Contacts) {
     this.$state = $state;
     this.dialogService = dialogService;
@@ -67,7 +75,7 @@ class EditContactController {
   }
 }
 
-EditContactController.prototype.uiCanExit.$inject = ['$transition$'];
+EditContactController.prototype.uiCanExit['inject'] = ['$transition$'];
 
 ngmodule.component(editContactComponent, {
   bindings: { pristineContact: '<' },

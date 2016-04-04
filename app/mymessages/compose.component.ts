@@ -22,6 +22,21 @@ const composeTemplate = `
 `;
 
 class ComposeController {
+  // injected
+  $state;
+  dialogService;
+  AppConfig;
+  Messages;
+  
+  // bound
+  $stateParams;
+  $transition$;
+  
+  // data
+  pristineMessage;
+  message;
+  canExit: boolean;
+  
   constructor($state, dialogService, AppConfig, Messages) {
     this.$state = $state;
     this.dialogService = dialogService;

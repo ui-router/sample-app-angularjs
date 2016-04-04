@@ -35,6 +35,9 @@ class FoldersService extends SessionStorage {
 
 /** A fake Messages REST client API */
 class MessagesService extends SessionStorage {
+  // injected
+  AppConfig;
+  
   constructor($http, $timeout, $q, AppConfig) {
     // http://beta.json-generator.com/api/json/get/VJl5GbIze
     super($http, $timeout, $q, 'messages', 'data/messages.json', AppConfig);

@@ -4,7 +4,6 @@ import "../services/dialog";
 import {contactComponent} from "./contact.component";
 import {contactsComponent} from "./contacts.component";
 import {editContactComponent} from "./editContact.component";
-import {RevertableModel} from "../util/revertableModel";
 
 /**
  * This state displays the contact list.

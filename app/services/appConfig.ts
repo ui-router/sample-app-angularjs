@@ -3,6 +3,10 @@ import {ngmodule} from "../bootstrap/ngmodule"
  * This service stores and retrieves user preferences in session storage
  */
 class AppConfig {
+  sort: string;
+  emailAddress: string;
+  restDelay: number;
+  
   constructor() {
     this.sort = '+date';
     this.emailAddress = undefined;

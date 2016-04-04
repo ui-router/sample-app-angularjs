@@ -13,7 +13,13 @@ const prefsTemplate = `
 </div>
 `;
 
-class PrefsController {
+class PrefsController{
+  // injected
+  AppConfig;
+  
+  // data
+  prefs;
+  
   constructor(AppConfig) {
     this.AppConfig = AppConfig
   }

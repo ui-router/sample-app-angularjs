@@ -37,6 +37,13 @@ export let loginTemplate = `
 `;
 
 export let loginController = class LoginController {
+  usernames;
+  credentials;
+  authenticating;
+  errorMessage;
+  
+  login;
+  
   constructor(AppConfig, AuthService, $state, returnTo) {
     this.usernames = AuthService.usernames;
 

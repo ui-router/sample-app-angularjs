@@ -4,6 +4,14 @@ import {ngmodule} from "../bootstrap/ngmodule"
  * This service emulates an Authentication Service.
  */
 class FakeAuthService {
+  // injected
+  AppConfig;
+  $q;
+  $timeout;
+  
+  // data
+  usernames;
+  
   constructor(AppConfig, $q, $timeout) {
     this.AppConfig = AppConfig;
     this.$q = $q;

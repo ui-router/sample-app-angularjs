@@ -54,6 +54,19 @@ const makeResponseMsg = (subjectPrefix, origMsg) => ({
 
 
 class MessageController {
+  // injected
+  $state;
+  dialogService;
+  Messages;
+  
+  // bound
+  folder;
+  message;
+  nextMessageGetter;
+  
+  // data
+  actions;
+  
   constructor($state, dialogService, Messages) {
     this.$state = $state;
     this.dialogService = dialogService;

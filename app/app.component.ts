@@ -28,6 +28,14 @@ export let appTemplate = `
 
 
 export let appController = class AuthedController {
+  // injected
+  AuthService;
+  $state;
+  
+  //data
+  emailAddress;
+  isAuthenticated;
+
   constructor(AppConfig, AuthService, $state) {
     this.AuthService = AuthService;
     this.$state = $state;

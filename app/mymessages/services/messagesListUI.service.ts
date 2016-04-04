@@ -2,6 +2,10 @@ import {ngmodule} from "../../bootstrap/ngmodule";
 
 /** Provides services related to a message list */
 class MessageListUIService {
+  // injected
+  $filter;
+  AppConfig;
+  
   constructor($filter, AppConfig) {
     this.$filter = $filter;
     this.AppConfig = AppConfig;

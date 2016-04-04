@@ -13,6 +13,17 @@ import {pushToArr, guid, setProp} from "./util";
  * For an example, please see dataSources.js
  */
 class SessionStorage {
+  // injected
+  $timeout;
+  $q;
+  sessionStorageKey;
+  AppConfig;
+  
+  // data
+  _data;
+  _idProp;
+  _eqFn;
+  
   /**
    * Creates a new SessionStorage object
    *
