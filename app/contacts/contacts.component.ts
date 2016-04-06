@@ -1,13 +1,12 @@
-import {ngmodule} from "../bootstrap/ngmodule";
-
-export const contactsComponent = "contacts";
+import {UIROUTER_DIRECTIVES} from "ui-router-ng2";
+import {Component, Input} from "angular2/core";
 
 const contactsTemplate = `
 <div class="my-contacts flex-h">
   <ul class="selectlist list-unstyled flex nogrow">
     <li>
       <!-- This link is a relative ui-sref to the contacts.new state. -->
-      <a ui-sref=".new">
+      <a uiSref=".new">
         <button class="btn btn-primary">
           <i class="fa fa-pencil"></i><span>New Contact</span>
         </button>
@@ -19,8 +18,8 @@ const contactsTemplate = `
     <!-- Highlight the selected contact:
         When the current state matches the ui-sref's state (and its parameters)
         ui-sref-active applies the 'selected' class to the li element -->
-    <li ui-sref-active="selected" ng-repeat="contact in $ctrl.contacts" >
-      <a ui-sref=".contact({contactId: contact._id})">
+    <li *ngFor="#contact of contacts" >
+      <a uiSref=".contact" [uiParams]="{contactId: contact._id}" uiSrefActive="selected">
         {{contact.name.first}} {{contact.name.last}}
       </a>
     </li>
@@ -32,8 +31,12 @@ const contactsTemplate = `
   </div>
 </div>`;
 
+@Component({
+  selector: 'contacts',
+  template: contactsTemplate,
+  directives: [UIROUTER_DIRECTIVES]
+})
+export class ContactsComponent {
+  @Input() contacts;
+}
 
-ngmodule.component(contactsComponent, {
-  bindings: { contacts: '<' },
-  template: contactsTemplate
-});

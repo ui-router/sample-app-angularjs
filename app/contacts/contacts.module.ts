@@ -2,7 +2,7 @@ import {ngmodule} from "../bootstrap/ngmodule";
 import "../services/dialog";
 
 import {ContactComponent} from "./contact.component";
-import {contactsComponent} from "./contacts.component";
+import {ContactsComponent} from "./contacts.component";
 import {EditContactComponent} from "./editContact.component";
 
 /**
@@ -20,7 +20,7 @@ let contactsState = {
     contacts: (Contacts) => Contacts.all()
   },
   data: { requiresAuth: true },
-  component: contactsComponent
+  component: ContactsComponent
 };
 
 /**
@@ -69,6 +69,9 @@ let editContactState = {
 let newContactState = {
   name: 'contacts.new',
   url: '/new',
+  resolve: {
+    pristineContact: () => ({ name: {}, address: {} }) 
+  },
   component: EditContactComponent
 };
 
