@@ -1,5 +1,5 @@
-import {UIROUTER_DIRECTIVES} from "ui-router-ng2";
-import {Component, Input, Inject} from "angular2/core";
+import {UIROUTER_DIRECTIVES, TransitionService, UiView} from "ui-router-ng2";
+import {Component, Input, Inject, Optional} from "angular2/core";
 
 const editContactTemplate = `
 <div class="contact">
@@ -36,15 +36,26 @@ const editContactTemplate = `
 export class EditContactComponent {
   @Input() pristineContact;
   contact;
+  state;
+  deregister;
   canExit: boolean;
 
   constructor(@Inject('$state') public $state,
               @Inject('dialogService') public dialogService,
-              @Inject('Contacts') public Contacts) { }
+              @Inject('Contacts') public Contacts,
+              @Optional() @Inject(UiView.PARENT_INJECT) view,
+              public $trans: TransitionService) {
+    this.state = view && view.context && view.context.name;
+  }
 
   ngOnInit() {
     // Make an editable copy of the pristineContact
     this.contact = angular.copy(this.pristineContact);
+    this.deregister = this.$trans.onBefore({ exiting: this.state }, ($transition$) => this.uiCanExit($transition$));
+  }
+
+  ngOnDestroy() {
+    if (this.deregister) this.deregister();
   }
 
   uiCanExit($transition$) {

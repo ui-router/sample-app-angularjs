@@ -24,6 +24,7 @@
     "angular": "<2",
     "angular2": "^2.0.0-beta.13",
     "angular-ui-router": "^1.0.0-alpha.4",
+    "ui-router-ng1-to-ng2": "^1.0.2",
     "es6-shim": "^0.35.0",
     "reflect-metadata": "0.1.2",
     "rxjs": "5.0.0-beta.2",
