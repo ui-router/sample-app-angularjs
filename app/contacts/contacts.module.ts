@@ -1,9 +1,9 @@
 import {ngmodule} from "../bootstrap/ngmodule";
 import "../services/dialog";
 
-import {contactComponent} from "./contact.component";
+import {ContactComponent} from "./contact.component";
 import {contactsComponent} from "./contacts.component";
-import {editContactComponent} from "./editContact.component";
+import {EditContactComponent} from "./editContact.component";
 
 /**
  * This state displays the contact list.
@@ -35,7 +35,7 @@ let viewContactState = {
     // The resolved contact is provided to the contactComponent's contact binding
     contact: (Contacts, $stateParams) => Contacts.get($stateParams.contactId)
   },
-  component: contactComponent
+  component: ContactComponent
 };
 
 
@@ -56,7 +56,7 @@ let editContactState = {
     // Or, this could also have been written using absolute ui-view addressing: !$default.$default.$default
     '^.^.$default': {
       bindings: { pristineContact: "contact" },
-      component: editContactComponent
+      component: EditContactComponent
     }
   }
 };
@@ -69,7 +69,7 @@ let editContactState = {
 let newContactState = {
   name: 'contacts.new',
   url: '/new',
-  component: editContactComponent
+  component: EditContactComponent
 };
 
 // ...and register them with the $stateProvider
