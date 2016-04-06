@@ -1,6 +1,7 @@
 "use strict";
 var ngmodule_1 = require("../bootstrap/ngmodule");
 exports.composeComponent = "compose";
+var composeTemplate = "\n<div class=\"compose\">\n  <div class=\"header\">\n    <div class=\"flex-h\"> <label>Recipient</label> <input type=\"text\" id=\"to\" name=\"to\" ng-model=\"$ctrl.message.to\"> </div>\n    <div class=\"flex-h\"> <label>Subject</label> <input type=\"text\" id=\"subject\" name=\"subject\" ng-model=\"$ctrl.message.subject\"> </div>\n  </div>\n\n  <div class=\"body\">\n    <textarea name=\"body\" id=\"body\" ng-model=\"$ctrl.message.body\" cols=\"30\" rows=\"20\"></textarea>\n    <div class=\"buttons\">\n      <!-- Clicking this button brings the user back to the state they came from (previous state) -->\n      <button class=\"btn btn-primary\" ng-click=\"$ctrl.gotoPreviousState()\"><i class=\"fa fa-times-circle-o\"></i><span>Cancel</span></button>\n      <button class=\"btn btn-primary\" ng-click=\"$ctrl.save($ctrl.message)\"><i class=\"fa fa-save\"></i><span>Save as Draft</span></button>\n      <button class=\"btn btn-primary\" ng-click=\"$ctrl.send($ctrl.message)\"><i class=\"fa fa-paper-plane-o\"></i><span>Send</span></button>\n    </div>\n  </div>\n</div>\n";
 var ComposeController = (function () {
     function ComposeController($state, dialogService, AppConfig, Messages) {
         this.$state = $state;
@@ -56,5 +57,6 @@ var ComposeController = (function () {
 ngmodule_1.ngmodule.component(exports.composeComponent, {
     bindings: { $stateParams: '<', $transition$: '<' },
     controller: ComposeController,
-    template: "\n<div class=\"compose\">\n  <div class=\"header\">\n    <div class=\"flex-h\"> <label>Recipient</label> <input type=\"text\" id=\"to\" name=\"to\" ng-model=\"$ctrl.message.to\"> </div>\n    <div class=\"flex-h\"> <label>Subject</label> <input type=\"text\" id=\"subject\" name=\"subject\" ng-model=\"$ctrl.message.subject\"> </div>\n  </div>\n\n  <div class=\"body\">\n    <textarea name=\"body\" id=\"body\" ng-model=\"$ctrl.message.body\" cols=\"30\" rows=\"20\"></textarea>\n    <div class=\"buttons\">\n      <!-- Clicking this button brings the user back to the state they came from (previous state) -->\n      <button class=\"btn btn-primary\" ng-click=\"$ctrl.gotoPreviousState()\"><i class=\"fa fa-times-circle-o\"></i><span>Cancel</span></button>\n      <button class=\"btn btn-primary\" ng-click=\"$ctrl.save($ctrl.message)\"><i class=\"fa fa-save\"></i><span>Save as Draft</span></button>\n      <button class=\"btn btn-primary\" ng-click=\"$ctrl.send($ctrl.message)\"><i class=\"fa fa-paper-plane-o\"></i><span>Send</span></button>\n    </div>\n  </div>\n</div>\n" });
+    template: composeTemplate
+});
 //# sourceMappingURL=compose.component.js.map

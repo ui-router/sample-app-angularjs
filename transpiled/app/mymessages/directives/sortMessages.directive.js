@@ -4,7 +4,7 @@ ngmodule_1.ngmodule.directive("sortMessages", function (AppConfig) {
     return {
         restrict: 'A',
         link: function (scope, elem, attrs) {
-            var col = attrs.sortMessages;
+            var col = attrs['sortMessages'];
             if (!col)
                 return;
             var chevron = angular.element("<i style='padding-left: 0.25em' class='fa'></i>");

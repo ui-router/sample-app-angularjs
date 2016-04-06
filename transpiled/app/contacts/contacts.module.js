@@ -19,7 +19,7 @@ var contactsState = {
         contacts: function (Contacts) { return Contacts.all(); }
     },
     data: { requiresAuth: true },
-    component: contacts_component_1.contactsComponent
+    component: contacts_component_1.ContactsComponent
 };
 /**
  * This state displays a single contact.
@@ -33,7 +33,7 @@ var viewContactState = {
         // The resolved contact is provided to the contactComponent's contact binding
         contact: function (Contacts, $stateParams) { return Contacts.get($stateParams.contactId); }
     },
-    component: contact_component_1.contactComponent
+    component: contact_component_1.ContactComponent
 };
 /**
  * This state allows a user to edit a contact
@@ -52,7 +52,7 @@ var editContactState = {
         // Or, this could also have been written using absolute ui-view addressing: !$default.$default.$default
         '^.^.$default': {
             bindings: { pristineContact: "contact" },
-            component: editContact_component_1.editContactComponent
+            component: editContact_component_1.EditContactComponent
         }
     }
 };
@@ -64,7 +64,10 @@ var editContactState = {
 var newContactState = {
     name: 'contacts.new',
     url: '/new',
-    component: editContact_component_1.editContactComponent
+    resolve: {
+        pristineContact: function () { return ({ name: {}, address: {} }); }
+    },
+    component: editContact_component_1.EditContactComponent
 };
 // ...and register them with the $stateProvider
 ngmodule_1.ngmodule.config(function ($stateProvider) {

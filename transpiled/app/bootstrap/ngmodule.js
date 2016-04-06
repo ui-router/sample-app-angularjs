@@ -14,5 +14,5 @@ var ui_router_visualizer_1 = require("ui-router-visualizer");
 //
 // import {ngmodule} from "../bootstrap/ngmodule";
 // ngmodule.config(($stateProvider) => { /* ... register states with $stateProvider */ }
-exports.ngmodule = angular.module("demo", [angular_ui_router_1.default, ui_router_visualizer_1.default]);
+exports.ngmodule = angular.module("demo", [angular_ui_router_1.default, ui_router_visualizer_1.default, 'ui.router.upgrade']);
 //# sourceMappingURL=ngmodule.js.map
