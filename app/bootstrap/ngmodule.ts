@@ -15,4 +15,4 @@ import stateVis from "ui-router-visualizer";
 //
 // import {ngmodule} from "../bootstrap/ngmodule";
 // ngmodule.config(($stateProvider) => { /* ... register states with $stateProvider */ }
-export let ngmodule = angular.module("demo", [uiRouter, stateVis]);
+export let ngmodule = angular.module("demo", [uiRouter, stateVis, 'ui.router.upgrade']);

@@ -14,6 +14,9 @@
  * - Submodules
  * - Top-level states
  * - UI-Router Transition Hooks
+ * 
+ * Then this module creates the ng-upgrade adapter 
+ * and bootstraps the hybrid application
  */
 
 // Import the angular1 module
@@ -43,3 +46,21 @@ import '../routerhooks/redirectTo';
 import '../routerhooks/requiresAuth';
 
 import '../util/ga';
+
+// ============================================================
+// Create upgrade adapter and bootstrap the hybrid ng1/ng2 app
+// ============================================================
+import {UpgradeAdapter} from 'angular2/upgrade';
+export const upgradeAdapter = new UpgradeAdapter();
+
+// Supply the ui-router with the upgrade adapter
+import {uiRouterNgUpgrade} from "ui-router-ng1-to-ng2";
+uiRouterNgUpgrade.setUpgradeAdapter(upgradeAdapter);
+
+// Register some ng1 services as ng2 providers
+upgradeAdapter.upgradeNg1Provider('$state');
+upgradeAdapter.upgradeNg1Provider('dialogService');
+upgradeAdapter.upgradeNg1Provider('Contacts');
+
+// Manually bootstrap the app with the Upgrade Adapter (instead of ng-app)
+upgradeAdapter.bootstrap(document.body, ['demo']);

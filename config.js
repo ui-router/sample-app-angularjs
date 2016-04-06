@@ -22,6 +22,7 @@ System.config({
     "css": "npm:systemjs-plugin-css/css",
     "d3": "npm:d3/d3.min",
     "font-awesome": "npm:font-awesome",
+    "ui-router-ng1-to-ng2": "npm:ui-router-ng1-to-ng2/ng1-to-ng2",
     "ui-router-visualizer": "npm:ui-router-visualizer/release/visualizer"
   }
 });
