@@ -1,18 +1,25 @@
 <html>
 <head>
-    <script src="node_modules/systemjs/dist/system.js"></script>
+    <!-- 1. Load required NG2 libraries -->
+    <!-- IE required polyfills, in this exact order -->
+    <script src="node_modules/es6-shim/es6-shim.min.js"></script>
+    <script src="node_modules/systemjs/dist/system-polyfills.js"></script>
+    <script src="node_modules/angular2/es6/dev/src/testing/shims_for_IE.js"></script>
+    <script src="node_modules/angular2/bundles/angular2-polyfills.js"></script>
+    <script src="node_modules/systemjs/dist/system.src.js"></script>
+    <script src="node_modules/rxjs/bundles/Rx.js"></script>
+    <script src="node_modules/angular2/bundles/angular2.dev.js"></script>
+
+    <!-- 2. Load the systemjs config for module loading from node_modules, etc -->
     <script src="config.js"></script>
 
-    <script>
-
-        System.import('transpiled/app/bootstrap/bootstrap');
-
-    </script>
+    <!-- 3. Load our application bootstrap code -->
+    <script> System.import('transpiled/app/bootstrap/bootstrap'); </script>
 
     <link rel="stylesheet" href="styles/app.css">
 </head>
-<body ng-app="demo">
-    <!-- the app goes here -->
+<body>
+    <!-- the app will fill this ui-view -->
     <div ui-view></div>
 
     <uir-transitions-view></uir-transitions-view>
