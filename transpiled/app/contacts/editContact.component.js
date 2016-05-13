@@ -12,17 +12,25 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
     return function (target, key) { decorator(target, key, paramIndex); }
 };
 var ui_router_ng2_1 = require("ui-router-ng2");
-var core_1 = require("angular2/core");
+var core_1 = require("@angular/core");
 var editContactTemplate = "\n<div class=\"contact\">\n  <div class=\"details\">\n    <div><label>First</label><input type=\"text\" [(ngModel)]=\"contact.name.first\"></div>\n    <div><label>Last</label><input type=\"text\" [(ngModel)]=\"contact.name.last\"></div>\n    <div><label>Company</label><input type=\"text\" [(ngModel)]=\"contact.company\"></div>\n    <div><label>Age</label><input type=\"text\" [(ngModel)]=\"contact.age\"></div>\n    <div><label>Phone</label><input type=\"text\" [(ngModel)]=\"contact.phone\"></div>\n    <div><label>Email</label><input type=\"text\" [(ngModel)]=\"contact.email\"></div>\n    <div><label>Street</label><input type=\"text\" [(ngModel)]=\"contact.address.street\"></div>\n    <div><label>City</label><input type=\"text\" [(ngModel)]=\"contact.address.city\"> </div>\n    <div><label>State</label><input type=\"text\" [(ngModel)]=\"contact.address.state\"></div>\n    <div><label>Zip</label><input type=\"text\" [(ngModel)]=\"contact.address.zip\"></div>\n    <div><label>Image</label><input type=\"text\" [(ngModel)]=\"contact.picture\"></div>\n  </div>\n\n  <hr>\n\n  <div>\n    <!-- This button's ui-sref relatively targets the parent state, i.e., contacts.contact -->\n    <button class=\"btn btn-primary\" uiSref=\"^\"><i class=\"fa fa-close\"></i><span>Cancel</span></button>\n    <button class=\"btn btn-primary\" (click)=\"save(contact)\"><i class=\"fa fa-save\"></i><span>Save</span></button>\n    <button class=\"btn btn-primary\" (click)=\"remove(contact)\"><i class=\"fa fa-close\"></i><span>Delete</span></button>\n  </div>\n</div>";
 var EditContactComponent = (function () {
-    function EditContactComponent($state, dialogService, Contacts) {
+    function EditContactComponent($state, dialogService, Contacts, view, $trans) {
         this.$state = $state;
         this.dialogService = dialogService;
         this.Contacts = Contacts;
+        this.$trans = $trans;
+        this.state = view && view.context && view.context.name;
     }
     EditContactComponent.prototype.ngOnInit = function () {
+        var _this = this;
         // Make an editable copy of the pristineContact
         this.contact = angular.copy(this.pristineContact);
+        this.deregister = this.$trans.onBefore({ exiting: this.state }, function ($transition$) { return _this.uiCanExit($transition$); });
+    };
+    EditContactComponent.prototype.ngOnDestroy = function () {
+        if (this.deregister)
+            this.deregister();
     };
     EditContactComponent.prototype.uiCanExit = function ($transition$) {
         if (this.canExit || angular.equals(this.contact, this.pristineContact)) {
@@ -59,8 +67,10 @@ var EditContactComponent = (function () {
         }),
         __param(0, core_1.Inject('$state')),
         __param(1, core_1.Inject('dialogService')),
-        __param(2, core_1.Inject('Contacts')), 
-        __metadata('design:paramtypes', [Object, Object, Object])
+        __param(2, core_1.Inject('Contacts')),
+        __param(3, core_1.Optional()),
+        __param(3, core_1.Inject(ui_router_ng2_1.UiView.PARENT_INJECT)), 
+        __metadata('design:paramtypes', [Object, Object, Object, Object, ui_router_ng2_1.TransitionService])
     ], EditContactComponent);
     return EditContactComponent;
 }());

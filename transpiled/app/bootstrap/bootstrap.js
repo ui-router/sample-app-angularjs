@@ -43,7 +43,7 @@ require('../util/ga');
 // ============================================================
 // Create upgrade adapter and bootstrap the hybrid ng1/ng2 app
 // ============================================================
-var upgrade_1 = require('angular2/upgrade');
+var upgrade_1 = require('@angular/upgrade');
 exports.upgradeAdapter = new upgrade_1.UpgradeAdapter();
 // Supply the ui-router with the upgrade adapter
 var ui_router_ng1_to_ng2_1 = require("ui-router-ng1-to-ng2");
