@@ -1,10 +1,21 @@
+var packages = {
+  "app": { "defaultExtension": "js" }
+};
+
+var ng2PackageNames = [ 'common', 'compiler', 'core', 'http', 'platform-browser',
+  'platform-browser-dynamic', 'router-deprecated', 'testing', 'upgrade'
+];
+
+// add package entries for angular packages in the form '@angular/common': { main: 'index.js', defaultExtension: 'js' }
+ng2PackageNames.forEach(function(pkgName) {
+  packages["@angular/" + pkgName] = { main: 'index.js', defaultExtension: 'js' };
+});
+
 System.config({
   transpiler: false,
   defaultJSExtensions: true,
 
-  packages: {
-    "app": { "defaultExtension": "js" }
-  },
+  packages: packages,
 
   paths: { "npm:*": "node_modules/*" },
 
@@ -14,7 +25,7 @@ System.config({
 
   map: {
     "angular": "npm:angular/angular",
-    "angular2": "npm:angular2",
+    "@angular": "npm:@angular",
     "rxjs": "npm:rxjs",
     "angular-ui-router": "npm:angular-ui-router/release/angular-ui-router",
     "ui-router-ng2": "npm:ui-router-ng2/ng2",

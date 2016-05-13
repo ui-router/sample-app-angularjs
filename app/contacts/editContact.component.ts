@@ -1,5 +1,5 @@
 import {UIROUTER_DIRECTIVES, TransitionService, UiView} from "ui-router-ng2";
-import {Component, Input, Inject, Optional} from "angular2/core";
+import {Component, Input, Inject, Optional} from "@angular/core";
 
 const editContactTemplate = `
 <div class="contact">

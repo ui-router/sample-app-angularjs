@@ -50,7 +50,7 @@ import '../util/ga';
 // ============================================================
 // Create upgrade adapter and bootstrap the hybrid ng1/ng2 app
 // ============================================================
-import {UpgradeAdapter} from 'angular2/upgrade';
+import {UpgradeAdapter} from '@angular/upgrade';
 export const upgradeAdapter = new UpgradeAdapter();
 
 // Supply the ui-router with the upgrade adapter

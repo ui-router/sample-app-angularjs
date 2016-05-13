@@ -1,5 +1,5 @@
 import {UIROUTER_DIRECTIVES} from "ui-router-ng2";
-import {Component, Input} from "angular2/core";
+import {Component, Input} from "@angular/core";
 
 const contactsTemplate = `
 <div class="my-contacts flex-h">

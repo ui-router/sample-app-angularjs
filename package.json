@@ -21,14 +21,18 @@
     "url": "https://github.com/ui-router/sample-app.git"
   },
   "dependencies": {
+    "@angular/common": "^2.0.0-rc.1",
+    "@angular/core": "^2.0.0-rc.1",
+    "@angular/http": "^2.0.0-rc.1",
+    "@angular/upgrade": "^2.0.0-rc.1",
+    "@angular/platform-browser-dynamic": "^2.0.0-rc.1",
     "angular": "<2",
-    "angular2": "^2.0.0-beta.13",
-    "angular-ui-router": "^1.0.0-alpha.4",
-    "ui-router-ng1-to-ng2": "^1.0.2",
+    "angular-ui-router": "^1.0.0-alpha.5",
     "es6-shim": "^0.35.0",
     "reflect-metadata": "0.1.2",
-    "rxjs": "5.0.0-beta.2",
-    "ui-router-ng2": "^1.0.0-alpha.4",
+    "rxjs": "^5.0.0-beta.6",
+    "ui-router-ng1-to-ng2": "^1.0.5",
+    "ui-router-ng2": "^1.0.0-alpha.5",
     "zone.js": "^0.6.8"
   },
   "devDependencies": {
