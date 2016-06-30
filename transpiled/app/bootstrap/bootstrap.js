@@ -17,7 +17,7 @@
  */
 "use strict";
 // Import the angular1 module
-require("./ngmodule");
+var ngmodule_1 = require("./ngmodule");
 // Import CSS (SystemJS will inject it into the document)
 require("font-awesome/css/font-awesome.css!");
 require("bootstrap/css/bootstrap.css!");
@@ -27,14 +27,21 @@ require('../services/auth');
 // Import the fake REST APIs (for Contacts, Folders, Messages)
 // These register themselves as angular services
 require("../services/dataSources");
-// Import the submodules that make up the main subsections of the application
-// Each submodule registers its own states/services/components
-require('../app.module');
-require('../mymessages/mymessages.module');
-require('../contacts/contacts.module');
-require('../prefs/prefs.module');
 // Import any global transition hooks
-require('../routerhooks/redirectTo');
 require('../routerhooks/requiresAuth');
 require('../util/ga');
+// Import the states from the submodules that make up the main sections of the application
+// Each submodule exports its states
+var app_states_1 = require('../app.states');
+var mymessages_states_1 = require('../mymessages/mymessages.states');
+var contacts_states_1 = require('../contacts/contacts.states');
+var prefs_states_1 = require('../prefs/prefs.states');
+// Then register all the states with the $stateProvider
+ngmodule_1.ngmodule.config(function ($stateProvider) {
+    var ALL_STATES = [].concat(app_states_1.APP_STATES)
+        .concat(mymessages_states_1.MYMESSAGES_STATES)
+        .concat(contacts_states_1.CONTACTS_STATES)
+        .concat(prefs_states_1.PREFS_STATES);
+    ALL_STATES.forEach(function (state) { return $stateProvider.state(state); });
+});
 //# sourceMappingURL=bootstrap.js.map

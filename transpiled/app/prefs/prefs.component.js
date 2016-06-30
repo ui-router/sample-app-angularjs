@@ -1,6 +1,7 @@
 "use strict";
 var ngmodule_1 = require("../bootstrap/ngmodule");
 exports.prefsComponent = "prefs";
+var prefsTemplate = "\n<div>\n  <button class=\"btn btn-primary\" ng-click=\"$ctrl.reset()\"><i class=\"fa fa-recycle\"></i> <span>Reset All Data</span></button>\n</div>\n\n<div>\n  <label for=\"restDelay\">Simulated REST API delay (ms)</label>\n  <input type=\"text\" name=\"restDelay\" ng-model=\"$ctrl.prefs.restDelay\">\n  <button class=\"btn btn-primary\" ng-click=\"$ctrl.savePrefs()\">Save</button>\n</div>\n";
 var PrefsController = (function () {
     function PrefsController(AppConfig) {
         this.AppConfig = AppConfig;
@@ -24,5 +25,6 @@ var PrefsController = (function () {
 }());
 ngmodule_1.ngmodule.component(exports.prefsComponent, {
     controller: PrefsController,
-    template: "\n<div>\n  <button class=\"btn btn-primary\" ng-click=\"$ctrl.reset()\"><i class=\"fa fa-recycle\"></i> <span>Reset All Data</span></button>\n</div>\n\n<div>\n  <label for=\"restDelay\">Simulated REST API delay (ms)</label>\n  <input type=\"text\" name=\"restDelay\" ng-model=\"$ctrl.prefs.restDelay\">\n  <button class=\"btn btn-primary\" ng-click=\"$ctrl.savePrefs()\">Save</button>\n</div>\n" });
+    template: prefsTemplate
+});
 //# sourceMappingURL=prefs.component.js.map
