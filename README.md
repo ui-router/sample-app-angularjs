@@ -58,9 +58,9 @@ There are many ways to structure a ui-router app.  We aren't super opinionated o
     - If a transition to a state with a truthy `data.authRequired: true` property is started
     and the user is not currently authenticated
 - Defining a default substate for a top-level state
-  - Example: declaring `redirectTo: 'mymessages.folder'` in `mymessages/mymessages.module.js` (mymessages state)
+  - Example: declaring `redirectTo: 'mymessages.folder'` in `mymessages/mymessages.states.js` (mymessages state)
 - Defining a default parameter for a state
-  - Example: `folderId` parameter defaults to 'inbox' in `mymessages/mymessages.module.js` (folder state)
+  - Example: `folderId` parameter defaults to 'inbox' in `mymessages/mymessages.states.js` (folder state)
 - Application data lifecycle
   - Data loading is managed by the state declaration, via the `resolve:` block
   - Data is fetched before the state is _entered_
