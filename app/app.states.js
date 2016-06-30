@@ -97,11 +97,7 @@ function returnTo ($transition$) {
   return { state: 'home' };
 }
 
-// ... register each one with the StateProvider
-ngmodule.config(['$stateProvider', $stateProvider => {
-  [appState, homeState, welcomeState, loginState].forEach(state => $stateProvider.state(state));
-}]);
-
+export let APP_STATES = [appState, homeState, welcomeState, loginState];
 
 // Apply some global configuration...
 

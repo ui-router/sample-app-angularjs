@@ -17,7 +17,7 @@
  */
 
 // Import the angular1 module
-import "./ngmodule";
+import {ngmodule} from "./ngmodule";
 
 // Import CSS (SystemJS will inject it into the document)
 import "font-awesome/css/font-awesome.css!"
@@ -31,15 +31,23 @@ import '../services/auth';
 // These register themselves as angular services
 import "../services/dataSources"
 
-// Import the submodules that make up the main subsections of the application
-// Each submodule registers its own states/services/components
-import '../app.module';
-import '../mymessages/mymessages.module';
-import '../contacts/contacts.module';
-import '../prefs/prefs.module';
-
 // Import any global transition hooks
-import '../routerhooks/redirectTo';
 import '../routerhooks/requiresAuth';
 
 import '../util/ga';
+
+// Import the states from the submodules that make up the main sections of the application
+// Each submodule exports its states
+import {APP_STATES} from '../app.states';
+import {MYMESSAGES_STATES} from '../mymessages/mymessages.states';
+import {CONTACTS_STATES} from '../contacts/contacts.states';
+import {PREFS_STATES} from '../prefs/prefs.states';
+
+// Then register all the states with the $stateProvider
+ngmodule.config(function($stateProvider) {
+  let ALL_STATES = [].concat(APP_STATES)
+      .concat(MYMESSAGES_STATES)
+      .concat(CONTACTS_STATES)
+      .concat(PREFS_STATES);
+  ALL_STATES.forEach(state => $stateProvider.state(state));
+});

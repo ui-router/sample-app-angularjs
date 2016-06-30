@@ -1,10 +1,8 @@
-import {ngmodule} from "../bootstrap/ngmodule";
 import "../services/dialog";
 
 import {contactComponent} from "./contact.component";
 import {contactsComponent} from "./contacts.component";
 import {editContactComponent} from "./editContact.component";
-import {RevertableModel} from "../util/revertableModel";
 
 /**
  * This state displays the contact list.
@@ -73,8 +71,5 @@ let newContactState = {
   component: editContactComponent
 };
 
-// ...and register them with the $stateProvider
-ngmodule.config(($stateProvider) => {
-  let contactsStates = [contactsState, newContactState, viewContactState, editContactState];
-  contactsStates.forEach(state => $stateProvider.state(state));
-});
+
+export let CONTACTS_STATES = [contactsState, newContactState, viewContactState, editContactState];

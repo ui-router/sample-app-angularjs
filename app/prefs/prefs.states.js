@@ -1,4 +1,3 @@
-import {ngmodule} from "../bootstrap/ngmodule";
 import {prefsComponent} from "./prefs.component";
 
 /**
@@ -13,8 +12,4 @@ let prefsState = {
   data: { requiresAuth: true }
 };
 
-// ... and register with the $stateProvider
-ngmodule.config(($stateProvider) => {
-  let prefsStates = [prefsState];
-  prefsStates.forEach(state => $stateProvider.state(state));
-});
+export let PREFS_STATES = [prefsState];

@@ -1,4 +1,3 @@
-import {ngmodule} from "../bootstrap/ngmodule";
 import "./directives/messageTable.component";
 import "./directives/sortMessages.directive";
 import "./filters/messageBody.filter";
@@ -98,8 +97,4 @@ let messageListState = {
 };
 
 
-// ...and register them with the $stateProvider
-ngmodule.config(($stateProvider) => {
-  let mymessagesStates = [ messageListState, mymessagesState, messageState, composeState ];
-  mymessagesStates.forEach(state => $stateProvider.state(state));
-});
+export let MYMESSAGES_STATES = [ messageListState, mymessagesState, messageState, composeState ];
