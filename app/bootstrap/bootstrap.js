@@ -7,47 +7,55 @@
  *
  * Point Webpack or SystemJS to this file.
  *
- * This module imports all the different parts of the application:
- * - 3rd party Libraries and angular1 module
- * - Services
- * - Components
+ * This module imports all the different parts of the application and registers them with angular.
  * - Submodules
- * - Top-level states
- * - UI-Router Transition Hooks
+ *   - States
+ *   - Components
+ *   - Directives
+ *   - Services
+ *   - Filters
+ *   - Run and Config blocks
+ *     - Transition Hooks
+ * - 3rd party Libraries and angular1 module
  */
 
 // Import the angular1 module
 import {ngmodule} from "./ngmodule";
 
+
+//////////////////// MODULES ///////////////
+
+// import all the sub module definitions
+import {GLOBAL_MODULE} from "../global/index";
+import {MAIN_MODULE} from "../main/index";
+import {CONTACTS_MODULE} from "../contacts/index";
+import {MYMESSAGES_MODULE} from "../mymessages/index";
+import {PREFS_MODULE} from "../prefs/index";
+
+const BLANK_MODULE = {
+  states: [], components: {}, directives: {}, services: {}, filters: {}, configBlocks: [], runBlocks: []
+};
+
+// make sure all modules have all the keys from BLANK_MODULE.
+let MODULES = [GLOBAL_MODULE, MAIN_MODULE, CONTACTS_MODULE, MYMESSAGES_MODULE, PREFS_MODULE]
+    .map(module => Object.assign({}, BLANK_MODULE, module));
+
+// Register each module's states, directives, components, filters, services, and config/run blocks
+MODULES.forEach(module => {
+  ngmodule.config($stateProvider => module.states.forEach(state => $stateProvider.state(state)));
+  Object.keys(module.components).forEach(name => ngmodule.component(name, module.components[name]));
+  Object.keys(module.directives).forEach(name => ngmodule.directive(name, module.directives[name]));
+  Object.keys(module.services).forEach(name => ngmodule.service(name, module.services[name]));
+  Object.keys(module.filters).forEach(name => ngmodule.filter(name, module.filters[name]));
+  module.configBlocks.forEach(configBlock => ngmodule.config(configBlock));
+  module.runBlocks.forEach(runBlock => ngmodule.run(runBlock));
+});
+
 // Import CSS (SystemJS will inject it into the document)
 import "font-awesome/css/font-awesome.css!"
 import "bootstrap/css/bootstrap.css!"
 
-// Import the service that manages the user's application preferences, and the Authentication service
-import '../services/appConfig';
-import '../services/auth';
-
-// Import the fake REST APIs (for Contacts, Folders, Messages)
-// These register themselves as angular services
-import "../services/dataSources"
-
-// Import any global transition hooks
-import '../routerhooks/requiresAuth';
-
+// Google analytics
 import '../util/ga';
 
-// Import the states from the submodules that make up the main sections of the application
-// Each submodule exports its states
-import {APP_STATES} from '../app.states';
-import {MYMESSAGES_STATES} from '../mymessages/mymessages.states';
-import {CONTACTS_STATES} from '../contacts/contacts.states';
-import {PREFS_STATES} from '../prefs/prefs.states';
 
-// Then register all the states with the $stateProvider
-ngmodule.config(function($stateProvider) {
-  let ALL_STATES = [].concat(APP_STATES)
-      .concat(MYMESSAGES_STATES)
-      .concat(CONTACTS_STATES)
-      .concat(PREFS_STATES);
-  ALL_STATES.forEach(state => $stateProvider.state(state));
-});

@@ -1,15 +1,10 @@
-import {ngmodule} from "../bootstrap/ngmodule";
-import "./directives/messageTable.component";
-
-export const messageListComponent = "messageList";
-
-const messageListTemplate = `
-<div class="messages">
-  <message-table columns="$ctrl.folder.columns" messages="$ctrl.messages"></message-table>
-</div>
-`;
-
-ngmodule.component(messageListComponent, {
+/**
+ * This component renders a list of messages using the `messageTable` component
+ */
+export const messageList = {
   bindings: { folder: '<', messages: '<' },
-  template: messageListTemplate
-});
+  template: `
+    <div class="messages">
+      <message-table columns="$ctrl.folder.columns" messages="$ctrl.messages"></message-table>
+    </div>
+`};

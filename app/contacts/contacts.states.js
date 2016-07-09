@@ -1,8 +1,4 @@
-import "../services/dialog";
-
-import {contactComponent} from "./contact.component";
-import {contactsComponent} from "./contacts.component";
-import {editContactComponent} from "./editContact.component";
+import "../global/dialog.service";
 
 /**
  * This state displays the contact list.
@@ -10,7 +6,7 @@ import {editContactComponent} from "./editContact.component";
  *
  * The contacts are fetched using a resolve.
  */
-let contactsState = {
+export const contactsState = {
   parent: 'app', // declares that 'contacts' is a child of 'app'
   name: "contacts",
   url: "/contacts",
@@ -19,22 +15,22 @@ let contactsState = {
     contacts: (Contacts) => Contacts.all()
   },
   data: { requiresAuth: true },
-  component: contactsComponent
+  component: 'contacts'
 };
 
 /**
  * This state displays a single contact.
  * The contact to display is fetched using a resolve, based on the `contactId` parameter.
  */
-let viewContactState = {
+export const viewContactState = {
   name: 'contacts.contact',
   url: '/:contactId',
   resolve: {
     // Resolve the contact, based on the contactId parameter value.
     // The resolved contact is provided to the contactComponent's contact binding
-    contact: (Contacts, $stateParams) => Contacts.get($stateParams.contactId)
+    contact: (Contacts, $transition$) => Contacts.get($transition$.params().contactId)
   },
-  component: contactComponent
+  component: 'contactView'
 };
 
 
@@ -46,7 +42,7 @@ let viewContactState = {
  * This state uses view targeting to replace the parent ui-view (which would normally be filled
  * by 'contacts.contact') with the edit contact template/controller
  */
-let editContactState = {
+export const editContactState = {
   name: 'contacts.contact.edit',
   url: '/edit',
   views: {
@@ -55,7 +51,7 @@ let editContactState = {
     // Or, this could also have been written using absolute ui-view addressing: !$default.$default.$default
     '^.^.$default': {
       bindings: { pristineContact: "contact" },
-      component: editContactComponent
+      component: 'editContact'
     }
   }
 };
@@ -65,11 +61,8 @@ let editContactState = {
  *
  * The contact data to edit is injected into the component from the parent state's resolve.
  */
-let newContactState = {
+export const newContactState = {
   name: 'contacts.new',
   url: '/new',
-  component: editContactComponent
+  component: 'editContact'
 };
-
-
-export let CONTACTS_STATES = [contactsState, newContactState, viewContactState, editContactState];

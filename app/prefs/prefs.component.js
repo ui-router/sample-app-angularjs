@@ -1,18 +1,6 @@
-import {ngmodule} from "../bootstrap/ngmodule";
-export const prefsComponent = "prefs";
-
-const prefsTemplate = `
-<div>
-  <button class="btn btn-primary" ng-click="$ctrl.reset()"><i class="fa fa-recycle"></i> <span>Reset All Data</span></button>
-</div>
-
-<div>
-  <label for="restDelay">Simulated REST API delay (ms)</label>
-  <input type="text" name="restDelay" ng-model="$ctrl.prefs.restDelay">
-  <button class="btn btn-primary" ng-click="$ctrl.savePrefs()">Save</button>
-</div>
-`;
-
+/**
+ * The controller for the prefs component.
+ */
 class PrefsController {
   constructor(AppConfig) {
     this.AppConfig = AppConfig
@@ -37,8 +25,20 @@ class PrefsController {
   }
 }
 
-ngmodule.component(prefsComponent, {
+/**
+ * A component which shows and updates app preferences
+ */
+export const prefs = {
   controller: PrefsController,
-  template: prefsTemplate
-});
 
+  template: `
+    <div>
+      <button class="btn btn-primary" ng-click="$ctrl.reset()"><i class="fa fa-recycle"></i> <span>Reset All Data</span></button>
+    </div>
+    
+    <div>
+      <label for="restDelay">Simulated REST API delay (ms)</label>
+      <input type="text" name="restDelay" ng-model="$ctrl.prefs.restDelay">
+      <button class="btn btn-primary" ng-click="$ctrl.savePrefs()">Save</button>
+    </div>
+`};

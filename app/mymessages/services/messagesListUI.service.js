@@ -1,7 +1,5 @@
-import {ngmodule} from "../../bootstrap/ngmodule";
-
 /** Provides services related to a message list */
-class MessageListUIService {
+export class MessageListUI {
   constructor($filter, AppConfig) {
     this.$filter = $filter;
     this.AppConfig = AppConfig;
@@ -15,5 +13,3 @@ class MessageListUIService {
     return proximalIdx >= 0 ? sorted[proximalIdx]._id : undefined;
   }
 }
-
-ngmodule.service("MessageListUI", MessageListUIService);

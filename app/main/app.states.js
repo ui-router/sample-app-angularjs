@@ -1,4 +1,3 @@
-import {ngmodule} from "./bootstrap/ngmodule";
 import {appTemplate, appController} from "./app.component";
 import {welcomeTemplate, welcomeController} from "./welcome.component";
 import {homeTemplate} from "./home.component";
@@ -11,26 +10,21 @@ import {loginTemplate, loginController} from "./login.component";
  * 1) Shows the outermost chrome (including the navigation and logout for authenticated users)
  * 2) Provide a viewport (ui-view) for a substate to plug into
  */
-let appState = {
+export const appState = {
   name: 'app',
   redirectTo: 'welcome',
-  template: appTemplate,
-  controller: appController,
-  controllerAs: '$ctrl'
+  component: 'app'
 };
-
-
 
 /**
  * This is the 'welcome' state.  It is the default state (as defined by app.js) if no other state
  * can be matched to the URL.
  */
-let welcomeState = {
+export const welcomeState = {
   parent: 'app',
   name: 'welcome',
   url: '/welcome',
-  template: welcomeTemplate,
-  controller: welcomeController
+  component: 'welcome'
 };
 
 
@@ -39,11 +33,11 @@ let welcomeState = {
  *
  * It shows giant buttons which activate their respective submodules: Messages, Contacts, Preferences
  */
-let homeState = {
+export const homeState = {
   parent: 'app',
   name: 'home',
   url: '/home',
-  template: homeTemplate
+  component: 'home'
 };
 
 
@@ -54,13 +48,11 @@ let homeState = {
  * It shows a fake login dialog and prompts the user to authenticate.  Once the user authenticates, it then
  * reactivates the state that the user originally came from.
  */
-let loginState = {
+export const loginState = {
   parent: 'app',
   name: 'login',
   url: '/login',
-  template: loginTemplate,
-  controller: loginController,
-  controllerAs: '$ctrl',
+  component: 'login',
   resolve: { returnTo: returnTo }
 };
 
@@ -96,16 +88,3 @@ function returnTo ($transition$) {
   // If the fromState's name is empty, then this was the initial transition. Just return them to the home state
   return { state: 'home' };
 }
-
-export let APP_STATES = [appState, homeState, welcomeState, loginState];
-
-// Apply some global configuration...
-
-// If the user enters a URL that doesn't match any known URL (state), send them to `/welcome`
-ngmodule.config(['$urlRouterProvider', $urlRouterProvider => { $urlRouterProvider.otherwise("/welcome"); }]);
-
-// Enable tracing of each TRANSITION... (check the javascript console)
-
-// This syntax `$trace.enable(1)` is an alternative to `$trace.enable("TRANSITION")`.
-// Besides "TRANSITION", you can also enable tracing for : "RESOLVE", "HOOK", "INVOKE", "UIVIEW", "VIEWCONFIG"
-ngmodule.run(['$trace', $trace => { $trace.enable(1); }]);

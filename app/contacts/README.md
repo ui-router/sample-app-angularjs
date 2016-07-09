@@ -2,10 +2,16 @@
 
 ### The Contacts submodule states
 
-- *contacts.component*.js: A template/controller to display a list of contacts.
-- *contact.component*.js: A template/controller for viewing a contact's details.
-- *editContact.component*.js: A template/controller for editing a contact.
+- *contacts.states*.js: Defines the Contacts ui-router states
 
-### The Contacts submodule bootstrap
+### The Contacts submodule components
 
-- *contacts.module*.js: Defines and registers Contacts states
+- *contactDetail.component*.js: A component which renders a read only view of the details for a single contact.
+- *contactList.component*.js: A component which renders a list of contacts
+- *contacts.component*.js: A component which renders the contacts submodule.
+- *contactView.component*.js: A component which renders details and controls for a single contact
+- *editContact.component*.js: A component which edits a single contact.
+
+### The index file
+
+- *index.js*: aggregates and exports the contacts submodule states and components 

@@ -1,7 +1,7 @@
-// This is a home screen for authenticated users.
+// This is a home component for authenticated users.
 // It shows giant buttons which activate their respective submodules: Messages, Contacts, Preferences
-
-export let homeTemplate = `
+export const home = {
+  template: `
     <div class="home buttons">
       <button ui-sref="mymessages" class="btn btn-primary">
         <h1><i class="fa fa-envelope"></i></h1>
@@ -18,7 +18,4 @@ export let homeTemplate = `
         <h1>Preferences</h1>
       </button>
     </div>
-`;
-
-export let controller = function() {}
-
+`};

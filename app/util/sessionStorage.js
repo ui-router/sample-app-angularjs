@@ -12,7 +12,7 @@ import {pushToArr, guid, setProp} from "./util";
  *
  * For an example, please see dataSources.js
  */
-class SessionStorage {
+export class SessionStorage {
   /**
    * Creates a new SessionStorage object
    *
@@ -118,5 +118,3 @@ class SessionStorage {
     });
   }
 }
-
-export {SessionStorage}

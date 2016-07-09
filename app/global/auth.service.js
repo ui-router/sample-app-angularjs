@@ -1,9 +1,7 @@
-import {ngmodule} from "../bootstrap/ngmodule"
-
 /**
  * This service emulates an Authentication Service.
  */
-class FakeAuthService {
+export class AuthService {
   constructor(AppConfig, $q, $timeout) {
     this.AppConfig = AppConfig;
     this.$q = $q;
@@ -50,5 +48,3 @@ class FakeAuthService {
     this.AppConfig.save();
   }
 }
-
-ngmodule.service("AuthService", FakeAuthService);

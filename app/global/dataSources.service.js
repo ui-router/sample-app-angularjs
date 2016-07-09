@@ -1,6 +1,4 @@
-import {uniqReduce} from "../util/util";
 import {SessionStorage} from "../util/sessionStorage"
-import {ngmodule} from "../bootstrap/ngmodule"
 
 /**
  * Fake REST Services (Contacts, Folders, Messages) used in the mymessages submodule.
@@ -19,7 +17,7 @@ import {ngmodule} from "../bootstrap/ngmodule"
  */
 
 /** A fake Contacts REST client API */
-class ContactsService extends SessionStorage {
+export class Contacts extends SessionStorage {
   constructor($http, $timeout, $q, AppConfig) {
     // http://beta.json-generator.com/api/json/get/V1g6UwwGx
     super($http, $timeout, $q, "contacts", "data/contacts.json", AppConfig);
@@ -27,14 +25,14 @@ class ContactsService extends SessionStorage {
 }
 
 /** A fake Folders REST client API */
-class FoldersService extends SessionStorage {
+export class Folders extends SessionStorage {
   constructor($http, $timeout, $q, AppConfig) {
     super($http, $timeout, $q, 'folders', 'data/folders.json', AppConfig);
   }
 }
 
 /** A fake Messages REST client API */
-class MessagesService extends SessionStorage {
+export class Messages extends SessionStorage {
   constructor($http, $timeout, $q, AppConfig) {
     // http://beta.json-generator.com/api/json/get/VJl5GbIze
     super($http, $timeout, $q, 'messages', 'data/messages.json', AppConfig);
@@ -47,8 +45,3 @@ class MessagesService extends SessionStorage {
     return this.search(searchObject);
   }
 }
-
-
-ngmodule.service("Contacts", ContactsService);
-ngmodule.service("Folders", FoldersService);
-ngmodule.service("Messages", MessagesService);

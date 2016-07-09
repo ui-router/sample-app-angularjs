@@ -1,15 +1,11 @@
-import {prefsComponent} from "./prefs.component";
-
 /**
  * This state allows the user to set their application preferences
  */
-let prefsState = {
+export const prefsState = {
   parent: 'app',
   name: 'prefs',
   url: '/prefs',
-  component: prefsComponent,
-  // Mark this state as requiring authentication.  See ../routerhooks/requiresAuth.js.
+  component: 'prefs',
+  // Mark this state as requiring authentication.  See ../global/requiresAuth.hook.js.
   data: { requiresAuth: true }
 };
-
-export let PREFS_STATES = [prefsState];

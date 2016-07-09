@@ -1,14 +1,12 @@
-import {ngmodule} from "../bootstrap/ngmodule"
-
 /**
- * This file registers an hook with the TransitionsService which protects a
+ * This file contains a Transition Hook which protects a
  * route that requires authentication.
  *
- * Register a hook which redirects to /login when:
+ * This hook redirects to /login when both:
  * - The user is not authenticated
  * - The user is navigating to a state that requires authentication
  */
-ngmodule.run(($transitions, AuthService) => {
+export function authHookRunBlock($transitions, AuthService) {
   // Matches if the destination state's data property has a truthy 'requiresAuth' property
   let requiresAuthCriteria = {
     to: (state) => state.data && state.data.requiresAuth
@@ -27,4 +25,4 @@ ngmodule.run(($transitions, AuthService) => {
 
   // Register the "requires auth" hook with the TransitionsService
   $transitions.onBefore(requiresAuthCriteria, redirectToLogin, {priority: 10});
-});
+}

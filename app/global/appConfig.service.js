@@ -1,12 +1,12 @@
-import {ngmodule} from "../bootstrap/ngmodule"
 /**
  * This service stores and retrieves user preferences in session storage
  */
-class AppConfig {
+export class AppConfig {
   constructor() {
     this.sort = '+date';
     this.emailAddress = undefined;
     this.restDelay = 100;
+    this.load();
   }
 
   load() {
@@ -21,6 +21,3 @@ class AppConfig {
     sessionStorage.setItem("appConfig", angular.toJson(angular.extend({}, this)));
   }
 }
-
-ngmodule.value('AppConfig', new AppConfig().load());
-

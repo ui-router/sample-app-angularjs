@@ -1,21 +1,10 @@
-import "./directives/messageTable.component";
-import "./directives/sortMessages.directive";
-import "./filters/messageBody.filter";
-import "./services/messagesListUI.service";
-
-
-import {messageListComponent} from "./messageList.component";
-import {composeComponent} from "./compose.component";
-import {mymessagesComponent} from "./mymessages.component";
-import {messageComponent} from "./message.component";
-
 /**
  * This state allows the user to compose a new message, edit a drafted message, send a message,
  * or save an unsent message as a draft.
  *
  * This state uses view-targeting to take over the ui-view that would normally be filled by the 'mymessages' state.
  */
-let composeState = {
+export const composeState = {
   name: 'mymessages.compose',
   url: '/compose',
   // Declares that this state has a 'message' parameter, that defaults to an empty object.
@@ -25,7 +14,7 @@ let composeState = {
   },
   views: {
     // Absolutely targets the $default (unnamed) ui-view, two nesting levels down with the composeComponent.
-    "!$default.$default": composeComponent
+    "!$default.$default": 'compose'
   }
 };
 
@@ -35,7 +24,7 @@ let composeState = {
  * This state shows the list of folders for the current user. It retrieves the folders from the
  * Folders service.  If a user navigates directly to this state, the state redirects to the 'mymessages.messagelist'.
  */
-let mymessagesState = {
+export const mymessagesState = {
   parent: 'app',
   name: "mymessages",
   url: "/mymessages",
@@ -45,7 +34,7 @@ let mymessagesState = {
   },
   // If mymessages state is directly activated, redirect the transition to the child state 'mymessages.messagelist'
   redirectTo: 'mymessages.messagelist',
-  component: mymessagesComponent,
+  component: 'mymessages',
   // Mark this state as requiring authentication.  See ../routerhooks/requiresAuth.js.
   data: { requiresAuth: true }
 };
@@ -55,7 +44,7 @@ let mymessagesState = {
  * This state shows the contents of a single message.
  * It also has UI to reply, forward, delete, or edit an existing draft.
  */
-let messageState = {
+export const messageState = {
   name: 'mymessages.messagelist.message',
   url: '/:messageId',
   resolve: {
@@ -68,7 +57,7 @@ let messageState = {
     // Relatively target the parent-state's parent-state's 'messagecontent' ui-view
     // This could also have been written using ui-view@state addressing: 'messagecontent@mymessages'
     // Or, this could also have been written using absolute ui-view addressing: '!$default.$default.messagecontent'
-    "^.^.messagecontent": messageComponent
+    "^.^.messagecontent": 'message'
   }
 };
 
@@ -76,7 +65,7 @@ let messageState = {
 /**
  * This state shows the contents (a message list) of a single folder
  */
-let messageListState = {
+export const messageListState = {
   name: 'mymessages.messagelist',
   url: '/:folderId',
   // The folderId parameter is part of the URL.  This params block sets 'inbox' as the default value.
@@ -92,9 +81,6 @@ let messageListState = {
   },
   views: {
     // This targets the "messagelist" named ui-view added to the DOM in the parent state 'mymessages'
-    "messagelist": messageListComponent
+    "messagelist": 'messageList'
   }
 };
-
-
-export let MYMESSAGES_STATES = [ messageListState, mymessagesState, messageState, composeState ];

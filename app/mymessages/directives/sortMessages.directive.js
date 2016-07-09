@@ -1,5 +1,7 @@
-import {ngmodule} from "../../bootstrap/ngmodule";
-ngmodule.directive("sortMessages", (AppConfig) => {
+/**
+ * A directive (for a table header) which changes the app's sort order
+ */
+export const sortMessages = (AppConfig) => {
   return {
     restrict: 'A',
     link: function(scope, elem, attrs) {
@@ -15,4 +17,4 @@ ngmodule.directive("sortMessages", (AppConfig) => {
       });
     }
   }
-});
+};

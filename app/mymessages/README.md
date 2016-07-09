@@ -17,5 +17,5 @@
 
 ### Directives
 
-- *directives/messageTable*.js: A directive that displays a folder of messages
+- *directives/messageTable*.js: A directive that displays a folder of messages as a table
 - *directives/sortMessages*.js: A directive used in messageTable to toggle the currently sorted column
