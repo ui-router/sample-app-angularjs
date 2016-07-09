@@ -8,11 +8,9 @@ var angular = require("angular");
 var angular_ui_router_1 = require("angular-ui-router");
 require("d3");
 var ui_router_visualizer_1 = require("ui-router-visualizer");
-// Create the angular module "demo".  It's empty now, but other parts of the app will register things on it.
-// Since it is exported, other parts of the application (in other files) can then import it and register things.
-// For example, in mymessages.module.js:
+// Create the angular module "demo".
 //
-// import {ngmodule} from "../bootstrap/ngmodule";
-// ngmodule.config(($stateProvider) => { /* ... register states with $stateProvider */ }
+// Since it is exported, other parts of the application (in other files) can then import it and register things.
+// In bootstrap.js, the module is imported, and the components, services, and states are registered.
 exports.ngmodule = angular.module("demo", [angular_ui_router_1.default, ui_router_visualizer_1.default]);
 //# sourceMappingURL=ngmodule.js.map

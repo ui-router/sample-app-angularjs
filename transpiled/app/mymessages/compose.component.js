@@ -1,27 +1,35 @@
 "use strict";
-var ngmodule_1 = require("../bootstrap/ngmodule");
-exports.composeComponent = "compose";
-var composeTemplate = "\n<div class=\"compose\">\n  <div class=\"header\">\n    <div class=\"flex-h\"> <label>Recipient</label> <input type=\"text\" id=\"to\" name=\"to\" ng-model=\"$ctrl.message.to\"> </div>\n    <div class=\"flex-h\"> <label>Subject</label> <input type=\"text\" id=\"subject\" name=\"subject\" ng-model=\"$ctrl.message.subject\"> </div>\n  </div>\n\n  <div class=\"body\">\n    <textarea name=\"body\" id=\"body\" ng-model=\"$ctrl.message.body\" cols=\"30\" rows=\"20\"></textarea>\n    <div class=\"buttons\">\n      <!-- Clicking this button brings the user back to the state they came from (previous state) -->\n      <button class=\"btn btn-primary\" ng-click=\"$ctrl.gotoPreviousState()\"><i class=\"fa fa-times-circle-o\"></i><span>Cancel</span></button>\n      <button class=\"btn btn-primary\" ng-click=\"$ctrl.save($ctrl.message)\"><i class=\"fa fa-save\"></i><span>Save as Draft</span></button>\n      <button class=\"btn btn-primary\" ng-click=\"$ctrl.send($ctrl.message)\"><i class=\"fa fa-paper-plane-o\"></i><span>Send</span></button>\n    </div>\n  </div>\n</div>\n";
+/**
+ * The controller for the Compose component
+ */
 var ComposeController = (function () {
-    function ComposeController($state, dialogService, AppConfig, Messages) {
+    function ComposeController($state, DialogService, AppConfig, Messages) {
         this.$state = $state;
-        this.dialogService = dialogService;
+        this.DialogService = DialogService;
         this.AppConfig = AppConfig;
         this.Messages = Messages;
     }
+    /**
+     * Create our message's model using the current user's email address as 'message.from'
+     * Then extend it with all the properties from (non-url) state parameter 'message'.
+     * Keep two copies: the editable one and the original one.
+     * These copies are used to check if the message is dirty.
+     */
     ComposeController.prototype.$onInit = function () {
-        // Create our message's model using the current user's email address as 'message.from'
-        // Then extend it with all the properties from non-url state parameter 'message'.
         this.pristineMessage = angular.extend({ from: this.AppConfig.emailAddress }, this.$stateParams.message);
         this.message = angular.copy(this.pristineMessage);
     };
+    /**
+     * Checks if the edited copy and the pristine copy are identical when the state is changing.
+     * If they are not identical, the allows the user to confirm navigating away without saving.
+     */
     ComposeController.prototype.uiCanExit = function () {
         if (this.canExit || angular.equals(this.pristineMessage, this.message)) {
             return true;
         }
         var message = 'You have not saved this message.';
         var question = 'Navigate away and lose changes?';
-        return this.dialogService.confirm(message, question, "Yes", "No");
+        return this.DialogService.confirm(message, question, "Yes", "No");
     };
     /**
      * Navigates back to the previous state.
@@ -54,9 +62,17 @@ var ComposeController = (function () {
     };
     return ComposeController;
 }());
-ngmodule_1.ngmodule.component(exports.composeComponent, {
+/**
+ * This component composes a message
+ *
+ * The message might be new, a saved draft, or a reply/forward.
+ * A Cancel button discards the new message and returns to the previous state.
+ * A Save As Draft button saves the message to the "drafts" folder.
+ * A Send button sends the message
+ */
+exports.compose = {
     bindings: { $stateParams: '<', $transition$: '<' },
     controller: ComposeController,
-    template: composeTemplate
-});
+    template: "\n    <div class=\"compose\">\n      <div class=\"header\">\n        <div class=\"flex-h\"> <label>Recipient</label> <input type=\"text\" id=\"to\" name=\"to\" ng-model=\"$ctrl.message.to\"> </div>\n        <div class=\"flex-h\"> <label>Subject</label> <input type=\"text\" id=\"subject\" name=\"subject\" ng-model=\"$ctrl.message.subject\"> </div>\n      </div>\n    \n      <div class=\"body\">\n        <textarea name=\"body\" id=\"body\" ng-model=\"$ctrl.message.body\" cols=\"30\" rows=\"20\"></textarea>\n        \n        <div class=\"buttons\">\n          <!-- Clicking this button brings the user back to the state they came from (previous state) -->\n          <button class=\"btn btn-primary\" ng-click=\"$ctrl.gotoPreviousState()\"><i class=\"fa fa-times-circle-o\"></i><span>Cancel</span></button>\n          <button class=\"btn btn-primary\" ng-click=\"$ctrl.save($ctrl.message)\"><i class=\"fa fa-save\"></i><span>Save as Draft</span></button>\n          <button class=\"btn btn-primary\" ng-click=\"$ctrl.send($ctrl.message)\"><i class=\"fa fa-paper-plane-o\"></i><span>Send</span></button>\n        </div>\n      </div>\n    </div>\n"
+};
 //# sourceMappingURL=compose.component.js.map

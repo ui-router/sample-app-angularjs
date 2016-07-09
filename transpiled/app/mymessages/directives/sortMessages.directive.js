@@ -1,6 +1,8 @@
 "use strict";
-var ngmodule_1 = require("../../bootstrap/ngmodule");
-ngmodule_1.ngmodule.directive("sortMessages", function (AppConfig) {
+/**
+ * A directive (for a table header) which changes the app's sort order
+ */
+exports.sortMessages = function (AppConfig) {
     return {
         restrict: 'A',
         link: function (scope, elem, attrs) {
@@ -16,5 +18,5 @@ ngmodule_1.ngmodule.directive("sortMessages", function (AppConfig) {
             });
         }
     };
-});
+};
 //# sourceMappingURL=sortMessages.directive.js.map
