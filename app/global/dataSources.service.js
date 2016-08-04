@@ -40,7 +40,7 @@ export class Messages extends SessionStorage {
 
   byFolder(folder) {
     let searchObject = { folder: folder._id };
-    let toFromAttr = ["drafts", "sent"].indexOf(folder) !== -1 ? "from" : "to";
+    let toFromAttr = ["drafts", "sent"].indexOf(folder._id) !== -1 ? "from" : "to";
     searchObject[toFromAttr] = this.AppConfig.emailAddress;
     return this.search(searchObject);
   }
