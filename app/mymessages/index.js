@@ -1,4 +1,5 @@
 import {compose} from "./compose.component";
+import {folderList} from "./directives/folderList.component";
 import {message} from "./message.component";
 import {messageList} from "./messageList.component";
 import {mymessages} from "./mymessages.component";
@@ -11,7 +12,7 @@ import {composeState, messageState, messageListState, mymessagesState} from "./m
 
 export const MYMESSAGES_MODULE = {
   directives: {sortMessages},
-  components: {compose, message, messageList, mymessages, messageTable},
+  components: {compose, folderList, message, messageList, mymessages, messageTable},
   states: [composeState, messageState, messageListState, mymessagesState],
   filters: {messageBody},
   services: {MessageListUI}

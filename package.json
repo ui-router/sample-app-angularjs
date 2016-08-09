@@ -29,7 +29,7 @@
     "systemjs": "^0.19.24",
     "systemjs-plugin-css": "^0.1.20",
     "typescript": "^1.8.7",
-    "ui-router-visualizer": "^1.1.0"
+    "ui-router-visualizer": "^2.0.7"
   },
   "devDependencies": {
     "lite-server": "^2.2.2"
