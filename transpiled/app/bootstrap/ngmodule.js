@@ -6,7 +6,6 @@
 // External dependencies
 var angular = require("angular");
 var angular_ui_router_1 = require("angular-ui-router");
-require("d3");
 var ui_router_visualizer_1 = require("ui-router-visualizer");
 // Create the angular module "demo".
 //

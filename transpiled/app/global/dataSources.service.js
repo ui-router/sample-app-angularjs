@@ -48,7 +48,7 @@ var Messages = (function (_super) {
     }
     Messages.prototype.byFolder = function (folder) {
         var searchObject = { folder: folder._id };
-        var toFromAttr = ["drafts", "sent"].indexOf(folder) !== -1 ? "from" : "to";
+        var toFromAttr = ["drafts", "sent"].indexOf(folder._id) !== -1 ? "from" : "to";
         searchObject[toFromAttr] = this.AppConfig.emailAddress;
         return this.search(searchObject);
     };
