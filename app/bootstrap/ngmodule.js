@@ -6,7 +6,6 @@
 // External dependencies
 import * as angular from "angular";
 import uiRouter from "angular-ui-router";
-import "d3";
 import {visualizer} from "ui-router-visualizer";
 
 // Create the angular module "demo".
