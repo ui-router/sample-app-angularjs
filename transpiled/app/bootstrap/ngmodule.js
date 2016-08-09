@@ -12,5 +12,7 @@ var ui_router_visualizer_1 = require("ui-router-visualizer");
 //
 // Since it is exported, other parts of the application (in other files) can then import it and register things.
 // In bootstrap.js, the module is imported, and the components, services, and states are registered.
-exports.ngmodule = angular.module("demo", [angular_ui_router_1.default, ui_router_visualizer_1.default]);
+exports.ngmodule = angular.module("demo", [angular_ui_router_1.default]);
+// Show ui-router-visualizer
+exports.ngmodule.run(function (ng1UIRouter) { return ui_router_visualizer_1.visualizer(ng1UIRouter); });
 //# sourceMappingURL=ngmodule.js.map
