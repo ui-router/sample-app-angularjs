@@ -15,4 +15,4 @@ import {visualizer} from "ui-router-visualizer";
 export const ngmodule = angular.module("demo", [uiRouter]);
 
 // Show ui-router-visualizer
-ngmodule.run(ng1UIRouter => visualizer(ng1UIRouter));
+ngmodule.run($uiRouter => visualizer($uiRouter));
