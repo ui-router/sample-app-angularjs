@@ -54,12 +54,12 @@ exports.loginState = {
  * return the main "app" state.
  */
 function returnTo($transition$) {
-    var redirectedFrom = $transition$.previous();
+    var redirectedFrom = $transition$.redirectedFrom();
     // The user was redirected to the login state (via the requiresAuth hook)
     if (redirectedFrom != null) {
         // Follow the current transition's redirect chain all the way back to the original attempted transition
-        while (redirectedFrom.previous()) {
-            redirectedFrom = redirectedFrom.previous();
+        while (redirectedFrom.redirectedFrom()) {
+            redirectedFrom = redirectedFrom.redirectedFrom();
         }
         // return to the original attempted "to state"
         return { state: redirectedFrom.to(), params: redirectedFrom.params("to") };
