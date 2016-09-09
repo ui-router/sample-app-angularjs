@@ -61,30 +61,23 @@ export const loginState = {
  *
  * If the user was initially redirected to login state (due to the requiresAuth redirect), then return the toState/params
  * they were redirected from.  Otherwise, if they transitioned directly, return the fromState/params.  Otherwise
- * return the main "app" state.
+ * return the main "home" state.
  */
 function returnTo ($transition$) {
-  let redirectedFrom = $transition$.redirectedFrom();
-  // The user was redirected to the login state (via the requiresAuth hook)
-  if (redirectedFrom != null) {
-    // Follow the current transition's redirect chain all the way back to the original attempted transition
-    while (redirectedFrom.redirectedFrom()) {
-      redirectedFrom = redirectedFrom.redirectedFrom();
-    }
-    // return to the original attempted "to state"
-
-    return { state: redirectedFrom.to(), params: redirectedFrom.params("to") };
+  if ($transition$.redirectedFrom() != null) {
+    // The user was redirected to the login state (e.g., via the requiresAuth hook when trying to activate contacts)
+    // Return to the original attempted target state (e.g., contacts)
+    return $transition$.redirectedFrom().targetState();
   }
+
+  let $state = $transition$.router.stateService;
 
   // The user was not redirected to the login state; they directly activated the login state somehow.
   // Return them to the state they came from.
-  let fromState = $transition$.from();
-  let fromParams = $transition$.params("from");
-
-  if (fromState.name !== '') {
-    return {state: fromState, params: fromParams};
+  if ($transition$.from().name !== '') {
+    return $state.target($transition$.from(), $transition$.params("from"));
   }
 
   // If the fromState's name is empty, then this was the initial transition. Just return them to the home state
-  return { state: 'home' };
+  return $state.target('home');
 }

@@ -27,19 +27,19 @@ var BLANK_MODULE = {
  * Register each app module's states, directives, components, filters, services,
  * and config/run blocks with the `ngmodule`
  *
- * @param ngmodule the `angular.module()` object
+ * @param ngModule the `angular.module()` object
  * @param appModule the feature module consisting of components, states, services, etc
  */
-function loadNg1Module(ngmodule, appModule) {
+function loadNg1Module(ngModule, appModule) {
     var module = Object.assign({}, BLANK_MODULE, appModule);
-    ngmodule.config(['$stateProvider', function ($stateProvider) { return module.states.forEach(function (state) { return $stateProvider.state(state); }); }]);
-    Object.keys(module.components).forEach(function (name) { return ngmodule.component(name, module.components[name]); });
-    Object.keys(module.directives).forEach(function (name) { return ngmodule.directive(name, module.directives[name]); });
-    Object.keys(module.services).forEach(function (name) { return ngmodule.service(name, module.services[name]); });
-    Object.keys(module.filters).forEach(function (name) { return ngmodule.filter(name, module.filters[name]); });
-    module.configBlocks.forEach(function (configBlock) { return ngmodule.config(configBlock); });
-    module.runBlocks.forEach(function (runBlock) { return ngmodule.run(runBlock); });
-    return ngmodule;
+    ngModule.config(['$stateProvider', function ($stateProvider) { return module.states.forEach(function (state) { return $stateProvider.state(state); }); }]);
+    Object.keys(module.components).forEach(function (name) { return ngModule.component(name, module.components[name]); });
+    Object.keys(module.directives).forEach(function (name) { return ngModule.directive(name, module.directives[name]); });
+    Object.keys(module.services).forEach(function (name) { return ngModule.service(name, module.services[name]); });
+    Object.keys(module.filters).forEach(function (name) { return ngModule.filter(name, module.filters[name]); });
+    module.configBlocks.forEach(function (configBlock) { return ngModule.config(configBlock); });
+    module.runBlocks.forEach(function (runBlock) { return ngModule.run(runBlock); });
+    return ngModule;
 }
 exports.loadNg1Module = loadNg1Module;
 //# sourceMappingURL=ngmodule.js.map
