@@ -1,3 +1,5 @@
+import {loadNg1Module, ngmodule} from "../bootstrap/ngmodule";
+
 import {compose} from "./compose.component";
 import {folderList} from "./directives/folderList.component";
 import {message} from "./message.component";
@@ -10,10 +12,12 @@ import {MessageListUI} from "./services/messagesListUI.service";
 
 import {composeState, messageState, messageListState, mymessagesState} from "./mymessages.states";
 
-export const MYMESSAGES_MODULE = {
+const mymessagesAppModule = {
   directives: {sortMessages},
   components: {compose, folderList, message, messageList, mymessages, messageTable},
   states: [composeState, messageState, messageListState, mymessagesState],
   filters: {messageBody},
   services: {MessageListUI}
 };
+
+loadNg1Module(ngmodule, mymessagesAppModule);

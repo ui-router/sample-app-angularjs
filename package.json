@@ -1,7 +1,7 @@
 {
   "name": "ui-router-architecture",
   "description": "Architecture overview demo for Angular UI-Router",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "scripts": {
     "start": "npm run watch:compile & npm run serve",
     "compile": "./node_modules/typescript/bin/tsc",
