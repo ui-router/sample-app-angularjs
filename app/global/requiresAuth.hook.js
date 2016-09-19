@@ -16,7 +16,6 @@ export function authHookRunBlock($transitions, AuthService) {
   // if the user is not currently authenticated (according to the AuthService)
 
   let redirectToLogin = (transition) => {
-    let AuthService = transition.injector().get('AuthService');
     let $state = transition.router.stateService;
     if (!AuthService.isAuthenticated()) {
       return $state.target('login', undefined, { location: false });
