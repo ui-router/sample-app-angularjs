@@ -1,6 +1,8 @@
 /**
  * The controller for the editContact component
  *
+ * This component is used by both `contacts.contact.edit` and `contacts.new` states.
+ *
  * The component makes a copy of the contqct data for editing.
  * The new copy and original (pristine) copy are used to determine if the contact is "dirty" or not.
  * If the user navigates to some other state while the contact is "dirty", the `uiCanExit` component
@@ -14,7 +16,9 @@
  *
  * The Save Contact button is wired to the `save` method which:
  * - saves the REST resource (PUT or POST, depending)
- * - navigates back to the read-only view of the contact using relative addressing `^`
+ * - navigates back to the parent state using relative addressing `^`.
+ *   when editing an existing contact, this returns to the `contacts.contact` "view contact" state
+ *   when creating a new contact, this returns to the `contacts` list.
  *   the `reload: true` option re-fetches the contacts resolve data from the server
  */
 class EditContactController {
