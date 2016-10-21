@@ -15,8 +15,15 @@ var LoginController = (function () {
         };
         this.login = function (credentials) {
             _this.authenticating = true;
-            var returnToOriginalState = function () { return $state.go(_this.returnTo.state, _this.returnTo.params, { reload: true }); };
-            var showError = function (errorMessage) { return _this.errorMessage = errorMessage; };
+            var returnToOriginalState = function () {
+                var state = _this.returnTo.state();
+                var params = _this.returnTo.params();
+                var options = Object.assign({}, _this.returnTo.options(), { reload: true });
+                $state.go(state, params, options);
+            };
+            var showError = function (errorMessage) {
+                return _this.errorMessage = errorMessage;
+            };
             AuthService.authenticate(credentials.username, credentials.password)
                 .then(returnToOriginalState)
                 .catch(showError)
