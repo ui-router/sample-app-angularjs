@@ -3,3 +3,6 @@ node_modules/
 *.iml
 *.ipr
 *.iws
+.*
+
+transpiled

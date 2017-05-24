@@ -21,15 +21,15 @@
     "url": "https://github.com/ui-router/sample-app.git"
   },
   "dependencies": {
+    "@uirouter/visualizer": "^4.0.0",
+    "@uirouter/angularjs": "^1.0.0",
     "angular": "<2",
-    "angular-ui-router": "^1.0.0-beta.2",
     "bootstrap": "^3.3.6",
     "d3": "^3.5.16",
     "font-awesome": "^4.5.0",
     "systemjs": "^0.19.24",
     "systemjs-plugin-css": "^0.1.20",
-    "typescript": "^1.8.7",
-    "ui-router-visualizer": "^2.0.7"
+    "typescript": "^1.8.7"
   },
   "devDependencies": {
     "lite-server": "^2.2.2"

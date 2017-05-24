@@ -5,8 +5,8 @@
 
 // External dependencies
 import * as angular from "angular";
-import uiRouter from "angular-ui-router";
-import {visualizer} from "ui-router-visualizer";
+import uiRouter from "@uirouter/angularjs";
+import {visualizer} from "@uirouter/visualizer";
 
 // Create the angular module "demo".
 //
