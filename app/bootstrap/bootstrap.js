@@ -28,9 +28,5 @@ import "../contacts/index";
 import "../mymessages/index";
 import "../prefs/index";
 
-// Import CSS (SystemJS will inject it into the document)
-import "font-awesome/css/font-awesome.css!"
-import "bootstrap/css/bootstrap.css!"
-
 // Google analytics
 import '../util/ga';
