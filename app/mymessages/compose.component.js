@@ -62,6 +62,7 @@ class ComposeController {
         .then(() => this.gotoPreviousState());
   }
 }
+ComposeController.$inject = ['$state', 'DialogService', 'AppConfig', 'Messages'];
 
 /**
  * This component composes a message

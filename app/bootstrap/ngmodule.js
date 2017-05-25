@@ -15,7 +15,7 @@ import {visualizer} from "@uirouter/visualizer";
 export const ngmodule = angular.module("demo", [uiRouter]);
 
 // Show ui-router-visualizer
-ngmodule.run($uiRouter => visualizer($uiRouter));
+ngmodule.run(['$uiRouter', $uiRouter => visualizer($uiRouter)]);
 
 const BLANK_MODULE = {
   states: [],
@@ -37,7 +37,7 @@ const BLANK_MODULE = {
 export function loadNg1Module(ngModule, appModule) {
   let module = Object.assign({}, BLANK_MODULE, appModule);
 
-  ngModule.config(['$stateProvider', $stateProvider => module.states.forEach(state => $stateProvider.state(state))]);
+  ngModule.config(['$stateRegistryProvider', $stateRegistryProvider => module.states.forEach(state => $stateRegistryProvider.register(state))]);
 
   Object.keys(module.components).forEach(name => ngModule.component(name, module.components[name]));
 

@@ -30,7 +30,7 @@ export const mymessagesState = {
   url: "/mymessages",
   resolve: {
     // All the folders are fetched from the Folders service
-    folders: (Folders) => Folders.all()
+    folders: ['Folders', (Folders) => Folders.all()]
   },
   // If mymessages state is directly activated, redirect the transition to the child state 'mymessages.messagelist'
   redirectTo: 'mymessages.messagelist',
@@ -49,9 +49,9 @@ export const messageState = {
   url: '/:messageId',
   resolve: {
     // Fetch the message from the Messages service using the messageId parameter
-    message: (Messages, $stateParams) => Messages.get($stateParams.messageId),
+    message: ['Messages', '$stateParams', (Messages, $stateParams) => Messages.get($stateParams.messageId)],
     // Provide the component with a function it can query that returns the closest message id
-    nextMessageGetter: (MessageListUI, messages) => MessageListUI.proximalMessageId.bind(MessageListUI, messages)
+    nextMessageGetter: ['MessageListUI', 'messages', (MessageListUI, messages) => MessageListUI.proximalMessageId.bind(MessageListUI, messages)]
   },
   views: {
     // Relatively target the parent-state's parent-state's 'messagecontent' ui-view
@@ -73,11 +73,11 @@ export const messageListState = {
   params: {folderId: "inbox"},
   resolve: {
     // Fetch the current folder from the Folders service, using the folderId parameter
-    folder: (Folders, $stateParams) => Folders.get($stateParams.folderId),
+    folder: ['Folders', '$stateParams', (Folders, $stateParams) => Folders.get($stateParams.folderId)],
 
     // The resolved folder object (from the resolve above) is injected into this resolve
     // The list of message for the folder are fetched from the Messages service
-    messages: (Messages, folder) => Messages.byFolder(folder)
+    messages: ['Messages', 'folder', (Messages, folder) => Messages.byFolder(folder)]
   },
   views: {
     // This targets the "messagelist" named ui-view added to the DOM in the parent state 'mymessages'

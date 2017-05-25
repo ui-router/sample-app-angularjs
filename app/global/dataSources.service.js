@@ -23,6 +23,7 @@ export class Contacts extends SessionStorage {
     super($http, $timeout, $q, "contacts", "data/contacts.json", AppConfig);
   }
 }
+Contacts.$inject = ['$http', '$timeout', '$q', 'AppConfig'];
 
 /** A fake Folders REST client API */
 export class Folders extends SessionStorage {
@@ -30,6 +31,7 @@ export class Folders extends SessionStorage {
     super($http, $timeout, $q, 'folders', 'data/folders.json', AppConfig);
   }
 }
+Folders.$inject = ['$http', '$timeout', '$q', 'AppConfig'];
 
 /** A fake Messages REST client API */
 export class Messages extends SessionStorage {
@@ -45,3 +47,4 @@ export class Messages extends SessionStorage {
     return this.search(searchObject);
   }
 }
+Messages.$inject = ['$http', '$timeout', '$q', 'AppConfig'];

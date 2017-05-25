@@ -48,3 +48,4 @@ export class AuthService {
     this.AppConfig.save();
   }
 }
+AuthService.$inject = ['AppConfig', '$q', '$timeout'];

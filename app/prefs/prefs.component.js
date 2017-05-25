@@ -24,6 +24,7 @@ class PrefsController {
     document.location.reload(true);
   }
 }
+PrefsController.$inject = ['AppConfig'];
 
 /**
  * A component which shows and updates app preferences

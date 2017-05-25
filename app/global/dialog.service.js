@@ -12,3 +12,4 @@ export class DialogService {
     }
   }
 }
+DialogService.$inject = ['$document', '$compile', '$rootScope'];

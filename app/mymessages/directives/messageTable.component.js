@@ -10,10 +10,7 @@
 export const messageTable = {
   bindings: { columns: '<', messages: '<' },
 
-  controller: function(AppConfig) {
-    this.AppConfig = AppConfig;
-    this.colVisible = (name) => this.columns.indexOf(name) !== -1;
-  },
+  controller: messageTableController,
 
   template: `
     <table>
@@ -40,3 +37,9 @@ export const messageTable = {
   
     </table>
 `};
+
+messageTableController.$inject = ['AppConfig'];
+function messageTableController(AppConfig) {
+  this.AppConfig = AppConfig;
+  this.colVisible = (name) => this.columns.indexOf(name) !== -1;
+}

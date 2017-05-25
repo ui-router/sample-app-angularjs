@@ -58,6 +58,7 @@ class EditContactController {
         .then(() => this.$state.go("^", null, { reload: true }));
   }
 }
+EditContactController.$inject = ['$state', 'DialogService', 'Contacts'];
 
 /**
  * This component edits a single contact.

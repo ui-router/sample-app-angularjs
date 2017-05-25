@@ -11,7 +11,7 @@ ga('create', 'UA-73329341-1', 'auto');
 ga('send', 'pageview');
 
 
-ngmodule.config($transitionsProvider => {
+ngmodule.config(['$transitionsProvider', $transitionsProvider => {
   $transitionsProvider.onBefore({}, $transition$ => {
     let path = $transition$.treeChanges().to
         .map(node=>node.state.self.url)
@@ -29,4 +29,4 @@ ngmodule.config($transitionsProvider => {
 
     $transition$.promise.then(success, error);
   })
-});
+}]);

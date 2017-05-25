@@ -63,7 +63,8 @@ export const loginState = {
  * they were redirected from.  Otherwise, if they transitioned directly, return the fromState/params.  Otherwise
  * return the main "home" state.
  */
-function returnTo ($transition$) {
+returnTo.$inject = ['$transition$'];
+function returnTo($transition$) {
   if ($transition$.redirectedFrom() != null) {
     // The user was redirected to the login state (e.g., via the requiresAuth hook when trying to activate contacts)
     // Return to the original attempted target state (e.g., contacts)

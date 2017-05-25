@@ -33,6 +33,7 @@ class LoginController {
     }
   }
 }
+LoginController.$inject = ['AppConfig', 'AuthService', '$state'];
 
 /**
  * This component renders a faux authentication UI

@@ -6,6 +6,7 @@
  * - The user is not authenticated
  * - The user is navigating to a state that requires authentication
  */
+authHookRunBlock.$inject = ['$transitions', 'AuthService'];
 export function authHookRunBlock($transitions, AuthService) {
   // Matches if the destination state's data property has a truthy 'requiresAuth' property
   let requiresAuthCriteria = {

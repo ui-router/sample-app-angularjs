@@ -88,6 +88,7 @@ class MessageController {
         .then(() => this.$state.go(nextState, params, { reload: 'mymessages.messagelist' }));
   };
 }
+MessageController.$inject = ['$state', 'DialogService', 'Messages'];
 
 /**
  * This component renders a single message

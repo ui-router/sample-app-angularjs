@@ -1,4 +1,5 @@
-export const dialog = function($timeout, $q) {
+dialog.$inject = ['$timeout', '$q'];
+export function dialog($timeout, $q) {
   return {
     link: (scope, elem) => {
       $timeout(() => elem.addClass('active'));
@@ -22,4 +23,4 @@ export const dialog = function($timeout, $q) {
       </div>
 `
   }
-};
+}

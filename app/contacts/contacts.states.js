@@ -12,7 +12,7 @@ export const contactsState = {
   url: "/contacts",
   resolve: {
     // Resolve all the contacts.  The resolved contacts are injected into the controller.
-    contacts: (Contacts) => Contacts.all()
+    contacts: ['Contacts', (Contacts) => Contacts.all()]
   },
   data: { requiresAuth: true },
   component: 'contacts'
@@ -28,7 +28,7 @@ export const viewContactState = {
   resolve: {
     // Resolve the contact, based on the contactId parameter value.
     // The resolved contact is provided to the contactComponent's contact binding
-    contact: (Contacts, $transition$) => Contacts.get($transition$.params().contactId)
+    contact: ['Contacts', '$transition$', (Contacts, $transition$) => Contacts.get($transition$.params().contactId)]
   },
   component: 'contactView'
 };

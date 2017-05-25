@@ -118,3 +118,4 @@ export class SessionStorage {
     });
   }
 }
+SessionStorage.$inject = ['$http', '$timeout', '$q', 'sessionStorageKey', 'sourceUrl', 'AppConfig'];

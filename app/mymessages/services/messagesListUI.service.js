@@ -13,3 +13,4 @@ export class MessageListUI {
     return proximalIdx >= 0 ? sorted[proximalIdx]._id : undefined;
   }
 }
+MessageListUI.$inject = ['$filter', 'AppConfig'];

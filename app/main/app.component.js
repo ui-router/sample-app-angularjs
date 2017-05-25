@@ -17,6 +17,7 @@ class AuthedController {
     return $state.go('welcome', {}, { reload: true });
   }
 }
+AuthedController.$inject = ['AppConfig', 'AuthService', '$state'];
 
 /**
  * This is the main app component for an authenticated user.
