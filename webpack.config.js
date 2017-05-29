@@ -4,12 +4,29 @@ var path = require('path');
 var DEV_SERVER = process.argv[1].indexOf('webpack-dev-server') !== -1;
 var DEV = DEV_SERVER || process.env.DEV;
 
+var plugins = [];
+if (!DEV) {
+  plugins.push(new webpack.optimize.UglifyJsPlugin({ sourceMap: true, }));
+}
+plugins.push(new webpack.optimize.CommonsChunkPlugin({ name: 'vendor' }));
+
+
 module.exports = {
   entry: {
     "sampleapp": "./app/bootstrap/bootstrap.js",
+
+    "vendor": [
+      'angular',
+      'oclazyload',
+      '@uirouter/core',
+      '@uirouter/angularjs',
+      '@uirouter/visualizer',
+      '@uirouter/sticky-states',
+      '@uirouter/dsr',
+    ],
   },
 
-  devtool: DEV ? 'cheap-module-source-map' :'source-map',
+  devtool: DEV ? 'source-map' :'source-map',
 
   output: {
     path: path.join(__dirname, "_bundles"),
@@ -21,20 +38,20 @@ module.exports = {
     extensions: ['.js']
   },
 
-  plugins: [
-    new webpack.optimize.UglifyJsPlugin({
-      sourceMap: true,
-      compress: DEV ? false : { warnings: false },
-      mangle: DEV ? false : true,
-    }),
-  ],
+  plugins: plugins,
 
   module: {
     rules: [
       {
         test: /\.js$/,
+        use: ["source-map-loader"],
+        enforce: "pre",
+        exclude: [/@uirouter/]
+      },
+      {
+        test: /\.js$/,
         exclude: /(node_modules|bower_components)/,
-        use: { loader: 'babel-loader', options: { presets: ['env'] } },
+        use: { loader: 'babel-loader', options: { presets: ['babel-preset-es2015'] } },
       }
     ]
   },

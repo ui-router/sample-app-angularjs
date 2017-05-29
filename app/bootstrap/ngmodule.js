@@ -5,9 +5,9 @@
 // External dependencies
 import * as angular from "angular";
 import uiRouter from "@uirouter/angularjs";
-import { visualizer } from "@uirouter/visualizer";
 import { StickyStatesPlugin } from '@uirouter/sticky-states';
 import { DSRPlugin } from '@uirouter/dsr';
+import { visualizer } from "@uirouter/visualizer";
 import ocLazyLoad from "oclazyload";
 
 import { MAIN_MODULE } from '../main/main.module';
