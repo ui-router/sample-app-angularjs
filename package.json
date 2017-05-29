@@ -5,7 +5,7 @@
   "scripts": {
     "start": "webpack-dev-server --progress --open",
     "build": "webpack --progress",
-    "gh-pages": "git checkout gh-pages && git rebase master && rm -rf node_modules && npm install && echo 'If there are any updated modules:' && echo 'git commit -am update_libs' && echo 'git rebase -i' && echo && echo 'Finally:' && echo 'git push origin gh-pages:gh-pages --force' && echo 'git checkout master'"
+    "gh-pages": "git checkout gh-pages && git rebase master && rm -rf node_modules && yarn install && webpack && git add -f _bundles && git commit -m 'publish gh-pages' && git push origin gh-pages:gh-pages --force && git checkout master"
   },
   "contributors": [
     {
