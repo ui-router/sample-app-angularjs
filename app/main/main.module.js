@@ -27,4 +27,3 @@ MAIN_MODULE.component('app', app);
 MAIN_MODULE.component('welcome', welcome);
 MAIN_MODULE.component('login', login);
 MAIN_MODULE.component('home', home);
-

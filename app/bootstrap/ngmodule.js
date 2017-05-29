@@ -8,8 +8,8 @@ import uiRouter from "@uirouter/angularjs";
 import { visualizer } from "@uirouter/visualizer";
 import { StickyStatesPlugin } from '@uirouter/sticky-states';
 import { DSRPlugin } from '@uirouter/dsr';
+import ocLazyLoad from "oclazyload";
 
-import { CONTACTS_MODULE } from '../contacts/contacts.module';
 import { MAIN_MODULE } from '../main/main.module';
 import { GLOBAL_MODULE } from '../global/global.module';
 import { MYMESSAGES_MODULE } from '../mymessages/mymessages.module';
@@ -21,16 +21,29 @@ import { PREFS_MODULE } from '../prefs/prefs.module';
 // In bootstrap.js, the module is imported, and the components, services, and states are registered.
 export const ngmodule = angular.module("demo", [
   uiRouter,
-  CONTACTS_MODULE.name,
+  ocLazyLoad,
+  // CONTACTS_MODULE.name // lazy loaded below
   MAIN_MODULE.name,
   GLOBAL_MODULE.name,
   MYMESSAGES_MODULE.name,
   PREFS_MODULE.name,
 ]);
 
-ngmodule.run(['$uiRouter', $uiRouter => {
+ngmodule.config(['$uiRouterProvider', $uiRouter => {
   $uiRouter.plugin(StickyStatesPlugin);
   $uiRouter.plugin(DSRPlugin);
   // Show the UI-Router Visualizer
   visualizer($uiRouter);
+
+  // Future State (Placeholder) for the contacts module
+  const contactsFutureState = {
+    name: 'contacts.**',
+    url: '/contacts',
+    lazyLoad: function(transition) {
+      const $ocLazyLoad = transition.injector().get('$ocLazyLoad');
+      return System.import('../contacts/contacts.module').then((ngmod) => $ocLazyLoad.load(ngmod.CONTACTS_MODULE))
+    }
+  };
+
+  $uiRouter.stateRegistry.register(contactsFutureState);
 }]);
