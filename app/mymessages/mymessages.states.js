@@ -13,10 +13,12 @@ export const composeState = {
     message: {}
   },
   views: {
-    // Absolutely targets the $default (unnamed) ui-view, two nesting levels down with the composeComponent.
-    "!$default.$default": 'compose'
+    // Absolutely targets the ui-view named 'mymessages' (which is nested inside an unnamed ui-view) with the 'compose' component.
+    // Absolute targeting finds the nested ui-view in the DOM, using view names.
+    '!$default.mymessages': 'compose'
   }
 };
+
 
 /**
  * The mymessages state. This is the main state for the mymessages submodule.
@@ -32,11 +34,17 @@ export const mymessagesState = {
     // All the folders are fetched from the Folders service
     folders: ['Folders', (Folders) => Folders.all()]
   },
-  // If mymessages state is directly activated, redirect the transition to the child state 'mymessages.messagelist'
-  redirectTo: 'mymessages.messagelist',
-  component: 'mymessages',
+  views: {
+    mymessages: 'mymessages'
+  },
   // Mark this state as requiring authentication.  See ../routerhooks/requiresAuth.js.
-  data: { requiresAuth: true }
+  data: { requiresAuth: true },
+  // If mymessages state is directly activated, redirect the transition to the most recent
+  // child state that was previously activated, or 'mymessages.messagelist' (by default)
+  deepStateRedirect: {
+    default: { state: 'mymessages.messagelist' }
+  },
+  sticky: true,
 };
 
 
@@ -56,7 +64,7 @@ export const messageState = {
   views: {
     // Relatively target the parent-state's parent-state's 'messagecontent' ui-view
     // This could also have been written using ui-view@state addressing: 'messagecontent@mymessages'
-    // Or, this could also have been written using absolute ui-view addressing: '!$default.$default.messagecontent'
+    // Or, this could also have been written using absolute ui-view addressing: '!$default.mymessages.messagecontent'
     "^.^.messagecontent": 'message'
   }
 };
@@ -81,6 +89,6 @@ export const messageListState = {
   },
   views: {
     // This targets the "messagelist" named ui-view added to the DOM in the parent state 'mymessages'
-    "messagelist": 'messageList'
+    messagelist: 'messageList'
   }
 };

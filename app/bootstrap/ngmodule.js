@@ -2,11 +2,12 @@
  * This file imports the third party library dependencies, then creates the angular module "demo"
  * and exports it.
  */
-
 // External dependencies
 import * as angular from "angular";
 import uiRouter from "@uirouter/angularjs";
-import {visualizer} from "@uirouter/visualizer";
+import { visualizer } from "@uirouter/visualizer";
+import { StickyStatesPlugin } from '@uirouter/sticky-states';
+import { DSRPlugin } from '@uirouter/dsr';
 
 // Create the angular module "demo".
 //
@@ -14,7 +15,13 @@ import {visualizer} from "@uirouter/visualizer";
 // In bootstrap.js, the module is imported, and the components, services, and states are registered.
 export const ngmodule = angular.module("demo", [uiRouter]);
 
-// Show ui-router-visualizer
+ngmodule.run(['$uiRouter', $uiRouter => {
+  $uiRouter.plugin(StickyStatesPlugin);
+  $uiRouter.plugin(DSRPlugin);
+  // Show the UI-Router Visualizer
+  visualizer($uiRouter);
+}]);
+
 ngmodule.run(['$uiRouter', $uiRouter => visualizer($uiRouter)]);
 
 const BLANK_MODULE = {

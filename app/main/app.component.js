@@ -16,6 +16,10 @@ class AuthedController {
     // Reload states after authentication change
     return $state.go('welcome', {}, { reload: true });
   }
+
+  isActive(glob) {
+    return this.$state.includes(glob);
+  }
 }
 AuthedController.$inject = ['AppConfig', 'AuthService', '$state'];
 
@@ -52,6 +56,8 @@ export const app = {
       </ul>
     </div>
     
-    <div ui-view/>
+    <div ui-view></div>
+    <div ui-view="mymessages" ng-show="$ctrl.isActive('mymessages.**')"></div>
+    <div ui-view="contacts" ng-show="$ctrl.isActive('contacts.**')"></div>
 `
 }

@@ -1,7 +1,8 @@
 /**
  * A directive (for a table header) which changes the app's sort order
  */
-export const sortMessages = (AppConfig) => {
+sortMessages.$inject = ['AppConfig'];
+export function sortMessages(AppConfig) {
   return {
     restrict: 'A',
     link: function(scope, elem, attrs) {
@@ -17,4 +18,4 @@ export const sortMessages = (AppConfig) => {
       });
     }
   }
-};
+}

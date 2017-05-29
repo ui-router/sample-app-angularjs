@@ -15,7 +15,11 @@ export const contactsState = {
     contacts: ['Contacts', (Contacts) => Contacts.all()]
   },
   data: { requiresAuth: true },
-  component: 'contacts'
+  deepStateRedirect: true,
+  sticky: true,
+  views: {
+    contacts: 'contacts'
+  },
 };
 
 /**
