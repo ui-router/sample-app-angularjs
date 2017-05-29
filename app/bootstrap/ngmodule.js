@@ -9,11 +9,24 @@ import { visualizer } from "@uirouter/visualizer";
 import { StickyStatesPlugin } from '@uirouter/sticky-states';
 import { DSRPlugin } from '@uirouter/dsr';
 
+import { CONTACTS_MODULE } from '../contacts/contacts.module';
+import { MAIN_MODULE } from '../main/main.module';
+import { GLOBAL_MODULE } from '../global/global.module';
+import { MYMESSAGES_MODULE } from '../mymessages/mymessages.module';
+import { PREFS_MODULE } from '../prefs/prefs.module';
+
 // Create the angular module "demo".
 //
 // Since it is exported, other parts of the application (in other files) can then import it and register things.
 // In bootstrap.js, the module is imported, and the components, services, and states are registered.
-export const ngmodule = angular.module("demo", [uiRouter]);
+export const ngmodule = angular.module("demo", [
+  uiRouter,
+  CONTACTS_MODULE.name,
+  MAIN_MODULE.name,
+  GLOBAL_MODULE.name,
+  MYMESSAGES_MODULE.name,
+  PREFS_MODULE.name,
+]);
 
 ngmodule.run(['$uiRouter', $uiRouter => {
   $uiRouter.plugin(StickyStatesPlugin);
@@ -21,42 +34,3 @@ ngmodule.run(['$uiRouter', $uiRouter => {
   // Show the UI-Router Visualizer
   visualizer($uiRouter);
 }]);
-
-ngmodule.run(['$uiRouter', $uiRouter => visualizer($uiRouter)]);
-
-const BLANK_MODULE = {
-  states: [],
-  components: {},
-  directives: {},
-  services: {},
-  filters: {},
-  configBlocks: [],
-  runBlocks: []
-};
-
-/**
- * Register each app module's states, directives, components, filters, services,
- * and config/run blocks with the `ngmodule`
- *
- * @param ngModule the `angular.module()` object
- * @param appModule the feature module consisting of components, states, services, etc
- */
-export function loadNg1Module(ngModule, appModule) {
-  let module = Object.assign({}, BLANK_MODULE, appModule);
-
-  ngModule.config(['$stateRegistryProvider', $stateRegistryProvider => module.states.forEach(state => $stateRegistryProvider.register(state))]);
-
-  Object.keys(module.components).forEach(name => ngModule.component(name, module.components[name]));
-
-  Object.keys(module.directives).forEach(name => ngModule.directive(name, module.directives[name]));
-
-  Object.keys(module.services).forEach(name => ngModule.service(name, module.services[name]));
-
-  Object.keys(module.filters).forEach(name => ngModule.filter(name, module.filters[name]));
-
-  module.configBlocks.forEach(configBlock => ngModule.config(configBlock));
-
-  module.runBlocks.forEach(runBlock => ngModule.run(runBlock));
-
-  return ngModule;
-}

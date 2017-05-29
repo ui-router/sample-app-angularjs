@@ -1,6 +1,6 @@
 /**
- * This file contains a Transition Hook which protects a
- * route that requires authentication.
+ * This run block registers a Transition Hook which protects
+ * routes that requires authentication.
  *
  * This hook redirects to /login when both:
  * - The user is not authenticated

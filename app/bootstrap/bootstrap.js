@@ -22,11 +22,11 @@
 
 // import all the app sub modules
 // Each module registers it states/services/components, with the `ngmodule`
-import "../global/index";
-import "../main/index";
-import "../contacts/index";
-import "../mymessages/index";
-import "../prefs/index";
+import "../global/global.module";
+import "../main/main.module";
+import "../contacts/contacts.module";
+import "../mymessages/mymessages.module";
+import "../prefs/prefs.module";
 
 // Google analytics
 import '../util/ga';
