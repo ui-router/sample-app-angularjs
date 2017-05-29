@@ -1,26 +1,4 @@
 /**
- * This state allows the user to compose a new message, edit a drafted message, send a message,
- * or save an unsent message as a draft.
- *
- * This state uses view-targeting to take over the ui-view that would normally be filled by the 'mymessages' state.
- */
-export const composeState = {
-  name: 'mymessages.compose',
-  url: '/compose',
-  // Declares that this state has a 'message' parameter, that defaults to an empty object.
-  // Note the parameter does not appear in the URL.
-  params: {
-    message: {}
-  },
-  views: {
-    // Absolutely targets the ui-view named 'mymessages' (which is nested inside an unnamed ui-view) with the 'compose' component.
-    // Absolute targeting finds the nested ui-view in the DOM, using view names.
-    '!$default.mymessages': 'compose'
-  }
-};
-
-
-/**
  * The mymessages state. This is the main state for the mymessages submodule.
  *
  * This state shows the list of folders for the current user. It retrieves the folders from the
@@ -49,6 +27,30 @@ export const mymessagesState = {
 
 
 /**
+ * This state shows the contents (a message list) of a single folder
+ */
+export const messageListState = {
+  name: 'mymessages.messagelist',
+  url: '/:folderId',
+  // The folderId parameter is part of the URL.  This params block sets 'inbox' as the default value.
+  // If no parameter value for folderId is provided on the transition, then it will be defaulted to 'inbox'
+  params: {folderId: "inbox"},
+  resolve: {
+    // Fetch the current folder from the Folders service, using the folderId parameter
+    folder: ['Folders', '$stateParams', (Folders, $stateParams) => Folders.get($stateParams.folderId)],
+
+    // The resolved folder object (from the resolve above) is injected into this resolve
+    // The list of message for the folder are fetched from the Messages service
+    messages: ['Messages', 'folder', (Messages, folder) => Messages.byFolder(folder)]
+  },
+  views: {
+    // This targets the "messagelist" named ui-view added to the DOM in the parent state 'mymessages'
+    messagelist: 'messageList'
+  }
+};
+
+
+/**
  * This state shows the contents of a single message.
  * It also has UI to reply, forward, delete, or edit an existing draft.
  */
@@ -71,24 +73,22 @@ export const messageState = {
 
 
 /**
- * This state shows the contents (a message list) of a single folder
+ * This state allows the user to compose a new message, edit a drafted message, send a message,
+ * or save an unsent message as a draft.
+ *
+ * This state uses view-targeting to take over the ui-view that would normally be filled by the 'mymessages' state.
  */
-export const messageListState = {
-  name: 'mymessages.messagelist',
-  url: '/:folderId',
-  // The folderId parameter is part of the URL.  This params block sets 'inbox' as the default value.
-  // If no parameter value for folderId is provided on the transition, then it will be defaulted to 'inbox'
-  params: {folderId: "inbox"},
-  resolve: {
-    // Fetch the current folder from the Folders service, using the folderId parameter
-    folder: ['Folders', '$stateParams', (Folders, $stateParams) => Folders.get($stateParams.folderId)],
-
-    // The resolved folder object (from the resolve above) is injected into this resolve
-    // The list of message for the folder are fetched from the Messages service
-    messages: ['Messages', 'folder', (Messages, folder) => Messages.byFolder(folder)]
+export const composeState = {
+  name: 'mymessages.compose',
+  url: '/compose',
+  // Declares that this state has a 'message' parameter, that defaults to an empty object.
+  // Note the parameter does not appear in the URL.
+  params: {
+    message: {}
   },
   views: {
-    // This targets the "messagelist" named ui-view added to the DOM in the parent state 'mymessages'
-    messagelist: 'messageList'
+    // Absolutely targets the ui-view named 'mymessages' (which is nested inside an unnamed ui-view) with the 'compose' component.
+    // Absolute targeting finds the nested ui-view in the DOM, using view names.
+    '!$default.mymessages': 'compose'
   }
 };
