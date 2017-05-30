@@ -1,6 +1,6 @@
 {
-  "name": "ui-router-architecture",
-  "description": "Architecture overview demo for Angular UI-Router",
+  "name": "sample-app-angularjs",
+  "description": "Sample app for UI-Router for AngularJS",
   "version": "1.0.2",
   "scripts": {
     "start": "webpack-dev-server --progress --open",
