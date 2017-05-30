@@ -51,7 +51,7 @@ class EditContactController {
         .then(() => this.$state.go("^.^", null, { reload: true }));
   }
 
-  /** Save the contact, then go to the grandparent state ('contacts') */
+  /** Save the contact, then go to the parent state ('contacts.contact') */
   save(contact) {
     this.Contacts.save(contact)
         .then(() => this.canExit = true)
