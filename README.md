@@ -1,10 +1,10 @@
 ## UI-Router 1.0 Sample Application
 
-[![Greenkeeper badge](https://badges.greenkeeper.io/ui-router/sample-app-angularjs.svg)](https://greenkeeper.io/)
 
 http://ui-router.github.io/sample-app/#/mymessages/inbox/5648b50cc586cac4aed6836f
 
-<img src="https://travis-ci.org/ui-router/sample-app-angularjs.svg?branch=master" alt="travis ci status">
+[![Greenkeeper badge](https://badges.greenkeeper.io/ui-router/sample-app-angularjs.svg)](https://greenkeeper.io/)
+[![Travis badge](https://travis-ci.org/ui-router/sample-app-angularjs.svg?branch=master)](https://travis-ci.org/ui-router/sample-app-angularjs?branch=master)
 
 This sample app is intended to demonstrate a non-trivial ui-router application.
 
@@ -14,6 +14,8 @@ This sample app is intended to demonstrate a non-trivial ui-router application.
 - Authentication (simulated)
 - Authenticated and unauthenticated states
 - REST data retrieval (simulated)
+- Lazy loaded AngularJS module (contacts submodule)
+- [Sticky States](https://github.com/ui-router/sticky-states) with [Deep State Redirect](https://github.com/ui-router/dsr)
 
 ---
 
@@ -62,9 +64,9 @@ There are many ways to structure a ui-router app.  We aren't super opinionated o
     - If a transition to a state with a truthy `data.authRequired: true` property is started
     and the user is not currently authenticated
 - Defining a default substate for a top-level state
-  - Example: declaring `redirectTo: 'mymessages.folder'` in `mymessages/mymessages.states.js` (mymessages state)
+  - Example: declaring `redirectTo: 'welcome'` in `app.states.js`
 - Defining a default parameter for a state
-  - Example: `folderId` parameter defaults to 'inbox' in `mymessages/mymessages.states.js` (folder state)
+  - Example: `folderId` parameter defaults to 'inbox' in `mymessages.states.js` (folder state)
 - Application data lifecycle
   - Data loading is managed by the state declaration, via the `resolve:` block
   - Data is fetched before the state is _entered_
@@ -72,3 +74,16 @@ There are many ways to structure a ui-router app.  We aren't super opinionated o
   - The state is _entered_ when the data is ready
   - The resolved data is injected into the components
   - The resolve data remains loaded until the state is exited
+- Lazy Loaded states
+  - The Contacts submodule (all its states and components) are lazy loaded
+  - The Contacts "future state" (a placeholder) is added in `bootstrap/ngmodule.js`
+  - [ocLazyLoad](https://oclazyload.readme.io/) is used to lazy load the angular module
+- Deep State Redirect (DSR)
+  - DSR used on the `contacts` and `mymessages` top level states
+  - When a substate of a DSR state is activated, the state and parameters are memorized
+  - When `contacts` or `mymessages` is activated again, the transition redirects to the memorized deep state and params
+- Sticky States
+  - Sticky States are enabled on the `contacts` and `mymessages` top level states
+  - The modules' views (including DOM) and state are retained when a different module is activated
+  - When returning to the module, the inactive state is reactivated
+  - The views are restored (unhidden)
