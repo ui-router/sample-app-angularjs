@@ -1,7 +1,6 @@
-## UI-Router 1.0 Sample Application
+## UI-Router for AngularJS 1.0 - Sample Application
 
-
-http://ui-router.github.io/sample-app/#/mymessages/inbox/5648b50cc586cac4aed6836f
+http://ui-router.github.io/sample-app-angularjs/#/mymessages/inbox/5648b50cc586cac4aed6836f
 
 [![Greenkeeper badge](https://badges.greenkeeper.io/ui-router/sample-app-angularjs.svg)](https://greenkeeper.io/)
 [![Travis badge](https://travis-ci.org/ui-router/sample-app-angularjs.svg?branch=master)](https://travis-ci.org/ui-router/sample-app-angularjs?branch=master)
@@ -22,18 +21,21 @@ This sample app is intended to demonstrate a non-trivial ui-router application.
 ### Visualizer
 
 We're using the [State and Transition Visualizer](http://github.com/ui-router/visualizer) to visually represent 
-the current state tree, as well as the transitions between states.  Explore how transitions work by hovering
-over them, and clicking to expand details (params and resolves).  
+the current state tree, as well as the transitions between states.
+Explore how transitions work by hovering over them, and clicking to expand details (params and resolves).
 
 Note how states are _entered_ when they were previously not active, _exited_ and re-_entered_ when parameters change,
- and how parent states whose parameters did not change are _retained_.  Each of these (_exited, entered, retained_) 
- correspond to a Transition Hook.
+ and how parent states whose parameters did not change are _retained_.
 
 ### Structure
 
-The application is written in ES6, and utilizes ES6 modules.  We are loading the modules using SystemJS and es6-module-loader in the browser _(note: currently, we are also transpiling in the browser, but will be transpiling at build-time in the future for better performance/smaller payload)_.
+The application is written in ES6 (transpiled using babel), and utilizes ES6 modules.
+We are loading the modules and creating bundles using webpack 2.
 
-There are many ways to structure a ui-router app.  We aren't super opinionated on application structure.  Use what works for you.  We organized ours in the following way:
+There are many ways to structure a ui-router app.
+We aren't super opinionated on application structure.
+Use what works for you.
+We organized ours in the following way:
 
 - Sub-module (feature) organization
   - Each feature gets its own directory. 
