@@ -34,17 +34,4 @@ ngmodule.config(['$uiRouterProvider', $uiRouter => {
   $uiRouter.plugin(DSRPlugin);
   // Show the UI-Router Visualizer
   visualizer($uiRouter);
-
-  // Future State (Placeholder) for the contacts module
-  const contactsFutureState = {
-    parent: 'app',
-    name: 'contacts.**',
-    url: '/contacts',
-    lazyLoad: function(transition) {
-      const $ocLazyLoad = transition.injector().get('$ocLazyLoad');
-      return System.import('../contacts/contacts.module').then((ngmod) => $ocLazyLoad.load(ngmod.CONTACTS_MODULE))
-    }
-  };
-
-  $uiRouter.stateRegistry.register(contactsFutureState);
 }]);

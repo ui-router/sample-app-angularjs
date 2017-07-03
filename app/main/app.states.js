@@ -82,3 +82,17 @@ function returnTo($transition$) {
   // If the fromState's name is empty, then this was the initial transition. Just return them to the home state
   return $state.target('home');
 }
+
+
+
+// Future State (Placeholder) for the contacts module
+export const contactsFutureState = {
+  parent: 'app',
+  name: 'contacts.**',
+  url: '/contacts',
+  lazyLoad: function(transition) {
+    const $ocLazyLoad = transition.injector().get('$ocLazyLoad');
+    return System.import('../contacts/contacts.module').then((ngmod) => $ocLazyLoad.load(ngmod.CONTACTS_MODULE))
+  }
+};
+
