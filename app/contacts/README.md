@@ -2,7 +2,7 @@
 
 ### The Contacts submodule
 
-- *contacts.module.js*: The submodule with states and components registered
+- *contacts.module*.js: The submodule with states and components registered
 - *contacts.states*.js: The Contacts ui-router states
 
 ### The Contacts submodule components

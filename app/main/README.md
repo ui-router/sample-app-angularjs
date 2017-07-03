@@ -2,7 +2,8 @@
  
 ### The main app module bootstrap
 
-- *app.states*.js: Defines the top-level states such as home, welcome, and login
+- *app.states*.js: Defines the top-level states such as home, welcome, and login.
+Also registers future states for lazy loaded feature modules.
 
 ### Components for the Top-level states
 
