@@ -37,6 +37,7 @@ ngmodule.config(['$uiRouterProvider', $uiRouter => {
 
   // Future State (Placeholder) for the contacts module
   const contactsFutureState = {
+    parent: 'app',
     name: 'contacts.**',
     url: '/contacts',
     lazyLoad: function(transition) {
