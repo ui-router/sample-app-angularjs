@@ -2,7 +2,7 @@ import {app} from "./app.component";
 import {welcome} from "./welcome.component";
 import {login} from "./login.component";
 import {home} from "./home.component";
-import {appState, homeState, loginState, welcomeState, contactsFutureState} from "./app.states";
+import {appState, homeState, loginState, welcomeState, contactsFutureState, prefsFutureState, mymessagesFutureState} from "./app.states";
 
 export const MAIN_MODULE = angular.module('main', []);
 
@@ -21,7 +21,10 @@ MAIN_MODULE.config(['$uiRouterProvider', function($uiRouter) {
   $stateRegistry.register(homeState);
   $stateRegistry.register(loginState);
   $stateRegistry.register(welcomeState);
+
   $stateRegistry.register(contactsFutureState);
+  $stateRegistry.register(prefsFutureState);
+  $stateRegistry.register(mymessagesFutureState);
 }]);
 
 MAIN_MODULE.component('app', app);

@@ -12,8 +12,6 @@ import ocLazyLoad from "oclazyload";
 
 import { MAIN_MODULE } from '../main/main.module';
 import { GLOBAL_MODULE } from '../global/global.module';
-import { MYMESSAGES_MODULE } from '../mymessages/mymessages.module';
-import { PREFS_MODULE } from '../prefs/prefs.module';
 
 // Create the angular module "demo".
 //
@@ -22,11 +20,13 @@ import { PREFS_MODULE } from '../prefs/prefs.module';
 export const ngmodule = angular.module("demo", [
   uiRouter,
   ocLazyLoad,
-  // CONTACTS_MODULE.name // lazy loaded below
   MAIN_MODULE.name,
   GLOBAL_MODULE.name,
-  MYMESSAGES_MODULE.name,
-  PREFS_MODULE.name,
+
+  // These modules are lazy loaded via future states in app.states.js
+  // CONTACTS_MODULE.name
+  // MYMESSAGES_MODULE.name
+  // PREFS_MODULE.name
 ]);
 
 ngmodule.config(['$uiRouterProvider', $uiRouter => {

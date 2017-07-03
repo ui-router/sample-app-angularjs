@@ -92,7 +92,29 @@ export const contactsFutureState = {
   url: '/contacts',
   lazyLoad: function(transition) {
     const $ocLazyLoad = transition.injector().get('$ocLazyLoad');
-    return System.import('../contacts/contacts.module').then((ngmod) => $ocLazyLoad.load(ngmod.CONTACTS_MODULE))
+    return System.import('../contacts/contacts.module').then(mod => $ocLazyLoad.load(mod.CONTACTS_MODULE))
+  }
+};
+
+// Future State (Placeholder) for the prefs module
+export const prefsFutureState = {
+  parent: 'app',
+  name: 'prefs.**',
+  url: '/prefs',
+  lazyLoad: function(transition) {
+    const $ocLazyLoad = transition.injector().get('$ocLazyLoad');
+    return System.import('../prefs/prefs.module').then(mod => $ocLazyLoad.load(mod.PREFS_MODULE))
+  }
+};
+
+// Future State (Placeholder) for the mymessages module
+export const mymessagesFutureState = {
+  parent: 'app',
+  name: 'mymessages.**',
+  url: '/mymessages',
+  lazyLoad: function(transition) {
+    const $ocLazyLoad = transition.injector().get('$ocLazyLoad');
+    return System.import('../mymessages/mymessages.module').then(mod => $ocLazyLoad.load(mod.MYMESSAGES_MODULE))
   }
 };
 
