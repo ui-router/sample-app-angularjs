@@ -1,9 +1,0 @@
-{
-  "name": "ui-router-architecture",
-  "dependencies": {},
-  "globalDependencies": {
-    "angular": "registry:dt/angular#1.5.0+20160709055139",
-    "es6-shim": "registry:dt/es6-shim#0.31.2+20160602141504",
-    "jquery": "registry:dt/jquery#1.10.0+20160704162008"
-  }
-}
