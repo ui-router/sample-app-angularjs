@@ -50,7 +50,7 @@ module.exports = {
       },
       {
         test: /\.js$/,
-        exclude: /(uirouter|node_modules)/,
+        exclude: /(node_modules)/,
         use: { loader: 'babel-loader', options: { presets: ['babel-preset-es2015'] } },
       }
     ]
