@@ -329,8 +329,19 @@ button.btn i + span {
 }
 
 #spinner {
-    display: block;
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
+    position: fixed;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+
+    display: flex;
+    flex-flow: column;
+    align-content: center;
+    justify-content: center;
+}
+#spinner i {
+    flex: 0 0 auto;
+    margin-left: auto;
+    margin-right: auto;
 }

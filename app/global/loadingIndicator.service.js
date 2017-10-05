@@ -14,3 +14,4 @@ export class LoadingIndicatorService {
     };
   }
 }
+LoadingIndicatorService.$inject = ['$document', '$compile', '$rootScope'];
