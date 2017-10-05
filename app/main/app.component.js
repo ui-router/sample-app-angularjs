@@ -2,13 +2,13 @@
  * The controller for the `app` component.
  */
 class AuthedController {
-  constructor(AppConfig, AuthService, $state) {
+  constructor(AppConfig, AuthService, $state, $transitions, LoadingIndicatorService) {
     this.AuthService = AuthService;
     this.$state = $state;
 
     this.emailAddress = AppConfig.emailAddress;
     this.isAuthenticated = AuthService.isAuthenticated();
-  }
+ }
 
   logout() {
     let {AuthService, $state} = this;
@@ -21,7 +21,7 @@ class AuthedController {
     return this.$state.includes(glob);
   }
 }
-AuthedController.$inject = ['AppConfig', 'AuthService', '$state'];
+AuthedController.$inject = ['AppConfig', 'AuthService', '$state', '$transitions', 'LoadingIndicatorService'];
 
 /**
  * This is the main app component for an authenticated user.

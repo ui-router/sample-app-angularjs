@@ -327,3 +327,21 @@ button.btn i + span {
     0% { left: 1.5em; }
     100% { left: 0.5em; }
 }
+
+#spinner {
+    position: fixed;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+
+    display: flex;
+    flex-flow: column;
+    align-content: center;
+    justify-content: center;
+}
+#spinner i {
+    flex: 0 0 auto;
+    margin-left: auto;
+    margin-right: auto;
+}
