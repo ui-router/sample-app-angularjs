@@ -327,3 +327,10 @@ button.btn i + span {
     0% { left: 1.5em; }
     100% { left: 0.5em; }
 }
+
+#spinner {
+    display: block;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+}
