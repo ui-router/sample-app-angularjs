@@ -6,7 +6,7 @@ var DEV = DEV_SERVER || process.env.DEV;
 
 var plugins = [];
 if (!DEV) {
-  plugins.push(new webpack.optimize.UglifyJsPlugin({ sourceMap: true, }));
+  // plugins.push(new webpack.optimize.UglifyJsPlugin({ sourceMap: true, }));
 }
 plugins.push(new webpack.optimize.CommonsChunkPlugin({ name: 'vendor' }));
 
@@ -51,7 +51,7 @@ module.exports = {
       {
         test: /\.js$/,
         exclude: /(node_modules)/,
-        use: { loader: 'babel-loader', options: { presets: ['babel-preset-es2015'] } },
+        use: { loader: 'babel-loader', options: { presets: ['es2015-ie'] } },
       }
     ]
   },
