@@ -29,7 +29,8 @@ export const ngmodule = angular.module("demo", [
   // PREFS_MODULE.name
 ]);
 
-ngmodule.config(['$uiRouterProvider', $uiRouter => {
+ngmodule.config(['$uiRouterProvider', '$locationProvider', ($uiRouter, $locationProvider) => {
+  $locationProvider.hashPrefix('');
   $uiRouter.plugin(StickyStatesPlugin);
   $uiRouter.plugin(DSRPlugin);
   // Show the UI-Router Visualizer
