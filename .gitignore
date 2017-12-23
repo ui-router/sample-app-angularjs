@@ -7,3 +7,6 @@ node_modules/
 
 _bundles
 transpiled
+
+cypress/screenshots
+cypress/videos
