@@ -22,9 +22,9 @@ export const contactList = {
   
       <!-- Highlight the selected contact:
           When the current state matches the ui-sref's state (and its parameters)
-          ui-sref-active applies the 'selected' class to the li element -->
-      <li ng-repeat="contact in $ctrl.contacts" ui-sref-active="selected">
-        <a ui-sref=".contact({contactId: contact._id})">
+          ui-sref-active applies the 'selected' class to the a element -->
+      <li ng-repeat="contact in $ctrl.contacts">
+        <a ui-sref=".contact({contactId: contact._id})" ui-sref-active="selected">
           {{contact.name.first}} {{contact.name.last}}
         </a>
       </li>
