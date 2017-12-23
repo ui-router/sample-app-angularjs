@@ -1,5 +1,7 @@
 ## UI-Router 1.0 Sample Application
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/ui-router/sample-app-angularjs.svg)](https://greenkeeper.io/)
+
 http://ui-router.github.io/sample-app/#/mymessages/inbox/5648b50cc586cac4aed6836f
 
 <img src="https://travis-ci.org/ui-router/sample-app-angularjs.svg?branch=master" alt="travis ci status">
