@@ -16,7 +16,7 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/ui-router/sample-app.git"
+    "url": "https://github.com/ui-router/sample-app-angularjs.git"
   },
   "dependencies": {
     "@uirouter/angularjs": "1.0.10",
