@@ -2,6 +2,8 @@
 
 http://ui-router.github.io/sample-app/#/mymessages/inbox/5648b50cc586cac4aed6836f
 
+<img src="https://travis-ci.org/ui-router/sample-app-angularjs.svg?branch=master" alt="travis ci status">
+
 This sample app is intended to demonstrate a non-trivial ui-router application.
 
 - Multiple sub-modules
@@ -68,4 +70,3 @@ There are many ways to structure a ui-router app.  We aren't super opinionated o
   - The state is _entered_ when the data is ready
   - The resolved data is injected into the components
   - The resolve data remains loaded until the state is exited
- 
