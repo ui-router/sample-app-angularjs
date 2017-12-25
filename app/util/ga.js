@@ -12,21 +12,22 @@ ga('send', 'pageview');
 
 
 ngmodule.config(['$transitionsProvider', $transitionsProvider => {
-  $transitionsProvider.onBefore({}, $transition$ => {
-    let path = $transition$.treeChanges().to
-        .map(node=>node.state.self.url)
-        .filter(x => x != null && x !== '^')
-        .join('');
+  const vpv = (vpath) =>
+      window['ga']('send', 'pageview', vpath);
 
-    let vpv = (path) => ga('send', 'pageview', path);
+  const path = (trans) => {
+    const formattedRoute = trans.$to().url.format(trans.params());
+    const withSitePrefix = location.pathname + formattedRoute;
+    return `/${withSitePrefix.split('/').filter(x => x).join('/')}`;
+  };
 
-    let success = () => { vpv(path); };
-    let error = (err) => {
-      let errType = err && err.hasOwnProperty("type") ? err.type : '_';
-      path = path.replace(/^\//, "");
-      vpv(`/errors/${errType}/${path}`)
-    };
+  const error = (trans) => {
+    const err = trans.error();
+    const type = err && err.hasOwnProperty('type') ? err.type : '_';
+    const message = err && err.hasOwnProperty('message') ? err.message : '_';
+    vpv(path(trans) + ';errorType=' + type + ';errorMessage=' + message);
+  };
 
-    $transition$.promise.then(success, error);
-  })
+  $transitionsProvider.onSuccess({}, (trans) => vpv(path(trans)), { priority: -10000 });
+  $transitionsProvider.onError({}, (trans) => error(trans), { priority: -10000 });
 }]);
