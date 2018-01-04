@@ -97,14 +97,14 @@
     rollup-plugin-sourcemaps "^0.4.2"
     rollup-plugin-uglify "^1.0.2"
 
-"@uirouter/visualizer@5.0.6":
-  version "5.0.6"
-  resolved "https://registry.yarnpkg.com/@uirouter/visualizer/-/visualizer-5.0.6.tgz#bf892bebe2384b51ea9f91e616b5a3ad11fb6a1d"
+"@uirouter/visualizer@5.1.3":
+  version "5.1.3"
+  resolved "https://registry.yarnpkg.com/@uirouter/visualizer/-/visualizer-5.1.3.tgz#c62d57ee7f11f3414cd05232d4b7a698a2416a9b"
   dependencies:
     d3-hierarchy "^1.1.5"
     d3-interpolate "^1.1.5"
+    file-loader "^1.1.6"
     preact "^8.2.5"
-    typestyle "^1.5.1"
 
 abbrev@1:
   version "1.1.0"
@@ -157,7 +157,7 @@ ajv@^4.9.1:
     co "^4.6.0"
     json-stable-stringify "^1.0.1"
 
-ajv@^5.1.0, ajv@^5.1.5:
+ajv@^5.0.0, ajv@^5.1.0, ajv@^5.1.5:
   version "5.5.2"
   resolved "https://registry.yarnpkg.com/ajv/-/ajv-5.5.2.tgz#73b5eeca3fab653e3d3f9422b341ad42205dc965"
   dependencies:
@@ -2147,6 +2147,13 @@ figures@^1.7.0:
     escape-string-regexp "^1.0.5"
     object-assign "^4.1.0"
 
+file-loader@^1.1.6:
+  version "1.1.6"
+  resolved "https://registry.yarnpkg.com/file-loader/-/file-loader-1.1.6.tgz#7b9a8f2c58f00a77fddf49e940f7ac978a3ea0e8"
+  dependencies:
+    loader-utils "^1.0.2"
+    schema-utils "^0.3.0"
+
 filename-regex@^2.0.0:
   version "2.0.1"
   resolved "https://registry.yarnpkg.com/filename-regex/-/filename-regex-2.0.1.tgz#c1c4b9bee3e09725ddb106b75c1e301fe2f18b26"
@@ -2241,10 +2248,6 @@ form-data@~2.3.1:
 forwarded@~0.1.2:
   version "0.1.2"
   resolved "https://registry.yarnpkg.com/forwarded/-/forwarded-0.1.2.tgz#98c23dab1175657b8c0573e8ceccd91b0ff18c84"
-
-free-style@2.5.1:
-  version "2.5.1"
-  resolved "https://registry.yarnpkg.com/free-style/-/free-style-2.5.1.tgz#5e3f684c470d3bba7e4dbb43524e0a08917e873c"
 
 fresh@0.5.0:
   version "0.5.0"
@@ -4255,6 +4258,12 @@ safe-buffer@5.1.1, safe-buffer@^5.0.1, safe-buffer@^5.1.0, safe-buffer@^5.1.1, s
   version "5.1.1"
   resolved "https://registry.yarnpkg.com/safe-buffer/-/safe-buffer-5.1.1.tgz#893312af69b2123def71f57889001671eeb2c853"
 
+schema-utils@^0.3.0:
+  version "0.3.0"
+  resolved "https://registry.yarnpkg.com/schema-utils/-/schema-utils-0.3.0.tgz#f5877222ce3e931edae039f17eb3716e7137f8cf"
+  dependencies:
+    ajv "^5.0.0"
+
 select-hose@^2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/select-hose/-/select-hose-2.0.0.tgz#625d8658f865af43ec962bfc376a37359a4994ca"
@@ -4857,12 +4866,6 @@ type-is@~1.6.15:
 typedarray@^0.0.6:
   version "0.0.6"
   resolved "https://registry.yarnpkg.com/typedarray/-/typedarray-0.0.6.tgz#867ac74e3864187b1d3d47d996a78ec5c8830777"
-
-typestyle@^1.5.1:
-  version "1.5.1"
-  resolved "https://registry.yarnpkg.com/typestyle/-/typestyle-1.5.1.tgz#b2c79c4d6d5c6e2cc6bffdc9468665512910b8e5"
-  dependencies:
-    free-style "2.5.1"
 
 ua-parser-js@0.7.12:
   version "0.7.12"
