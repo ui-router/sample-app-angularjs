@@ -73,15 +73,15 @@
   version "4.0.0"
   resolved "https://registry.yarnpkg.com/@types/sinon/-/sinon-4.0.0.tgz#9a93ffa4ee1329e85166278a5ed99f81dc4c8362"
 
-"@uirouter/angularjs@1.0.12":
-  version "1.0.12"
-  resolved "https://registry.yarnpkg.com/@uirouter/angularjs/-/angularjs-1.0.12.tgz#b2275b7e33e0024a485f96568a18d350539880f3"
+"@uirouter/angularjs@1.0.13":
+  version "1.0.13"
+  resolved "https://registry.yarnpkg.com/@uirouter/angularjs/-/angularjs-1.0.13.tgz#a63561d1177541f19b4231117d83ec49a5f19b90"
   dependencies:
-    "@uirouter/core" "5.0.13"
+    "@uirouter/core" "5.0.14"
 
-"@uirouter/core@5.0.13":
-  version "5.0.13"
-  resolved "https://registry.yarnpkg.com/@uirouter/core/-/core-5.0.13.tgz#e1b31626c393cbdd82651755ff1ce3fc55163fd0"
+"@uirouter/core@5.0.14":
+  version "5.0.14"
+  resolved "https://registry.yarnpkg.com/@uirouter/core/-/core-5.0.14.tgz#621477f779886c9287fcc606a4082157fc0ffa65"
 
 "@uirouter/dsr@^1.0.0":
   version "1.0.2"
