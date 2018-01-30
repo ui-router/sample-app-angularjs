@@ -23,24 +23,24 @@
     "url": "https://github.com/ui-router/sample-app-angularjs.git"
   },
   "dependencies": {
-    "@uirouter/angularjs": "1.0.12",
+    "@uirouter/angularjs": "1.0.13",
     "@uirouter/dsr": "1.0.2",
     "@uirouter/sticky-states": "1.5.0",
     "@uirouter/visualizer": "5.1.3",
-    "angular": "<2",
+    "angular": "1.6.8",
     "oclazyload": "1.1.0"
   },
   "devDependencies": {
-    "babel-core": "6.24.1",
-    "babel-loader": "7.0.0",
+    "babel-core": "6.26.0",
+    "babel-loader": "7.1.2",
     "babel-preset-es2015": "6.24.1",
     "babel-preset-es2015-ie": "6.7.0",
-    "browser-sync": "2.21.0",
-    "cypress": "1.4.0",
+    "browser-sync": "2.23.6",
+    "cypress": "1.4.1",
     "npm-run-all": "4.1.2",
-    "source-map-loader": "0.2.1",
-    "wait-on": "2.0.2",
+    "source-map-loader": "0.2.3",
+    "wait-on": "2.1.0",
     "webpack": "3.10.0",
-    "webpack-dev-server": "2.9.7"
+    "webpack-dev-server": "2.11.1"
   }
 }
