@@ -10,21 +10,21 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.GLOBAL_MODULE = undefined;
 
-var _appConfig = __webpack_require__(70);
+var _appConfig = __webpack_require__(71);
 
-var _auth = __webpack_require__(71);
+var _auth = __webpack_require__(72);
 
-var _dataSources = __webpack_require__(72);
+var _dataSources = __webpack_require__(73);
 
-var _dialog = __webpack_require__(74);
+var _dialog = __webpack_require__(75);
 
 var _dialog2 = __webpack_require__(30);
 
-var _loadingIndicator = __webpack_require__(76);
+var _loadingIndicator = __webpack_require__(77);
 
-var _requiresAuth = __webpack_require__(77);
+var _requiresAuth = __webpack_require__(78);
 
-var _loadingIndicator2 = __webpack_require__(78);
+var _loadingIndicator2 = __webpack_require__(79);
 
 var GLOBAL_MODULE = exports.GLOBAL_MODULE = angular.module('global', []);
 
@@ -133,7 +133,7 @@ var _login = __webpack_require__(34);
 
 var _home = __webpack_require__(35);
 
-var _app2 = __webpack_require__(79);
+var _app2 = __webpack_require__(80);
 
 var MAIN_MODULE = exports.MAIN_MODULE = angular.module('main', []);
 
@@ -329,17 +329,17 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.CONTACTS_MODULE = undefined;
 
-var _contactDetail = __webpack_require__(80);
+var _contactDetail = __webpack_require__(81);
 
-var _contactList = __webpack_require__(81);
+var _contactList = __webpack_require__(82);
 
-var _contacts = __webpack_require__(82);
+var _contacts = __webpack_require__(83);
 
-var _contactView = __webpack_require__(83);
+var _contactView = __webpack_require__(84);
 
-var _editContact = __webpack_require__(84);
+var _editContact = __webpack_require__(85);
 
-var _contacts2 = __webpack_require__(85);
+var _contacts2 = __webpack_require__(86);
 
 var CONTACTS_MODULE = exports.CONTACTS_MODULE = angular.module('contacts', []);
 
@@ -368,9 +368,9 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.PREFS_MODULE = undefined;
 
-var _prefs = __webpack_require__(86);
+var _prefs = __webpack_require__(87);
 
-var _prefs2 = __webpack_require__(87);
+var _prefs2 = __webpack_require__(88);
 
 var PREFS_MODULE = exports.PREFS_MODULE = angular.module('prefs', []);
 
@@ -392,25 +392,25 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.MYMESSAGES_MODULE = undefined;
 
-var _compose = __webpack_require__(88);
+var _compose = __webpack_require__(89);
 
-var _folderList = __webpack_require__(89);
+var _folderList = __webpack_require__(90);
 
-var _message = __webpack_require__(90);
+var _message = __webpack_require__(91);
 
-var _messageList = __webpack_require__(91);
+var _messageList = __webpack_require__(92);
 
-var _mymessages = __webpack_require__(92);
+var _mymessages = __webpack_require__(93);
 
-var _messageTable = __webpack_require__(93);
+var _messageTable = __webpack_require__(94);
 
-var _sortMessages = __webpack_require__(94);
+var _sortMessages = __webpack_require__(95);
 
-var _messageBody = __webpack_require__(95);
+var _messageBody = __webpack_require__(96);
 
-var _messagesListUI = __webpack_require__(96);
+var _messagesListUI = __webpack_require__(97);
 
-var _mymessages2 = __webpack_require__(97);
+var _mymessages2 = __webpack_require__(98);
 
 var MYMESSAGES_MODULE = exports.MYMESSAGES_MODULE = angular.module('mymessages', []);
 
@@ -465,7 +465,8 @@ MYMESSAGES_MODULE.config(['$stateRegistryProvider', function ($stateRegistry) {
 /* 66 */,
 /* 67 */,
 /* 68 */,
-/* 69 */
+/* 69 */,
+/* 70 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -481,10 +482,10 @@ __webpack_require__(38);
 
 __webpack_require__(37);
 
-__webpack_require__(98);
+__webpack_require__(99);
 
 /***/ }),
-/* 70 */
+/* 71 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -525,7 +526,7 @@ var AppConfig = exports.AppConfig = function () {
 }();
 
 /***/ }),
-/* 71 */
+/* 72 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -607,7 +608,7 @@ var AuthService = exports.AuthService = function () {
 AuthService.$inject = ['AppConfig', '$q', '$timeout'];
 
 /***/ }),
-/* 72 */
+/* 73 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -618,7 +619,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.Messages = exports.Folders = exports.Contacts = undefined;
 
-var _sessionStorage = __webpack_require__(73);
+var _sessionStorage = __webpack_require__(74);
 
 function _defaults(obj, defaults) { var keys = Object.getOwnPropertyNames(defaults); for (var i = 0; i < keys.length; i++) { var key = keys[i]; var value = Object.getOwnPropertyDescriptor(defaults, key); if (value && value.configurable && obj[key] === undefined) { Object.defineProperty(obj, key, value); } } return obj; }
 
@@ -701,7 +702,7 @@ var Messages = exports.Messages = function (_SessionStorage3) {
 Messages.$inject = ['$http', '$timeout', '$q', 'AppConfig'];
 
 /***/ }),
-/* 73 */
+/* 74 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -894,7 +895,7 @@ var SessionStorage = exports.SessionStorage = function () {
 SessionStorage.$inject = ['$http', '$timeout', '$q', 'sessionStorageKey', 'sourceUrl', 'AppConfig'];
 
 /***/ }),
-/* 74 */
+/* 75 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -925,8 +926,8 @@ function dialog($timeout, $q) {
 }
 
 /***/ }),
-/* 75 */,
-/* 76 */
+/* 76 */,
+/* 77 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -963,7 +964,7 @@ var LoadingIndicatorService = exports.LoadingIndicatorService = function Loading
 LoadingIndicatorService.$inject = ['$document', '$compile', '$rootScope'];
 
 /***/ }),
-/* 77 */
+/* 78 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1006,7 +1007,7 @@ function authHookRunBlock($transitions, AuthService) {
 }
 
 /***/ }),
-/* 78 */
+/* 79 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1027,7 +1028,7 @@ function loadingIndicatorHookRunBlock($transitions, LoadingIndicatorService) {
 }
 
 /***/ }),
-/* 79 */
+/* 80 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1164,7 +1165,7 @@ var mymessagesFutureState = exports.mymessagesFutureState = {
 };
 
 /***/ }),
-/* 80 */
+/* 81 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1183,7 +1184,7 @@ var contactDetail = exports.contactDetail = {
 };
 
 /***/ }),
-/* 81 */
+/* 82 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1205,7 +1206,7 @@ var contactList = exports.contactList = {
 };
 
 /***/ }),
-/* 82 */
+/* 83 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1227,7 +1228,7 @@ var contacts = exports.contacts = {
 };
 
 /***/ }),
-/* 83 */
+/* 84 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1249,7 +1250,7 @@ var contactView = exports.contactView = {
   template: '\n    <div class="contact">\n    \n      <contact-detail contact="$ctrl.contact"></contact-detail>\n      \n      <!-- This button has an ui-sref to the mymessages.compose state. The ui-sref provides the mymessages.compose\n           state with an non-url parameter, which is used as the initial message model -->\n      <button class="btn btn-primary" ui-sref="mymessages.compose({ message: { to: $ctrl.contact.email } })">\n        <i class="fa fa-envelope"></i><span>Message</span>\n      </button>\n    \n      <!-- This button has a relative ui-sref to the contacts.contact.edit state. -->\n      <button class="btn btn-primary" ui-sref=".edit">\n        <i class="fa fa-pencil"></i><span>Edit Contact</span>\n      </button>\n      \n    </div>\n' };
 
 /***/ }),
-/* 84 */
+/* 85 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1357,7 +1358,7 @@ var editContact = exports.editContact = {
   template: '\n    <div class="contact">\n      <div class="details">\n        <div><label>First</label>   <input type="text" ng-model="$ctrl.contact.name.first"></div>\n        <div><label>Last</label>    <input type="text" ng-model="$ctrl.contact.name.last"></div>\n        <div><label>Company</label> <input type="text" ng-model="$ctrl.contact.company"></div>\n        <div><label>Age</label>     <input type="text" ng-model="$ctrl.contact.age"></div>\n        <div><label>Phone</label>   <input type="text" ng-model="$ctrl.contact.phone"></div>\n        <div><label>Email</label>   <input type="text" ng-model="$ctrl.contact.email"></div>\n        <div><label>Street</label>  <input type="text" ng-model="$ctrl.contact.address.street"></div>\n        <div><label>City</label>    <input type="text" ng-model="$ctrl.contact.address.city"> </div>\n        <div><label>State</label>   <input type="text" ng-model="$ctrl.contact.address.state"></div>\n        <div><label>Zip</label>     <input type="text" ng-model="$ctrl.contact.address.zip"></div>\n        <div><label>Image</label>   <input type="text" ng-model="$ctrl.contact.picture"></div>\n      </div>\n    \n      <hr>\n    \n      <div>\n        <!-- This button\'s ui-sref relatively targets the parent state, i.e., contacts.contact -->\n        <button class="btn btn-primary" ui-sref="^"><i class="fa fa-close"></i><span>Cancel</span></button>\n        <button class="btn btn-primary" ng-click="$ctrl.save($ctrl.contact)"><i class="fa fa-save"></i><span>Save</span></button>\n        <button class="btn btn-primary" ng-click="$ctrl.remove($ctrl.contact)"><i class="fa fa-close"></i><span>Delete</span></button>\n      </div>\n    </div>\n' };
 
 /***/ }),
-/* 85 */
+/* 86 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1445,7 +1446,7 @@ var newContactState = exports.newContactState = {
 };
 
 /***/ }),
-/* 86 */
+/* 87 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1503,7 +1504,7 @@ var prefs = exports.prefs = {
   template: '\n    <div>\n      <button class="btn btn-primary" ng-click="$ctrl.reset()"><i class="fa fa-recycle"></i> <span>Reset All Data</span></button>\n    </div>\n    \n    <div>\n      <label for="restDelay">Simulated REST API delay (ms)</label>\n      <input type="text" name="restDelay" ng-model="$ctrl.prefs.restDelay">\n      <button class="btn btn-primary" ng-click="$ctrl.savePrefs()">Save</button>\n    </div>\n' };
 
 /***/ }),
-/* 87 */
+/* 88 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1525,7 +1526,7 @@ var prefsState = exports.prefsState = {
 };
 
 /***/ }),
-/* 88 */
+/* 89 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1639,7 +1640,7 @@ var compose = exports.compose = {
 };
 
 /***/ }),
-/* 89 */
+/* 90 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1657,7 +1658,7 @@ var folderList = exports.folderList = {
   template: '\n    <!-- Renders a list of folders -->\n    <div class="folderlist">\n      <ul class="selectlist list-unstyled">\n  \n        <!-- Highlight the selected folder:\n            When the current state matches the ui-sref\'s state (and its parameters)\n            ui-sref-active applies the \'selected\' class to the li element -->\n        <li class="folder" ui-sref-active="selected" ng-repeat="folder in $ctrl.folders" >\n          <!-- This ui-sref is a relative link to the \'mymessages.messagelist\' substate. It provides the\n              \'folderId\' parameter value from the current folder\'s .id property -->\n          <a ui-sref=".messagelist({folderId: folder._id})"><i class="fa"></i>{{folder._id}}</a>\n        </li>\n      </ul>\n    </div>\n' };
 
 /***/ }),
-/* 90 */
+/* 91 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1788,7 +1789,7 @@ var message = exports.message = {
   template: "\n    <div class=\"message\">\n    \n      <div class=\"header\">\n        <div>\n          <h4>{{$ctrl.message.subject}}</h4>\n          <h5>{{$ctrl.message.from}} <i class=\"fa fa-long-arrow-right\"></i> {{$ctrl.message.to}}</h5>\n        </div>\n    \n        <div class=\"line2\">\n          <div>{{$ctrl.message.date | date: 'longDate'}} {{$ctrl.message.date | date: 'mediumTime'}}</div>\n          <div>\n            <button class=\"btn btn-primary\" ng-show=\"$ctrl.actions.edit\" ng-click=\"$ctrl.editDraft($ctrl.message)\"><i class=\"fa fa-pencil\"></i> <span>Edit Draft</span></button>\n            <button class=\"btn btn-primary\" ng-show=\"$ctrl.actions.reply\" ng-click=\"$ctrl.reply($ctrl.message)\"><i class=\"fa fa-reply\"></i> <span>Reply</span></button>\n            <button class=\"btn btn-primary\" ng-show=\"$ctrl.actions.forward\" ng-click=\"$ctrl.forward($ctrl.message)\"><i class=\"fa fa-forward\" ></i> <span>Forward</span></button>\n            <button class=\"btn btn-primary\" ng-show=\"$ctrl.actions.delete\" ng-click=\"$ctrl.remove($ctrl.message)\"><i class=\"fa fa-close\"></i> <span>Delete</span></button>\n          </div>\n        </div>\n      </div>\n    \n      <!-- Pass the raw (plain text) message body through the messageBody filter to format slightly nicer. -->\n      <div class=\"body\" ng-bind-html=\"::$ctrl.message.body | messageBody\"></div>\n    </div>\n" };
 
 /***/ }),
-/* 91 */
+/* 92 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1805,7 +1806,7 @@ var messageList = exports.messageList = {
   template: '\n    <div class="messages">\n      <message-table columns="$ctrl.folder.columns" messages="$ctrl.messages"></message-table>\n    </div>\n' };
 
 /***/ }),
-/* 92 */
+/* 93 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1827,7 +1828,7 @@ var mymessages = exports.mymessages = {
   template: '\n    <div class="my-messages">\n    \n      <!-- Show message folders -->\n      <folder-list folders="$ctrl.folders"></folder-list>\n    \n      <!-- A named view for the list of messages in this folder.  This will be  filled in by the \'mymessages.messagelist\' child state -->\n      <div ui-view="messagelist" class="messagelist"> </div>\n    \n    </div>\n    \n    <!-- A named ui-view for a message\'s contents.  The \'mymessages.messagelist.message\' grandchild state plugs into this ui-view -->\n    <div ui-view="messagecontent"></div>\n' };
 
 /***/ }),
-/* 93 */
+/* 94 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1863,7 +1864,7 @@ function messageTableController(AppConfig) {
 }
 
 /***/ }),
-/* 94 */
+/* 95 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1900,7 +1901,7 @@ function sortMessages(AppConfig) {
 }
 
 /***/ }),
-/* 95 */
+/* 96 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1922,7 +1923,7 @@ function messageBody($sce) {
 }
 
 /***/ }),
-/* 96 */
+/* 97 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1961,7 +1962,7 @@ var MessageListUI = exports.MessageListUI = function () {
 MessageListUI.$inject = ['$filter', 'AppConfig'];
 
 /***/ }),
-/* 97 */
+/* 98 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2073,13 +2074,13 @@ var composeState = exports.composeState = {
 };
 
 /***/ }),
-/* 98 */
+/* 99 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var _ngmodule = __webpack_require__(99);
+var _ngmodule = __webpack_require__(100);
 
 /** Google analytics */
 
@@ -2121,7 +2122,7 @@ _ngmodule.ngmodule.config(['$transitionsProvider', function ($transitionsProvide
 }]);
 
 /***/ }),
-/* 99 */
+/* 100 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2140,13 +2141,13 @@ var _angularjs = __webpack_require__(39);
 
 var _angularjs2 = _interopRequireDefault(_angularjs);
 
-var _stickyStates = __webpack_require__(65);
+var _stickyStates = __webpack_require__(66);
 
-var _dsr = __webpack_require__(66);
+var _dsr = __webpack_require__(67);
 
-var _visualizer = __webpack_require__(67);
+var _visualizer = __webpack_require__(68);
 
-var _oclazyload = __webpack_require__(68);
+var _oclazyload = __webpack_require__(69);
 
 var _oclazyload2 = _interopRequireDefault(_oclazyload);
 
@@ -2184,5 +2185,5 @@ ngmodule.config(['$uiRouterProvider', '$locationProvider', function ($uiRouter, 
 }]);
 
 /***/ })
-]),[69]);
+]),[70]);
 //# sourceMappingURL=sampleapp.js.map
