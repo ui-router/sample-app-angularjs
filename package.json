@@ -26,7 +26,7 @@
     "@uirouter/angularjs": "1.0.15",
     "@uirouter/dsr": "1.0.2",
     "@uirouter/sticky-states": "1.5.0",
-    "@uirouter/visualizer": "5.1.3",
+    "@uirouter/visualizer": "6.0.0",
     "angular": "1.6.9",
     "oclazyload": "1.1.0"
   },

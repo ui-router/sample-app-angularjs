@@ -93,9 +93,9 @@
   version "1.5.0"
   resolved "https://registry.yarnpkg.com/@uirouter/sticky-states/-/sticky-states-1.5.0.tgz#48b7612300948d8275eb638e443e6d2385d27977"
 
-"@uirouter/visualizer@5.1.3":
-  version "5.1.3"
-  resolved "https://registry.yarnpkg.com/@uirouter/visualizer/-/visualizer-5.1.3.tgz#c62d57ee7f11f3414cd05232d4b7a698a2416a9b"
+"@uirouter/visualizer@6.0.0":
+  version "6.0.0"
+  resolved "https://registry.yarnpkg.com/@uirouter/visualizer/-/visualizer-6.0.0.tgz#8812198ab5c89d7dd252665573bc027f2dd2ff98"
   dependencies:
     d3-hierarchy "^1.1.5"
     d3-interpolate "^1.1.5"
