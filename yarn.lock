@@ -1598,9 +1598,9 @@ currently-unhandled@^0.4.1:
   dependencies:
     array-find-index "^1.0.1"
 
-cypress@1.4.2:
-  version "1.4.2"
-  resolved "https://registry.yarnpkg.com/cypress/-/cypress-1.4.2.tgz#d957d631617aa87e64a7eae71502f2e175076638"
+cypress@2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/cypress/-/cypress-2.0.0.tgz#6cc9b5da2df1df6892873340f65e66a4df86844a"
   dependencies:
     "@cypress/listr-verbose-renderer" "0.4.1"
     "@cypress/xvfb" "1.1.3"
