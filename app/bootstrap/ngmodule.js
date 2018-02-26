@@ -7,7 +7,6 @@ import * as angular from "angular";
 import uiRouter from "@uirouter/angularjs";
 import { StickyStatesPlugin } from '@uirouter/sticky-states';
 import { DSRPlugin } from '@uirouter/dsr';
-import { visualizer } from "@uirouter/visualizer";
 import ocLazyLoad from "oclazyload";
 
 import { MAIN_MODULE } from '../main/main.module';
@@ -34,5 +33,5 @@ ngmodule.config(['$uiRouterProvider', '$locationProvider', ($uiRouter, $location
   $uiRouter.plugin(StickyStatesPlugin);
   $uiRouter.plugin(DSRPlugin);
   // Show the UI-Router Visualizer
-  visualizer($uiRouter);
+  import("@uirouter/visualizer").then(module => $uiRouter.plugin(module.Visualizer));
 }]);

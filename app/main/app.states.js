@@ -92,7 +92,7 @@ export const contactsFutureState = {
   url: '/contacts',
   lazyLoad: function(transition) {
     const $ocLazyLoad = transition.injector().get('$ocLazyLoad');
-    return System.import('../contacts/contacts.module').then(mod => $ocLazyLoad.load(mod.CONTACTS_MODULE))
+    return import('../contacts/contacts.module').then(mod => $ocLazyLoad.load(mod.CONTACTS_MODULE))
   }
 };
 
@@ -103,7 +103,7 @@ export const prefsFutureState = {
   url: '/prefs',
   lazyLoad: function(transition) {
     const $ocLazyLoad = transition.injector().get('$ocLazyLoad');
-    return System.import('../prefs/prefs.module').then(mod => $ocLazyLoad.load(mod.PREFS_MODULE))
+    return import('../prefs/prefs.module').then(mod => $ocLazyLoad.load(mod.PREFS_MODULE))
   }
 };
 
@@ -114,7 +114,7 @@ export const mymessagesFutureState = {
   url: '/mymessages',
   lazyLoad: function(transition) {
     const $ocLazyLoad = transition.injector().get('$ocLazyLoad');
-    return System.import('../mymessages/mymessages.module').then(mod => $ocLazyLoad.load(mod.MYMESSAGES_MODULE))
+    return import('../mymessages/mymessages.module').then(mod => $ocLazyLoad.load(mod.MYMESSAGES_MODULE))
   }
 };
 

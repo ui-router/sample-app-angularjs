@@ -4,29 +4,13 @@ var path = require('path');
 var DEV_SERVER = process.argv[1].indexOf('webpack-dev-server') !== -1;
 var DEV = DEV_SERVER || process.env.DEV;
 
-var plugins = [];
-if (!DEV) {
-  // plugins.push(new webpack.optimize.UglifyJsPlugin({ sourceMap: true, }));
-}
-plugins.push(new webpack.optimize.CommonsChunkPlugin({ name: 'vendor' }));
-
-
 module.exports = {
+  mode: DEV ? 'development' : 'production',
   entry: {
     "sampleapp": "./app/bootstrap/bootstrap.js",
-
-    "vendor": [
-      'angular',
-      'oclazyload',
-      '@uirouter/core',
-      '@uirouter/angularjs',
-      '@uirouter/visualizer',
-      '@uirouter/sticky-states',
-      '@uirouter/dsr',
-    ],
   },
 
-  devtool: DEV ? 'source-map' :'source-map',
+  devtool: DEV ? 'eval' :'source-map',
 
   output: {
     path: path.join(__dirname, "_bundles"),
@@ -37,8 +21,6 @@ module.exports = {
   resolve: {
     extensions: ['.js']
   },
-
-  plugins: plugins,
 
   module: {
     rules: [
@@ -51,7 +33,7 @@ module.exports = {
       {
         test: /\.js$/,
         exclude: /(node_modules)/,
-        use: { loader: 'babel-loader', options: { presets: ['es2015-ie'] } },
+        use: { loader: 'babel-loader' },
       }
     ]
   },
