@@ -6552,9 +6552,9 @@ webpack-dev-middleware@2.0.6:
     url-join "^2.0.2"
     webpack-log "^1.0.1"
 
-webpack-dev-server@3.0.0:
-  version "3.0.0"
-  resolved "https://registry.yarnpkg.com/webpack-dev-server/-/webpack-dev-server-3.0.0.tgz#0ca2d293dc7a7b1a94fc5fd62cfca2a9fa61bcf7"
+webpack-dev-server@3.1.0:
+  version "3.1.0"
+  resolved "https://registry.yarnpkg.com/webpack-dev-server/-/webpack-dev-server-3.1.0.tgz#5d2365514d9dfa0d415502742d2cc28afc4a32d8"
   dependencies:
     ansi-html "0.0.7"
     array-includes "^3.0.3"
@@ -6582,6 +6582,7 @@ webpack-dev-server@3.0.0:
     strip-ansi "^3.0.0"
     supports-color "^5.1.0"
     webpack-dev-middleware "2.0.6"
+    webpack-log "^1.1.2"
     yargs "9.0.1"
 
 webpack-fork-yeoman-generator@^1.1.1:
@@ -6614,7 +6615,7 @@ webpack-fork-yeoman-generator@^1.1.1:
     through2 "^2.0.0"
     yeoman-environment "^1.1.0"
 
-webpack-log@^1.0.1:
+webpack-log@^1.0.1, webpack-log@^1.1.2:
   version "1.1.2"
   resolved "https://registry.yarnpkg.com/webpack-log/-/webpack-log-1.1.2.tgz#cdc76016537eed24708dc6aa3d1e52189efee107"
   dependencies:
@@ -6630,9 +6631,9 @@ webpack-sources@^1.0.1, webpack-sources@^1.1.0:
     source-list-map "^2.0.0"
     source-map "~0.6.1"
 
-webpack@4.0.0:
-  version "4.0.0"
-  resolved "https://registry.yarnpkg.com/webpack/-/webpack-4.0.0.tgz#423c2d27cb050e7655c6ea25ce27bfcbfcb56731"
+webpack@4.0.1:
+  version "4.0.1"
+  resolved "https://registry.yarnpkg.com/webpack/-/webpack-4.0.1.tgz#768d708beeca4c5f77f6c2d38a240fb6ff50ba5d"
   dependencies:
     acorn "^5.0.0"
     acorn-dynamic-import "^3.0.0"

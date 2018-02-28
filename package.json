@@ -41,8 +41,8 @@
     "npm-run-all": "4.1.2",
     "source-map-loader": "0.2.3",
     "wait-on": "2.1.0",
-    "webpack": "4.0.0",
+    "webpack": "4.0.1",
     "webpack-cli": "^2.0.9",
-    "webpack-dev-server": "3.0.0"
+    "webpack-dev-server": "3.1.0"
   }
 }
