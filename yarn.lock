@@ -89,9 +89,9 @@
   version "5.0.17"
   resolved "https://registry.yarnpkg.com/@uirouter/core/-/core-5.0.17.tgz#c85d422b1e9a45df885be8b84f9b7f53233a7973"
 
-"@uirouter/dsr@1.0.2":
-  version "1.0.2"
-  resolved "https://registry.yarnpkg.com/@uirouter/dsr/-/dsr-1.0.2.tgz#78dc7edb7caed00ded47a0e76a11270ebe1f3b9f"
+"@uirouter/dsr@1.0.3":
+  version "1.0.3"
+  resolved "https://registry.yarnpkg.com/@uirouter/dsr/-/dsr-1.0.3.tgz#a8bffc3c73b8d9f084594b5bdaad968f14cd1061"
 
 "@uirouter/sticky-states@1.5.0":
   version "1.5.0"
