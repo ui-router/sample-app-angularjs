@@ -1,0 +1,3 @@
+version: 2
+dependencies:
+- type: js

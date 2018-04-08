@@ -23,26 +23,26 @@
     "url": "https://github.com/ui-router/sample-app-angularjs.git"
   },
   "dependencies": {
-    "@uirouter/angularjs": "1.0.15",
-    "@uirouter/dsr": "1.0.2",
-    "@uirouter/sticky-states": "1.5.0",
-    "@uirouter/visualizer": "6.0.0",
-    "angular": "1.6.9",
-    "oclazyload": "1.1.0"
+    "@uirouter/angularjs": "^1.0.15",
+    "@uirouter/dsr": "^1.0.2",
+    "@uirouter/sticky-states": "^1.5.0",
+    "@uirouter/visualizer": "^6.0.0",
+    "angular": "^1.6.9",
+    "oclazyload": "^1.1.0"
   },
   "devDependencies": {
-    "babel-core": "6.26.0",
-    "babel-loader": "7.1.4",
+    "babel-core": "^6.26.0",
+    "babel-loader": "^7.1.4",
     "babel-plugin-syntax-dynamic-import": "^6.18.0",
-    "babel-preset-es2015": "6.24.1",
-    "babel-preset-es2015-ie": "6.7.0",
-    "browser-sync": "2.23.6",
-    "cypress": "2.1.0",
-    "npm-run-all": "4.1.2",
-    "source-map-loader": "0.2.3",
-    "wait-on": "2.1.0",
-    "webpack": "4.1.1",
+    "babel-preset-es2015": "^6.24.1",
+    "babel-preset-es2015-ie": "^6.7.0",
+    "browser-sync": "^2.23.6",
+    "cypress": "^2.1.0",
+    "npm-run-all": "^4.1.2",
+    "source-map-loader": "^0.2.3",
+    "wait-on": "^2.1.0",
+    "webpack": "^4.1.1",
     "webpack-cli": "^2.0.10",
-    "webpack-dev-server": "3.1.1"
+    "webpack-dev-server": "^3.1.1"
   }
 }
