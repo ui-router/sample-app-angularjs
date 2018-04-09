@@ -22,6 +22,10 @@ module.exports = {
     extensions: ['.js']
   },
 
+  optimization: {
+    splitChunks: { chunks: 'all', },
+  },
+
   module: {
     rules: [
       {
