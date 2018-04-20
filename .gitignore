@@ -4,6 +4,7 @@ node_modules/
 *.ipr
 *.iws
 .*
+yarn-error.log
 
 _bundles
 transpiled
