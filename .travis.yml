@@ -9,6 +9,10 @@ notifications:
     on_success: never
     rooms:
       secure: dhKdixX+Y9eKxubo6cFyhEejlRYMnqVfrOi90oOzp0WMp0FWYiB59x51JVrDhyOITUPaFISvwK7bbt/hL8qWhYj3SKzmedORrjK89wjTcq24KabJAUAtySQ0Vt0LFen9ORxVX7oNcQw2IF4PHOfI9+Wt1g84+3U2yGXqKgV3yAkp6Xb4RqBT8azc4/B8DRJxjbSLlOF186yMoqyH8KJSCjSt5Mvf3jqVjv/tFKvmr2he6bMoQw+tWx5y/tMuMm1P0hw08Zf2YkT1+GbE8IuM/j52/hDaAayRjRkiCHjHvP5Y9MaDl+3oBCErOcjfCNat1zJ+7TbZuWBjRao4Z/oOxYaIA/GYd7kVcoGPEypgJMAuQz6Uf3YzS7uIRjaFyal8NoGRF1vgZqSbx6oGiyEZ/ZtG30mYkZ0JhoncM+BiVJ1YkAXyNQl5xprEN3rSyP36LMS60IAB1MefiCQ+0dlvI239nnJ0EfzeH4IpUEFHnpnAmkNI7kTO77kr+DEGi4ILBfkSjZa1i9okRWLrR3XDM3BHDuDZfTp9XtFqXRShJYeSZWiBqU1uHIunaYtPEifGE5KZfwyU3OcZYe5rJMO3mcQw0PuSSTxhkwDZbujrDU4amHq4FY4R5HrxVGD/jf2Pd3IH8kLquLgzBdNvC6rVMIdu/w2vV2ikEvVtfhYIvYc=
+sudo: false
+git:
+  depth: 3
 cache:
   directories:
   - node_modules
+  - ".downstream_cache"
