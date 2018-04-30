@@ -96,12 +96,13 @@
   version "5.0.17"
   resolved "https://registry.yarnpkg.com/@uirouter/core/-/core-5.0.17.tgz#c85d422b1e9a45df885be8b84f9b7f53233a7973"
 
-"@uirouter/cypress-runner@^1.0.6":
-  version "1.0.6"
-  resolved "https://registry.yarnpkg.com/@uirouter/cypress-runner/-/cypress-runner-1.0.6.tgz#9a09cba567c72bffa11c7ba20527990b4b13b48a"
+"@uirouter/cypress-runner@^1.0.7":
+  version "1.0.7"
+  resolved "https://registry.yarnpkg.com/@uirouter/cypress-runner/-/cypress-runner-1.0.7.tgz#d465bbadc67e899d6a7fe5801d120aa7b413ce26"
   dependencies:
     cypress "^2.1.0"
     node-cleanup "^2.1.2"
+    portfinder "^1.0.13"
     serve "^6.5.5"
     wait-on "^2.1.0"
     yargs "^11.0.0"
@@ -4692,7 +4693,7 @@ pkginfo@0.4.1:
   version "0.4.1"
   resolved "https://registry.yarnpkg.com/pkginfo/-/pkginfo-0.4.1.tgz#b5418ef0439de5425fc4995042dced14fb2a84ff"
 
-portfinder@^1.0.9:
+portfinder@^1.0.13, portfinder@^1.0.9:
   version "1.0.13"
   resolved "https://registry.yarnpkg.com/portfinder/-/portfinder-1.0.13.tgz#bb32ecd87c27104ae6ee44b5a3ccbf0ebb1aede9"
   dependencies:
