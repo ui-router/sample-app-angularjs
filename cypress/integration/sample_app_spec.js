@@ -6,18 +6,18 @@ describe('unauthenticated sample app', () => {
   });
 
   it('loads', () => {
-    cy.visit('http://localhost:4000');
+    cy.visit('');
   });
 
   it('renders home', () => {
-    cy.visit('http://localhost:4000/#/home');
+    cy.visit('/#/home');
     cy.get('button.btn').contains('Messages');
     cy.get('button.btn').contains('Contacts');
     cy.get('button.btn').contains('Preferences');
   });
 
   it('asks for authentication', () => {
-    cy.visit('http://localhost:4000/#/home')
+    cy.visit('/#/home')
       .get('button.btn')
       .contains('Preferences')
       .click();
@@ -32,7 +32,7 @@ describe('unauthenticated sample app', () => {
   it('can authenticate', () => {
     expect(sessionStorage.getItem('appConfig')).to.equal(null);
 
-    cy.visit('http://localhost:4000/#/prefs');
+    cy.visit('/#/prefs');
 
     cy.contains('Log In');
     cy.contains('Username');
@@ -59,7 +59,7 @@ describe('authenticated sample app', () => {
     };
 
     if (!_appConfig) {
-      cy.visit('http://localhost:4000/#/login');
+      cy.visit('/#/login');
       cy.get('select').contains('myself').parent('select').select(EMAIL_ADDRESS);
       cy.get('button').contains('Log in').click();
       cy.url().should('include', '#/home')
@@ -76,23 +76,23 @@ describe('authenticated sample app', () => {
   });
 
   it('navigates to Preferences by url', () => {
-    cy.visit('http://localhost:4000/#/prefs');
+    cy.visit('/#/prefs');
     cy.contains('Reset All Data');
   });
 
   it('navigates to Contacts by url', () => {
-    cy.visit('http://localhost:4000/#/contacts');
+    cy.visit('/#/contacts');
     cy.contains('Select a contact');
   });
 
   it('navigates to Messages by url', () => {
-    cy.visit('http://localhost:4000/#/mymessages');
+    cy.visit('/#/mymessages');
     cy.get('table').contains('Sender');
     cy.get('table').contains('Subject');
   });
 
   it('can send a message', () => {
-    cy.visit('http://localhost:4000/#/mymessages');
+    cy.visit('/#/mymessages');
     cy.url().should('include', '#/mymessages/inbox');
     cy.contains('New Message').click();
     cy.url().should('include', '#/mymessages/compose');
@@ -109,7 +109,7 @@ describe('authenticated sample app', () => {
   });
 
   it('can save a draft', () => {
-    cy.visit('http://localhost:4000/#/mymessages');
+    cy.visit('/#/mymessages');
     cy.url().should('include', '#/mymessages/inbox');
     cy.contains('New Message').click();
     cy.get('input#to').type('somebody@somewhere.com');
@@ -125,7 +125,7 @@ describe('authenticated sample app', () => {
   });
 
   it('prompts to save a message being composed', () => {
-    cy.visit('http://localhost:4000/#/mymessages');
+    cy.visit('/#/mymessages');
     cy.url().should('include', '#/mymessages/inbox');
     cy.contains('New Message').click();
     cy.get('input#to').type('somebody@somewhere.com');
@@ -150,7 +150,7 @@ describe('authenticated sample app', () => {
   });
 
   it('navigates through folders', () => {
-    cy.visit('http://localhost:4000/#/mymessages');
+    cy.visit('/#/mymessages');
     cy.url().should('include', '#/mymessages/inbox');
 
     cy.contains('inbox').parent('li').should('have.class', 'selected');
@@ -176,7 +176,7 @@ describe('authenticated sample app', () => {
       cy.get('.message h4').contains(subject);
     };
 
-    cy.visit('http://localhost:4000/#/mymessages/finance');
+    cy.visit('/#/mymessages/finance');
     cy.contains('finance').parent('li').should('have.class', 'selected');
 
     selectMessage('You look angerly', '5648b50cf8ea6dfc7d1a40a8');
@@ -186,7 +186,7 @@ describe('authenticated sample app', () => {
   });
 
   it('navigates through contacts', () => {
-    cy.visit('http://localhost:4000/#/contacts');
+    cy.visit('/#/contacts');
 
     const selectContact = (name, id) => {
       cy.contains(name).click();
