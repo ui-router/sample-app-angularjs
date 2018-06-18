@@ -330,9 +330,9 @@ amdefine@>=0.0.4:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/amdefine/-/amdefine-1.0.1.tgz#4a5282ac164729e93619bcfd3ad151f817ce91f5"
 
-angular@^1.7.1:
-  version "1.7.1"
-  resolved "https://registry.yarnpkg.com/angular/-/angular-1.7.1.tgz#274bd432e3c8b321f41c25c79e20d4f3b0fbaf79"
+angular@^1.7.2:
+  version "1.7.2"
+  resolved "https://registry.yarnpkg.com/angular/-/angular-1.7.2.tgz#687b955dbe5c533f8d73460461707af00360251f"
 
 ansi-align@^2.0.0:
   version "2.0.0"
