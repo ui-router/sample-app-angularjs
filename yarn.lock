@@ -86,9 +86,9 @@
   version "5.0.20"
   resolved "https://registry.yarnpkg.com/@uirouter/core/-/core-5.0.20.tgz#9c27d8d14d50358040840fd00e9d38c36be1adc5"
 
-"@uirouter/cypress-runner@^1.0.8":
-  version "1.0.8"
-  resolved "https://registry.yarnpkg.com/@uirouter/cypress-runner/-/cypress-runner-1.0.8.tgz#b9193904921070e8fc5779d90ecf73b0ac12fa01"
+"@uirouter/cypress-runner@^1.0.9":
+  version "1.0.9"
+  resolved "https://registry.yarnpkg.com/@uirouter/cypress-runner/-/cypress-runner-1.0.9.tgz#2c8f8476286d2a7e9156255c0b6a78982682e9ac"
   dependencies:
     cypress "^3.0.2"
     node-cleanup "^2.1.2"

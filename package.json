@@ -31,7 +31,7 @@
     "oclazyload": "^1.1.0"
   },
   "devDependencies": {
-    "@uirouter/cypress-runner": "^1.0.8",
+    "@uirouter/cypress-runner": "^1.0.9",
     "babel-core": "^6.26.3",
     "babel-loader": "^7.1.5",
     "babel-plugin-syntax-dynamic-import": "^6.18.0",
