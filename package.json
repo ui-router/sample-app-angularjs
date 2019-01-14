@@ -23,7 +23,7 @@
     "url": "https://github.com/ui-router/sample-app-angularjs.git"
   },
   "dependencies": {
-    "@uirouter/angularjs": "^1.0.20",
+    "@uirouter/angularjs": "^1.0.21",
     "@uirouter/dsr": "^1.0.2",
     "@uirouter/sticky-states": "^1.5.0",
     "@uirouter/visualizer": "^6.0.2",
