@@ -97,9 +97,9 @@
     wait-on "^3.2.0"
     yargs "^12.0.5"
 
-"@uirouter/dsr@^1.0.2":
-  version "1.0.3"
-  resolved "https://registry.yarnpkg.com/@uirouter/dsr/-/dsr-1.0.3.tgz#a8bffc3c73b8d9f084594b5bdaad968f14cd1061"
+"@uirouter/dsr@^1.1.0":
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/@uirouter/dsr/-/dsr-1.1.0.tgz#c7636a7e393f9da385e65359297e525400042511"
 
 "@uirouter/sticky-states@^1.5.0":
   version "1.5.0"
