@@ -76,15 +76,15 @@
   version "7.0.0"
   resolved "https://registry.yarnpkg.com/@types/sinon/-/sinon-7.0.0.tgz#84e707e157ec17d3e4c2a137f41fc3f416c0551e"
 
-"@uirouter/angularjs@^1.0.21":
-  version "1.0.21"
-  resolved "https://registry.yarnpkg.com/@uirouter/angularjs/-/angularjs-1.0.21.tgz#cc56eaa28287e455da3ca841207f15d2cae2fc2f"
+"@uirouter/angularjs@^1.0.22":
+  version "1.0.22"
+  resolved "https://registry.yarnpkg.com/@uirouter/angularjs/-/angularjs-1.0.22.tgz#581ab38794a2d7c2790851087072c4066b2b6c46"
   dependencies:
-    "@uirouter/core" "5.0.22"
+    "@uirouter/core" "5.0.23"
 
-"@uirouter/core@5.0.22":
-  version "5.0.22"
-  resolved "https://registry.yarnpkg.com/@uirouter/core/-/core-5.0.22.tgz#4d36280b8d7871f7bd3e5f695a0f83ce6e559e48"
+"@uirouter/core@5.0.23":
+  version "5.0.23"
+  resolved "https://registry.yarnpkg.com/@uirouter/core/-/core-5.0.23.tgz#363b4bea635a1b48900dc7e65793a65a3b58a79e"
 
 "@uirouter/cypress-runner@^1.0.10":
   version "1.0.10"
