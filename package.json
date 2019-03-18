@@ -40,7 +40,7 @@
     "shx": "^0.3.2",
     "source-map-loader": "^0.2.4",
     "webpack": "^4.29.6",
-    "webpack-cli": "^3.2.3",
+    "webpack-cli": "^3.3.0",
     "webpack-dev-server": "^3.2.1"
   }
 }
