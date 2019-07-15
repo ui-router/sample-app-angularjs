@@ -39,7 +39,7 @@
     "babel-preset-es2015-ie": "^6.7.0",
     "shx": "^0.3.2",
     "source-map-loader": "^0.2.4",
-    "webpack": "^4.35.2",
+    "webpack": "^4.35.3",
     "webpack-cli": "^3.3.6",
     "webpack-dev-server": "^3.7.2"
   }
