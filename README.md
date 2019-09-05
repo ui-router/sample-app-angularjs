@@ -30,7 +30,7 @@ Note how states are _entered_ when they were previously not active, _exited_ and
 ### Structure
 
 The application is written in ES6 (transpiled using babel), and utilizes ES6 modules.
-We are loading the modules and creating bundles using webpack 2.
+We are loading the modules and creating bundles using webpack 4.
 
 There are many ways to structure a ui-router app.
 We aren't super opinionated on application structure.
