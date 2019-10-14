@@ -93,9 +93,10 @@
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/@uirouter/dsr/-/dsr-1.1.0.tgz#c7636a7e393f9da385e65359297e525400042511"
 
-"@uirouter/sticky-states@^1.5.0":
-  version "1.5.0"
-  resolved "https://registry.yarnpkg.com/@uirouter/sticky-states/-/sticky-states-1.5.0.tgz#48b7612300948d8275eb638e443e6d2385d27977"
+"@uirouter/sticky-states@^1.5.1":
+  version "1.5.1"
+  resolved "https://registry.yarnpkg.com/@uirouter/sticky-states/-/sticky-states-1.5.1.tgz#124b05d55063391101ad96d9b375ef6a142f4900"
+  integrity sha512-jNDHskjN9NSm1Sti24VSBYWzWJQ3zx/liJ0ktYrjBwF0XL1oTZft7noj/a6z465zjBMmGJmhRzcRCmu3qZ0Vrg==
 
 "@uirouter/visualizer@^6.0.2":
   version "6.0.2"
