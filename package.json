@@ -27,7 +27,7 @@
     "@uirouter/dsr": "^1.1.1",
     "@uirouter/sticky-states": "^1.5.1",
     "@uirouter/visualizer": "^6.0.2",
-    "angular": "^1.7.8",
+    "angular": "^1.7.9",
     "oclazyload": "^1.1.0"
   },
   "devDependencies": {
