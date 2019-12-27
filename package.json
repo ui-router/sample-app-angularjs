@@ -24,9 +24,9 @@
   },
   "dependencies": {
     "@uirouter/angularjs": "^1.0.23",
-    "@uirouter/dsr": "^1.1.1",
+    "@uirouter/dsr": "^1.2.0",
     "@uirouter/sticky-states": "^1.5.1",
-    "@uirouter/visualizer": "^6.0.2",
+    "@uirouter/visualizer": "^7.0.0",
     "angular": "^1.7.9",
     "oclazyload": "^1.1.0"
   },
