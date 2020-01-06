@@ -65,17 +65,17 @@
   version "12.0.2"
   resolved "https://registry.yarnpkg.com/@types/node/-/node-12.0.2.tgz#3452a24edf9fea138b48fad4a0a028a683da1e40"
 
-"@uirouter/angularjs@^1.0.23":
-  version "1.0.23"
-  resolved "https://registry.yarnpkg.com/@uirouter/angularjs/-/angularjs-1.0.23.tgz#aeec0f96b0c42187c5044ef244ba6ccb75a5d835"
-  integrity sha512-r4hLSw7R3mwXGC5Sq7yxNlBK1sSzQUm/1MzigwwYRHoMO5uKcBPUhxFYx5U7kufP2Xl1165KeZvRsLCh0/Z1ng==
+"@uirouter/angularjs@^1.0.24":
+  version "1.0.24"
+  resolved "https://registry.yarnpkg.com/@uirouter/angularjs/-/angularjs-1.0.24.tgz#e8ac7c8b53f68481a070fbed87e9f7768d344942"
+  integrity sha512-Q+gR5eskbOwK5DlzSOOXx3MGWbKq5xQrcF0T4csHXOHUBuGO26n6QTPFYsPwg0AfpC5yNou3jrDonI+UR8wDEg==
   dependencies:
-    "@uirouter/core" "6.0.1"
+    "@uirouter/core" "6.0.3"
 
-"@uirouter/core@6.0.1":
-  version "6.0.1"
-  resolved "https://registry.yarnpkg.com/@uirouter/core/-/core-6.0.1.tgz#93b02a5d178a7ab7313f34b7b3f019a000d23396"
-  integrity sha512-mHCutiHtDDRKYmrJ92XPKDoSb2bgqaDyUpHdF4hUE+riwgkCvGdBjL8u+VDTcV3slBAk6B0LBIOIajjWkkObbQ==
+"@uirouter/core@6.0.3":
+  version "6.0.3"
+  resolved "https://registry.yarnpkg.com/@uirouter/core/-/core-6.0.3.tgz#1de7a3451039e1274e7f595de2be92421c26b09c"
+  integrity sha512-ftAQw9czKUSgLFC3LwOeJP97PDQ6naHcEK0NrbWw3X/r49oQJBMRFAsz9oEKqPFPD2vUDqkvG18BZXglLp8k+Q==
 
 "@uirouter/cypress-runner@^1.0.13":
   version "1.0.13"
