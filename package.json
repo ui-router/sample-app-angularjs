@@ -5,7 +5,7 @@
   "scripts": {
     "clean": "shx rm -rf _bundles transpiled",
     "start": "webpack-dev-server --progress --open",
-    "build": "webpack --progress",
+    "build": "webpack",
     "test": "npm run build && cypress-runner run --path .",
     "test:open": "npm run build && cypress-runner open --path .",
     "e2e": "npm run test",
