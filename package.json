@@ -34,7 +34,7 @@
     "@babel/core": "^7.0.0",
     "@babel/preset-env": "^7.8.6",
     "@uirouter/cypress-runner": "^1.1.0",
-    "babel-loader": "^8.0.6",
+    "babel-loader": "^8.1.0",
     "shx": "^0.3.2",
     "source-map-loader": "^0.2.4",
     "webpack": "^4.43.0",
