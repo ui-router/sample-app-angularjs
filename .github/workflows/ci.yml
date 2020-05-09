@@ -1,0 +1,33 @@
+name: 'CI'
+
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+
+jobs:
+
+  ci:
+    needs: [test]
+    runs-on: ubuntu-latest
+    steps:
+      - run: true
+
+  test:
+    name: yarn ${{ matrix.yarncmd }}
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        yarncmd: ['test']
+    steps:
+      - uses: actions/checkout@v2
+      - name: Configure
+        run: |
+          npm config set scripts-prepend-node-path auto
+          git config --global user.email uirouter@github.actions
+          git config --global user.name uirouter_github_actions
+      - name: Install Dependencies
+        run: yarn install --pure-lockfile
+      - name: Run Tests
+        run: yarn ${{ matrix.yarncmd }}
