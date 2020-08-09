@@ -1062,10 +1062,10 @@
   resolved "https://registry.yarnpkg.com/@types/sizzle/-/sizzle-2.3.2.tgz#a811b8c18e2babab7d542b3365887ae2e4d9de47"
   integrity sha512-7EJYyKTL7tFR8+gDbB6Wwz/arpGa0Mywk1TJbNzKzHtzbwVmY4HR9WqS5VV7dsBUKQmPNr192jHr/VpBluj/hg==
 
-"@uirouter/angularjs@^1.0.27":
-  version "1.0.27"
-  resolved "https://registry.yarnpkg.com/@uirouter/angularjs/-/angularjs-1.0.27.tgz#7f5e0b2edb04cb0fcee4f5ee8329b52515e34fb7"
-  integrity sha512-klW+ysT8hdYFJ0aVtRBumGtTrN3KJxtNBhVr1tXW4f7er+WB9SVWcvurFI1+8bt8vLQgDXsglU44xoek1LxT7Q==
+"@uirouter/angularjs@^1.0.28":
+  version "1.0.28"
+  resolved "https://registry.yarnpkg.com/@uirouter/angularjs/-/angularjs-1.0.28.tgz#3f4a567c3f0199c254729050fd77cb0e15f97246"
+  integrity sha512-PI9kgUjQu5ItRVUMvdp9j613IT6nCmFRlahTP2MiD4k1RJjY/RwIGzHI9pjuz7PAfdHvxAqGOZEOl6EjVmchyw==
   dependencies:
     "@uirouter/core" "6.0.6"
 
