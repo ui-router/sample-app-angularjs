@@ -31,12 +31,12 @@
     "oclazyload": "^1.1.0"
   },
   "devDependencies": {
-    "@babel/core": "^7.11.1",
+    "@babel/core": "^7.11.4",
     "@babel/preset-env": "^7.11.0",
     "@uirouter/cypress-runner": "^1.1.0",
     "babel-loader": "^8.1.0",
     "shx": "^0.3.2",
-    "source-map-loader": "^1.0.1",
+    "source-map-loader": "^1.0.2",
     "webpack": "^4.44.1",
     "webpack-cli": "^3.3.12",
     "webpack-dev-server": "^3.11.0"
