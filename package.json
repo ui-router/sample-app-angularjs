@@ -36,7 +36,7 @@
     "@uirouter/cypress-runner": "^1.1.0",
     "babel-loader": "^8.1.0",
     "shx": "^0.3.2",
-    "source-map-loader": "^1.0.2",
+    "source-map-loader": "^1.1.0",
     "webpack": "^4.44.1",
     "webpack-cli": "^3.3.12",
     "webpack-dev-server": "^3.11.0"
