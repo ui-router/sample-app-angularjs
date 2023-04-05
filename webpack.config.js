@@ -18,6 +18,12 @@ module.exports = {
     filename: "[name].js",
   },
 
+  performance: {
+    hints: false,
+    maxEntrypointSize: 512000,
+    maxAssetSize: 512000
+  },
+
   resolve: {
     extensions: ['.js']
   },
