@@ -22,6 +22,11 @@
     "type": "git",
     "url": "https://github.com/ui-router/sample-app-angularjs.git"
   },
+  "checkPeerDependencies": {
+    "ignore": [
+      "ajv"
+    ]
+  },
   "dependencies": {
     "@uirouter/angularjs": "^1.0.29",
     "@uirouter/dsr": "^1.2.0",
