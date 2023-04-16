@@ -29,7 +29,7 @@ module.exports = {
   },
 
   optimization: {
-    splitChunks: { chunks: 'all', },
+    splitChunks: { chunks: 'all', name: 'vendors~sampleapp' },
   },
 
   module: {
