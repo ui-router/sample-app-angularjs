@@ -3,14 +3,14 @@
   "description": "Sample app for UI-Router for AngularJS",
   "version": "1.0.2",
   "scripts": {
-    "clean": "shx rm -rf _bundles transpiled",
+    "clean": "shx rm -rf dist",
     "start": "webpack-dev-server --progress --open",
     "build": "webpack",
-    "test": "npm run build && playwright test",
+    "test": "playwright install chromium && npm run build && playwright test",
     "test:ui": "npm run build && playwright test --ui",
     "e2e": "npm run test",
     "format": "prettier --write \"app/**/*.js\" \"tests/**/*.js\" \"*.js\" \"*.json\"",
-    "gh-pages": "git checkout gh-pages && git rebase master && yarn && webpack && git add -f _bundles && git commit -m 'publish gh-pages' && git push origin gh-pages:gh-pages --force && git checkout master",
+    "gh-pages": "git checkout gh-pages && git rebase master && yarn && webpack && git add -f dist && git commit -m 'publish gh-pages' && git push origin gh-pages:gh-pages --force && git checkout master",
     "prepare": "husky"
   },
   "contributors": [
@@ -26,29 +26,29 @@
   },
   "checkPeerDependencies": {
     "ignore": [
-      "ajv"
+      "ajv",
+      "picomatch"
     ]
   },
   "dependencies": {
-    "@uirouter/angularjs": "^1.0.29",
+    "@uirouter/angularjs": "^1.1.2",
+    "@uirouter/core": "^6.1.2",
     "@uirouter/dsr": "^1.2.0",
     "@uirouter/sticky-states": "^1.5.1",
     "@uirouter/visualizer": "^7.2.1",
-    "angular": "^1.8.2",
+    "angular": "^1.8.3",
     "oclazyload": "^1.1.0"
   },
   "devDependencies": {
-    "@babel/core": "^7.21.4",
-    "@babel/preset-env": "^7.14.9",
     "@playwright/test": "^1.57.0",
-    "babel-loader": "^9.1.2",
+    "copy-webpack-plugin": "^13.0.1",
+    "html-webpack-plugin": "^5.6.5",
     "husky": "^9.1.7",
     "prettier": "^3.7.4",
     "serve": "^14.2.5",
-    "shx": "^0.3.4",
-    "source-map-loader": "^4.0.1",
-    "webpack": "^5.77.0",
-    "webpack-cli": "^5.0.1",
-    "webpack-dev-server": "^4.13.2"
+    "shx": "^0.4.0",
+    "webpack": "^5.104.1",
+    "webpack-cli": "^6.0.1",
+    "webpack-dev-server": "^5.2.2"
   }
 }
