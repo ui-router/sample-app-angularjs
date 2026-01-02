@@ -10,7 +10,7 @@
     "test:ui": "npm run build && playwright test --ui",
     "e2e": "npm run test",
     "format": "prettier --write \"app/**/*.js\" \"tests/**/*.js\" \"*.js\" \"*.json\"",
-    "gh-pages": "git checkout gh-pages && git rebase master && yarn && webpack && git add -f dist && git commit -m 'publish gh-pages' && git push origin gh-pages:gh-pages --force && git checkout master",
+    "gh-pages": "git checkout gh-pages && git rebase master && npm install && npm run build && git add -f dist && git commit -m 'publish gh-pages' && git push origin gh-pages:gh-pages --force && git checkout master",
     "prepare": "husky"
   },
   "contributors": [
