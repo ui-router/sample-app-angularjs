@@ -1,4 +1,4 @@
-import {SessionStorage} from "../util/sessionStorage"
+import { SessionStorage } from '../util/sessionStorage';
 
 /**
  * Fake REST Services (Contacts, Folders, Messages) used in the mymessages submodule.
@@ -20,7 +20,7 @@ import {SessionStorage} from "../util/sessionStorage"
 export class Contacts extends SessionStorage {
   constructor($http, $timeout, $q, AppConfig) {
     // http://beta.json-generator.com/api/json/get/V1g6UwwGx
-    super($http, $timeout, $q, "contacts", "data/contacts.json", AppConfig);
+    super($http, $timeout, $q, 'contacts', 'data/contacts.json', AppConfig);
   }
 }
 Contacts.$inject = ['$http', '$timeout', '$q', 'AppConfig'];
@@ -42,7 +42,7 @@ export class Messages extends SessionStorage {
 
   byFolder(folder) {
     let searchObject = { folder: folder._id };
-    let toFromAttr = ["drafts", "sent"].indexOf(folder._id) !== -1 ? "from" : "to";
+    let toFromAttr = ['drafts', 'sent'].indexOf(folder._id) !== -1 ? 'from' : 'to';
     searchObject[toFromAttr] = this.AppConfig.emailAddress;
     return this.search(searchObject);
   }

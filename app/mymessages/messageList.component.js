@@ -7,4 +7,5 @@ export const messageList = {
     <div class="messages">
       <message-table columns="$ctrl.folder.columns" messages="$ctrl.messages"></message-table>
     </div>
-`};
+`,
+};

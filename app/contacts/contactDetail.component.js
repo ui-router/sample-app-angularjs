@@ -1,5 +1,5 @@
 /**
- * This component renders a read only view of the details for a single contact. 
+ * This component renders a read only view of the details for a single contact.
  */
 export const contactDetail = {
   bindings: { contact: '<' },
@@ -24,5 +24,5 @@ export const contactDetail = {
         <img ng-src="{{$ctrl.contact.picture}}"/>
       </div>
     </div>
-`
+`,
 };

@@ -2,7 +2,7 @@
  * Renders a list of folders
  */
 export const folderList = {
-  bindings: {folders: '<'},
+  bindings: { folders: '<' },
 
   template: `
     <!-- Renders a list of folders -->
@@ -19,4 +19,5 @@ export const folderList = {
         </li>
       </ul>
     </div>
-`};
+`,
+};

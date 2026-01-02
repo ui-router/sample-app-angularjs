@@ -7,5 +7,5 @@ export const prefsState = {
   url: '/prefs',
   component: 'prefs',
   // Mark this state as requiring authentication.  See ../global/requiresAuth.hook.js.
-  data: { requiresAuth: true }
+  data: { requiresAuth: true },
 };

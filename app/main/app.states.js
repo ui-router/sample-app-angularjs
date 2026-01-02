@@ -1,7 +1,7 @@
-import {appTemplate, appController} from "./app.component";
-import {welcomeTemplate, welcomeController} from "./welcome.component";
-import {homeTemplate} from "./home.component";
-import {loginTemplate, loginController} from "./login.component";
+import { appTemplate, appController } from './app.component';
+import { welcomeTemplate, welcomeController } from './welcome.component';
+import { homeTemplate } from './home.component';
+import { loginTemplate, loginController } from './login.component';
 
 /**
  * This is the parent state for the entire application.
@@ -13,7 +13,7 @@ import {loginTemplate, loginController} from "./login.component";
 export const appState = {
   name: 'app',
   redirectTo: 'welcome',
-  component: 'app'
+  component: 'app',
 };
 
 /**
@@ -24,9 +24,8 @@ export const welcomeState = {
   parent: 'app',
   name: 'welcome',
   url: '/welcome',
-  component: 'welcome'
+  component: 'welcome',
 };
-
 
 /**
  * This is a home screen for authenticated users.
@@ -37,9 +36,8 @@ export const homeState = {
   parent: 'app',
   name: 'home',
   url: '/home',
-  component: 'home'
+  component: 'home',
 };
-
 
 /**
  * This is the login state.  It is activated when the user navigates to /login, or if a unauthenticated
@@ -53,7 +51,7 @@ export const loginState = {
   name: 'login',
   url: '/login',
   component: 'login',
-  resolve: { returnTo: returnTo }
+  resolve: { returnTo: returnTo },
 };
 
 /**
@@ -76,24 +74,22 @@ function returnTo($transition$) {
   // The user was not redirected to the login state; they directly activated the login state somehow.
   // Return them to the state they came from.
   if ($transition$.from().name !== '') {
-    return $state.target($transition$.from(), $transition$.params("from"));
+    return $state.target($transition$.from(), $transition$.params('from'));
   }
 
   // If the fromState's name is empty, then this was the initial transition. Just return them to the home state
   return $state.target('home');
 }
 
-
-
 // Future State (Placeholder) for the contacts module
 export const contactsFutureState = {
   parent: 'app',
   name: 'contacts.**',
   url: '/contacts',
-  lazyLoad: function(transition) {
+  lazyLoad: function (transition) {
     const $ocLazyLoad = transition.injector().get('$ocLazyLoad');
-    return import('../contacts/contacts.module').then(mod => $ocLazyLoad.load(mod.CONTACTS_MODULE))
-  }
+    return import('../contacts/contacts.module').then((mod) => $ocLazyLoad.load(mod.CONTACTS_MODULE));
+  },
 };
 
 // Future State (Placeholder) for the prefs module
@@ -101,10 +97,10 @@ export const prefsFutureState = {
   parent: 'app',
   name: 'prefs.**',
   url: '/prefs',
-  lazyLoad: function(transition) {
+  lazyLoad: function (transition) {
     const $ocLazyLoad = transition.injector().get('$ocLazyLoad');
-    return import('../prefs/prefs.module').then(mod => $ocLazyLoad.load(mod.PREFS_MODULE))
-  }
+    return import('../prefs/prefs.module').then((mod) => $ocLazyLoad.load(mod.PREFS_MODULE));
+  },
 };
 
 // Future State (Placeholder) for the mymessages module
@@ -112,9 +108,8 @@ export const mymessagesFutureState = {
   parent: 'app',
   name: 'mymessages.**',
   url: '/mymessages',
-  lazyLoad: function(transition) {
+  lazyLoad: function (transition) {
     const $ocLazyLoad = transition.injector().get('$ocLazyLoad');
-    return import('../mymessages/mymessages.module').then(mod => $ocLazyLoad.load(mod.MYMESSAGES_MODULE))
-  }
+    return import('../mymessages/mymessages.module').then((mod) => $ocLazyLoad.load(mod.MYMESSAGES_MODULE));
+  },
 };
-

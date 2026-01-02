@@ -1,6 +1,6 @@
 /**
  * This component renders the contacts submodule.
- * 
+ *
  * On the left is the list of contacts.
  * On the right is the ui-view viewport where contact details appear.
  */
@@ -17,5 +17,5 @@ export const contacts = {
         <h4 style="margin: 1em 2em;">Select a contact</h4>
       </div>
       
-    </div>`
+    </div>`,
 };
