@@ -3,7 +3,7 @@
   "description": "Sample app for UI-Router for AngularJS",
   "version": "1.0.2",
   "scripts": {
-    "clean": "shx rm -rf dist",
+    "clean": "shx rm -rf dist test-results",
     "start": "webpack-dev-server --progress --open",
     "build": "webpack",
     "test": "playwright install chromium && npm run build && playwright test",
