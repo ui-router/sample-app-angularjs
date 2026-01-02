@@ -46,16 +46,16 @@ class EditContactController {
   /** Ask for confirmation, then delete the contact, then go to the grandparent state ('contacts') */
   remove(contact) {
     this.DialogService.confirm(`Delete contact: ${contact.name.first} ${contact.name.last}`)
-        .then(() => this.Contacts.remove(contact))
-        .then(() => this.canExit = true)
-        .then(() => this.$state.go("^.^", null, { reload: true }));
+      .then(() => this.Contacts.remove(contact))
+      .then(() => (this.canExit = true))
+      .then(() => this.$state.go('^.^', null, { reload: true }));
   }
 
   /** Save the contact, then go to the grandparent state ('contacts') */
   save(contact) {
     this.Contacts.save(contact)
-        .then(() => this.canExit = true)
-        .then(() => this.$state.go("^", null, { reload: true }));
+      .then(() => (this.canExit = true))
+      .then(() => this.$state.go('^', null, { reload: true }));
   }
 }
 EditContactController.$inject = ['$state', 'DialogService', 'Contacts'];
@@ -68,7 +68,7 @@ EditContactController.$inject = ['$state', 'DialogService', 'Contacts'];
  * Another button saves the contact.
  * A third button deletes the bcontact.
  */
-export const editContact =  {
+export const editContact = {
   bindings: { pristineContact: '<' },
 
   controller: EditContactController,
@@ -98,4 +98,5 @@ export const editContact =  {
         <button class="btn btn-primary" ng-click="$ctrl.remove($ctrl.contact)"><i class="fa fa-close"></i><span>Delete</span></button>
       </div>
     </div>
-`};
+`,
+};

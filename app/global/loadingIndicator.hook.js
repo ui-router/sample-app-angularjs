@@ -4,6 +4,16 @@
  */
 loadingIndicatorHookRunBlock.$inject = ['$transitions', 'LoadingIndicatorService'];
 export function loadingIndicatorHookRunBlock($transitions, LoadingIndicatorService) {
-  $transitions.onStart( { /* match anything */ }, LoadingIndicatorService.showLoadingIndicator);
-  $transitions.onFinish( { /* match anything */ }, LoadingIndicatorService.hideLoadingIndicator);
+  $transitions.onStart(
+    {
+      /* match anything */
+    },
+    LoadingIndicatorService.showLoadingIndicator,
+  );
+  $transitions.onFinish(
+    {
+      /* match anything */
+    },
+    LoadingIndicatorService.hideLoadingIndicator,
+  );
 }

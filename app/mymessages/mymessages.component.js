@@ -6,7 +6,7 @@
  * - messagecontent: filled with the contents of a single message.
  */
 export const mymessages = {
-  bindings: {folders: '<'},
+  bindings: { folders: '<' },
 
   template: `
     <div class="my-messages">
@@ -21,4 +21,5 @@ export const mymessages = {
     
     <!-- A named ui-view for a message's contents.  The 'mymessages.messagelist.message' grandchild state plugs into this ui-view -->
     <div ui-view="messagecontent"></div>
-`};
+`,
+};

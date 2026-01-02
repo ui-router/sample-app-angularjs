@@ -28,18 +28,18 @@ export class AuthService {
     let { $timeout, $q, AppConfig } = this;
 
     // checks if the username is one of the known usernames, and the password is 'password'
-    const checkCredentials = () => $q((resolve, reject) => {
-      var validUsername = this.usernames.indexOf(username) !== -1;
-      var validPassword = password === 'password';
+    const checkCredentials = () =>
+      $q((resolve, reject) => {
+        var validUsername = this.usernames.indexOf(username) !== -1;
+        var validPassword = password === 'password';
 
-      return (validUsername && validPassword) ? resolve(username) : reject("Invalid username or password");
+        return validUsername && validPassword ? resolve(username) : reject('Invalid username or password');
+      });
+
+    return $timeout(checkCredentials, 800).then((authenticatedUser) => {
+      AppConfig.emailAddress = authenticatedUser;
+      AppConfig.save();
     });
-
-    return $timeout(checkCredentials, 800)
-        .then((authenticatedUser) => {
-          AppConfig.emailAddress = authenticatedUser;
-          AppConfig.save()
-        });
   }
 
   /** Logs the current user out */

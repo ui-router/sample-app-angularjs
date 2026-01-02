@@ -9,7 +9,9 @@
     "test": "npm run build && playwright test",
     "test:ui": "npm run build && playwright test --ui",
     "e2e": "npm run test",
-    "gh-pages": "git checkout gh-pages && git rebase master && yarn && webpack && git add -f _bundles && git commit -m 'publish gh-pages' && git push origin gh-pages:gh-pages --force && git checkout master"
+    "format": "prettier --write \"app/**/*.js\" \"tests/**/*.js\" \"*.js\" \"*.json\"",
+    "gh-pages": "git checkout gh-pages && git rebase master && yarn && webpack && git add -f _bundles && git commit -m 'publish gh-pages' && git push origin gh-pages:gh-pages --force && git checkout master",
+    "prepare": "husky"
   },
   "contributors": [
     {
@@ -40,6 +42,8 @@
     "@babel/preset-env": "^7.14.9",
     "@playwright/test": "^1.57.0",
     "babel-loader": "^9.1.2",
+    "husky": "^9.1.7",
+    "prettier": "^3.7.4",
     "serve": "^14.2.5",
     "shx": "^0.3.4",
     "source-map-loader": "^4.0.1",

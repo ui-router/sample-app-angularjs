@@ -16,9 +16,7 @@ test.describe('unauthenticated sample app', () => {
     await page.goto('/#/home');
     await expect(page.getByRole('button', { name: 'Messages' })).toBeVisible();
     await expect(page.getByRole('button', { name: 'Contacts' })).toBeVisible();
-    await expect(
-      page.getByRole('button', { name: 'Preferences' })
-    ).toBeVisible();
+    await expect(page.getByRole('button', { name: 'Preferences' })).toBeVisible();
   });
 
   test('asks for authentication', async ({ page }) => {
@@ -29,18 +27,14 @@ test.describe('unauthenticated sample app', () => {
     await expect(page.locator('label[for="username"]')).toBeVisible();
     await expect(page.locator('label[for="password"]')).toBeVisible();
 
-    const appConfig = await page.evaluate(() =>
-      sessionStorage.getItem('appConfig')
-    );
+    const appConfig = await page.evaluate(() => sessionStorage.getItem('appConfig'));
     expect(appConfig).toBeNull();
   });
 
   test('can authenticate', async ({ page }) => {
     await page.goto('/#/prefs');
 
-    const appConfigBefore = await page.evaluate(() =>
-      sessionStorage.getItem('appConfig')
-    );
+    const appConfigBefore = await page.evaluate(() => sessionStorage.getItem('appConfig'));
     expect(appConfigBefore).toBeNull();
 
     await expect(page.getByRole('heading', { name: 'Log In' })).toBeVisible();
@@ -52,9 +46,7 @@ test.describe('unauthenticated sample app', () => {
 
     await expect(page.getByText('Reset All Data')).toBeVisible();
 
-    const appConfig = await page.evaluate(() =>
-      sessionStorage.getItem('appConfig')
-    );
+    const appConfig = await page.evaluate(() => sessionStorage.getItem('appConfig'));
     expect(appConfig).not.toBeNull();
   });
 });
@@ -93,17 +85,13 @@ test.describe('authenticated sample app', () => {
 
     await page.locator('input#to').fill('somebody@somewhere.com');
     await page.locator('input#subject').fill('Hello World');
-    await page
-      .locator('textarea#body')
-      .fill('The quick brown fox jumps over the lazy dog');
+    await page.locator('textarea#body').fill('The quick brown fox jumps over the lazy dog');
     await page.getByRole('button', { name: 'Send' }).click();
 
     await expect(page.getByText('Sender')).toBeVisible();
     await page.locator('li a').getByText('sent').click();
     await expect(page.locator('table').getByText('Hello World')).toBeVisible();
-    await expect(
-      page.locator('table').getByText('somebody@somewhere.com')
-    ).toBeVisible();
+    await expect(page.locator('table').getByText('somebody@somewhere.com')).toBeVisible();
   });
 
   test('can save a draft', async ({ page }) => {
@@ -113,17 +101,13 @@ test.describe('authenticated sample app', () => {
     await page.getByText('New Message').click();
     await page.locator('input#to').fill('somebody@somewhere.com');
     await page.locator('input#subject').fill('Hello World');
-    await page
-      .locator('textarea#body')
-      .fill('The quick brown fox jumps over the lazy dog');
+    await page.locator('textarea#body').fill('The quick brown fox jumps over the lazy dog');
     await page.getByRole('button', { name: 'Draft' }).click();
 
     await expect(page.getByText('Sender')).toBeVisible();
     await page.locator('li a').getByText('drafts').click();
     await expect(page.locator('table').getByText('Hello World')).toBeVisible();
-    await expect(
-      page.locator('table').getByText('somebody@somewhere.com')
-    ).toBeVisible();
+    await expect(page.locator('table').getByText('somebody@somewhere.com')).toBeVisible();
   });
 
   test('prompts to save a message being composed', async ({ page }) => {
@@ -159,9 +143,7 @@ test.describe('authenticated sample app', () => {
     await expect(page.getByText('Longer in style')).toBeVisible();
 
     await page.getByText('finance').click();
-    await expect(
-      page.locator('li.selected').getByText('finance')
-    ).toBeVisible();
+    await expect(page.locator('li.selected').getByText('finance')).toBeVisible();
     await expect(page.getByText('You look angerly')).toBeVisible();
     await expect(page).toHaveURL(/#\/mymessages\/finance/);
 
@@ -171,9 +153,7 @@ test.describe('authenticated sample app', () => {
     await expect(page).toHaveURL(/#\/mymessages\/travel/);
 
     await page.getByText('personal').click();
-    await expect(
-      page.locator('li.selected').getByText('personal')
-    ).toBeVisible();
+    await expect(page.locator('li.selected').getByText('personal')).toBeVisible();
     await expect(page.getByText('Mother is not all')).toBeVisible();
     await expect(page).toHaveURL(/#\/mymessages\/personal/);
   });
@@ -182,21 +162,14 @@ test.describe('authenticated sample app', () => {
     const selectMessage = async (subject, guid) => {
       await page.getByText(subject).click();
       await expect(page).toHaveURL(new RegExp(guid));
-      await expect(
-        page.locator('.message h4').getByText(subject)
-      ).toBeVisible();
+      await expect(page.locator('.message h4').getByText(subject)).toBeVisible();
     };
 
     await page.goto('/#/mymessages/finance');
-    await expect(
-      page.locator('li.selected').getByText('finance')
-    ).toBeVisible();
+    await expect(page.locator('li.selected').getByText('finance')).toBeVisible();
 
     await selectMessage('You look angerly', '5648b50cf8ea6dfc7d1a40a8');
-    await selectMessage(
-      'Historical change consequent',
-      '5648b50c66b80016c9acc467'
-    );
+    await selectMessage('Historical change consequent', '5648b50c66b80016c9acc467');
     await selectMessage('The gracious Duncan', '5648b50d05f033d24fe5a1a2');
     await selectMessage('Rings, does not die', '5648b50c8e0e098cef934e04');
   });

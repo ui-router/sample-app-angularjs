@@ -1,4 +1,4 @@
-name: 'CI'
+name: "CI"
 
 on:
   push:
@@ -7,7 +7,6 @@ on:
   pull_request:
 
 jobs:
-
   ci:
     needs: [test]
     runs-on: ubuntu-latest
@@ -19,12 +18,11 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        yarncmd: ['test']
+        yarncmd: ["test"]
     steps:
       - uses: actions/checkout@v2
       - name: Configure
         run: |
-          npm config set scripts-prepend-node-path auto
           git config --global user.email uirouter@github.actions
           git config --global user.name uirouter_github_actions
       - name: Install Dependencies
