@@ -18,4 +18,5 @@ export const home = {
         <h1>Preferences</h1>
       </button>
     </div>
-`};
+`,
+};

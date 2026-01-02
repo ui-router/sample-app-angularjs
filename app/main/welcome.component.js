@@ -28,5 +28,5 @@ export const welcome = {
         <li>Redirect Hook</li>
         <li>Default Param Values</li>
       </ul>
-    </div>`
+    </div>`,
 };

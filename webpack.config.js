@@ -7,25 +7,25 @@ var DEV = DEV_SERVER || process.env.DEV;
 module.exports = {
   mode: DEV ? 'development' : 'production',
   entry: {
-    "sampleapp": "./app/bootstrap/bootstrap.js",
+    sampleapp: './app/bootstrap/bootstrap.js',
   },
 
-  devtool: DEV ? 'eval' :'source-map',
+  devtool: DEV ? 'eval' : 'source-map',
 
   output: {
-    path: path.join(__dirname, "_bundles"),
+    path: path.join(__dirname, '_bundles'),
     publicPath: '_bundles/',
-    filename: "[name].js",
+    filename: '[name].js',
   },
 
   performance: {
     hints: false,
     maxEntrypointSize: 512000,
-    maxAssetSize: 512000
+    maxAssetSize: 512000,
   },
 
   resolve: {
-    extensions: ['.js']
+    extensions: ['.js'],
   },
 
   optimization: {
@@ -36,15 +36,15 @@ module.exports = {
     rules: [
       {
         test: /\.js$/,
-        use: ["source-map-loader"],
-        enforce: "pre",
-        exclude: [/@uirouter/]
+        use: ['source-map-loader'],
+        enforce: 'pre',
+        exclude: [/@uirouter/],
       },
       {
         test: /\.js$/,
         exclude: /(node_modules)/,
         use: { loader: 'babel-loader' },
-      }
-    ]
+      },
+    ],
   },
 };

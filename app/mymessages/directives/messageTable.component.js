@@ -1,10 +1,10 @@
 /**
  * A component that displays a folder of messages as a table
- * 
+ *
  * If a row is clicked, the details of the message is shown using a relative ui-sref to `.message`.
- * 
+ *
  * ui-sref-active is used to highlight the selected row.
- * 
+ *
  * Shows/hides specific columns based on the `columns` input binding.
  */
 export const messageTable = {
@@ -36,7 +36,8 @@ export const messageTable = {
       </tbody>
   
     </table>
-`};
+`,
+};
 
 messageTableController.$inject = ['AppConfig'];
 function messageTableController(AppConfig) {

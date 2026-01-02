@@ -1,4 +1,4 @@
-import {setProp} from "../util/util";
+import { setProp } from '../util/util';
 
 /** Helper function to prefix a message with "fwd: " or "re: " */
 const prefixSubject = (prefix, message) => prefix + message.subject;
@@ -20,9 +20,8 @@ const makeResponseMsg = (subjectPrefix, origMsg) => ({
   from: origMsg.to,
   to: origMsg.from,
   subject: prefixSubject(subjectPrefix, origMsg),
-  body: quoteMessage(origMsg)
+  body: quoteMessage(origMsg),
 });
-
 
 /**
  * The controller for the Message component
@@ -50,25 +49,25 @@ class MessageController {
    * Compose a new message as a reply to this one
    */
   reply(message) {
-    let replyMsg = makeResponseMsg("Re: ", message);
+    let replyMsg = makeResponseMsg('Re: ', message);
     this.$state.go('mymessages.compose', { message: replyMsg });
-  };
+  }
 
   /**
    * Compose a new message as a forward of this one.
    */
   forward(message) {
-    let fwdMsg = makeResponseMsg("Fwd: ", message);
+    let fwdMsg = makeResponseMsg('Fwd: ', message);
     delete fwdMsg.to;
     this.$state.go('mymessages.compose', { message: fwdMsg });
-  };
+  }
 
   /**
    * Continue composing this (draft) message
    */
   editDraft(message) {
     this.$state.go('mymessages.compose', { message: message });
-  };
+  }
 
   /**
    * Delete this message.
@@ -83,10 +82,10 @@ class MessageController {
     let nextState = nextMessageId ? 'mymessages.messagelist.message' : 'mymessages.messagelist';
     let params = { messageId: nextMessageId };
 
-    this.DialogService.confirm("Delete?", undefined)
-        .then(() => this.Messages.remove(message))
-        .then(() => this.$state.go(nextState, params, { reload: 'mymessages.messagelist' }));
-  };
+    this.DialogService.confirm('Delete?', undefined)
+      .then(() => this.Messages.remove(message))
+      .then(() => this.$state.go(nextState, params, { reload: 'mymessages.messagelist' }));
+  }
 }
 MessageController.$inject = ['$state', 'DialogService', 'Messages'];
 
@@ -125,4 +124,5 @@ export const message = {
       <!-- Pass the raw (plain text) message body through the messageBody filter to format slightly nicer. -->
       <div class="body" ng-bind-html="::$ctrl.message.body | messageBody"></div>
     </div>
-`};
+`,
+};

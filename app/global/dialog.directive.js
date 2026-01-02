@@ -3,10 +3,13 @@ export function dialog($timeout, $q) {
   return {
     link: (scope, elem) => {
       $timeout(() => elem.addClass('active'));
-      elem.data('promise', $q((resolve, reject) => {
-        scope.yes = () => resolve(true);
-        scope.no = () => reject(false);
-      }));
+      elem.data(
+        'promise',
+        $q((resolve, reject) => {
+          scope.yes = () => resolve(true);
+          scope.no = () => reject(false);
+        }),
+      );
     },
     template: `
       <div class="backdrop"></div>
@@ -21,6 +24,6 @@ export function dialog($timeout, $q) {
           </div>
         </div>
       </div>
-`
-  }
+`,
+  };
 }

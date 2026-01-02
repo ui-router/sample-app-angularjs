@@ -3,13 +3,13 @@
  */
 class PrefsController {
   constructor(AppConfig) {
-    this.AppConfig = AppConfig
+    this.AppConfig = AppConfig;
   }
 
   $onInit() {
     this.prefs = {
-      restDelay: this.AppConfig.restDelay
-    }
+      restDelay: this.AppConfig.restDelay,
+    };
   }
 
   /** Clear out the session storage */
@@ -42,4 +42,5 @@ export const prefs = {
       <input type="text" name="restDelay" ng-model="$ctrl.prefs.restDelay">
       <button class="btn btn-primary" ng-click="$ctrl.savePrefs()">Save</button>
     </div>
-`};
+`,
+};

@@ -3,11 +3,11 @@
  * and exports it.
  */
 // External dependencies
-import * as angular from "angular";
-import uiRouter from "@uirouter/angularjs";
+import * as angular from 'angular';
+import uiRouter from '@uirouter/angularjs';
 import { StickyStatesPlugin } from '@uirouter/sticky-states';
 import { DSRPlugin } from '@uirouter/dsr';
-import ocLazyLoad from "oclazyload";
+import ocLazyLoad from 'oclazyload';
 
 import { MAIN_MODULE } from '../main/main.module';
 import { GLOBAL_MODULE } from '../global/global.module';
@@ -16,7 +16,7 @@ import { GLOBAL_MODULE } from '../global/global.module';
 //
 // Since it is exported, other parts of the application (in other files) can then import it and register things.
 // In bootstrap.js, the module is imported, and the components, services, and states are registered.
-export const ngmodule = angular.module("demo", [
+export const ngmodule = angular.module('demo', [
   uiRouter,
   ocLazyLoad,
   MAIN_MODULE.name,
@@ -28,10 +28,14 @@ export const ngmodule = angular.module("demo", [
   // PREFS_MODULE.name
 ]);
 
-ngmodule.config(['$uiRouterProvider', '$locationProvider', ($uiRouter, $locationProvider) => {
-  $locationProvider.hashPrefix('');
-  $uiRouter.plugin(StickyStatesPlugin);
-  $uiRouter.plugin(DSRPlugin);
-  // Show the UI-Router Visualizer
-  import("@uirouter/visualizer").then(module => $uiRouter.plugin(module.Visualizer));
-}]);
+ngmodule.config([
+  '$uiRouterProvider',
+  '$locationProvider',
+  ($uiRouter, $locationProvider) => {
+    $locationProvider.hashPrefix('');
+    $uiRouter.plugin(StickyStatesPlugin);
+    $uiRouter.plugin(DSRPlugin);
+    // Show the UI-Router Visualizer
+    import('@uirouter/visualizer').then((module) => $uiRouter.plugin(module.Visualizer));
+  },
+]);

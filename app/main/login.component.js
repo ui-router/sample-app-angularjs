@@ -10,7 +10,7 @@ class LoginController {
 
     this.credentials = {
       username: AppConfig.emailAddress,
-      password: 'password'
+      password: 'password',
     };
 
     this.login = (credentials) => {
@@ -23,14 +23,13 @@ class LoginController {
         $state.go(state, params, options);
       };
 
-      const showError = (errorMessage) =>
-          this.errorMessage = errorMessage;
+      const showError = (errorMessage) => (this.errorMessage = errorMessage);
 
       AuthService.authenticate(credentials.username, credentials.password)
-          .then(returnToOriginalState)
-          .catch(showError)
-          .finally(() => this.authenticating = false);
-    }
+        .then(returnToOriginalState)
+        .catch(showError)
+        .finally(() => (this.authenticating = false));
+    };
   }
 }
 LoginController.$inject = ['AppConfig', 'AuthService', '$state'];
@@ -46,7 +45,7 @@ export const login = {
 
   controller: LoginController,
 
-  template:  `
+  template: `
     <div class="container">
       <div class="col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
         <h3>Log In</h3>
@@ -82,5 +81,5 @@ export const login = {
           <i ng-show="$ctrl.credentials.username && $ctrl.credentials.password == 'password'" style="position: relative;" class="fa fa-arrow-left bounce-horizontal"> Click Me!</i>
       </div>
     </div>
-    `
+    `,
 };
