@@ -6,8 +6,7 @@ node_modules/
 .*
 yarn-error.log
 
-_bundles
-transpiled
+dist
 
 cypress/screenshots
 cypress/videos

@@ -1,50 +1,31 @@
-var webpack = require('webpack');
-var path = require('path');
+const path = require('path');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 
-var DEV_SERVER = process.argv[1].indexOf('webpack-dev-server') !== -1;
-var DEV = DEV_SERVER || process.env.DEV;
+const isDev = process.env.NODE_ENV !== 'production';
 
 module.exports = {
-  mode: DEV ? 'development' : 'production',
-  entry: {
-    sampleapp: './app/bootstrap/bootstrap.js',
-  },
-
-  devtool: DEV ? 'eval' : 'source-map',
+  mode: isDev ? 'development' : 'production',
+  entry: './app/bootstrap/bootstrap.js',
+  devtool: isDev ? 'eval' : 'source-map',
 
   output: {
-    path: path.join(__dirname, '_bundles'),
-    publicPath: '_bundles/',
+    path: path.join(__dirname, 'dist'),
     filename: '[name].js',
+    clean: true,
   },
 
-  performance: {
-    hints: false,
-    maxEntrypointSize: 512000,
-    maxAssetSize: 512000,
-  },
+  plugins: [
+    new HtmlWebpackPlugin({
+      template: './public/index.html',
+    }),
+    new CopyWebpackPlugin({
+      patterns: [{ from: 'public', globOptions: { ignore: ['**/index.html'] } }],
+    }),
+  ],
 
-  resolve: {
-    extensions: ['.js'],
-  },
-
-  optimization: {
-    splitChunks: { chunks: 'all', name: 'vendors~sampleapp' },
-  },
-
-  module: {
-    rules: [
-      {
-        test: /\.js$/,
-        use: ['source-map-loader'],
-        enforce: 'pre',
-        exclude: [/@uirouter/],
-      },
-      {
-        test: /\.js$/,
-        exclude: /(node_modules)/,
-        use: { loader: 'babel-loader' },
-      },
-    ],
+  devServer: {
+    static: path.join(__dirname, 'dist'),
+    port: 4000,
   },
 };
